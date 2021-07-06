@@ -15,3 +15,7 @@
 /* 
 background-color: var(--preto); <=== exemplo de uso da variável
      */
+
+body{
+    background-color: var(--cinza);
+}
