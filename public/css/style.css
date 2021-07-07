@@ -16,6 +16,21 @@
 background-color: var(--preto); <=== exemplo de uso da variável
      */
 
-body{
+body {
     background-color: var(--cinza);
+}
+
+header {
+    text-align: center;
+    padding: 10%;
+}
+
+.googleBtn {
+    width: 312px;
+    height: 48px;
+    left: 25px;
+    top: 194px;
+    border: 1px solid #D5D7DC;
+    box-sizing: border-box;
+    border-radius: 100px;
 }
