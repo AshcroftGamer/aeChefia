@@ -4,4 +4,4 @@ const port = process.env.PORT;
 const server = http.createServer(app)
 
 
-server.listen(port);
+server.listen(3000);
