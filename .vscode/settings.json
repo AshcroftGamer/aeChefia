@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3006,
+            "driver": "MySQL",
+            "name": "local",
+            "database": "ae_chefia",
+            "username": "root",
+            "password": "root"
+        }
+    ]
+}
