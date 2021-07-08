@@ -7,11 +7,107 @@
 }
 
 * {
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-size: 16px;
+}
+h1{
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 27px;
+letter-spacing: -0.02em;
+color: #666666;
 }
 
 /* 
 background-color: var(--preto); <=== exemplo de uso da variável
      */
+
+body {
+    background-color: var(--cinza);
+    background-color: var(--fundo);
+
+}
+
+header {
+    text-align: center;
+    padding: 10%;
+}
+
+.googleBtn {
+    width: 312px;
+    height: 48px;
+    left: 25px;
+    top: 194px;
+    border: 1px solid #D5D7DC;
+    box-sizing: border-box;
+    border-radius: 100px;
+}
+    /* width: 90%;
+    height: 48px;
+    border: 1px solid #D5D7DC;
+    box-sizing: border-box;
+    border-radius: 100px;
+    text-align: center;
+    background-image: url("../img/google.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    font-size: 16px;
+} */
+
+.btn {
+    width: 87%;
+    height: 48px;
+    border: 1px solid #D5D7DC;
+    box-sizing: border-box;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.redBtn {
+    background-color: var(--vermelho);
+    color: var(--branco);
+}
+
+.redBtn-cad{
+    margin-top: 3%;
+}
+
+.borderBtn{
+    border: 1px solid #ED1B2E;
+    margin-top: 20%;
+}
+
+.inputLine {
+    width: 87%;
+    height: 48px;
+    border: 1px solid #D5D7DC;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-left: 12px;
+    outline: 0;
+}
+
+.inputs {
+    text-align: center;
+}
+
+.divcenter {
+    text-align: center;
+}
+
+.inputSpacing {
+    margin-top: 10px;
+}
+
+.esqsenha{
+    float: right;
+    margin-right: 5%;
+    color: var(--vermelho);
+}
+
+/* Cadastro */
+
