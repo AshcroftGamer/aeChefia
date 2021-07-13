@@ -3,7 +3,6 @@ const app = express();
 const morgan = require('morgan')
 
 
-
 app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 app.use('/css', express.static(__dirname + 'public/css'));
