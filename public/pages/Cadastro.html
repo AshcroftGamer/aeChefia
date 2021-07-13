@@ -3,9 +3,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Cadastro</title>
 </head>
 <body>
-    
+    <header>
+        <img src="./img/logo.png" alt="">
+    </header>
 </body>
+<h2>Crie sua conta, é gratis!</h2>
+<div class="inputSpacing"></div>
+<div class="inputs">
+    <input class="inputLine" placeholder="Nome" type="text"> <br>
+    <input class="inputLine" placeholder="E-mail" type="email"><br>
+    <input class="inputLine" placeholder="CPF" type="number"><br>
+    <input class="form-control inputLine" placeholder="Telefone" tel-mask="(00) 00000-0000" type="tel"><br>
+    <input class="inputLine" placeholder="Senha" type="password"><br>
+    <input class="inputLine" placeholder="Confirmar a senha" type="password"><br>
+</div>
+<footer class="divcenter footer">
+    <button class="btn redBtn redBtn-cad" onclick="ok()">Criar conta</button><br>
+</footer>
 </html>
