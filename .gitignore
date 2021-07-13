@@ -1,5 +1,8 @@
-node_modules
+node_modules/
 
 mysql.js
 
 nodemon.json
+
+uploads/
+
