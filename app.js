@@ -18,7 +18,6 @@ app.get('/', (req, res) => {
 app.get('/cadastro', (req, res) => {
     res.sendFile(__dirname + '/public/pages/cadastro.html');
 })
-
 app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/public/pages/home.html');
 })
