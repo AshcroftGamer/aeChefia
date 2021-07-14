@@ -8,10 +8,30 @@
     <title>home</title>
 </head>
 <body>
-    <header>
+    <header class="headerMenor">
         <img src="./img/logo.png" alt="">
-        
+        <div id="div-menu">
+            
+            <nav id="nav">
+              <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+                <span id="hamburger"></span>
+              </button>
+              <ul id="menu" role="menu">
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Portfólio</a></li>
+                <li><a href="#">Contato</a></li>
+              </ul>
+            </nav>
+        </div>
     </header>
-    <h1>ola rai</h1>
+    <span class="spanHome">Olá Rai!</span>
+    <div class="vermelhao">
+        <span class="spanVermelhao">Você ainda não possui 
+            estabelecimentos cadastrados</span>
+            <div>
+                    <button class="btn borderBtn" onclick="ok()">criar conta</button>
+            </div>
+    </div>
 </body>
 </html>
