@@ -9,7 +9,10 @@ app.use( bodyparser.json() );
 const rotaCardapio = require( './route/cardapio' );
 const rotaFunciorario = require( './route/funcionario' );
 const rotaProprietario = require( './route/proprietario' );
+const rotaSign = require('./route/sign');
 
+
+app.use('/sign', rotaSign);
 app.use( '/cardapio', rotaCardapio );
 app.use( '/funcionario', rotaFunciorario );
 app.use( '/proprietario', rotaProprietario );
@@ -23,9 +26,6 @@ app.use( '/img', express.static( __dirname + 'public/img' ) );
 
 app.get( '/', ( req, res ) => {
     res.sendFile( __dirname + '/index.html' );
-} )
-app.get( '/dashboard', ( req, res ) => {
-    res.sendFile( __dirname + '/public/pages/dashboard.html' );
 } )
 
 app.get('/cadastro', (req, res) => {
