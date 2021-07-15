@@ -4,6 +4,7 @@
     --branco: #E5E5E5;
     --rozinha: #FFFFFF, 30%;
     --fundo: #FFFFFF, 10%;
+    --font:'Inter', sans-serif
 }
 
 * {
@@ -302,6 +303,30 @@ a:hover {
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
+    padding-top: 170px;
+    text-align: center;
+}
+
+.spanVermelhao{
+    font-family: 'Inter', sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 27px;
+text-align: center;
+letter-spacing: -0.02em;
+
+color: #FFFFFF;
+margin-left: 5px;
+position: relative;
+left: -9px;
+
+}
+
+.inverseBtn{
+    margin-top: 8%;
+    color: var(--vermelho);
+    font-weight: 600;
 }
 /* Animaçao */
 .slideInUp {

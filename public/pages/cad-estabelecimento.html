@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/script.js"></script>
     <link rel="stylesheet" href="/css/style.css">
-    <title>home</title>
+    <title>Novo estabelecimento</title>
 </head>
 <body>
     <header class="headerMenor">
@@ -26,13 +26,20 @@
         </div>
     </header>
     <div class="inputSpacing"></div>
-    <span class="spanHome">Olá Rai!</span>
-    <div class="vermelhao">
-        <span class="spanVermelhao">Você ainda não possui <br>
-            estabelecimentos cadastrados</span>
-            <div>
-                    <button class="btn borderBtn inverseBtn" onclick="ok()">Cadastrar estabelecimento</button>
-            </div>
-    </div>
+    <span class="spanHome">Novo estabelecimento</span>
+    <div class="inputSpacing"></div>
+    <div class="inputs">
+    <input class="inputLine" placeholder="Nome" type="text"> <br>
+    <input class="inputLine" placeholder="Logo" type="email"><br>
+    <input class="inputLine" placeholder="CEP" type="number"><br>
+    <input class="inputLine" placeholder="Endereço" type="text"><br>
+</div>
+<div data-app="product.quantity" id="quantidade">
+    <span id="span_erro_carrinho" class="blocoAlerta" style="display:none;">Selecione uma opção para variação do produto</span>
+    <label>Quantidade:</label>      
+    <input type="button" id="plus" value='-' onclick="process(-1)" />
+    <input id="quant" name="quant" class="text" size="1" type="text" value="1" maxlength="5" />
+    <input type="button" id="minus" value='+' onclick="process(1)">
+  </div>
 </body>
 </html>
