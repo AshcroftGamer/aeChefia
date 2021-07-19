@@ -1,2 +1,1 @@
-select *
- from proprietario;
+describe estabelecimento;

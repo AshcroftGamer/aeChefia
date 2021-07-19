@@ -9,13 +9,14 @@ app.use( bodyparser.json() );
 const rotaCardapio = require( './route/cardapio' );
 const rotaFunciorario = require( './route/funcionario' );
 const rotaProprietario = require( './route/proprietario' );
-const rotaSign = require('./route/sign');
+const rotaCadastro = require('./route/cadastro');
+const rotaUser = require('./route/usuario');
 
-
-app.use('/sign', rotaSign);
+app.use('/cadastro', rotaCadastro);
 app.use( '/cardapio', rotaCardapio );
 app.use( '/funcionario', rotaFunciorario );
 app.use( '/proprietario', rotaProprietario );
+app.use('/cadastro', rotaCadastro)
 
 app.use( morgan( 'dev' ) );
 app.use( express.static( 'public' ) );
