@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Novo estabelecimento</title>
+</head>
+<body>
+    <header class="headerMenor">
+        <img src="./img/logo.png" alt="">
+        <div id="div-menu">
+            
+            <nav id="nav">
+              <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+                <span id="hamburger"></span>
+              </button>
+              <ul id="menu" role="menu">
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Portfólio</a></li>
+                <li><a href="#">Contato</a></li>
+              </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="inputSpacing"></div>
+    <span class="spanHome">Novo estabelecimento</span>
+    <div class="inputSpacing"></div>
+    <div class="inputs">
+    <input class="inputLine" placeholder="Nome" type="text"> <br>
+    <input class="inputLine" placeholder="Logo" type="email"><br>
+    <input class="inputLine" placeholder="CEP" type="number"><br>
+    <input class="inputLine" placeholder="Endereço" type="text"><br>
+</div>
+
+  <footer class="divcenter footer">
+    <h1 class="divcenter">Mesas disponíveis:</h1>
+      <div data-app="product.quantity" class="btnQnt" id="quantidade">    
+        <input type="button" id="plus" class="input-mais" value='-' onclick="process(-1)" />
+        <input id="quant" class="input-quantidade" name="quant" class="text" size="1" type="text" value="1" maxlength="5" />
+        <input type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
+      </div> 
+
+    <button class="btn redBtn redBtn-cad" onclick="ok()">Criar conta</button><br>
+</footer>
+</body>
+</html>

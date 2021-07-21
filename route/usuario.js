@@ -72,29 +72,29 @@ user.post( '/login', ( req, res, next ) => {
     } )
 } )
 
-user.post( '/funcionario', ( req, res, next ) => {
-    bd.getConnection( ( err, conn ) => {
-        if ( err ) { return res.status( 500 ).send( { Error: err } ) }
-        conn.query( `INSERT INTO funcionario (nome, email, login, senha) VALUES (?, ?, ?, ?);`,
-            [
-                req.body.nome,
-                req.body.email,
-                req.body.login,
-                req.body.senha
-            ],
-            ( err, result, fields ) => {
-                if ( err ) { return res.status( 500 ).send( { Error: err } ) }
-                const response = {
-                    nome: result[ 0 ].nome,
-                    email: result[ 0 ].email,
-                    login: result[ 0 ].login
-                }
+// user.post( '/funcionario', ( req, res, next ) => {
+//     bd.getConnection( ( err, conn ) => {
+//         if ( err ) { return res.status( 500 ).send( { Error: err } ) }
+//         conn.query( `INSERT INTO funcionario (nome, email, login, senha) VALUES (?, ?, ?, ?);`,
+//             [
+//                 req.body.nome,
+//                 req.body.email,
+//                 req.body.login,
+//                 req.body.senha
+//             ],
+//             ( err, result, fields ) => {
+//                 if ( err ) { return res.status( 500 ).send( { Error: err } ) }
+//                 const response = {
+//                     nome: result[ 0 ].nome,
+//                     email: result[ 0 ].email,
+//                     login: result[ 0 ].login
+//                 }
 
-                return res.status( 500 ).send( response )
-            }
+//                 return res.status( 500 ).send( response )
+//             }
 
-        )
-    } )
-} )
+//         )
+//     } )
+// } )
 
 module.exports = user;
