@@ -17,7 +17,7 @@ user.post( '/login', ( req, res, next ) => {
 
 
                 if ( results.length < 1 ) {
-                    console.log("entrou if passou")
+                    
                     return res.status( 401 ).send( { mensagem: 'Falha na autenticação'} )
                 }
                

@@ -6,12 +6,12 @@ const bodyparser = require( 'body-parser' );
 app.use( bodyparser.urlencoded( { extended: false } ) );
 app.use( bodyparser.json() );
 
+
 const rotaCadastro = require('./route/cadastro');
 const rotaUser = require('./route/usuario');
 
 app.use('/cadastro', rotaCadastro);
 app.use('/user', rotaUser);
-
 
 app.use( morgan( 'dev' ) );
 app.use( express.static( 'public' ) );
@@ -23,13 +23,12 @@ app.use( '/img', express.static( __dirname + 'public/img' ) );
 app.get( '/', ( req, res ) => {
     res.sendFile( __dirname + '/index.html' );
 } )
-
-app.get('/cadastro', (req, res) => {
-    res.sendFile(__dirname + '/public/pages/cadastro.html');
+app.get('/cad', (req, res) => {
+    res.sendFile(__dirname + '/public/pages/cad-estabelecimento.html');
 })
 
 app.get('/home', (req, res) => {
-    res.sendFile(__dirname + '/public/pages/home.html');
+    res.sendFile(__dirname + '/public/pages/home-cadastrado.html');
 })
 app.use( '*', ( req, res ) => {
     res.sendFile (__dirname + '/public/pages/error.html' );
