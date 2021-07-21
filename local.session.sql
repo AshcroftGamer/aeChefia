@@ -1,1 +1,1 @@
-describe funcionario;
+ select * from proprietario;

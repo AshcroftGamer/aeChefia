@@ -44,8 +44,8 @@ sign.post( '/usuario', ( req, res ) => {
             else {
                 bcrypt.hash( req.body.senha, 10, ( errBcrypt, hash ) => {
                     if ( errBcrypt ) { return res.status( 500 ).send( { err: errBcrypt } ) }
-                    conn.query( `INSERT INTO proprietario (nome, email, telefone, senha) VALUES (?, ?, ?, ?)`,
-                        [ req.body.nome, req.body.email, req.body.telefone, hash ],
+                    conn.query( `INSERT INTO proprietario (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?)`,
+                        [ req.body.nome, req.body.email, req.body.cpf, req.body.telefone, hash ],
                         ( err, result ) => {
                             conn.release();
                             if ( err ) {
@@ -57,6 +57,7 @@ sign.post( '/usuario', ( req, res ) => {
                                     id: result.insertId,
                                     nome: req.body.nome,
                                     email: req.body.email,
+                                    cpf: req.body.cpf,
                                     telefone: req.body.telefone
                                 }
                             }
