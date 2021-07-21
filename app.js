@@ -32,7 +32,7 @@ app.get('/cad', (req, res) => {
     res.sendFile(__dirname + '/public/pages/cad-estabelecimento.html');
 })
 app.get('/home', (req, res) => {
-    res.sendFile(__dirname + '/public/pages/home.html');
+    res.sendFile(__dirname + '/public/pages/home-cadastrado.html');
 })
 app.use( '*', ( req, res ) => {
     res.sendFile (__dirname + '/public/pages/error.html' );

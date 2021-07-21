@@ -10,20 +10,22 @@
 <body>
     <header class="headerMenor">
         <img src="./img/logo.png" alt="">
-        <div id="div-menu">
-            
-            <nav id="nav">
-              <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
-                <span id="hamburger"></span>
-              </button>
-              <ul id="menu" role="menu">
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Produtos</a></li>
-                <li><a href="#">Portfólio</a></li>
-                <li><a href="#">Contato</a></li>
-              </ul>
-            </nav>
-        </div>
+        <nav role="navigation">
+          <div id="menuToggle">
+
+            <input type="checkbox" />            
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul id="menu">
+              <a href="#"><li>Home</li></a>
+              <a href="#"><li>Sobre</li></a>
+              <a href="#"><li>Info</li></a>
+              <a href="#"><li>Contato</li></a>
+              <a href="#" target="_blank"><li>Mostre-me mais</li></a>
+            </ul>
+          </div>
+        </nav>
     </header>
     <div class="inputSpacing"></div>
     <span class="spanHome">Novo estabelecimento</span>
@@ -43,7 +45,7 @@
         <input type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
       </div> 
 
-    <button class="btn redBtn redBtn-cad" onclick="ok()">Criar conta</button><br>
+    <button class="btn redBtn redBtn-cad" onclick="ok()">Cadastrar estabelecimento</button><br>
 </footer>
 </body>
 </html>
