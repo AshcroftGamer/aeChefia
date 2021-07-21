@@ -1,0 +1,13 @@
+{
+    "env":{
+        "MYSQL_USER" : "root",
+        "MYSQL_PASSWORD" : "root",
+        "MYSQL_DATABASE" : "ae_chefia",
+        "MYSQL_HOST" : "localhost",
+        "MYSQL_PORT" : 3006,
+        "JWT_KEY" : "segredo",
+        "Google_id": "valores",
+        "id_client": "210083615667-stv5vfeujo7ktlgpjmrs8r59dkhcs8c1.apps.googleusercontent.com",
+        "chave secreta client": "ixtYLroxOfJPWH_13O67uvtl"
+    }
+}

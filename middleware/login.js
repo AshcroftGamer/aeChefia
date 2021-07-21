@@ -1,8 +1,7 @@
-
 const jwt = require('jsonwebtoken');
 
 
-exports.loginObrigatorio = (req, res, next) => {
+exports.loginProprietario = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ') [1];
         const decode = jwt.verify(token, process.env.JWT_KEY);
@@ -13,7 +12,7 @@ exports.loginObrigatorio = (req, res, next) => {
     }
 
 }
-exports.loginOpcional = (req, res, next) => {
+exports.loginFuncionario = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ') [1];
         const decode = jwt.verify(token, process.env.JWT_KEY);

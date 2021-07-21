@@ -1,1 +1,1 @@
-describe estabelecimento;
+describe funcionario;
