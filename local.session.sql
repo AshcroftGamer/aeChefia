@@ -1,1 +1,2 @@
- select * from proprietario;
+
+select * from proprietario;
