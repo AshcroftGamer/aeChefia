@@ -55,6 +55,7 @@ exports.loginUsuario = ( req, res, next ) => {
             } )
     } )
 }
+
 exports.redSenha = ( req, res ) => {
 
     bd.getConnection( ( err, conn ) => {
@@ -63,11 +64,11 @@ exports.redSenha = ( req, res ) => {
         }
         // conn.query( 'SELECT * FROM proprietario WHERE cpf = ?', [ req.body.cpf ], ( err, result ) => {
         conn.query( 'SELECT * FROM proprietario WHERE email = ? ', [ req.body.email], 
-        ( err, result ) => {
-            console.log( result )
-            const id = result[ 0 ].id_proprietario;
+        ( err, results ) => {
+            console.log( results )
+            const id = results[ 0 ].id_proprietario;
             if ( err ) { return res.status( 500 ).send( { err: err } ) }
-            if ( result.length > 0 ) {
+            if ( results.length < 1 ) {
                 // res.status( 409 ).send( { mensagem: 'Usuário já cadastrado' } ) 
                 bcrypt.hash( req.body.senha, 10, ( errBcrypt, hash ) => {
                     if ( errBcrypt ) {
@@ -86,7 +87,7 @@ exports.redSenha = ( req, res ) => {
 
                             }
                             // return res.status( 200 ).send( response ); //retorna o status do andamento
-                            return res.status( 200 ).redirect( '/home' );  //retorna para a home
+                            return res.status( 200 ).send(response  );  //retorna para a home
                         } )
                 } )
             }
