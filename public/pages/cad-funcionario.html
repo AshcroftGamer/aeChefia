@@ -4,8 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/script.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Novo estabelecimento</title>
+    <link rel="stylesheet" href="/css/style.css">  
+    <title>Cadastrar Funcionários</title>
 </head>
 <body>
     <header class="headerMenor">
@@ -28,24 +28,18 @@
         </nav>
     </header>
     <div class="inputSpacing"></div>
-    <span class="spanHome">Novo estabelecimento</span>
+    <span class="spanHome">Novo funcionário</span>
     <div class="inputSpacing"></div>
     <div class="inputs">
+        <div class="inputSpacing"></div>
     <input class="inputLine" placeholder="Nome" type="text"> <br>
-    <input class="inputLine" placeholder="Logo" type="email"><br>
-    <input class="inputLine" placeholder="CEP" type="number"><br>
-    <input class="inputLine" placeholder="Endereço" type="text"><br>
+    <input class="inputLine" placeholder="E-mail" type="email"><br>
+    <input class="inputLine" placeholder="Login" type="text"><br>
+    <input class="inputLine" placeholder="Senha" type="password"><br>
+    <input class="inputLine" placeholder="Confirmar senha" type="password"><br>
+    <footer class="divcenter footer footerAdd">   
+        <button class="btn redBtn redBtn-cad" onclick="ok()">Cadastrar funcionário</button><br>
+    </footer>
 </div>
-
-  <footer class="divcenter footer footerAdd">
-    <h1 class="divcenter">Mesas disponíveis:</h1>
-      <div data-app="product.quantity" class="btnQnt" id="quantidade">    
-        <input type="button" id="plus" class="input-mais" value='-' onclick="process(-1)" />
-        <input id="quant" class="input-quantidade" name="quant" class="text" size="1" type="number" value="1" maxlength="5" />
-        <input type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
-      </div> 
-
-    <button class="btn redBtn redBtn-cad" onclick="ok()">Cadastrar estabelecimento</button><br>
-</footer>
 </body>
 </html>

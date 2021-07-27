@@ -68,6 +68,7 @@ header {
     box-sizing: border-box;
     border-radius: 100px;
     text-align: center;
+    font-weight: 700;
 }
 
 .redBtn {
@@ -256,7 +257,7 @@ h2 {
 #menu {
     position: absolute;
     width: 300px;
-    margin: -100px 0 0 -50px;
+    margin: -100px 0 0 -95px;
     padding: 50px;
     padding-top: 125px;
     background: #ffffffe3;
@@ -274,6 +275,7 @@ h2 {
 #menu li {
     padding: 10px 0;
     font-size: 22px;
+    padding-left: 25px;
 }
 
 /*
@@ -324,6 +326,10 @@ h2 {
     animation-fill-mode: both;
     padding-top: 170px;
     text-align: center;
+}
+
+.vermelhaoCadastrado {
+    padding-top: 50px;
 }
 
 .spanVermelhao {
@@ -600,6 +606,10 @@ h2 {
     align-items: center
 }
 
+.visto3sucess{
+    padding-bottom: 10px;
+}
+
 .visto-img {
     width: 60px;
 }
@@ -612,4 +622,366 @@ h2 {
     text-align: center;
     letter-spacing: -0.02em;
     color: #FFFFFF;
+}
+
+/* Home-Cadastrado */
+
+.dropdown {
+    background: #FFFFFF;
+    border: 1px solid #D5D7DC;
+    box-sizing: border-box;
+    border-radius: 6px;
+    width: 87%;
+    height: 48px;
+    color: var(--vermelho);
+    outline: 0;
+    margin-left: 15px;
+}
+
+.card {
+    border-top: 1px solid #ccc;
+    border-width: 87%;
+    padding: 20px;
+    margin-top: 15px;
+    width: 87%;
+    margin-left: 6.5%;
+}
+
+.card-div {
+    margin-bottom: 30px;
+    height: 1%;
+}
+
+.btnAdd {
+    width: 55px;
+    height: 55px;
+    background: #FFFFFF;
+    border-radius: 50px;
+    font-size: 41px;
+    color: var(--vermelho);
+    border: none;
+    float: right;
+    margin-top: -5px;
+}
+
+.spanAdd {
+    float: left;
+    color: var(--branco);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.02em;
+    margin-top: 11px;
+}
+
+.h2-Add {
+    color: var(--branco);
+    padding-left: 0;
+}
+
+.footerAdd {
+    padding-bottom: 30px;
+}
+
+.quantidadeAdd {
+    width: 81px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+    border-radius: 100px;
+    float: right;
+    margin-top: -4px;
+    margin-right: 15px;
+    /* visibility: hidden; */
+    padding-top: 13px;
+    color: var(--branco);
+    font-weight: 700;
+}
+
+.cardapio-item {
+    width: 40%;
+    height: 184px;
+    background: rgba(237, 27, 46, 0.03);
+    border: 1px solid rgba(237, 27, 46, 0.2);
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin-left: 7%;
+    margin-top: 15px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.div-cardapio {
+    display: flex;
+    padding-bottom: 95px;
+}
+
+.img-cardapio {
+    width: 78px;
+}
+
+.h1-bebida {
+    color: var(--vermelho);
+    margin-top: 15px;
+    margin-right: 28px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    /* identical to box height, or 150% */
+    letter-spacing: -0.02em;
+}
+
+.h1-comida {
+    color: var(--vermelho);
+    margin-top: 20px;
+    margin-right: 28px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 35px;
+    letter-spacing: -0.02em;
+}
+
+.inputs label {
+    margin-top: 15px;
+    margin-bottom: 6px;
+    place-self: flex-start;
+    margin-left: 7%;
+}
+
+.nice-select {
+    height: 22px;
+    /* altura do select */
+    line-height: 22px;
+    /* este valor deve ser o mesmo acima */
+    border: solid 1px red;
+    /* cor da borda do select*/
+    -webkit-tap-highlight-color: transparent;
+    background-color: #fff;
+    box-sizing: border-box;
+    clear: both;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: normal;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 30px;
+    position: relative;
+    text-align: left !important;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    width: auto;
+}
+
+.nice-select:hover {
+    border-color: orange;
+    /* cor da borda do select ao passar o mouse */
+}
+
+.nice-select:active, .nice-select.open, .nice-select:focus {
+    border-color: blue;
+    /* cor da borda quando o select estiver aberto */
+}
+
+.nice-select:after {
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+    content: '';
+    display: block;
+    height: 5px;
+    margin-top: -4px;
+    pointer-events: none;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    -webkit-transform-origin: 66% 66%;
+    -ms-transform-origin: 66% 66%;
+    transform-origin: 66% 66%;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    width: 5px;
+}
+
+.nice-select.open:after {
+    -webkit-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+}
+
+.nice-select.open .list {
+    opacity: 1;
+    pointer-events: auto;
+    -webkit-transform: scale(1) translateY(0);
+    -ms-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+}
+
+.nice-select.disabled {
+    border-color: #000;
+    color: #999;
+    pointer-events: none;
+}
+
+.nice-select.disabled:after {
+    border-color: #000;
+}
+
+.nice-select.wide {
+    width: 100%;
+}
+
+.nice-select.wide .list {
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.nice-select.right {
+    float: right;
+}
+
+.nice-select.right .list {
+    left: auto;
+    right: 0;
+}
+
+.nice-select.small {
+    font-size: 12px;
+    height: 36px;
+    line-height: 34px;
+}
+
+.nice-select.small:after {
+    height: 4px;
+    width: 4px;
+}
+
+.nice-select.small .option {
+    line-height: 34px;
+    min-height: 34px;
+}
+
+.nice-select .list {
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(68, 68, 68, 1);
+    /* cor da borda dos options em RGB */
+    box-sizing: border-box;
+    margin-top: 4px;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    -webkit-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-transform: scale(0.75) translateY(-21px);
+    -ms-transform: scale(0.75) translateY(-21px);
+    transform: scale(0.75) translateY(-21px);
+    -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+    transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+    z-index: 9;
+}
+
+.nice-select .list:hover .option:not(:hover) {
+    background-color: transparent !important;
+}
+
+.nice-select .option {
+    cursor: pointer;
+    font-weight: 400;
+    line-height: 22px;
+    /* altura das options */
+    min-height: 22px;
+    /* este valor deve ser o mesmo do acima */
+    list-style: none;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 29px;
+    text-align: left;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+    background-color: green;
+    /* corde fundo da option selecionada e ao passar o mouse */
+    color: red;
+    /* cor da option ao passar o mouse e do item selecionado*/
+}
+
+.nice-select .option.selected {
+    font-weight: bold;
+}
+
+.nice-select .option.disabled {
+    background-color: transparent;
+    color: #999;
+    cursor: default;
+}
+
+.no-csspointerevents .nice-select .list {
+    display: none;
+}
+
+.no-csspointerevents .nice-select.open .list {
+    display: block;
+}
+
+.Post {
+    float: none;
+    width: 78%;
+    -webkit-border-top-right-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-bottomright: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    height: 48px;
+    border: 1px solid #D5D7DC;
+    box-sizing: border-box;
+    padding-left: 12px;
+    outline: 0;
+}
+
+.Send {
+    width: 53px;
+    height: 48px;
+    background: #ED1B2E;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    padding-bottom: 16px;
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 19px;
+    letter-spacing: -0.02em;
+    padding: inherit;
+    color: #FFFFFF;
+}
+
+.input-icon {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
 }
