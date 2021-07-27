@@ -28,7 +28,7 @@ app.get('/cad', (req, res) => {
 })
 
 app.get('/home', (req, res) => {
-    res.sendFile(__dirname + '/public/pages/home-cadastrado.html');
+    res.sendFile(__dirname + '/public/pages/home.html');
 })
 app.use( '*', ( req, res ) => {
     res.sendFile (__dirname + '/public/pages/error.html' );

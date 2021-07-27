@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'
+        type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Inserir bebida</title>
+</head>
+
+<body>
+    <header class="headerMenor">
+        <img src="./img/logo.png" alt="">
+        <nav role="navigation">
+            <div id="menuToggle">
+
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="#">
+                        <li>Home</li>
+                    </a>
+                    <a href="#">
+                        <li>Sobre</li>
+                    </a>
+                    <a href="#">
+                        <li>Info</li>
+                    </a>
+                    <a href="#">
+                        <li>Contato</li>
+                    </a>
+                    <a href="#" target="_blank">
+                        <li>Mostre-me mais</li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="inputSpacing"></div>
+    <span class="spanHome">Inserir bebida</span>
+    <div class="inputSpacing"></div>
+    <div class="inputs">
+        <label>Tipo de bebida</label>
+        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
+            name="city" list="cityname">
+        <datalist id="cityname">
+            <option value="bebida1">sds
+            <option value="bebida2">sdsd
+        </datalist>
+        <label>Marca</label>
+        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
+            name="city" list="cityname">
+        <datalist id="cityname">
+            <option value="marca1">
+            <option value="marca2">
+        </datalist>
+        <label>Medida/Unidade</label>
+        <input class="inputLine" placeholder="Ex: 600ml" type="text"> <br>
+        <label>Valor da venda</label>
+        <!-- <input class="inputLine" placeholder="" type="text"> <br> -->
+        <div class="input-icon">
+            <button class="Send">R$</button>
+            <input class="Post" placeholder="0,00" type="number">
+        </div>
+
+    </div>
+
+
+
+    <!-- <select class="personalizar-select">
+        <option>Mustard</option> 
+        <option>Ketchup</option>
+        <option>Relish</option>
+    </select> -->
+    <footer class="divcenter footer footerAdd">   
+        <button class="btn redBtn redBtn-cad" onclick="ok()">Inserir bebida</button><br>
+    </footer>
+</body>
+
+</html>
