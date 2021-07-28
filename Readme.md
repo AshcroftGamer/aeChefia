@@ -5,3 +5,5 @@ _Sempre que baixar o projeto ou mergear ele do origin, tem que dar um <code>npm 
 
 
 # _AshcroftGamer_ and JUPALO12
+
+## Ninguém em juízo trabalhe com o _JUPALO12_
