@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">  
     <script src="/js/script.js"></script>
-    <title>Criar cardápio</title>
+    <title>lista de itens do cardápio</title>
 </head>
 <body>
     <header class="headerMenor">
@@ -44,15 +44,20 @@
 
     <div class="inputs">
         <label>Cardápios cadastrados</label>
-
+        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
+        name="city" list="cityname">
+    <datalist id="cityname">
+        <option value="Comidas">
+        <option value="Bebidas">
+    </datalist>
     </div>
 
     
     <div class="div-cadastrado">
         <div class="span-cadastrado">
-            <span class="nome-cadastrado">Cardápio 1</span>
-            <span>35 itens</span>
-            <span>28/07/2021</span>
+            <span class="nome-cadastrado">Porçao de fritas</span>
+            <span>M</span>
+            <span>R$:5,50</span>
         </div>
         <div class="btn-cadastrado">
             <button class="editarGrey" onclick="ok()">Editar</button>
@@ -63,9 +68,9 @@
     
     <div class="div-cadastrado">
         <div class="span-cadastrado">
-            <span class="nome-cadastrado">Cardápio 2</span>
-            <span>35 itens</span>
-            <span>28/07/2021</span>
+            <span class="nome-cadastrado">Itaipava</span>
+            <span>600 ml</span>
+            <span>R$:10,00</span>
         </div>
         <div class="btn-cadastrado">
             <button class="editarGrey" onclick="ok()">Editar</button>
