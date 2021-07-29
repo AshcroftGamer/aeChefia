@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">  
+    <script src="/js/script.js"></script>
     <title>Criar cardápio</title>
 </head>
 <body>
@@ -32,23 +33,44 @@
     <div class="inputSpacing"></div>
     <div class="div-cardapio">
         <div class="cardapio-item">
-            <img class="img-cardapio" src="" alt="">
-            <h1 class="h1-bebida">Funcionários</h1>
+            <img class="img-cardapio" src="../img/bebida.png" alt="">
+            <h1 class="h1-bebida">Bebida</h1>
         </div>
         <div class="cardapio-item">
-            <img class="img-cardapio" src="" alt="">
-            <h1 class="h1-comida">Cardápio</h1>
+            <img class="img-cardapio" src="../img/comida.png" alt="">
+            <h1 class="h1-comida">Comida</h1>
         </div>
     </div>
 
     <div class="inputs">
-        <label>Tipo de bebida</label>
-        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
-            name="city" list="cityname">
-        <datalist id="cityname">
-            <option value="Comidas">
-            <option value="Bebidas">
-        </datalist>
+        <label>Cardápios cadastrados</label>
+
+    </div>
+
+    
+    <div class="div-cadastrado">
+        <div class="span-cadastrado">
+            <span class="nome-cadastrado">Cardápio 1</span>
+            <span>35 itens</span>
+            <span>28/07/2021</span>
+        </div>
+        <div class="btn-cadastrado">
+            <button class="editarGrey" onclick="ok()">Editar</button>
+            <button class="excluirRed" onclick="ok()">Excluir</button>
+        </div>
+    </div>
+
+    
+    <div class="div-cadastrado">
+        <div class="span-cadastrado">
+            <span class="nome-cadastrado">Cardápio 2</span>
+            <span>35 itens</span>
+            <span>28/07/2021</span>
+        </div>
+        <div class="btn-cadastrado">
+            <button class="editarGrey" onclick="ok()">Editar</button>
+            <button class="excluirRed" onclick="ok()">Excluir</button>
+        </div>
     </div>
 </body>
 </html>
