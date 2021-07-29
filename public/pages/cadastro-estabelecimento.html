@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/js/script.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Novo estabelecimento</title>
+</head>
+
+<body>
+  <header class="headerMenor">
+    <img src="../img/logo.png" alt="">
+    <nav role="navigation">
+      <div id="menuToggle">
+
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <a href="#">
+            <li>Home</li>
+          </a>
+          <a href="#">
+            <li>Sobre</li>
+          </a>
+          <a href="#">
+            <li>Info</li>
+          </a>
+          <a href="#">
+            <li>Contato</li>
+          </a>
+          <a href="#" target="_blank">
+            <li>Mostre-me mais</li>
+          </a>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="inputSpacing"></div>
+  <span class="spanHome">Novo estabelecimento</span>
+  <div class="inputSpacing"></div>
+  <div class="inputs">
+    <form action="/cadastro/estabelecimento" method="post">
+      <input class="inputLine" name="nome"   id="nome" placeholder="Nome" type="text"> <br>
+    <input class="inputLine" name="logo"   id="logo" placeholder="Logo" type="file"><br>
+    <input class="inputLine" name="cep"   id="cep" placeholder="CEP" type="number"><br>
+    <input class="inputLine" name="endereco"   id="endereco" placeholder="Endereço" type="text"><br>
+    <h1 class="divcenter">Mesas disponíveis:</h1>
+    <div data-app="product.quantity" class="btnQnt" id="quantidade">
+    <input type="button" id="plus" class="input-mais" value='-' onclick="process(-1)" />
+    <input id="mesa" class="input-quantidade" name="mesa" class="text" size="1" type="number" value="1"
+      maxlength=5 />
+    <input type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
+    
+    <button class="btn redBtn redBtn-cad" type="submit" > Cadastrar estabelecimento</button><br>
+    </form>
+    
+  </div>
+
+  <footer class="divcenter footer footerAdd">
+   
+     
+    </div>
+
+   
+  </footer>
+</body>
+
+</html>

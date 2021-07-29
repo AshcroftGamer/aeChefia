@@ -68,7 +68,7 @@ exports.postEstabelecimento = async ( req, res ) => {
             mensagem: 'Estabelecimento inserido com sucesso',
         }
 
-        return res.status( 500 ).send( response )
+        return res.status( 200 ).redirect()
     } catch ( err ) {
         return res.status( 500 ).send( { err: err } )
     }

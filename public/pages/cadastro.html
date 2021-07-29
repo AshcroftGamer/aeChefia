@@ -1,29 +1,51 @@
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/script.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <script src="../js/script.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
     <title>Cadastro</title>
+
 </head>
+
 <body>
     <header>
-        <img src="./img/logo.png" alt="">
+        <img src="../img/logo.png" alt="">
     </header>
-    <h2>Crie sua conta, é gratis!</h2>
-<div class="inputSpacing"></div>
-<div class="inputs">
-    <input class="inputLine" placeholder="Nome" type="text"> <br>
-    <input class="inputLine" placeholder="E-mail" type="email"><br>
-    <input class="inputLine" placeholder="CPF" type="number"><br>
-    <input class="form-control inputLine" placeholder="Telefone" tel-mask="(00) 00000-0000" type="tel"><br>
-    <input class="inputLine" placeholder="Senha" type="password"><br>
-    <input class="inputLine" placeholder="Confirmar a senha" type="password"><br>
-</div>
+    <h2>Crie sua conta, é grátis!</h2>
+    <div class="inputSpacing"></div>
+    <div class="inputs">
+        <form action="/cadastro/usuario" method="post">
+            <input class="inputLine" id="nome" name="nome" placeholder="Nome" type="text" required autocomplete="off">
+            <br>
+            <input class="inputLine" id="email" name="email" placeholder="E-mail" type="email" autocomplete="off"
+                required>
+            <br>
+            <span id="erromail"></span>
+            <input class="inputLine" id="cpf" name="cpf" placeholder="CPF" type="number" required><br>
+            <input class="form-control inputLine" id="telefone" name="telefone" placeholder="Telefone" type="tel"
+                required autocomplete="off"><br>
+            <input class="inputLine" id="senha" name="senha" placeholder="Senha" onkeyup="validaSenha()" type="password"
+                required autocomplete="off"><br>
+            <span style=" font-style: italic; color: red;" id="pass"></span>
+            <input class="inputLine" id="confSenha" placeholder="Confirmar a senha" onfocus="validaSenha()"
+                type="password" required autocomplete="off"><br>
+            <button type="submit" class="btn redBtn redBtn-cad"> Criar conta</button><br>
+        </form>
 
-<footer class="divcenter footer">
-    <button class="btn redBtn redBtn-cad" onclick="ok()">Criar conta</button><br>
-</footer>
+    </div>
+
+    <footer class="divcenter footer">
+
+    </footer>
+
+    <script>
+
+
+
+    </script>
 </body>
+
 </html>

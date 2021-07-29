@@ -26,10 +26,18 @@ app.get( '/', ( req, res ) => {
 app.get('/cadastro', (req, res) => {
     res.sendFile(__dirname + '/public/pages/cad-estabelecimento.html');
 })
+app.get('/cadastro/estabe', (req, res) => {
+    res.sendFile(__dirname + '/public/pages/cadastro-estabelecimento.html');
+})
 
 app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/public/pages/home.html');
 })
+
+app.get('/sucesso', (req, res) => {
+    res.sendFile(__dirname + '/public/pages/estabelecimento-sucesso.html')
+})
+
 app.use( '*', ( req, res ) => {
     res.sendFile (__dirname + '/public/pages/error.html' );
 } )
