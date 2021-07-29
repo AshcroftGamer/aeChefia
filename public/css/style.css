@@ -7,6 +7,12 @@
     --font: 'Inter', sans-serif
 }
 
+@media(min-width: 1026px) {
+    * {
+        display: none;
+    }
+}
+
 * {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -24,10 +30,6 @@ h1 {
     color: #666666;
     padding-left: 25px;
 }
-
-/* 
-background-color: var(--preto); <=== exemplo de uso da variável
-     */
 
 body {
     background-color: var(--cinza);
@@ -188,7 +190,6 @@ h2 {
     position: absolute;
     top: -7px;
     left: -5px;
-    cursor: pointer;
     opacity: 0;
     /* hide this */
     z-index: 2;
@@ -606,7 +607,7 @@ h2 {
     align-items: center
 }
 
-.visto3sucess{
+.visto3sucess {
     padding-bottom: 10px;
 }
 
@@ -636,6 +637,7 @@ h2 {
     color: var(--vermelho);
     outline: 0;
     margin-left: 15px;
+    padding-left: 10px;
 }
 
 .card {
@@ -730,7 +732,6 @@ h2 {
     font-weight: 600;
     font-size: 18px;
     line-height: 27px;
-    /* identical to box height, or 150% */
     letter-spacing: -0.02em;
 }
 
@@ -750,197 +751,6 @@ h2 {
     margin-bottom: 6px;
     place-self: flex-start;
     margin-left: 7%;
-}
-
-.nice-select {
-    height: 22px;
-    /* altura do select */
-    line-height: 22px;
-    /* este valor deve ser o mesmo acima */
-    border: solid 1px red;
-    /* cor da borda do select*/
-    -webkit-tap-highlight-color: transparent;
-    background-color: #fff;
-    box-sizing: border-box;
-    clear: both;
-    cursor: pointer;
-    display: block;
-    float: left;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: normal;
-    outline: none;
-    padding-left: 18px;
-    padding-right: 30px;
-    position: relative;
-    text-align: left !important;
-    -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    white-space: nowrap;
-    width: auto;
-}
-
-.nice-select:hover {
-    border-color: orange;
-    /* cor da borda do select ao passar o mouse */
-}
-
-.nice-select:active, .nice-select.open, .nice-select:focus {
-    border-color: blue;
-    /* cor da borda quando o select estiver aberto */
-}
-
-.nice-select:after {
-    border-bottom: 2px solid #000;
-    border-right: 2px solid #000;
-    content: '';
-    display: block;
-    height: 5px;
-    margin-top: -4px;
-    pointer-events: none;
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    -webkit-transform-origin: 66% 66%;
-    -ms-transform-origin: 66% 66%;
-    transform-origin: 66% 66%;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    -webkit-transition: all 0.15s ease-in-out;
-    transition: all 0.15s ease-in-out;
-    width: 5px;
-}
-
-.nice-select.open:after {
-    -webkit-transform: rotate(-135deg);
-    -ms-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-}
-
-.nice-select.open .list {
-    opacity: 1;
-    pointer-events: auto;
-    -webkit-transform: scale(1) translateY(0);
-    -ms-transform: scale(1) translateY(0);
-    transform: scale(1) translateY(0);
-}
-
-.nice-select.disabled {
-    border-color: #000;
-    color: #999;
-    pointer-events: none;
-}
-
-.nice-select.disabled:after {
-    border-color: #000;
-}
-
-.nice-select.wide {
-    width: 100%;
-}
-
-.nice-select.wide .list {
-    left: 0 !important;
-    right: 0 !important;
-}
-
-.nice-select.right {
-    float: right;
-}
-
-.nice-select.right .list {
-    left: auto;
-    right: 0;
-}
-
-.nice-select.small {
-    font-size: 12px;
-    height: 36px;
-    line-height: 34px;
-}
-
-.nice-select.small:after {
-    height: 4px;
-    width: 4px;
-}
-
-.nice-select.small .option {
-    line-height: 34px;
-    min-height: 34px;
-}
-
-.nice-select .list {
-    background-color: #fff;
-    box-shadow: 0 0 0 1px rgba(68, 68, 68, 1);
-    /* cor da borda dos options em RGB */
-    box-sizing: border-box;
-    margin-top: 4px;
-    opacity: 0;
-    overflow: hidden;
-    padding: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    -webkit-transform-origin: 50% 0;
-    -ms-transform-origin: 50% 0;
-    transform-origin: 50% 0;
-    -webkit-transform: scale(0.75) translateY(-21px);
-    -ms-transform: scale(0.75) translateY(-21px);
-    transform: scale(0.75) translateY(-21px);
-    -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
-    transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
-    z-index: 9;
-}
-
-.nice-select .list:hover .option:not(:hover) {
-    background-color: transparent !important;
-}
-
-.nice-select .option {
-    cursor: pointer;
-    font-weight: 400;
-    line-height: 22px;
-    /* altura das options */
-    min-height: 22px;
-    /* este valor deve ser o mesmo do acima */
-    list-style: none;
-    outline: none;
-    padding-left: 18px;
-    padding-right: 29px;
-    text-align: left;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-}
-
-.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
-    background-color: green;
-    /* corde fundo da option selecionada e ao passar o mouse */
-    color: red;
-    /* cor da option ao passar o mouse e do item selecionado*/
-}
-
-.nice-select .option.selected {
-    font-weight: bold;
-}
-
-.nice-select .option.disabled {
-    background-color: transparent;
-    color: #999;
-    cursor: default;
-}
-
-.no-csspointerevents .nice-select .list {
-    display: none;
-}
-
-.no-csspointerevents .nice-select.open .list {
-    display: block;
 }
 
 .Post {
@@ -985,3 +795,115 @@ h2 {
     display: inline-flex;
     justify-content: center;
 }
+
+/* cadastro funcionarios cardapios */
+
+.div-cadastrado {
+    height: 111px;
+    background: #F4F4F4;
+    border-radius: 6px;
+    display: flex;
+    width: 87%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.span-cadastrado {
+    width: 70%;
+    display: grid;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.02em;
+    color: #666666;
+    padding: 10px;
+}
+
+.nome-cadastrado {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    letter-spacing: -0.02em;
+    color: #666666;
+}
+
+.btn-cadastrado {
+    width: 30%;
+    display: grid;
+    padding: 20px;
+}
+
+.btn-cadastrado button {
+    background-color: rgba(194, 100, 100, 0);
+    border: none;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.02em;
+}
+
+.editarGrey {
+    color: var(--cinza);
+}
+
+.excluirRed {
+    color: var(--vermelho);
+}
+
+.estado-mesas {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 24px;
+    /* identical to box height, or 200% */
+    letter-spacing: -0.02em;
+    color: #666666;
+    text-align: center;
+    word-spacing: 30px;
+}
+
+.ponto1::before {
+    content: "•";
+    color: rgba(39, 34, 34, 0);
+    padding-right: 20px;
+    font-size: 35px;
+}
+
+.ponto2::before {
+    content: "•";
+    color: red;
+    padding-right: 20px;
+    font-size: 35px;
+}
+
+.ponto3::before {
+    content: "•";
+    color: var(--cinza);
+    padding-right: 20px;
+    font-size: 35px;
+}
+
+.ponto1, .ponto2, .ponto3 {
+    display: inline-flex;
+}
+
+.margin-top20 {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.mesas {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    padding-top: 25px;
+    margin-right: 10px;
+    flex-wrap: wrap;
+    
+}
+
+

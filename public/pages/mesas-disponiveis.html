@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Mesas Disponíveis</title>
+</head>
+<body>
+    <header class="headerMenor">
+        <img src="./img/logo.png" alt="">
+        <nav role="navigation">
+          <div id="menuToggle">
+
+            <input type="checkbox" />            
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul id="menu">
+              <a href="#"><li>Home</li></a>
+              <a href="#"><li>Sobre</li></a>
+              <a href="#"><li>Info</li></a>
+              <a href="#"><li>Contato</li></a>
+              <a href="#" target="_blank"><li>Mostre-me mais</li></a>
+            </ul>
+          </div>
+        </nav>
+    </header>
+    <div class="estado-mesas">
+        <span class="ponto1"> Disponíveis</span>
+        <span class="ponto2">Ocupadas</span>
+        <span class="ponto3">Indisponíveis</span> 
+    </div>
+    <h1 class="margin-top20">Mesas Disponíveis</h1>
+    <input type="button" value="clicar" id="btn" onclick="criarDiv()">
+    <div id="mesas" class="mesas">
+
+    </div>
+
+</body>
+</html>
