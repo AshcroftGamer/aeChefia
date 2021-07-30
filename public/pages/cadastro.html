@@ -14,21 +14,31 @@
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
-          <div id="menuToggle">
+            <div id="menuToggle">
 
-            <input id="menu-js" type="checkbox" />            
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menu">
-              <a href="#"><li><a href="/funcionarios">funcionario</a></li></a>
-              <a href="#"><li><a href="/">Login</a></li></a>
-              <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
-              <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
-              <a href="#"><li><a href="/cardapio">Cardapio</a></li></a>
-              
-            </ul>
-          </div>
+                <input id="menu-js" type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="#">
+                        <li><a href="/funcionarios">funcionario</a></li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/">Login</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/cadastro">Cadastro</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/mesa">Mesas</a> </li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/cardapio">Cardapio</a></li>
+                    </a>
+
+                </ul>
+            </div>
         </nav>
     </header>
     <h2>Crie sua conta, é grátis!</h2>
@@ -41,9 +51,14 @@
                 required>
             <br>
             <span id="erromail"></span>
-            <input class="inputLine" id="cpf" name="cpf" placeholder="CPF" type="number" required><br>
-            <input class="form-control inputLine" id="telefone" name="telefone" placeholder="Telefone" type="tel"
-                required autocomplete="off"><br>
+            <label for="cpf">
+                <input class="inputLine" id="cpf" name="cpf" placeholder="CPF" type="text" required><br>
+            </label>
+            <label for="telefone">
+                <input class="form-control inputLine" id="telefone" name="telefone" placeholder="Telefone" type="text"
+                    required autocomplete="off"><br>
+
+            </label>
             <input class="inputLine" id="senha" name="senha" placeholder="Senha" onkeyup="validaSenha()" type="password"
                 required autocomplete="off"><br>
             <span style=" font-style: italic; color: red;" id="pass"></span>
@@ -58,9 +73,19 @@
 
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+
     <script>
-
-
+        new Cleave( '#cpf', {
+            blocks: [ 3, 3, 3, 2 ],
+            delimiters: [ '.', '.', '-' ],
+            numericOnly: true
+        } );
+        new Cleave( '#telefone', {
+            blocks: [ 2, 5, 4 ],
+            delimiters: [ " ", ' ' ],
+            numericOnly: true
+        } );
 
     </script>
 </body>

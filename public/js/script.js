@@ -199,3 +199,8 @@ function criarDiv(){
     // document.body.appendChild(divElement)
     console.log("rodou")
 }
+
+
+
+
+
