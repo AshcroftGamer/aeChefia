@@ -70,7 +70,9 @@ async function cadastro( ) {
   
     usuario.nome = document.getElementById( "nome" ).value;
     usuario.email = document.getElementById( 'email' ).value;
-    usuario.cpf = document.getElementById( 'cpf' ).value;
+    let cpf = document.getElementById( 'cpf' ).value;
+    cpf.slice(3, 7, 12);
+    usuario.cpf = cpf;
     usuario.telefone = document.getElementById( 'telefone' ).value;
     usuario.senha = document.getElementById( 'senha' ).value;
   

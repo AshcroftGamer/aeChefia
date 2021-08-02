@@ -44,12 +44,16 @@
     <h2>Crie sua conta, é grátis!</h2>
     <div class="inputSpacing"></div>
     <div class="inputs">
-        <form action="/cadastro/usuario" method="post">
-            <input class="inputLine" id="nome" name="nome" placeholder="Nome" type="text" required autocomplete="off">
-            <br>
-            <input class="inputLine" id="email" name="email" placeholder="E-mail" type="email" autocomplete="off"
+        <form action="/cadastro/usuario" method="POST">
+            <label for="nome">
+                <input class="inputLine" id="nome" name="nome" placeholder="Nome" type="text" required autocomplete="off">
+                <br>
+            </label>
+            <label for="email">
+                <input class="inputLine" id="email" name="email" placeholder="E-mail" type="email" autocomplete="off"
                 required>
             <br>
+            </label>
             <span id="erromail"></span>
             <label for="cpf">
                 <input class="inputLine" id="cpf" name="cpf" placeholder="CPF" type="text" required><br>
@@ -57,13 +61,16 @@
             <label for="telefone">
                 <input class="form-control inputLine" id="telefone" name="telefone" placeholder="Telefone" type="text"
                     required autocomplete="off"><br>
-
             </label>
-            <input class="inputLine" id="senha" name="senha" placeholder="Senha" onkeyup="validaSenha()" type="password"
+            <label for="senha"><input class="inputLine" id="senha" name="senha" placeholder="Senha" onkeyup="validaSenha()" type="password"
                 required autocomplete="off"><br>
+            </label>
+            
             <span style=" font-style: italic; color: red;" id="pass"></span>
-            <input class="inputLine" id="confSenha" placeholder="Confirmar a senha" onfocus="validaSenha()"
+            <label for="confSenha">
+                <input class="inputLine" id="confSenha" placeholder="Confirmar a senha" onfocus="validaSenha()"
                 type="password" required autocomplete="off"><br>
+            </label>
             <button type="submit" class="btn redBtn redBtn-cad"> Criar conta</button><br>
         </form>
 
