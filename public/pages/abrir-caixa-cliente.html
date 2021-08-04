@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/script.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Abrir Caixa</title>
+</head>
+<body>
+    <header class="headerMenor">
+        <img src="../img/logo.png" alt="">
+        <nav role="navigation">
+            <div id="menuToggle">
+
+                <input id="menu-js" type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="#">
+                        <li><a href="/funcionarios">funcionario</a></li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/">Login</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/cadastro">Cadastro</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/mesa">Mesas</a> </li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/cardapio">Cardapio</a></li>
+                    </a>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="seleCliente">
+    <input style="color: black;" type="text" placeholder="Selecione um cliente" class="dropdown inputLine"
+    name="city" list="cityname">
+<datalist id="cityname">
+    <option value="bebida1">sds
+    <option value="bebida2">sdsd
+</datalist>
+<button style="background-color: var(--vermelho);color: var(--branco);margin-left: 10px;
+margin-top: -2px;width: 50px;height: 48px;" class="btnAdd">+</button>
+</div>
+
+<h1 style="padding: 4%;font-size: 20px;">Adicionar um cardápio</h1>
+<div class="div-cardapio">
+    <div class="cardapio-item">
+        <img class="img-cardapio" src="../img/bebida.png" alt="">
+        <h1 class="h1-bebida">Bebida</h1>
+    </div>
+    <div class="cardapio-item">
+        <img class="img-cardapio" src="../img/comida.png" alt="">
+        <h1 class="h1-comida">Comida</h1>
+    </div>
+</div>
+
+
+<footer class="divcenter footer footerAdd">
+ 
+
+    <button class="btn redBtn redBtn-cad" onclick="ok()">Fechar comanda</button><br>
+</footer>
+</body>
+</html>

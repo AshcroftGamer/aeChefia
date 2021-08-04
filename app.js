@@ -83,7 +83,7 @@ app.get('/mesa', (req, res) => {
 
 //* LISTA DE ITENS DO CARDAPIO
 app.get('/cardapio', (req, res) => {
-    res.sendFile(__dirname + '/public/pages/lista-item-cardapio.html')
+    res.sendFile(__dirname + '/public/pages/cardapio.html')
 })
 
  //* REDEFINIR SENHA

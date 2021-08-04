@@ -1,0 +1,60 @@
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/script.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Abrir Caixa</title>
+
+</head>
+
+<body>
+    <header class="headerMenor">
+        <img src="../img/logo.png" alt="">
+        <nav role="navigation">
+            <div id="menuToggle">
+
+                <input id="menu-js" type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="#">
+                        <li><a href="/funcionarios">funcionario</a></li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/">Login</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/cadastro">Cadastro</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/mesa">Mesas</a> </li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/cardapio">Cardapio</a></li>
+                    </a>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="divRetirada">
+        <h1 style="font-size: 18px;padding: 15px;">Retirada de caixa</h1>
+        <div class="input-icon" style="display: block; text-align: center;">
+            <button class="Send">R$</button>
+            <input class="Post" placeholder="0,00" type="number">
+            <div class="btnRetirada">
+                
+                <button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" onclick="ok()">Cancelar</button>
+                <button class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="ok()">Confirmar retirada</button><br>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

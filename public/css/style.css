@@ -21,6 +21,21 @@
     font-size: 16px;
 }
 
+form {
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    width: 87%;
+}
+
+.linkIndex {
+    color: var(--vermelho);
+}
+
+a {
+    text-decoration: none;
+}
+
 h1 {
     font-style: normal;
     font-weight: 600;
@@ -750,7 +765,7 @@ h2 {
     margin-top: 15px;
     margin-bottom: 6px;
     place-self: flex-start;
-    margin-left: 7%;
+    width: 100%;
 }
 
 .Post {
@@ -903,7 +918,68 @@ h2 {
     padding-top: 25px;
     margin-right: 10px;
     flex-wrap: wrap;
-    
 }
 
+/* Abrir Caixa Retirada/fechar */
 
+.divRetirada {
+    background: #FFFFFF;
+    border: 1px solid rgba(102, 102, 102, 0.1);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    width: 87%;
+    margin: 0 auto;
+    margin-top: 15%;
+}
+
+.btnRetirada {
+    width: 86%;
+    margin: 0 auto;
+    margin-top: -2%;
+    padding-bottom: 7%;
+}
+
+/* Abrir Caixa / cleinte */
+
+.seleCliente {
+    margin: 0 auto;
+    width: 87%;
+    display: flex;
+    padding: 10px;
+}
+
+.spanInputs {
+    justify-self: baseline;
+    padding-left: 7%;
+    padding-top: 17px;
+    margin-bottom: -8px;
+}
+
+/* BUSCAR ITENS CARDAPIO BEBIDA/COMIDA */
+
+.itens-cardapio {
+    width: 40%;
+    height: 165px;
+    background: #F4F4F4;
+    display: grid;
+    margin: 5px;
+    border-radius: 6px;
+    text-align: center;
+    padding: 26px;
+    padding-top: 40px;
+    justify-items: start;
+    color: #666666;
+
+}
+
+.itens-cardapio-span {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+}
+
+.itens-cardapio:hover {
+    background: #ED1B2E;
+    color: #F4F4F4;
+}
