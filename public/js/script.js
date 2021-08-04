@@ -43,20 +43,71 @@ function process( mesa ) {
 //   $( '.personalizar-select' ).niceSelect();
 // } );
 
+
+/**
+ * ? MASCARA DE DADOS
+*/
+
+const options = {
+  method: "GET",
+  mode: "cors",
+  caches: "default"
+}
+function fMasc( objeto, mascara ) {
+  obj = objeto
+  masc = mascara
+  setTimeout( "fMascEx()", 1 )
+}
+function fMascEx() {
+  obj.value = masc( obj.value )
+}
+function mTel( tel ) {
+  tel = tel.replace( /\D/g, "" )
+  tel = tel.replace( /^(\d)/, "($1" )
+  tel = tel.replace( /(.{3})(\d)/, "$1)$2" )
+  if ( tel.length == 9 ) {
+    tel = tel.replace( /(.{1})$/, "-$1" )
+  } else if ( tel.length == 10 ) {
+    tel = tel.replace( /(.{2})$/, "-$1" )
+  } else if ( tel.length == 11 ) {
+    tel = tel.replace( /(.{3})$/, "-$1" )
+  } else if ( tel.length == 12 ) {
+    tel = tel.replace( /(.{4})$/, "-$1" )
+  } else if ( tel.length > 12 ) {
+    tel = tel.replace( /(.{4})$/, "-$1" )
+  } return tel;
+}
+function mCEP( cep ) {
+  cep = cep.replace( /\D/g, "" )
+  cep = cep.replace( /^(\d{2})(\d)/, "$1.$2" )
+  cep = cep.replace( /.(\d{3})(\d)/, ".$1-$2" )
+  return cep
+}
+
+
 /** 
  * ! FUNCOES POST E GET DATABASE
  * 
  * 
  * ?cadastro de Usuario
 */
-async function cadastro( ) {
+async function cadastro() {
   let usuario = {}
 
   usuario.nome = document.getElementById( "nome" ).value;
   usuario.email = document.getElementById( 'email' ).value;
-  usuario.cpf = document.getElementById( 'cpf' ).value;
-  usuario.telefone = document.getElementById( 'telefone' ).value;
+  // usuario.cpf = document.getElementById( 'cpf' ).value;
+  let cpf = document.getElementById( 'cpf' );
+  console.log(cpf)
+  cpf = cpf.value.replace( '.', '' );
+  usuario.cpf = cpf.value.replace( '-', '' );
+  let tel = document.getElementById( 'telefone' ).value;
+  tel = tel.value.replace( '(', "");
+  tel = tel.value.replace( ')', "");
+  usuario.telefone = tel.replace( '-', '' )
   usuario.senha = document.getElementById( 'senha' ).value;
+
+  console.log(usuario);
 
   const formData = new FormData();
   formData.append( 'nome', usuario.nome )
@@ -65,68 +116,10 @@ async function cadastro( ) {
   formData.append( 'telefone', usuario.telefone )
   formData.append( 'senha', usuario.senha )
 
-  async function cadastro( ) {
-    let usuario = {}
-  
-    usuario.nome = document.getElementById( "nome" ).value;
-    usuario.email = document.getElementById( 'email' ).value;
-    let cpf = document.getElementById( 'cpf' ).value;
-    cpf.slice(3, 7, 12);
-    usuario.cpf = cpf;
-    usuario.telefone = document.getElementById( 'telefone' ).value;
-    usuario.senha = document.getElementById( 'senha' ).value;
-  
-    const formData = new FormData();
-    formData.append( 'nome', usuario.nome )
-    formData.append( 'email', usuario.email )
-    formData.append( 'cpf', usuario.cpf )
-    formData.append( 'telefone', usuario.telefone )
-    formData.append( 'senha', usuario.senha )
-  
-    await fetch( 'http://localhost:3000/cadastro/usuario',
-      {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        }
-      } ).then( result => {
-        return result.json()
-      } ).then( data => {
-        console.log( data )
-  
-      } )
-
-
-
-}
-
-/** 
- * *  Cadastro de Estabelecimento
-*/
-
-async function cadEst( ) {
-  let estabelecimento = {}
-
-  estabelecimento.nome =      document.getElementById( "nome" ).value;
-  estabelecimento.cep =       document.getElementById( 'cep' ).value;
-  estabelecimento.endereco =  document.getElementById( 'endereco' ).value;
-  estabelecimento.mesa =     document.getElementById( 'mesa' ).value;
-
-  const formData = new FormData();
-
-  const fileField = document.querySelector( 'input[type="file"]' );
-
-  formData.append( 'nome',      estabelecimento.nome )
-  formData.append( 'logo',     fileField.files[0] )
-  formData.append( 'cep',       estabelecimento.cep )
-  formData.append( 'endereco',  estabelecimento.endereco )
-  formData.append( 'mesa',     estabelecimento.mesa )
-
-  await fetch( 'http://localhost:3000/cadastro/estabelecimento',
+  await fetch( 'http://localhost:3000/cadastro/usuario',
     {
       method: 'POST',
-      body: JSON.stringify( formData),
+      body: JSON.parse(usuario.stringify()),
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       }
@@ -134,14 +127,52 @@ async function cadEst( ) {
       return result.json()
     } ).then( data => {
       console.log( data )
-
+      
     } )
 
 
 
+}
+ 
 
-}
-}
+  /** 
+   * *  Cadastro de Estabelecimento
+  */
+
+  async function cadEst() {
+    let estabelecimento = {}
+
+    estabelecimento.nome = document.getElementById( "nome" ).value;
+    estabelecimento.cep = document.getElementById( 'cep' ).value;
+    estabelecimento.endereco = document.getElementById( 'endereco' ).value;
+    estabelecimento.mesa = document.getElementById( 'mesa' ).value;
+
+    const formData = new FormData();
+
+    const fileField = document.querySelector( 'input[type="file"]' );
+
+    formData.append( 'nome', estabelecimento.nome )
+    formData.append( 'logo', fileField.files[ 0 ] )
+    formData.append( 'cep', estabelecimento.cep )
+    formData.append( 'endereco', estabelecimento.endereco )
+    formData.append( 'mesa', estabelecimento.mesa )
+
+    await fetch( 'http://localhost:3000/cadastro/estabelecimento',
+      {
+        method: 'POST',
+        body: JSON.stringify( formData ),
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        }
+      } ).then( result => {
+        return result.json()
+      } ).then( data => {
+        console.log( data )
+
+      } )
+
+  }
+
 
 // function validaSenha() {
 //   const pass = document.getElementById( 'pass' )
@@ -165,41 +196,41 @@ function getNextId() {
 }
 
 //Sua função, chamada no click do botão
-function criarDiv(){
-    //Pego o ID
-    let id = getNextId();
-    //Crio a DIV
-    let divElement = document.createElement("div");
-    var conteudoNovo = document.createTextNode(id);
-    divElement.appendChild(conteudoNovo);
-    //Pego a DIV onde a nova DIV será criada, sempre na DIV mãe
-    let divMae = document.getElementById("mesas");
+function criarDiv() {
+  //Pego o ID
+  let id = getNextId();
+  //Crio a DIV
+  let divElement = document.createElement( "div" );
+  var conteudoNovo = document.createTextNode( id );
+  divElement.appendChild( conteudoNovo );
+  //Pego a DIV onde a nova DIV será criada, sempre na DIV mãe
+  let divMae = document.getElementById( "mesas" );
 
-    //A ideia do ID é que ele seja um elemento único, ou seja, não se repita
-    divElement.setAttribute('id', 'box' + id.toString());
+  //A ideia do ID é que ele seja um elemento único, ou seja, não se repita
+  divElement.setAttribute( 'id', 'box' + id.toString() );
 
-    //CSS
-    divElement.style.width = "66px";
-    divElement.style.height = "66px";
-    divElement.style.backgroundColor = '#666666';
-    divElement.style.display = '';
-    divElement.style.opacity = '0.1';
-    divElement.style.marginLeft = '5%';
-    divElement.style.margin = '10px'
-    divElement.classList.add("bounceIn")
-    divElement.style.paddingTop = '23px'
-    divElement.style.textAlign = 'center'
-    
-    
+  //CSS
+  divElement.style.width = "66px";
+  divElement.style.height = "66px";
+  divElement.style.backgroundColor = '#666666';
+  divElement.style.display = '';
+  divElement.style.opacity = '0.1';
+  divElement.style.marginLeft = '5%';
+  divElement.style.margin = '10px'
+  divElement.classList.add( "bounceIn" )
+  divElement.style.paddingTop = '23px'
+  divElement.style.textAlign = 'center'
 
-    //Essa parte é mais para deixar claro que outras divs estão sendo criadas, criando um degrade
-    //divElement.style.backgroundColor = "#f0" + id.toString();
 
-    //Adiciono a nova DIV na DIV mãe
-    //Aqui poderia ser por exemplo document.body.appendChild, adicionando assim o elemento criado diretamente no body
-    divMae.appendChild(divElement);
-    // document.body.appendChild(divElement)
-    console.log("rodou")
+
+  //Essa parte é mais para deixar claro que outras divs estão sendo criadas, criando um degrade
+  //divElement.style.backgroundColor = "#f0" + id.toString();
+
+  //Adiciono a nova DIV na DIV mãe
+  //Aqui poderia ser por exemplo document.body.appendChild, adicionando assim o elemento criado diretamente no body
+  divMae.appendChild( divElement );
+  // document.body.appendChild(divElement)
+  console.log( "rodou" )
 }
 
 

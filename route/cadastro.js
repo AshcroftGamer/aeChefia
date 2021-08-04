@@ -1,8 +1,6 @@
-const sign = require( 'express' ).Router();
+const route = require( 'express' ).Router();
 const multer = require( 'multer' );
-const path = require( 'path' );
-const jwt = require( 'jsonwebtoken' );
-const cadastroControl = require('../controllers/cadastrocontrol')
+const cadastroControl = require('../controllers/cadastrocontrol');
 
 
 const storage = multer.diskStorage( {
@@ -16,27 +14,19 @@ const storage = multer.diskStorage( {
 const upload = multer( { storage } )
 
 
-// ----- ROTA DE TESTE DE UPLOAD DE IMAGENS -----tt
-sign.post( '/imagem', upload.single( 'imagem2' ), ( req, res ) => {
-    console.log( req.body )
-    console.log( req.file )
-    bd.getConnection( ( err, conn ) => {
-        if ( err ) {
-            return res.status( 500 ).send( { err: err } )
-        }
-        return res.send( 'ok' )
-    } )
-} )
 
-sign.post( '/usuario', cadastroControl.postUsuario)
+route.get('/', (req, res) => {
+    // res.send('ok')
+    res.sendFile(__basedir + '/public/pages/cadastro.html');
+})
 
-sign.post( '/estabelecimento', upload.single('logo'), cadastroControl.postEstabelecimento )
 
-sign.post( '/cardapio', cadastroControl.postCardapio )
 
-sign.post( '/funcionario',  cadastroControl.postFuncionario)
+route.post( '/cardapio', cadastroControl.postCardapio )
+
+route.post( '/funcionario',  cadastroControl.postFuncionario)
 
 
 
 
-module.exports = sign;
+module.exports = route;

@@ -1,2 +1,3 @@
+select * from estabelecimento;
 
-select * from proprietario;
+DELETE FROM estabelecimento WHERE id_estabelecimento > 0
