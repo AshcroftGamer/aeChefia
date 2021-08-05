@@ -5,12 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/script.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="https://kit.fontawesome.com/6bda3a8a9b.js" crossorigin="anonymous"></script>
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
@@ -19,6 +17,9 @@
 </head>
 
 <body>
+    <div class="splash">
+        <img class="bounceIn" src="/img/logo-splash.png" alt="">
+    </div>
     <header>
         <img src="./img/logo.png" alt="">
     </header>
@@ -34,14 +35,23 @@
     <div class="inputs">
         <input class="inputLine" placeholder="Login" type="text"> <br>
         <div class="inputSpacing"></div>
-        <input class="inputLine" placeholder="Senha" type="text"><a href="./public/pages/cadastro.html" class="esqsenha">Esqueci minha senha</a> <br>
+        <div class="input-icon" style="text-align: center;">
+
+            <input class="Post" placeholder="Senha" id="senha" type="password">
+            <button onclick="ViewSenha()" class="SendIndex"><img id="olho" style="width: 50%;" src="/img/hidden.png"
+                    alt=""></button>
+
+        </div>
+        <a href="./public/pages/cadastro.html" class="esqsenha">Esqueci minha senha</a>
+        <!-- <input class="inputLine" placeholder="Senha" type="text"><a href="./public/pages/cadastro.html" class="esqsenha">Esqueci minha senha</a> <br> -->
     </div>
     <div class="divcenter">
         <button class="btn redBtn redBtn-cad" onclick="ok()">Entrar </button><br>
         <div class="inputSpacing"></div>
-        <button class="btn borderBtn" onclick=""><a class="linkIndex" href="/pages/cadastro.html">criar conta</a></button>
-        
-    </div>
+        <button class="btn borderBtn" onclick=""><a class="linkIndex" href="/pages/cadastro.html">criar
+                conta</a></button>
+
 </body>
+<script src="/js/script.js"></script>
 
 </html>
