@@ -38,6 +38,10 @@ app.get( '/', ( req, res ) => {
     res.sendFile( __dirname + '/index.html' );
 } )
 
+app.get( '/teste', ( req, res ) => {
+    res.sendFile( __dirname + '/public/pages/links.html' );
+} )
+
 /*
 //! TELA DE ERROR
 app.use( '*', ( req, res ) => {
