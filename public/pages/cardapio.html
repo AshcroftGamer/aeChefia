@@ -1,57 +1,81 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">  
+    <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Criar cardápio</title>
 </head>
+
 <body>
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
-          <div id="menuToggle">
+            <div id="menuToggle">
 
-            <input id="menu-js" type="checkbox" />            
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menu">
-              <a href="#"><li><a href="/funcionarios">funcionario</a></li></a>
-              <a href="#"><li><a href="/">Login</a></li></a>
-              <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
-              <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
-              <a href="#"><li><a href="/cardapio">Cardapio</a></li></a>
-              
-            </ul>
-          </div>
+                <input onclick="Menu()" id="menu-js" type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="#">
+                        <li><a href="funcionario.html">Funcionario</a></li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/">Login</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/cadastro">Cadastro</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/mesa">Mesas</a> </li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/cardapio">Cardapio</a></li>
+                    </a>
+
+                </ul>
+            </div>
         </nav>
     </header>
 
-        <div class="inputSpacing"></div>
+    <div class="inputSpacing"></div>
     <span class="spanHome">Cadastre um cardápio</span>
     <div class="inputSpacing"></div>
     <div class="div-cardapio">
-        <div class="cardapio-item">
-            <img class="img-cardapio" src="../img/bebida.png" alt="">
-            <h1 class="h1-bebida">Bebida</h1>
-        </div>
-        <div class="cardapio-item">
-            
-            <img href="./comida.html" class="img-cardapio" src="../img/comida.png" alt="">
-            <h1 class="h1-comida">Comida</h1>
-            
-            
-        </div>
+    
+      
+        <a class="cardapio-item" href="bebida.html">
+            <button style="border: none; background-color: #e5e5e500;"  > 
+           
+                <img class="img-cardapio" src="../img/bebida.png" alt="">
+                <h1 class="h1-bebida">Bebida</h1>
+            </button>
+
+           
+
+        </a>
+    
+        <a class="cardapio-item" href="comida.html">
+            <button style="border:none;background-color: #e5e5e500;">
+                <img href="./comida.html" class="img-cardapio" src="../img/comida.png" alt="">
+                <h1 class="h1-comida">Comida</h1>
+            </button></a>
+
+
+
     </div>
 
     <div class="inputs">
-        <label>Cardápios cadastrados</label>
-
+        <label style="width: auto;" class="label-listas">Cardápios cadastrados</label>
     </div>
 
-    
+
     <div class="div-cadastrado">
         <div class="span-cadastrado">
             <span class="nome-cadastrado">Cardápio 1</span>
@@ -64,8 +88,8 @@
         </div>
     </div>
 
-    
-    <div class="div-cadastrado">
+
+    <div  class="div-cadastrado">
         <div class="span-cadastrado">
             <span class="nome-cadastrado">Cardápio 2</span>
             <span>35 itens</span>
@@ -77,4 +101,5 @@
         </div>
     </div>
 </body>
+
 </html>

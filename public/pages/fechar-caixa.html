@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/script.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Fechar Caixa</title>
 
 </head>
@@ -16,13 +19,13 @@
         <nav role="navigation">
             <div id="menuToggle">
 
-                <input id="menu-js" type="checkbox" />
+                <input onclick="Menu()" id="menu-js" type="checkbox" />
                 <span></span>
                 <span></span>
                 <span></span>
                 <ul id="menu">
                     <a href="#">
-                        <li><a href="/funcionarios">funcionario</a></li>
+                        <li><a href="funcionario.html">Funcionario</a></li>
                     </a>
                     <a href="#">
                         <li><a href="/">Login</a></li>
@@ -48,7 +51,7 @@
             <h1 style="text-align: left;" >R$ 10.543,78</h1>
             <div class="btnRetirada">
                 
-                <button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" onclick="ok()">Cancelar</button>
+               <a href="../pages/mesas-disponiveis.html"><button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" >Cancelar</button></a> 
                 <button class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="ok()">Fechar caixa</button><br>
             </div>
         </div>

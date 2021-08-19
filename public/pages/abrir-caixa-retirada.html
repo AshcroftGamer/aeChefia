@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/script.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Retirar Caixa</title>
 
 </head>
@@ -16,13 +19,13 @@
         <nav role="navigation">
             <div id="menuToggle">
 
-                <input id="menu-js" type="checkbox" />
+                <input onclick="Menu()" id="menu-js" type="checkbox" />
                 <span></span>
                 <span></span>
                 <span></span>
                 <ul id="menu">
                     <a href="#">
-                        <li><a href="/funcionarios">funcionario</a></li>
+                        <li><a href="funcionario.html">Funcionario</a></li>
                     </a>
                     <a href="#">
                         <li><a href="/">Login</a></li>
@@ -44,7 +47,7 @@
 
     <div class="divRetirada">
         <h1 style="font-size: 18px;padding: 15px;">Retirada de caixa</h1>
-        <div class="input-icon" style="display: block; text-align: center;">
+        <div class="input-icon" style="display: inline-table; text-align: center;">
             <button class="Send">R$</button>
             <input class="Post" placeholder="0,00" type="number">
             <div class="btnRetirada">

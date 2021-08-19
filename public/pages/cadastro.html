@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/script.js"></script>
+    <script src="/js/script.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Cadastro</title>
 
 </head>
@@ -13,33 +16,7 @@
 <body>
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
-        <nav role="navigation">
-            <div id="menuToggle">
-
-                <input id="menu-js" type="checkbox" />
-                <span></span>
-                <span></span>
-                <span></span>
-                <ul id="menu">
-                    <a href="#">
-                        <li><a href="/funcionarios">funcionario</a></li>
-                    </a>
-                    <a href="#">
-                        <li><a href="/">Login</a></li>
-                    </a>
-                    <a href="#">
-                        <li> <a href="/cadastro">Cadastro</a></li>
-                    </a>
-                    <a href="#">
-                        <li> <a href="/mesa">Mesas</a> </li>
-                    </a>
-                    <a href="#">
-                        <li><a href="/cardapio">Cardapio</a></li>
-                    </a>
-
-                </ul>
-            </div>
-        </nav>
+       
     </header>
     <h2>Crie sua conta, é grátis!</h2>
     <div class="inputSpacing"></div>
@@ -62,23 +39,32 @@
                     required><br>
             </label>
             <label for="senha">
-                <input class="inputLine" id="senha" name="senha" placeholder="Senha" type="password"
-                required autocomplete="off"><br>
+                <div style="width: 87%;" class="input-icon" style="text-align: center;">
+
+                    <input style="width: 100%;" class="Post" placeholder="Senha" id="senha" type="password">
+                    <button onclick="ViewSenha()" class="SendIndex"><img id="olho" style="width: 50%;" src="/img/private.png"
+                            alt=""></button>
+                </div>
             </label>
-            
-            <span style=" font-style: italic; color: red;" id="pass"></span>
+        
             <label for="confSenha">
-                <input class="inputLine" id="confSenha" placeholder="Confirmar a senha"
-                type="password" required autocomplete="off"><br>
+                <div style="width: 87%;" class="input-icon" style="text-align: center;">
+
+                    <input style="width: 100%;" class="Post" placeholder="Confirmar senha" id="confSenha" type="password">
+                    <button onclick="confirmarSenha()" class="SendIndex"><img id="olho1" style="width: 50%;" src="/img/private.png"
+                            alt=""></button>
+                </div>
             </label>
-            <button onclick="cadastro()" class="btn redBtn redBtn-cad"> Criar conta</button><br>
+
+            <footer class="divcenter footer">
+                <button onclick="cadastro()" class="btn redBtn redBtn-cad"> Criar conta</button><br>
+            </footer>
+            
         </form>
 
     </div>
 
-    <footer class="divcenter footer">
 
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
 

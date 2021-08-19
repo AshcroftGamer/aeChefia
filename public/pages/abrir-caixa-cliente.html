@@ -1,25 +1,30 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/script.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Abrir Caixa</title>
 </head>
-<body>
+
+<body >
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
             <div id="menuToggle">
 
-                <input id="menu-js" type="checkbox" />
+                <input onclick="Menu()" id="menu-js" type="checkbox" />
                 <span></span>
                 <span></span>
                 <span></span>
                 <ul id="menu">
                     <a href="#">
-                        <li><a href="/funcionarios">funcionario</a></li>
+                        <li><a href="funcionario.html">Funcionario</a></li>
                     </a>
                     <a href="#">
                         <li><a href="/">Login</a></li>
@@ -40,33 +45,35 @@
     </header>
 
     <div class="seleCliente">
-    <input style="color: black;" type="text" placeholder="Selecione um cliente" class="dropdown inputLine"
-    name="city" list="cityname">
-<datalist id="cityname">
-    <option value="bebida1">sds
-    <option value="bebida2">sdsd
-</datalist>
-<button style="background-color: var(--vermelho);color: var(--branco);margin-left: 15px;
-margin-top: -2px;width: 50px;height: 48px;" class="btnAdd">+</button>
-</div>
-
-<h1 style="padding: 4%;font-size: 20px;margin-left: 4%;">Adicionar um cardápio</h1>
-<div class="div-cardapio">
-    <div class="cardapio-item">
-        <img class="img-cardapio" src="../img/bebida.png" alt="">
-        <h1 class="h1-bebida">Bebida</h1>
+        <input style="color: black;" type="text" placeholder="Selecione um cliente" class="dropdown inputLine"
+            name="city" list="cityname">
+        <datalist id="cityname">
+            <option value="bebida1">sds
+            <option value="bebida2">sdsd
+        </datalist>
+     <a href="/pages/adicionar-cliente-a-mesa.html">   <button style="background-color: var(--vermelho);color: var(--branco);margin-left: 15px;
+margin-top: -2px;width: 50px;height: 48px;display:grid;align-content:space-around;
+    padding-bottom: 4px;" class="btnAdd">+</button></a>
     </div>
-    <div class="cardapio-item">
-        <img class="img-cardapio" src="../img/comida.png" alt="">
-        <h1 class="h1-comida">Comida</h1>
+
+    <h1 style="padding: 4%;font-size: 20px;margin-left: 4%;">Adicionar um cardápio</h1>
+    <div class="div-cardapio">
+        <div class="cardapio-item">
+            <img class="img-cardapio" src="../img/bebida.png" alt="">
+            <h1 class="h1-bebida">Bebida</h1>
+        </div>
+        <div class="cardapio-item">
+            <img class="img-cardapio" src="../img/comida.png" alt="">
+            <h1 class="h1-comida">Comida</h1>
+        </div>
     </div>
-</div>
 
 
-<footer class="divcenter footer footerAdd">
- 
+    <footer class="divcenter footer footerAdd">
 
-    <button class="btn redBtn redBtn-cad" onclick="ok()">Fechar comanda</button><br>
-</footer>
+
+        <button class="btn redBtn redBtn-cad" onclick="ok()">Fechar comanda</button><br>
+    </footer>
 </body>
+
 </html>
