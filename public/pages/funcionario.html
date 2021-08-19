@@ -1,46 +1,93 @@
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/script.js"></script>
-    <link rel="stylesheet" href="/css/style.css">  
-    <title>Cadastrar Funcionários</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/js/script.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <title>Cadastrar Funcionários</title>
 </head>
+
 <body>
   <header class="headerMenor">
     <img src="../img/logo.png" alt="">
     <nav role="navigation">
       <div id="menuToggle">
 
-        <input id="menu-js" type="checkbox" />            
+        <input onclick="Menu()" id="menu-js" type="checkbox" />
         <span></span>
         <span></span>
         <span></span>
         <ul id="menu">
-          <a href="#"><li><a href="/funcionarios">funcionario</a></li></a>
-          <a href="#"><li><a href="/">Login</a></li></a>
-          <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
-          <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
-          <a href="#"><li><a href="/cardapio">Cardapio</a></li></a>
-          
+          <a href="#">
+            <li><a href="funcionario.html">Funcionario</a></li>
+          </a>
+          <a href="#">
+            <li><a href="/">Login</a></li>
+          </a>
+          <a href="#">
+            <li> <a href="/cadastro">Cadastro</a></li>
+          </a>
+          <a href="#">
+            <li> <a href="/mesa">Mesas</a> </li>
+          </a>
+          <a href="#">
+            <li><a href="/cardapio">Cardapio</a></li>
+          </a>
+
         </ul>
       </div>
     </nav>
-</header>
-    <div class="inputSpacing"></div>
-    <span class="spanHome">Novo funcionário</span>
-    <div class="inputSpacing"></div>
-    <div class="inputs">
-        <div class="inputSpacing"></div>
-    <input class="inputLine" placeholder="Nome" type="text"> <br>
-    <input class="inputLine" placeholder="E-mail" type="email"><br>
-    <input class="inputLine" placeholder="Login" type="text"><br>
-    <input class="inputLine" placeholder="Senha" type="password"><br>
-    <input class="inputLine" placeholder="Confirmar senha" type="password"><br>
-    <footer class="divcenter footer footerAdd">   
-        <button class="btn redBtn redBtn-cad" onclick="ok()">Cadastrar funcionário</button><br>
-    </footer>
-</div>
+  </header>
+  <div class="inputSpacing"></div>
+  <span class="spanHome">Novo funcionário</span>
+  <div class="inputSpacing"></div>
+  <div class="inputs">
+    <form action="" method="POST">
+      <div class="inputSpacing"></div>
+
+      <label for="nome">
+        <input class="inputLine" id="nome" name="nome" placeholder="Nome" type="text" required>
+        <br>
+      </label>
+
+      <label for="email">
+        <input class="inputLine" id="email" name="email" placeholder="E-mail" type="email" required>
+        <br>
+      </label>
+
+      <label for="Login">
+        <input class="inputLine" id="login" name="login" placeholder="Login" type="text" required>
+        <br>
+      </label>
+
+      <label for="senha">
+        <div style="width: 87%;" class="input-icon" style="text-align: center;">
+          <input style="width: 100%;" class="Post" placeholder="Senha" id="senha" type="password">
+          <button onclick="ViewSenha()" type="button" class="SendIndex"><img id="olho" style="width: 50%;" src="/img/private.png"
+              alt=""></button>
+        </div>
+      </label>
+
+      <label for="confSenha">
+        <div style="width: 87%;" class="input-icon" style="text-align: center;">
+
+          <input style="width: 100%;" class="Post" placeholder="Confirmar senha" id="confSenha" type="password">
+          <button onclick="confirmarSenha()" type="button" class="SendIndex"><img id="olho1" style="width: 50%;"
+              src="/img/private.png" alt=""></button>
+        </div>
+      </label>
+      
+      <footer class="divcenter footer footerAdd">
+        <button class="btn redBtn redBtn-cad" >Cadastrar funcionário</button><br>
+      </footer>
+
+    </form>
+  </div>
 </body>
+
 </html>

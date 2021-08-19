@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <script src="/js/script.js"></script>
     <title>Lista de Funcionários</title>
 </head>
@@ -15,12 +18,12 @@
         <nav role="navigation">
           <div id="menuToggle">
 
-            <input id="menu-js" type="checkbox" />            
+            <input onclick="Menu()" id="menu-js" type="checkbox" />            
             <span></span>
             <span></span>
             <span></span>
             <ul id="menu">
-              <a href="#"><li><a href="/funcionarios">funcionario</a></li></a>
+              <a href="#"><li><a href="funcionario.html">Funcionario</a></li></a>
               <a href="#"><li><a href="/">Login</a></li></a>
               <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
               <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
@@ -35,14 +38,18 @@
     <span class="spanHome">Cadastre um cardápio</span>
     <div class="inputSpacing"></div>
     <div style="padding-bottom: 0px;" class="div-cardapio">
-        <div class="cardapio-item">
+        <a class="cardapio-item" href="lista-funcionarios.html">
+        <div >
             <img class="img-cardapio" src="" alt="">
             <h1 class="h1-bebida">Funcionários</h1>
         </div>
-        <div class="cardapio-item">
+    </a>
+        <a class="cardapio-item" href="cardapio.html">
+        <div >
             <img class="img-cardapio" src="" alt="">
             <h1 class="h1-comida">Cardápio</h1>
         </div>
+    </a>
     </div>
 
     <div class="inputs">

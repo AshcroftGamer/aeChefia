@@ -7,8 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'
         type='text/css'>
+        <script src="/js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Inserir bebida</title>
 </head>
 
@@ -18,13 +22,13 @@
         <nav role="navigation">
             <div id="menuToggle">
 
-                <input id="menu-js" type="checkbox" />
+                <input onclick="Menu()" id="menu-js" type="checkbox" />
                 <span></span>
                 <span></span>
                 <span></span>
                 <ul id="menu">
                     <a href="#">
-                        <li><a href="/funcionarios">funcionario</a></li>
+                        <li><a href="funcionario.html">Funcionario</a></li>
                     </a>
                     <a href="#">
                         <li><a href="/">Login</a></li>
@@ -88,7 +92,7 @@
         <option>Relish</option>
     </select> -->
     <footer class="divcenter footer footerAdd">
-        <button class="btn redBtn redBtn-cad" onclick="ok()">Inserir bebida</button><br>
+      <a href="/pages/bebida-sucesso.html"> <button class="btn redBtn redBtn-cad" onclick="ok()">Inserir bebida</button><br></a> 
     </footer>
 </body>
 

@@ -7,8 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'
         type='text/css'>
+        <script src="/js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Inserir comida</title>
 </head>
 
@@ -18,12 +22,12 @@
         <nav role="navigation">
           <div id="menuToggle">
 
-            <input id="menu-js" type="checkbox" />            
+            <input onclick="Menu()" id="menu-js" type="checkbox" />            
             <span></span>
             <span></span>
             <span></span>
             <ul id="menu">
-              <a href="#"><li><a href="/funcionarios">funcionario</a></li></a>
+              <a href="#"><li><a href="funcionario.html">Funcionario</a></li></a>
               <a href="#"><li><a href="/">Login</a></li></a>
               <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
               <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
@@ -37,6 +41,7 @@
     <span class="spanHome">Inserir comida</span>
     <div class="inputSpacing"></div>
     <div style="text-align: inherit;" class="inputs">
+        
        <label style=" place-self: inherit;width: 83%;color: #666666;">Nome</label>
         <input class="inputLine" placeholder="Ex: Ribs Fries" type="text"> <br>
         <label style=" place-self: inherit;width: 83%;color: #666666;">Tipo de porção</label>

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">  
     <script src="/js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>lista de itens do cardápio</title>
 </head>
 <body>
@@ -13,12 +16,12 @@
         <nav role="navigation">
           <div id="menuToggle">
 
-            <input id="menu-js" type="checkbox" />            
+            <input onclick="Menu()" id="menu-js" type="checkbox" />            
             <span></span>
             <span></span>
             <span></span>
             <ul id="menu">
-              <a href="#"><li><a href="/funcionarios">funcionario</a></li></a>
+              <a href="#"><li><a href="funcionario.html">Funcionario</a></li></a>
               <a href="#"><li><a href="/">Login</a></li></a>
               <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
               <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
@@ -32,25 +35,34 @@
         <div class="inputSpacing"></div>
     <span class="spanHome">Cadastre um cardápio</span>
     <div class="inputSpacing"></div>
-    <div style="padding-bottom: 0px;" class="div-cardapio">
-        <div class="cardapio-item">
-            <img class="img-cardapio" src="../img/bebida.png" alt="">
-            <h1 class="h1-bebida">Bebida</h1>
-        </div>
-        <div class="cardapio-item">
-            <img class="img-cardapio" src="../img/comida.png" alt="">
-            <h1 class="h1-comida">Comida</h1>
-        </div>
-    </div>
+    <div class="div-cardapio">
+        <a class="cardapio-item" href="bebida.html">
+               <button style="border: none; background-color: #e5e5e500;">
+   
+                   <img class="img-cardapio" src="../img/bebida.png" alt="">
+                   <h1 class="h1-bebida">Bebida</h1>
+               </button>
+           </a>
+           <a class="cardapio-item" href="comida.html">
+               <button style="border:none;background-color: #e5e5e500;">
+                   <img href="./comida.html" class="img-cardapio" src="../img/comida.png" alt="">
+                   <h1 class="h1-comida">Comida</h1>
+               </button></a>
+       </div>
+   
 
     <div class="inputs">
         <label style="width: auto;" class="label-listas">Cardápios cadastrados</label>
-        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
+        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown"
         name="city" list="cityname">
     <datalist id="cityname">
         <option value="Comidas">
         <option value="Bebidas">
     </datalist>
+    <div class="inputSpacing"></div>
+
+    <input style="margin-left: 10px;" class="inputLine" placeholder="Buscar por..." type="text"> <br>
+
     </div>
 
     

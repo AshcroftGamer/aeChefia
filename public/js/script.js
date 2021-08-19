@@ -7,8 +7,8 @@ function process(mesa) {
   var value = parseInt(document.getElementById("quant").value);
   value += mesa;
 
-  if (value < 1) {
-    document.getElementById("quant").value = 1;
+  if (value == NaN) {
+    document.getElementById("quant").value = 0;
   } else {
     document.getElementById("quant").value = value;
   }
@@ -21,12 +21,24 @@ function ViewSenha() {
 
   if (senha.getAttribute('type') == ("password")) {
     senha.setAttribute("type", "text")
-   olho.src = "/img/vision.png"
+    olho.src = "/img/vision.png"
   } else {
     senha.setAttribute("type", "password")
     olho.src = "/img/private.png"
   }
 
+}
+
+function confirmarSenha() {
+  let confSenha = document.getElementById('confSenha')
+  let olho = document.getElementById('olho1')
+  if (confSenha.getAttribute('type') == ("password")) {
+    confSenha.setAttribute("type", "text")
+    olho.src = "/img/vision.png"
+  } else {
+    confSenha.setAttribute("type", "password")
+    olho.src = "/img/private.png"
+  }
 }
 
 /**
@@ -69,6 +81,25 @@ function mCEP(cep) {
   return cep
 }
 
+
+function Menu() {
+  let menu = document.getElementById('menu-js');
+  let conteudoMenu = document.getElementById('menu')
+  if (menu.checked == true) {
+    conteudoMenu.style.transform = origin = "0% 0%"
+    conteudoMenu.style.transition = "transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0)"
+
+  }
+  
+}
+
+function testeDiv(){
+let div1 = document.getElementById('quantidade1')
+let div2 = document.getElementById('quantidade2')
+
+div1.value = 1
+
+}
 
 /** 
  * ! FUNCOES POST E GET DATABASE
@@ -178,8 +209,8 @@ let id = 0;
 //Retorna o próximo ID válido para a DIV que será criada
 function getNextId() {
   return ++id;
-} 
- 
+}
+
 function criarDiv() {
   //Pego o ID
   let id = getNextId();
@@ -202,6 +233,7 @@ function criarDiv() {
   divElement.style.marginLeft = '5%';
   divElement.style.margin = '10px'
   divElement.classList.add("bounceIn")
+
   divElement.style.paddingTop = '23px'
   divElement.style.textAlign = 'center'
 
@@ -261,9 +293,55 @@ function criarDivCardapio() {
   //Adiciono a nova DIV na DIV mãe
   //Aqui poderia ser por exemplo document.body.appendChild, adicionando assim o elemento criado diretamente no body
   divMae.appendChild(divElement);
+  if (id >= 4) {
+    let footer = document.getElementById('footer');
+    footer.style.position = 'unset'
+  }
   // document.body.appendChild(divElement)
   console.log("rodou")
 }
 
+function estadoSpanHome() {
+  let span = document.getElementById('spanFunction');
+  let qnt1 = document.getElementById('quantidade1');
+  let qnt2 = document.getElementById('quantidade2');
 
+  console.log(qnt1.value)
+  console.log(qnt2.value)
+
+  if (qnt1.value, qnt2.value == "") {
+    console.log('rodou')
+    span.style.visibility = "visible"
+  } else {
+    console.log('passou')
+  }
+  this.estadoQuantidade1();
+  this.estadoQuantidade2();
+}
+
+
+function estadoQuantidade1() {
+  let qnt1 = document.getElementById('quantidade1');
+
+  if (qnt1.value == "") {
+    qnt1.style.visibility = "hidden"
+  } else {
+    console.log("caetano gay")
+  }
+}
+
+function estadoQuantidade2() {
+  let qnt2 = document.getElementById('quantidade2');
+  if (qnt2.value == "") {
+    qnt2.style.visibility = "hidden"
+
+  } else {
+    console.log("juan homao")
+  }
+
+}
+
+function timeout() {
+  myVar = setTimeout(function () { window.location.href = "./home-cadastrado.html"; }, 2500);
+}
 
