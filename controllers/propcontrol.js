@@ -166,7 +166,6 @@ exports.verifica = async ( req, res ) => {
         const query = 'SELECT * FROM proprietario WHERE email = ?'
 
         const result = await mysql.execute( query, [ req.body.email ] );
-        console.log( result.json )
         if ( result.length == 1 ) {
             const response = {
                 Mensagem: 'Usuario já cadastrado'
