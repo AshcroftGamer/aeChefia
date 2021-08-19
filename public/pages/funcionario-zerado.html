@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/script.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <title>Abrir Caixa</title>
+    <script src="/js/script.js"></script>
+    <title>Lista de Funcionários</title>
 </head>
 
 <body>
@@ -43,32 +43,27 @@
             </div>
         </nav>
     </header>
-    <h1>Adicionar cliente a mesa</h1>
-</body>
 
-<div class="inputs">
-    <span class="spanInputs">Tipo de bebida</span>
-    <label for="tipo-bebida">
-        <input class="inputLine" style="background: rgba(196, 196, 196, 0.4);" type="text" value="Mesa 8" disabled />
-        <br>
-    </label>
-    <span class="spanInputs">Nome do cliente</span>
-    <label for="nome">
-        <input class="inputLine" id="nome" name="nome" placeholder="Ex.Jorge Silva" type="text" required autocomplete="off">
-        <br>
-    </label>
-    <span class="spanInputs">Telefone</span>
-    <label for="telefone">
-        <input class="inputLine" id="telefone" name="telefone" maxlength="14" placeholder="Telefone" type="text" onkeydown="javascript: fMasc( this, mTel );"
-        required><br>
-    </label>
-
-</div>
+    <div class="inputSpacing"></div>
+    <span class="spanHome">Cadastre um cardápio</span>
+    <div class="inputSpacing"></div>
+    <div style="padding-bottom: 0px;" class="div-cardapio">
+        <a class="cardapio-item" href="lista-funcionarios.html">
+            <div >
+                <img class="img-cardapio" src="" alt="">
+                <h1 class="h1-bebida">Funcionários</h1>
+            </div>
+        </a>
+        <a class="cardapio-item" href="cardapio.html">
+            <div >
+                <img class="img-cardapio" src="" alt="">
+                <h1 class="h1-comida">Cardápio</h1>
+            </div>
+        </a>
+    </div>
 
 
-<footer class="divcenter footer footerAdd">
- 
 
-    <button class="btn redBtn redBtn-cad" onclick="ok()">Adicionar</button><br>
-</footer>
+
+
 </html>

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/script.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Novo estabelecimento</title>
 </head>
 <body>
@@ -13,12 +16,12 @@
     <nav role="navigation">
       <div id="menuToggle">
 
-        <input id="menu-js" type="checkbox" />            
+        <input onclick="Menu()" id="menu-js" type="checkbox" />            
         <span></span>
         <span></span>
         <span></span>
         <ul id="menu">
-          <a href="#"><li><a href="/funcionarios">funcionario</a></li></a>
+          <a href="#"><li><a href="funcionario.html">Funcionario</a></li></a>
           <a href="#"><li><a href="/">Login</a></li></a>
           <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
           <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
@@ -32,11 +35,28 @@
     <span class="spanHome">Novo estabelecimento</span>
     <div class="inputSpacing"></div>
     <div class="inputs" style="padding-top: 15px;">
-    <input class="inputLine" placeholder="Nome" type="text"> <br>
-    <input class="inputLine" placeholder="Logo" type="email"><br>
-    <input class="inputLine" placeholder="CEP" type="number"><br>
-    <input class="inputLine" placeholder="Endereço" type="text"><br>
+      <form action="" method="POST">
+
+      <label for="nome">
+        <input class="inputLine" id="nome" name="nome" placeholder="Nome" type="text" required>
+        <br>
+    </label>
+    <label style="width: 87%;place-self: center;display: inline-table;" class="lulu" for="Logo">Logo
+        <input class="inputLine" id="Logo" name="logo" placeholder="logo" type="file" required>
+        <button class="btnImg" disabled></button>
+    <br>
+    </label>
+    <span id="erromail"></span>
+    <label for="CEP">
+      <input class="inputLine" id="CEP" name="CEP" maxlength="9" placeholder="CEP" type="text" onkeydown="javascript: fMasc( this, mCEP );"
+          required><br>
+  </label>
+  <label for="Endereço">
+    <input class="inputLine" id="Endereço" name="Endereço"  placeholder="Endereço" type="text"
+        required><br>
+</label>
 </div>
+              
 
   <footer class="divcenter footer footerAdd">
     <h1 class="divcenter">Mesas disponíveis:</h1>
@@ -46,7 +66,9 @@
         <input type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
       </div> 
 
-    <button class="btn redBtn redBtn-cad" onclick="ok()">Cadastrar estabelecimento</button><br>
+    <a href="../pages/estabelecimento-sucesso.html"><button  class="btn redBtn redBtn-cad" >Cadastrar estabelecimento</button><br> </a>
 </footer>
+</form>
+
 </body>
 </html>

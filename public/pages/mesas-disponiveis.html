@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="/js/script.js"></script>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
   <title>Mesas Disponíveis</title>
 </head>
 
@@ -15,13 +18,13 @@
     <nav role="navigation">
       <div id="menuToggle">
 
-        <input id="menu-js" type="checkbox" />
+        <input onclick="Menu()" id="menu-js" type="checkbox" />
         <span></span>
         <span></span>
         <span></span>
         <ul id="menu">
           <a href="#">
-            <li><a href="/funcionarios">funcionario</a></li>
+            <li><a href="/funcionarios">Funcionario</a></li>
           </a>
           <a href="#">
             <li><a href="/">Login</a></li>
@@ -55,9 +58,9 @@
 " class="divcenter btnRetirada footer footerAdd">
 
     <button style="margin-top: 0px;margin-top: 0px;width: 48%;
-margin-left: 4%;" class="btn borderBtn" onclick="ok()">Fazer retirada</button><br>
+margin-left: 4%;" class="btn borderBtn" ><a style="color: red;" href="../pages/abrir-caixa-retirada.html">Fazer Retirada</a></button><br>
     <button style="margin-top: 0px;margin-top: 0px;width: 48%;
-    margin-left: 4%;" class="btn redBtn redBtn-cad" onclick="ok()">Adicionar</button><br>
+    margin-left: 4%;" class="btn redBtn redBtn-cad"><a style="color: white;" href="../pages/fechar-caixa.html">Fechar caixa</a></button><br>
   </footer>
 
 </body>
