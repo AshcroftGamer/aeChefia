@@ -43,29 +43,27 @@
     </header>
 
     <div class="inputs">
-        <input class="inputLine" placeholder="Busacar bebidas" type="text"> <br>
+        <input class="inputLine" placeholder="Buscar bebidas" type="text"> <br>
     </div>
     <input type="button" value="clicar" id="btn" onclick="criarDivCardapio()">
 
 <div id="mesas" class="mesas">
-
-
-
-
+<!-- Div onde é armazenada as bebidas do banco de dados -->
 </div>
+
+
 <footer id="footer" style="display: flex;margin-top: 10px;border-top: 1px solid rgba(102, 102, 102, 0.2);width: 100%;padding: 30px;
 " class="divcenter btnRetirada footer footerAdd">
 
       <div style="width: 48%;" data-app="product.quantity" class="btnQnt" id="quantidade">    
-
         <input style="width: 20%;" type="button" id="plus" class="input-mais" value='-' onclick="process(-1)" />
         <input id="quant" class="input-quantidade" name="quant" class="text" size="1" type="number" value="1" maxlength="5" />
         <input style="width: 20%;" type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
-
       </div> 
-
+      
     <button style="margin-top: 0px;margin-top: 0px;width: 48%;
     margin-left: 4%;" class="btn redBtn redBtn-cad" onclick="ok()">Adicionar</button><br>
 </footer>
+<div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 </body>
 </html>

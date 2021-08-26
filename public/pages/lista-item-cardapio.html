@@ -53,11 +53,12 @@
 
     <div class="inputs">
         <label style="width: auto;" class="label-listas">Cardápios cadastrados</label>
-        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown"
+        <input onchange="listaCardapio()" id="popo" style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown"
         name="city" list="cityname">
-    <datalist id="cityname">
+    <datalist  id="cityname">
         <option value="Comidas">
         <option value="Bebidas">
+        <option value="">
     </datalist>
     <div class="inputSpacing"></div>
 
@@ -65,9 +66,10 @@
 
     </div>
 
-    
-    <div class="div-cadastrado">
-        <div class="span-cadastrado">
+    <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
+
+    <div id="divComida" style="display: none;" class="div-cadastrado">
+        <div  class="span-cadastrado">
             <span class="nome-cadastrado">Porçao de fritas</span>
             <span>M</span>
             <span>R$:5,50</span>
@@ -79,7 +81,7 @@
     </div>
 
     
-    <div class="div-cadastrado">
+    <div id="divBebida" style="display: none;" class="div-cadastrado">
         <div class="span-cadastrado">
             <span class="nome-cadastrado">Itaipava</span>
             <span>600 ml</span>
@@ -90,5 +92,28 @@
             <button class="excluirRed" onclick="ok()">Excluir</button>
         </div>
     </div>
+
+    <!-- <div id="divBebida" style="display: none;" class="div-cadastrado">
+        <div class="span-cadastrado">
+            <span class="nome-cadastrado">Itaipava</span>
+            <span>1L </span>
+            <span>R$:15,00</span>
+        </div>
+        <div class="btn-cadastrado">
+            <button class="editarGrey" onclick="ok()">Editar</button>
+            <button class="excluirRed" onclick="ok()">Excluir</button>
+        </div>
+    </div>
+    <div id="divBebida" style="display: none;" class="div-cadastrado">
+        <div class="span-cadastrado">
+            <span class="nome-cadastrado">Suco</span>
+            <span>500 ml</span>
+            <span>R$:6,00</span>
+        </div>
+        <div class="btn-cadastrado">
+            <button class="editarGrey" onclick="ok()">Editar</button>
+            <button class="excluirRed" onclick="ok()">Excluir</button>
+        </div>
+    </div> -->
 </body>
 </html>

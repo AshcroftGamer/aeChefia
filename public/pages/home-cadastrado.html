@@ -35,6 +35,7 @@
 </header>
   <div class="inputSpacing"></div>
   <span class="spanHome">Olá Rai!</span>
+  <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
   <div class="vermelhao vermelhaoCadastrado">
     <button onclick="testeDiv()">teste</button>
     <input type="text" placeholder="Selecione o estabelecimento" class="dropdown" name="city" list="cityname">
@@ -45,7 +46,7 @@
     </datalist>
     <button class="btn borderBtn inverseBtn">Abrir caixa</button>         
     <div class="footer footerAdd">
-    <h2 id="spanFunction" style="visibility: hidden;"  class="h2-Add">Você ainda não possui cardápios <br> 
+    <h2 id="spanFunction" style="display: none;"  class="h2-Add">Você ainda não possui cardápios <br> 
       e funcionários cadastrados:</h1>
 
     <div class="card">
@@ -60,12 +61,13 @@
     <div class="card">
       <div class="card-div">
         <span class="spanAdd">Cardápios</span>
-       <a href="../pages/cardapio.html"> <button class="btnAdd">+</button></a>
+       <a href="../pages/cardapio-zerado.html"> <button class="btnAdd">+</button></a>
         <input id="quantidade2" class="quantidadeAdd" type="text" value="" disabled />
         <!-- <div id="quantidade2" class="quantidadeAdd">4</div> -->
       </div>
     </div>
   </div>
+  
 </body>
 
 </html>

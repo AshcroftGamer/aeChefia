@@ -50,7 +50,7 @@
         <!-- <input class="inputLine" placeholder="" type="text"> <br> -->
         <div class="input-icon">
             <button class="Send">R$</button>
-            <input class="Post" placeholder="0,00" type="number">
+            <input onkeyup="k(this);" class="Post" placeholder="0,00" type="number">
         </div>
 
     </div>
@@ -65,6 +65,7 @@
     <footer class="divcenter footer footerAdd">   
         <button class="btn redBtn redBtn-cad" onclick="ok()">Inserir comida</button><br>
     </footer>
+    <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 </body>
 
 </html>

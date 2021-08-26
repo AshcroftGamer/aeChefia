@@ -9,10 +9,31 @@
 
 @media(min-width: 1026px) {
     * {
-        display: none;
-        background-image: url(../img/logo.png);
-        background-size: cover;
+        visibility: hidden;
+        font-family: 'Inter', sans-serif;
+        
     }
+    .divAnuncio{
+        visibility: visible;
+        font-size: 35px;
+        text-align: center;
+        width: 285px;
+        margin-left: 37%;
+        color: #666666;
+    }
+    header img {
+        visibility: visible;
+        margin-left: 40%;
+    }
+
+}
+@media(max-width: 1024px){
+
+
+
+.divAnuncio{
+    visibility: hidden;
+    height: 0px;
 }
 
 * {
@@ -714,7 +735,6 @@ input[type="file"] {
     height: 48px;
     color: var(--vermelho);
     outline: 0;
-    margin-left: 15px;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -838,12 +858,9 @@ input[type="file"] {
 .Post {
     float: none;
     width: 78%;
-    -webkit-border-top-right-radius: 6px;
-    -webkit-border-bottom-right-radius: 6px;
-    -moz-border-radius-topright: 6px;
-    -moz-border-radius-bottomright: 6px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    -webkit-border-radius: 6px 0px 0px 6px;
+    -moz-border-radius: 6px 0px 0px 6px;
+    border-radius: 6px 0px 0px 6px;
     height: 48px;
     border: 1px solid #D5D7DC;
     box-sizing: border-box;
@@ -963,15 +980,15 @@ input[type="file"] {
 .estado-mesas {
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 45px;
     line-height: 24px;
+    display: inline-flex;
+    justify-content: space-evenly;
     /* identical to box height, or 200% */
     letter-spacing: -0.02em;
     color: #666666;
-    text-align: center;
-    word-spacing: 25px;
-    padding-right: 20px;
     padding-top: 5px;
+    padding-bottom: 5px;
     border-top: 1px solid rgba(102, 102, 102, 0.2);
     border-bottom: 1px solid rgba(102, 102, 102, 0.2);
     width: 90%;
@@ -981,8 +998,6 @@ input[type="file"] {
 .ponto1::before {
     content: "•";
     color: rgba(39, 34, 34, 0);
-    padding-right: 10px;
-    font-size: 35px;
 }
 
 .ponto2::before {
@@ -990,6 +1005,7 @@ input[type="file"] {
     color: red;
     padding-right: 10px;
     font-size: 35px;
+    margin-top: -2px;
 }
 
 .ponto3::before {
@@ -997,10 +1013,12 @@ input[type="file"] {
     color: var(--cinza);
     padding-right: 10px;
     font-size: 35px;
+    margin-top: -2px;
 }
 
 .ponto1, .ponto2, .ponto3 {
     display: inline-flex;
+    padding-right: 7px;
 }
 
 .margin-top20 {
@@ -1051,6 +1069,7 @@ input[type="file"] {
     padding-left: 7%;
     padding-top: 17px;
     margin-bottom: -8px;
+    color: #666666;
 }
 
 /* BUSCAR ITENS CARDAPIO BEBIDA/COMIDA */
@@ -1134,3 +1153,11 @@ table {
 
     transform: translateY(-2px);
 } */
+
+
+
+
+
+
+
+}
