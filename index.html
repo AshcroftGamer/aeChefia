@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id"
+        content="797033371325-imaoenhaa61usqegirm4spvn087h7ebg.apps.googleusercontent.com">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,6 +33,8 @@
         <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 
     </div>
+
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <div class="inputSpacing"></div>
     <h1 class="divcenter">ou</h1>
     <div class="inputSpacing"></div>
@@ -52,9 +56,42 @@
         <div class="inputSpacing"></div>
         <button class="btn borderBtn" onclick=""><a class="linkIndex" href="/pages/cadastro.html">Criar
                 conta</a></button>
+        <script>
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then( function () {
+                    console.log( 'User signed out.' );
+                } );
+            }
+            cliente = {};
+            function onSignIn( googleUser ) {
+                var profile = googleUser.getBasicProfile();
+
+
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log( id_token );
+
+                var xhr = new XMLHttpRequest();
+                xhr.open( 'POST', '/login' );
+                xhr.setRequestHeader( 'Content-Type', 'application/json' );
+                xhr.onload = function () {
+                    console.log( 'Signed in as: ' + xhr.responseText );
+                    if ( xhr.responseText == 'success' ) {
+                        signOut();
+                        location.assign( '/home' )
+                    }
+                };
+                xhr.send( JSON.stringify( { token: id_token } ) );
+                console.log()
+            }
+        </script>
+
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+        <script src="/js/script.js"></script>
+        <script src="js/splash.js"></script>
+
 
 </body>
-<script src="/js/script.js"></script>
-<script src="js/splash.js"></script>
 
 </html>
