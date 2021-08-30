@@ -131,6 +131,16 @@ header {
     padding: 10%;
 }
 
+.classgoo{ 
+    height: 48px;
+    width: 87%;
+    border-radius: 100px;
+    text-align: center;
+    left: 50px;
+    padding: 1%;
+
+}
+
 .googleBtn {
     width: 87%;
     height: 48px;

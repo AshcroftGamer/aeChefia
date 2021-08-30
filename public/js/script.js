@@ -121,13 +121,72 @@ function mCEP(cep) {
 
 // Function Mascara Moeda
 function k(i) {
-	var v = i.value.replace(/\D/g,'');
-	v = (v/100).toFixed(2) + '';
-	v = v.replace(".", ".");
-	v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
-	v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
-	i.value = v;
+  var v = i.value.replace(/\D/g, '');
+  v = (v / 100).toFixed(2) + '';
+  v = v.replace(".", ".");
+  v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+  v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+  i.value = v;
 }
+
+
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
+cliente = {};
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  // Conseguindo o Nome do Usuário
+  var userName = profile.getName();
+
+  // Conseguindo o E-mail do Usuário
+  var userEmail = profile.getEmail();
+
+  // Conseguindo a URL da Foto do Perfil
+  var userPicture = profile.getImageUrl();
+
+  // document.getElementById('user-photo').src = userPicture;
+  // document.getElementById('user-name').innerText = userName;
+  // document.getElementById('user-email').innerText = userEmail;
+
+  console.log(userName)
+  console.log(userEmail)
+  console.log(userPicture)
+
+  var id_token = googleUser.getAuthResponse().id_token;
+  console.log(id_token);
+  // console.log(googleUser.Vs.Pe)
+
+  // var nomegoo = googleUser.Vs.Pe;
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/login');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function () {
+    console.log('Signed in as: ' + xhr.responseText);
+    if (xhr.responseText == 'success') {
+      // signOut();
+      location.assign('/home')
+    }
+
+  };
+  xhr.send(JSON.stringify({ token: id_token }));
+  console.log()
+  return userName
+}
+
+// function aj( onSignIn(userName) ){
+//   console.log(userName)
+// }
+
+// height: 48px;
+// width: 87%;
+// border-radius: 100px;
+// text-align: center;
+// left: 50px;
+// padding: 1%;
 
 
 function Menu() {
@@ -138,18 +197,18 @@ function Menu() {
     conteudoMenu.style.transition = "transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0)"
 
   }
-  
+
 }
 
-function testeDiv(){
-let div1 = document.getElementById('quantidade1')
-let div2 = document.getElementById('quantidade2')
-let num = 1
-console.log(div1.value)
-div1.value = 1
-div2.value = 1
-this.estadoQuantidade1()
-this.estadoQuantidade2()
+function testeDiv() {
+  let div1 = document.getElementById('quantidade1')
+  let div2 = document.getElementById('quantidade2')
+  let num = 1
+  console.log(div1.value)
+  div1.value = 1
+  div2.value = 1
+  this.estadoQuantidade1()
+  this.estadoQuantidade2()
 }
 
 /** 
@@ -366,6 +425,7 @@ function estadoSpanHome() {
   } else {
     console.log('passou')
   }
+
   this.estadoQuantidade1();
   this.estadoQuantidade2();
 }
@@ -398,13 +458,13 @@ function timeout() {
 
 
 // Itens Cardapio
-function listaCardapio(){
+function listaCardapio() {
   let divComida = document.getElementById("divComida");
   let divBebida = document.getElementById("divBebida");
   let datalist = document.getElementById("popo")
 
 
-  if(datalist.value == "Comidas"){
+  if (datalist.value == "Comidas") {
     divComida.style.display = "flex"
     divBebida.style.display = "none"
   }
