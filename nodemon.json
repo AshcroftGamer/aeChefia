@@ -1,10 +1,10 @@
 {
     "env":{
         "MYSQL_USER" : "root",
-        "MYSQL_PASSWORD" : "root",
+        "MYSQL_PASSWORD" : "kuro",
         "MYSQL_DATABASE" : "ae_chefia",
         "MYSQL_HOST" : "localhost",
-        "MYSQL_PORT" : 3006,
+        "MYSQL_PORT" : 3306,
         "JWT_KEY" : "segredo",
         "CLIENT_ID": "797033371325-imaoenhaa61usqegirm4spvn087h7ebg.apps.googleusercontent.com"
     }
