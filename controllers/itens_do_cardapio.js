@@ -3,16 +3,16 @@ const mysql = require( '../mysql' );
 const bcrypt = require( 'bcrypt' );
 
 
-exports.postProprietario = async ( req, res ) => {
+exports.postItens_cardapio = async ( req, res ) => {
     try {
-        var query = 'SELECT * FROM proprietario WHERE email = ?';
+        var query = 'INSERT INTO itens_do_cardapio';
         var result = await mysql.execute( query, [ req.body.email ] );
         if ( result.length > 0 ) {
             return res.status( 409 ).send( { Mensagem: 'Usuario já cadastrado' } )
         }
         const hash = await bcrypt.hashSync( req.body.senha, 10 );
 
-        query = 'INSERT INTO proprietario (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?)';
+        query = 'INSERT INTO itens_do_cardapio (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?)';
         const results = await mysql.execute( query,
             [
                 req.body.nome,
@@ -22,7 +22,7 @@ exports.postProprietario = async ( req, res ) => {
                 hash
             ] )
         const response = {
-            mensagem: 'Proprietario criado com sucesso',
+            mensagem: 'itens_do_cardapio criado com sucesso',
             usuarioCriado: {
                 id: results.insertId,
                 nome: req.body.nome,
@@ -40,12 +40,12 @@ exports.postProprietario = async ( req, res ) => {
 
 }
 
-// exports.postProprietario = async ( req, res ) => {
+// exports.postitens_do_cardapio = async ( req, res ) => {
 //     try {
 
 
 
-//         const query = 'INSERT INTO proprietario (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?);'
+//         const query = 'INSERT INTO itens_do_cardapio (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?);'
 //         const result = await mysql.execute( query,
 //             [
 //                 req.body.nome,
@@ -56,7 +56,7 @@ exports.postProprietario = async ( req, res ) => {
 //             ] );
 
 //         const response = {
-//             mensagem: 'Proprietario criado com sucesso',
+//             mensagem: 'itens_do_cardapio criado com sucesso',
 //             usuarioCriado: {
 //                 id: result.insertId,
 //                 nome: req.body.nome,
@@ -74,16 +74,16 @@ exports.postProprietario = async ( req, res ) => {
 
 // }
 
-exports.patchProprietario = async ( req, res ) => {
+exports.patchItens_cardapio = async ( req, res ) => {
     try {
-        const query = 'UPDATE proprietario SET nome = ? WHERE email = ?;'
+        const query = 'UPDATE itens_do_cardapio SET nome = ? WHERE email = ?;'
         await mysql.execute( query,
             [
                 req.body.nome,
                 req.body.email
             ] );
         const response = {
-            mensagem: 'Proprietario atualizado com sucesso',
+            mensagem: 'itens_do_cardapio atualizado com sucesso',
             usuarioAtualizado: {
                 nome: req.body.nome
             }
@@ -97,14 +97,14 @@ exports.patchProprietario = async ( req, res ) => {
 
 }
 
-exports.deleteProprietario = async ( req, res ) => {
+exports.deleteItens_cardapio = async ( req, res ) => {
     try {
 
 
-        const query = 'DELETE from proprietario WHERE id_proprietario = ?'
-        await mysql.execute( query, [ req.body.id_proprietario ] );
+        const query = 'DELETE from itens_do_cardapio WHERE id_itens_do_cardapio = ?'
+        await mysql.execute( query, [ req.body.id_itens_do_cardapio ] );
         const response = {
-            mensagem: 'Proprietario removido com sucesso'
+            mensagem: 'itens_do_cardapio removido com sucesso'
         }
 
         return res.status( 200 ).send( response );
@@ -116,17 +116,17 @@ exports.deleteProprietario = async ( req, res ) => {
 }
 
 
-exports.getProp = async ( req, res ) => {
+exports.getTodos = async ( req, res ) => {
     try {
-        await mysql.execute( 'SELECT * FROM proprietario', ( error, results ) => {
+        await mysql.execute( 'SELECT * FROM itens_do_cardapio', ( error, results ) => {
             if ( error ) {
                 return res.status( 500 ).send( { Erro: error } )
             }
             const response = {
                 quantidade: results.length,
-                proprietarios: results.map( prod => {
+                itens_do_cardapios: results.map( prod => {
                     return {
-                        id_proprietario: prod.id_proprietario,
+                        id_itens_do_cardapio: prod.id_itens_do_cardapio,
                         nome: prod.nome,
                         email: prod.email,
                         cpf: prod.cpf,
@@ -147,7 +147,7 @@ exports.getProp = async ( req, res ) => {
 
 exports.verifica = async ( req, res ) => {
     try {
-        const query = 'SELECT * FROM proprietario WHERE email = ?'
+        const query = 'SELECT * FROM itens_do_cardapio WHERE email = ?'
 
         const result = await mysql.execute( query, [ req.body.email ] );
         if ( result.length == 1 ) {

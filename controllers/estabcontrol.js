@@ -57,15 +57,15 @@ exports.patchEstabelecimento = async ( req, res ) => {
 exports.deleteEstabelecimento = async ( req, res ) => {
 
     try {
-        const query = 'DELETE from estabelecimento WHERE id_proprietario = ?'
-        await mysql.execute( query, [ req.body.id_proprietario ] );
+        const query = 'DELETE from estabelecimento WHERE id_estabelecimento = ?'
+        await mysql.execute( query, [ req.body.id_estabelecimento ] );
 
         const response = {
             mensagem: 'Estabelecimento removido com sucesso',
 
         }
 
-        return res.status( 201 ).send( response );
+        return res.status( 200 ).send( response );
     }
     catch ( error ) {
         return res.status( 500 ).send( error )
@@ -84,7 +84,7 @@ exports.getEstabelecimento = async ( req, res ) => {
                 quantidade: results.length,
                 Estabelecimento: results.map( prod => {
                     return {
-                        id_estalecimento: prod.id_estabelecimento,
+                        id_estabelecimento: prod.id_estabelecimento,
                         nome: prod.nome_estabelecimento,
                         logo: prod.logo,
                         cep: prod.cep,
