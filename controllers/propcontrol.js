@@ -1,7 +1,6 @@
 
 const mysql = require( '../mysql' );
 const bcrypt = require( 'bcrypt' );
-const jwt = require( 'jsonwebtoken' );
 
 
 exports.postProprietario = async ( req, res ) => {
@@ -78,22 +77,15 @@ exports.postProprietario = async ( req, res ) => {
 exports.patchProprietario = async ( req, res ) => {
     try {
         const query = 'UPDATE proprietario SET nome = ? WHERE email = ?;'
-        const result = await mysql.execute( query,
+        await mysql.execute( query,
             [
                 req.body.nome,
-                req.body.cpf,
-                req.body.telefone,
                 req.body.email
             ] );
-        console.log( result.length )
         const response = {
             mensagem: 'Proprietario atualizado com sucesso',
-            usuarioCriado: {
-                id: result.insertId,
-                nome: req.body.nome,
-                cpf: req.body.cpf,
-                telefone: req.body.telefone,
-                email: req.body.email
+            usuarioAtualizado: {
+                nome: req.body.nome
             }
         }
 
@@ -110,20 +102,12 @@ exports.deleteProprietario = async ( req, res ) => {
 
 
         const query = 'DELETE from proprietario WHERE id_proprietario = ?'
-        const result = await mysql.execute( query, [ req.body.id_proprietario ] );
-        console.log( result.length )
+        await mysql.execute( query, [ req.body.id_proprietario ] );
         const response = {
-            mensagem: 'Proprietario removido com sucesso',
-            usuarioCriado: {
-                id: result[ 0 ].insertId,
-                nome: result[ 0 ].nome,
-                cpf: result[ 0 ].cpf,
-                telefone: result[ 0 ].telefone,
-                email: result[ 0 ].email
-            }
+            mensagem: 'Proprietario removido com sucesso'
         }
 
-        return res.status( 201 ).send( response );
+        return res.status( 200 ).send( response );
     }
     catch ( error ) {
         return res.status( 500 ).send( error )
@@ -179,7 +163,7 @@ exports.verifica = async ( req, res ) => {
                 Mensagem: 'Usuario não cadastrado'
             }
 
-            return res.status( 200 ).send( response );
+            return res.status( 404 ).send( response );
 
         }
 

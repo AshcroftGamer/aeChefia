@@ -230,41 +230,6 @@ async function cadastro() {
  * *  Cadastro de Estabelecimento
 */
 
-async function cadEst() {
-  let estabelecimento = {}
-
-  estabelecimento.nome = document.getElementById("nome").value;
-  estabelecimento.cep = document.getElementById('cep').value;
-  estabelecimento.endereco = document.getElementById('endereco').value;
-  estabelecimento.mesa = document.getElementById('mesa').value;
-
-  const formData = new FormData();
-
-  const fileField = document.querySelector('input[type="file"]');
-
-  formData.append('nome', estabelecimento.nome)
-  formData.append('logo', fileField.files[0])
-  formData.append('cep', estabelecimento.cep)
-  formData.append('endereco', estabelecimento.endereco)
-  formData.append('mesa', estabelecimento.mesa)
-
-  await fetch('http://localhost:3000/cadastro/estabelecimento',
-    {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    }).then(result => {
-      return result.json()
-    }).then(data => {
-      console.log(data)
-
-    })
-
-}
-
-
 // function validaSenha() {
 //   const pass = document.getElementById( 'pass' )
 
@@ -440,3 +405,97 @@ function listaCardapio() {
 
 }
 
+
+
+class Estabelecimento {
+  constructor() {
+    this.arrayEstabelecimento = [];
+    this.editId = null
+}
+cadastrar() {
+    let estabelecimento = this.lerDados();
+
+    if (this.validaCampos(estabelecimento)) {
+        if (this.editId == null) {
+            this.adicionar(estabelecimento)
+        } else {
+
+        }
+        
+    }
+
+}
+async adicionar(estabelecimento) {
+
+  const formData = new FormData();
+  const fileField = document.querySelector('input[type="file"]');
+
+  formData.append('nome_estabelecimento', estabelecimento.nome_estabelecimento);
+  formData.append('cep', estabelecimento.cep);
+  formData.append('logo', fileField.files[0]);
+  formData.append('endereco', estabelecimento.endereco);
+  formData.append('mesa', estabelecimento.mesa)
+  formData.append('proprietario', estabelecimento.proprietario)
+
+  
+  fetch('http://localhost:3000/estabelecimento/cadastro', {
+      method: 'POST',
+      body: formData,
+      
+  }).then(result => {
+      return result.json();
+  }).then(data => {
+    console.log("data")
+    console.log(data)
+    estabelecimento.nome_estabelecimento = data.estabelecimentoCriado.nome_estabelecimento;
+    estabelecimento.logo = data.estabelecimentoCriado.logo
+      estabelecimento.cep = data.estabelecimentoCriado.cep
+      estabelecimento.endereco = data.estabelecimentoCriado.endereco
+      estabelecimento.mesa = data.estabelecimentoCriado.mesa
+      estabelecimento.proprietario = data.estabelecimentoCriado.id_proprietario
+
+      this.arrayEstabelecimento.push(estabelecimento);
+
+  });
+}
+
+lerDados() {
+  let estabelecimento = {}
+
+  estabelecimento.id = 0;
+  estabelecimento.nome_estabelecimento = document.getElementById('nome_estabelecimento').value;
+  estabelecimento.cep = document.getElementById('cep').value;
+  estabelecimento.logo = document.getElementById('logo').value;
+  estabelecimento.endereco = document.getElementById('endereco').value
+  estabelecimento.mesa = document.getElementById('quant').value
+  estabelecimento.proprietario = 1
+
+  console.log(estabelecimento)
+
+  return estabelecimento;
+}
+
+validaCampos(estabelecimento) {
+  let msg = '';
+
+  if (estabelecimento.nome_estabelecimento == "") {
+      msg += '- Informe o nome do estabelecimento'
+  }
+  if (estabelecimento.logo == "") {
+      msg += '- Informe o logo do estabelecimento'
+  }
+  if (estabelecimento.cep == "") {
+    msg += '- Informe o cep do estabelecimento'
+}
+if (estabelecimento.endereco == "") {
+  msg += '- Informe o endereco do estabelecimento'
+}
+  if (msg != '') {
+      alert(msg);
+      return false
+  }
+  return true;
+
+}
+}
+var estabelecimento = new Estabelecimento
