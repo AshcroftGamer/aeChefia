@@ -3,14 +3,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/script.js"></script>
+    <meta name="google-signin-client_id"
+    content="797033371325-imaoenhaa61usqegirm4spvn087h7ebg.apps.googleusercontent.com">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
    <title>home</title>
 </head>
-<body>
+<body onload="this.juju()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -26,6 +27,7 @@
               <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
               <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
               <a href="#"><li><a href="/cardapio">Cardapio</a></li></a>
+              <a href="#"><li><a href="#">Sair</a></li></a>
               
             </ul>
           </div>
@@ -34,7 +36,7 @@
 
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
     <div class="inputSpacing"></div>
-    <span id="user-name" class="spanHome"></span>
+    <span id="user-name" class="spanHome">Olá</span>
     <div class="vermelhao">
         <span class="spanVermelhao">Você ainda não possui <br>
             estabelecimentos cadastrados</span>
@@ -42,8 +44,11 @@
                     <button class="btn borderBtn inverseBtn" > <a style="color: var(--vermelho);" href="./estabelecimento.html">Cadastrar estabelecimento</a> </button>
             </div>
     </div>
- 
-    <iframe src="/"></iframe>
+
+    <iframe style="display: none;" src="/"></iframe>
+   
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="/js/script.js"></script>
 </body>
 
 </html>

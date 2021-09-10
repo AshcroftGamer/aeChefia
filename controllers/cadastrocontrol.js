@@ -1,7 +1,5 @@
 
-const bcrypt = require( 'bcrypt' );
 const bd = require( '../mysql' );
-const bd2 = require( '../mysql' ).pool;
 
 
 //Funcionou com Form URL Encoded

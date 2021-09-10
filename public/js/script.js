@@ -1,4 +1,3 @@
-
 function ok() {
   alert("clickou")
 };
@@ -81,44 +80,6 @@ function mCEP(cep) {
   return cep
 }
 
-
-// function moeda(a, e, r, t) {
-//   let n = ""
-//     , h = j = 0
-//     , u = tamanho2 = 0
-//     , l = ajd2 = ""
-//     , o = window.Event ? t.which : t.keyCode;
-//   if (13 == o || 8 == o)
-//       return !0;
-//   if (n = String.fromCharCode(o),
-//   -1 == "0123456789".indexOf(n))
-//       return !1;
-//   for (u = a.value.length,
-//   h = 0; h < u && ("0" == a.value.charAt(h) || a.value.charAt(h) == r); h++)
-//       ;
-//   for (l = ""; h < u; h++)
-//       -1 != "0123456789".indexOf(a.value.charAt(h)) && (l += a.value.charAt(h));
-//   if (l += n,
-//   0 == (u = l.length) && (a.value = ""),
-//   1 == u && (a.value = "0" + r + "0" + l),
-//   2 == u && (a.value = "0" + r + l),
-//   u > 2) {
-//       for (ajd2 = "",
-//       j = 0,
-//       h = u - 3; h >= 0; h--)
-//           3 == j && (ajd2 += e,
-//           j = 0),
-//           ajd2 += l.charAt(h),
-//           j++;
-//       for (a.value = "",
-//       tamanho2 = ajd2.length,
-//       h = tamanho2 - 1; h >= 0; h--)
-//           a.value += ajd2.charAt(h);
-//       a.value += r + l.substr(u - 2, u)
-//   }
-//   return !1
-// }
-
 // Function Mascara Moeda
 function k(i) {
   var v = i.value.replace(/\D/g, '');
@@ -129,28 +90,30 @@ function k(i) {
   i.value = v;
 }
 
-
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     console.log('User signed out.');
   });
 }
+
 cliente = {};
+
 function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
+   profile = googleUser.getBasicProfile();
+   
   // Conseguindo o Nome do Usuário
-  var userName = profile.getName();
+   userName = profile.getName();
 
   // Conseguindo o E-mail do Usuário
-  var userEmail = profile.getEmail();
+   userEmail = profile.getEmail();
 
   // Conseguindo a URL da Foto do Perfil
-  var userPicture = profile.getImageUrl();
+   userPicture = profile.getImageUrl();
 
-  // document.getElementById('user-photo').src = userPicture;
-  // document.getElementById('user-name').innerText = userName;
-  // document.getElementById('user-email').innerText = userEmail;
+  document.getElementById('user-photo').src = userPicture;
+  document.getElementById('user-name').innerText = userName;
+  document.getElementById('user-email').innerText = userEmail;
 
   console.log(userName)
   console.log(userEmail)
@@ -158,24 +121,26 @@ function onSignIn(googleUser) {
 
   var id_token = googleUser.getAuthResponse().id_token;
   console.log(id_token);
-  // console.log(googleUser.Vs.Pe)
 
   // var nomegoo = googleUser.Vs.Pe;
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/login');
+ 
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function () {
     console.log('Signed in as: ' + xhr.responseText);
     if (xhr.responseText == 'success') {
-      // signOut();
-      location.assign('/home')
+       console.log(userName)
+      signOut();
+      location.replace('/home')
+      
     }
-
   };
   xhr.send(JSON.stringify({ token: id_token }));
-  console.log()
-  return userName
+  
+  return userName;
 }
+
 
 // function aj( onSignIn(userName) ){
 //   console.log(userName)
@@ -264,41 +229,6 @@ async function cadastro() {
 /** 
  * *  Cadastro de Estabelecimento
 */
-
-async function cadEst() {
-  let estabelecimento = {}
-
-  estabelecimento.nome = document.getElementById("nome").value;
-  estabelecimento.cep = document.getElementById('cep').value;
-  estabelecimento.endereco = document.getElementById('endereco').value;
-  estabelecimento.mesa = document.getElementById('mesa').value;
-
-  const formData = new FormData();
-
-  const fileField = document.querySelector('input[type="file"]');
-
-  formData.append('nome', estabelecimento.nome)
-  formData.append('logo', fileField.files[0])
-  formData.append('cep', estabelecimento.cep)
-  formData.append('endereco', estabelecimento.endereco)
-  formData.append('mesa', estabelecimento.mesa)
-
-  await fetch('http://localhost:3000/cadastro/estabelecimento',
-    {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    }).then(result => {
-      return result.json()
-    }).then(data => {
-      console.log(data)
-
-    })
-
-}
-
 
 // function validaSenha() {
 //   const pass = document.getElementById( 'pass' )
@@ -475,3 +405,97 @@ function listaCardapio() {
 
 }
 
+
+
+class Estabelecimento {
+  constructor() {
+    this.arrayEstabelecimento = [];
+    this.editId = null
+}
+cadastrar() {
+    let estabelecimento = this.lerDados();
+
+    if (this.validaCampos(estabelecimento)) {
+        if (this.editId == null) {
+            this.adicionar(estabelecimento)
+        } else {
+
+        }
+        
+    }
+
+}
+async adicionar(estabelecimento) {
+
+  const formData = new FormData();
+  const fileField = document.querySelector('input[type="file"]');
+
+  formData.append('nome_estabelecimento', estabelecimento.nome_estabelecimento);
+  formData.append('cep', estabelecimento.cep);
+  formData.append('logo', fileField.files[0]);
+  formData.append('endereco', estabelecimento.endereco);
+  formData.append('mesa', estabelecimento.mesa)
+  formData.append('proprietario', estabelecimento.proprietario)
+
+  
+  fetch('http://localhost:3000/estabelecimento/cadastro', {
+      method: 'POST',
+      body: formData,
+      
+  }).then(result => {
+      return result.json();
+  }).then(data => {
+    console.log("data")
+    console.log(data)
+    estabelecimento.nome_estabelecimento = data.estabelecimentoCriado.nome_estabelecimento;
+    estabelecimento.logo = data.estabelecimentoCriado.logo
+      estabelecimento.cep = data.estabelecimentoCriado.cep
+      estabelecimento.endereco = data.estabelecimentoCriado.endereco
+      estabelecimento.mesa = data.estabelecimentoCriado.mesa
+      estabelecimento.proprietario = data.estabelecimentoCriado.id_proprietario
+
+      this.arrayEstabelecimento.push(estabelecimento);
+
+  });
+}
+
+lerDados() {
+  let estabelecimento = {}
+
+  estabelecimento.id = 0;
+  estabelecimento.nome_estabelecimento = document.getElementById('nome_estabelecimento').value;
+  estabelecimento.cep = document.getElementById('cep').value;
+  estabelecimento.logo = document.getElementById('logo').value;
+  estabelecimento.endereco = document.getElementById('endereco').value
+  estabelecimento.mesa = document.getElementById('quant').value
+  estabelecimento.proprietario = 1
+
+  console.log(estabelecimento)
+
+  return estabelecimento;
+}
+
+validaCampos(estabelecimento) {
+  let msg = '';
+
+  if (estabelecimento.nome_estabelecimento == "") {
+      msg += '- Informe o nome do estabelecimento'
+  }
+  if (estabelecimento.logo == "") {
+      msg += '- Informe o logo do estabelecimento'
+  }
+  if (estabelecimento.cep == "") {
+    msg += '- Informe o cep do estabelecimento'
+}
+if (estabelecimento.endereco == "") {
+  msg += '- Informe o endereco do estabelecimento'
+}
+  if (msg != '') {
+      alert(msg);
+      return false
+  }
+  return true;
+
+}
+}
+var estabelecimento = new Estabelecimento
