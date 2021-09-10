@@ -499,3 +499,40 @@ if (estabelecimento.endereco == "") {
 }
 }
 var estabelecimento = new Estabelecimento
+
+
+function jwt_login(){
+
+  let user = {
+      email: document.getElementById("email").value,
+      senha: document.getElementById("senha").value
+  };
+
+  alert(JSON.stringify(user));
+
+  let response = fetch('http://localhost:3000/usuarios/login', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          'Authorization': `${localStorage.getItem("ourToken")}`
+
+      },
+      body: JSON.stringify(user)
+  }).then(result => {      
+      if (result.ok) {   
+          return result.json()
+      } else {
+          localStorage.setItem("ourToken", null)
+          alert("Senha Incorreta!")
+          document.getElementById('email').value = '';
+          document.getElementById('senha').value = '';
+      }
+  }).then(data => {
+    console.log(data)
+    
+      localStorage.setItem("ourToken", data.token)
+      location.assign('/home')
+  });
+
+
+}

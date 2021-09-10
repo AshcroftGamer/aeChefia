@@ -2,7 +2,6 @@ const express = require( 'express' );
 const app = express();
 const morgan = require( 'morgan' );
 const cookieParser = require( 'cookie-parser' );
-const cookieParser = require('cookie-parser');
 const bodyparser = require( 'body-parser' );
 
 global.__basedir = __dirname;
@@ -30,8 +29,10 @@ const rotaFuncionario = require( './route/funcionario' )
 const rotaLogout = require( './route/logout' )
 const rotaLogin = require( './route/login' )
 const rotaEstabelecimento = require( './route/estabelecimento' );
+const rotaUsuarios = require( './route/usuarios' )
 
 
+app.use( '/usuarios', rotaUsuarios )
 app.use( '/estabelecimento', rotaEstabelecimento )
 app.use( '/login', rotaLogin );
 app.use( '/logout', rotaLogout );

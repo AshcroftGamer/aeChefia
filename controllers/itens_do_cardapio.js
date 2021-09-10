@@ -5,7 +5,8 @@ const bcrypt = require( 'bcrypt' );
 
 exports.postItens_cardapio = async ( req, res ) => {
     try {
-        var query = 'INSERT INTO itens_do_cardapio';
+        var query = `INSERT INTO itens_do_cardapio(id_cardapio, id_item_tipo, id_bebida_tipo, id_marcas, id_medidas, nome_comida, preco)
+        SELECT `;
         var result = await mysql.execute( query, [ req.body.email ] );
         if ( result.length > 0 ) {
             return res.status( 409 ).send( { Mensagem: 'Usuario já cadastrado' } )
