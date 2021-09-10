@@ -1,4 +1,3 @@
-
 function ok() {
   alert("clickou")
 };
@@ -81,44 +80,6 @@ function mCEP(cep) {
   return cep
 }
 
-
-// function moeda(a, e, r, t) {
-//   let n = ""
-//     , h = j = 0
-//     , u = tamanho2 = 0
-//     , l = ajd2 = ""
-//     , o = window.Event ? t.which : t.keyCode;
-//   if (13 == o || 8 == o)
-//       return !0;
-//   if (n = String.fromCharCode(o),
-//   -1 == "0123456789".indexOf(n))
-//       return !1;
-//   for (u = a.value.length,
-//   h = 0; h < u && ("0" == a.value.charAt(h) || a.value.charAt(h) == r); h++)
-//       ;
-//   for (l = ""; h < u; h++)
-//       -1 != "0123456789".indexOf(a.value.charAt(h)) && (l += a.value.charAt(h));
-//   if (l += n,
-//   0 == (u = l.length) && (a.value = ""),
-//   1 == u && (a.value = "0" + r + "0" + l),
-//   2 == u && (a.value = "0" + r + l),
-//   u > 2) {
-//       for (ajd2 = "",
-//       j = 0,
-//       h = u - 3; h >= 0; h--)
-//           3 == j && (ajd2 += e,
-//           j = 0),
-//           ajd2 += l.charAt(h),
-//           j++;
-//       for (a.value = "",
-//       tamanho2 = ajd2.length,
-//       h = tamanho2 - 1; h >= 0; h--)
-//           a.value += ajd2.charAt(h);
-//       a.value += r + l.substr(u - 2, u)
-//   }
-//   return !1
-// }
-
 // Function Mascara Moeda
 function k(i) {
   var v = i.value.replace(/\D/g, '');
@@ -129,28 +90,30 @@ function k(i) {
   i.value = v;
 }
 
-
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     console.log('User signed out.');
   });
 }
+
 cliente = {};
+
 function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
+   profile = googleUser.getBasicProfile();
+   
   // Conseguindo o Nome do Usuário
-  var userName = profile.getName();
+   userName = profile.getName();
 
   // Conseguindo o E-mail do Usuário
-  var userEmail = profile.getEmail();
+   userEmail = profile.getEmail();
 
   // Conseguindo a URL da Foto do Perfil
-  var userPicture = profile.getImageUrl();
+   userPicture = profile.getImageUrl();
 
-  // document.getElementById('user-photo').src = userPicture;
-  // document.getElementById('user-name').innerText = userName;
-  // document.getElementById('user-email').innerText = userEmail;
+  document.getElementById('user-photo').src = userPicture;
+  document.getElementById('user-name').innerText = userName;
+  document.getElementById('user-email').innerText = userEmail;
 
   console.log(userName)
   console.log(userEmail)
@@ -158,24 +121,26 @@ function onSignIn(googleUser) {
 
   var id_token = googleUser.getAuthResponse().id_token;
   console.log(id_token);
-  // console.log(googleUser.Vs.Pe)
 
   // var nomegoo = googleUser.Vs.Pe;
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/login');
+ 
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function () {
     console.log('Signed in as: ' + xhr.responseText);
     if (xhr.responseText == 'success') {
-      // signOut();
-      location.assign('/home')
+       console.log(userName)
+      signOut();
+      location.replace('/home')
+      
     }
-
   };
   xhr.send(JSON.stringify({ token: id_token }));
-  console.log()
-  return userName
+  
+  return userName;
 }
+
 
 // function aj( onSignIn(userName) ){
 //   console.log(userName)
