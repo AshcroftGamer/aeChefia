@@ -2,6 +2,7 @@ const express = require( 'express' );
 const app = express();
 const morgan = require( 'morgan' );
 const cookieParser = require( 'cookie-parser' );
+const cookieParser = require('cookie-parser');
 const bodyparser = require( 'body-parser' );
 
 global.__basedir = __dirname;
@@ -11,6 +12,7 @@ app.use( bodyparser.json() );
 app.use( express.json() );
 app.use( cookieParser() );
 app.use( morgan( 'dev' ) );
+
 
 app.use( express.static( __dirname + '/public' ) );
 app.use( '/uploads', express.static( 'uploads' ) );

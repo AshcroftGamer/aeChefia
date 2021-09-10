@@ -1,10 +1,13 @@
-const route = require('express').Router();
+const router = require('express').Router();
 
+const controller = require('../controllers/funcionario-controller');
 
-route.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.sendFile(__basedir + '/public/pages/funcionario.html');
 })
 
 
+router.post('/', controller.postFuncionario);
 
-module.exports = route;
+
+module.exports = router;

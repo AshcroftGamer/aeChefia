@@ -8,10 +8,10 @@ exports.postEstabelecimento = async ( req, res ) => {
 
 
         const query = 'INSERT INTO estabelecimento (nome_estabelecimento, logo, cep, endereco, mesa, id_proprietario) VALUES (?, ?, ?, ?, ?, ?);'
-        await mysql.execute( query,
+        const result = await mysql.execute( query,
             [
                 req.body.nome_estabelecimento,
-                req.body.logo,
+                req.file.path.replace("public", " "),
                 req.body.cep,
                 req.body.endereco,
                 req.body.mesa,
@@ -20,12 +20,25 @@ exports.postEstabelecimento = async ( req, res ) => {
 
         const response = {
             mensagem: 'Estabelecimento inserido com sucesso!',
-
+            estabelecimentoCriado: {
+                id_estabelecimento: result.insertId,
+                nome: req.body.nome,
+                logo: req.file.path,
+                cep: req.body.cep,
+                endereco: req.body.endereco,
+                mesa: req.body.mesa,
+                proprietario: req.body.id_proprietario,
+                request: {
+                    tipo: 'POST',
+                    descricao: 'Adiciona Um Estabelecimento',
+                }
+            }
         }
 
         return res.status( 201 ).send( response );
     }
     catch ( error ) {
+        console.log(error)
         return res.status( 500 ).send( { err: error } )
     }
 

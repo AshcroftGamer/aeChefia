@@ -35,24 +35,23 @@
     <span class="spanHome">Novo estabelecimento</span>
     <div class="inputSpacing"></div>
     <div class="inputs" style="padding-top: 15px;">
-      <form action="" method="POST">
 
       <label for="nome">
-        <input class="inputLine" id="nome" name="nome" placeholder="Nome" type="text" required>
+        <input class="inputLine" id="nome_estabelecimento" name="nome" placeholder="Nome" type="text" required>
         <br>
     </label>
-    <label style="width: 87%;place-self: center;display: inline-table;" class="lulu" for="Logo">Logo
-        <input class="inputLine" id="Logo" name="logo" placeholder="logo" type="file" required>
+    <label style="width: 87%;place-self: center;display: inline-table;" class="lulu" for="logo">Logo
+        <input class="inputLine" id="logo" name="logo" placeholder="logo" type="file" required>
         <button class="btnImg" disabled></button>
     <br>
     </label>
     <span id="erromail"></span>
     <label for="CEP">
-      <input class="inputLine" id="CEP" name="CEP" maxlength="9" placeholder="CEP" type="text" onkeydown="javascript: fMasc( this, mCEP );"
+      <input class="inputLine" id="cep" name="CEP" maxlength="10" placeholder="CEP" type="text" onkeydown="javascript: fMasc( this, mCEP );"
           required><br>
   </label>
   <label for="Endereço">
-    <input class="inputLine" id="Endereço" name="Endereço"  placeholder="Endereço" type="text"
+    <input class="inputLine" id="endereco" name="Endereço"  placeholder="Endereço" type="text"
         required><br>
 </label>
 </div>
@@ -66,9 +65,8 @@
         <input type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
       </div> 
 
-    <a href="../pages/estabelecimento-sucesso.html"><button  class="btn redBtn redBtn-cad" >Cadastrar estabelecimento</button><br> </a>
+      <a href="../pages/estabelecimento-sucesso.html"><button  class="btn redBtn redBtn-cad" onclick="estabelecimento.cadastrar()">Cadastrar estabelecimento</button><br></a>
 </footer>
-</form>
 <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 </body>
 </html>
