@@ -1,5 +1,5 @@
-const route = require('express').Router();
-const prop = require('../controllers/propcontrol');
+const route = require( 'express' ).Router();
+const prop = require( '../controllers/propcontrol' );
 const multer = require( 'multer' );
 
 
@@ -15,23 +15,25 @@ const storage = multer.diskStorage( {
 const upload = multer( { storage } )
 
 
-route.get('/', (req, res) => {
-    res.sendFile(__basedir + '/public/pages/home.html');
-});
+route.get( '/', ( req, res ) => {
+    res.sendFile( __basedir + '/public/pages/home.html' );
+} );
 
 //traz todos proprietarios
-route.get('/todos', prop.getProp);
+route.get( '/todos', prop.getProp );
+
+route.get( '/nome', prop.getName );
 
 //verifica se o proprietario é cadastrado apesar que o post proprietario faz a verificação já
-route.get('/verifica', prop.verifica);
+route.get( '/verifica', prop.verifica );
 
 
-route.post('/cadastro', prop.postProprietario);
+route.post( '/cadastro', prop.postProprietario );
 
 
-route.patch('/atualizar', prop.patchProprietario);
+route.patch( '/atualizar', prop.patchProprietario );
 
-route.delete('/remover', prop.deleteProprietario)
+route.delete( '/remover', prop.deleteProprietario )
 
 
 module.exports = route;

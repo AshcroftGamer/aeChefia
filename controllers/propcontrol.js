@@ -40,39 +40,7 @@ exports.postProprietario = async ( req, res ) => {
 
 }
 
-// exports.postProprietario = async ( req, res ) => {
-//     try {
 
-
-
-//         const query = 'INSERT INTO proprietario (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?);'
-//         const result = await mysql.execute( query,
-//             [
-//                 req.body.nome,
-//                 req.body.email,
-//                 req.body.cpf,
-//                 req.body.telefone,
-//                 req.body.senha
-//             ] );
-
-//         const response = {
-//             mensagem: 'Proprietario criado com sucesso',
-//             usuarioCriado: {
-//                 id: result.insertId,
-//                 nome: req.body.nome,
-//                 email: req.body.email,
-//                 cpf: req.body.cpf,
-//                 telefone: req.body.telefone
-//             }
-//         }
-
-//         return res.status( 201 ).send( response );
-//     }
-//     catch ( error ) {
-//         return res.status( 500 ).send( { err: error } )
-//     }
-
-// }
 
 exports.patchProprietario = async ( req, res ) => {
     try {
@@ -138,6 +106,23 @@ exports.getProp = async ( req, res ) => {
             }
             return res.status( 200 ).send( response );
         } )
+    }
+    catch ( error ) {
+        return res.status( 500 ).send( error )
+    }
+
+}
+
+exports.getName = async ( req, res ) => {
+    try {
+        const query = 'SELECT * FROM proprietario WHERE name = ?';
+
+        await mysql.execute( query, [req.body.nome] );
+        const response = "ok"
+                      
+            
+        
+        return res.status( 200 ).send( response );
     }
     catch ( error ) {
 

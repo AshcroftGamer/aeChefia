@@ -2,9 +2,14 @@ node_modules/
 
 uploads/
 
-/arquive.html
+arquive.html
 
 merda.sql
 
 rotaExemplo.js
 
+.env
+
+mysql.js
+
+ok

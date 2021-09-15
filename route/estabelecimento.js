@@ -38,7 +38,7 @@ route.delete('/remover', controller.deleteEstabelecimento);
 
 route.patch('/atualizar', controller.patchEstabelecimento);
 
-route.post( '/cadastro', upload.single('logo'), controller.postEstabelecimento );
+route.post( '/cadastro', upload.single('logo'), controller.postEstab );
 
 
 

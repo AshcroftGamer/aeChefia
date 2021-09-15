@@ -1,41 +1,41 @@
 function ok() {
-  alert("clickou")
+  alert( "clickou" )
 };
 
-function process(mesa) {
-  var value = parseInt(document.getElementById("quant").value);
+function process( mesa ) {
+  var value = parseInt( document.getElementById( "quant" ).value );
   value += mesa;
 
-  if (value == NaN) {
-    document.getElementById("quant").value = 0;
+  if ( value == NaN ) {
+    document.getElementById( "quant" ).value = 0;
   } else {
-    document.getElementById("quant").value = value;
+    document.getElementById( "quant" ).value = value;
   }
 
 }
 
 function ViewSenha() {
-  let senha = document.getElementById('senha')
-  let olho = document.getElementById('olho')
+  let senha = document.getElementById( 'senha' )
+  let olho = document.getElementById( 'olho' )
 
-  if (senha.getAttribute('type') == ("password")) {
-    senha.setAttribute("type", "text")
+  if ( senha.getAttribute( 'type' ) == ( "password" ) ) {
+    senha.setAttribute( "type", "text" )
     olho.src = "/img/vision.png"
   } else {
-    senha.setAttribute("type", "password")
+    senha.setAttribute( "type", "password" )
     olho.src = "/img/private.png"
   }
 
 }
 
 function confirmarSenha() {
-  let confSenha = document.getElementById('confSenha')
-  let olho = document.getElementById('olho1')
-  if (confSenha.getAttribute('type') == ("password")) {
-    confSenha.setAttribute("type", "text")
+  let confSenha = document.getElementById( 'confSenha' )
+  let olho = document.getElementById( 'olho1' )
+  if ( confSenha.getAttribute( 'type' ) == ( "password" ) ) {
+    confSenha.setAttribute( "type", "text" )
     olho.src = "/img/vision.png"
   } else {
-    confSenha.setAttribute("type", "password")
+    confSenha.setAttribute( "type", "password" )
     olho.src = "/img/private.png"
   }
 }
@@ -49,95 +49,95 @@ const options = {
   mode: "cors",
   caches: "default"
 }
-function fMasc(objeto, mascara) {
+function fMasc( objeto, mascara ) {
   obj = objeto
   masc = mascara
-  setTimeout("fMascEx()", 1)
+  setTimeout( "fMascEx()", 1 )
 }
 function fMascEx() {
-  obj.value = masc(obj.value)
+  obj.value = masc( obj.value )
 }
-function mTel(tel) {
-  tel = tel.replace(/\D/g, "")
-  tel = tel.replace(/^(\d)/, "($1")
-  tel = tel.replace(/(.{3})(\d)/, "$1)$2")
-  if (tel.length == 9) {
-    tel = tel.replace(/(.{1})$/, "-$1")
-  } else if (tel.length == 10) {
-    tel = tel.replace(/(.{2})$/, "-$1")
-  } else if (tel.length == 11) {
-    tel = tel.replace(/(.{3})$/, "-$1")
-  } else if (tel.length == 12) {
-    tel = tel.replace(/(.{4})$/, "-$1")
-  } else if (tel.length > 12) {
-    tel = tel.replace(/(.{4})$/, "-$1")
+function mTel( tel ) {
+  tel = tel.replace( /\D/g, "" )
+  tel = tel.replace( /^(\d)/, "($1" )
+  tel = tel.replace( /(.{3})(\d)/, "$1)$2" )
+  if ( tel.length == 9 ) {
+    tel = tel.replace( /(.{1})$/, "-$1" )
+  } else if ( tel.length == 10 ) {
+    tel = tel.replace( /(.{2})$/, "-$1" )
+  } else if ( tel.length == 11 ) {
+    tel = tel.replace( /(.{3})$/, "-$1" )
+  } else if ( tel.length == 12 ) {
+    tel = tel.replace( /(.{4})$/, "-$1" )
+  } else if ( tel.length > 12 ) {
+    tel = tel.replace( /(.{4})$/, "-$1" )
   } return tel;
 }
-function mCEP(cep) {
-  cep = cep.replace(/\D/g, "")
-  cep = cep.replace(/^(\d{2})(\d)/, "$1.$2")
-  cep = cep.replace(/.(\d{3})(\d)/, ".$1-$2")
+function mCEP( cep ) {
+  cep = cep.replace( /\D/g, "" )
+  cep = cep.replace( /^(\d{2})(\d)/, "$1.$2" )
+  cep = cep.replace( /.(\d{3})(\d)/, ".$1-$2" )
   return cep
 }
 
 // Function Mascara Moeda
-function k(i) {
-  var v = i.value.replace(/\D/g, '');
-  v = (v / 100).toFixed(2) + '';
-  v = v.replace(".", ".");
-  v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
-  v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+function k( i ) {
+  var v = i.value.replace( /\D/g, '' );
+  v = ( v / 100 ).toFixed( 2 ) + '';
+  v = v.replace( ".", "." );
+  v = v.replace( /(\d)(\d{3})(\d{3}),/g, "$1.$2.$3," );
+  v = v.replace( /(\d)(\d{3}),/g, "$1.$2," );
   i.value = v;
 }
 
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    console.log('User signed out.');
-  });
+  auth2.signOut().then( function () {
+    console.log( 'User signed out.' );
+  } );
 }
 
 cliente = {};
 
-function onSignIn(googleUser) {
-   profile = googleUser.getBasicProfile();
-   
+function onSignIn( googleUser ) {
+  profile = googleUser.getBasicProfile();
+
   // Conseguindo o Nome do Usuário
-   userName = profile.getName();
+  userName = profile.getName();
 
   // Conseguindo o E-mail do Usuário
-   userEmail = profile.getEmail();
+  userEmail = profile.getEmail();
 
   // Conseguindo a URL da Foto do Perfil
-   userPicture = profile.getImageUrl();
+  userPicture = profile.getImageUrl();
 
-  document.getElementById('user-photo').src = userPicture;
-  document.getElementById('user-name').innerText = userName;
-  document.getElementById('user-email').innerText = userEmail;
+  document.getElementById( 'user-photo' ).src = userPicture;
+  document.getElementById( 'user-name' ).innerText = userName;
+  document.getElementById( 'user-email' ).innerText = userEmail;
 
-  console.log(userName)
-  console.log(userEmail)
-  console.log(userPicture)
+  console.log( userName )
+  console.log( userEmail )
+  console.log( userPicture )
 
   var id_token = googleUser.getAuthResponse().id_token;
-  console.log(id_token);
+  console.log( id_token );
 
   // var nomegoo = googleUser.Vs.Pe;
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/login');
- 
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.open( 'POST', '/login' );
+
+  xhr.setRequestHeader( 'Content-Type', 'application/json' );
   xhr.onload = function () {
-    console.log('Signed in as: ' + xhr.responseText);
-    if (xhr.responseText == 'success') {
-       console.log(userName)
+    console.log( 'Signed in as: ' + xhr.responseText );
+    if ( xhr.responseText == 'success' ) {
+      console.log( userName )
       signOut();
-      location.replace('/home')
-      
+      location.replace( '/home' )
+
     }
   };
-  xhr.send(JSON.stringify({ token: id_token }));
-  
+  xhr.send( JSON.stringify( { token: id_token } ) );
+
   return userName;
 }
 
@@ -155,9 +155,9 @@ function onSignIn(googleUser) {
 
 
 function Menu() {
-  let menu = document.getElementById('menu-js');
-  let conteudoMenu = document.getElementById('menu')
-  if (menu.checked == true) {
+  let menu = document.getElementById( 'menu-js' );
+  let conteudoMenu = document.getElementById( 'menu' )
+  if ( menu.checked == true ) {
     conteudoMenu.style.transform = origin = "0% 0%"
     conteudoMenu.style.transition = "transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0)"
 
@@ -166,10 +166,10 @@ function Menu() {
 }
 
 function testeDiv() {
-  let div1 = document.getElementById('quantidade1')
-  let div2 = document.getElementById('quantidade2')
+  let div1 = document.getElementById( 'quantidade1' )
+  let div2 = document.getElementById( 'quantidade2' )
   let num = 1
-  console.log(div1.value)
+  console.log( div1.value )
   div1.value = 1
   div2.value = 1
   this.estadoQuantidade1()
@@ -185,41 +185,41 @@ function testeDiv() {
 async function cadastro() {
   let usuario = {}
 
-  usuario.nome = document.getElementById("nome").value;
-  usuario.email = document.getElementById('email').value;
+  usuario.nome = document.getElementById( "nome" ).value;
+  usuario.email = document.getElementById( 'email' ).value;
   // usuario.cpf = document.getElementById( 'cpf' ).value;
-  let cpf = document.getElementById('cpf');
-  console.log(cpf)
-  cpf = cpf.value.replace('.', '');
-  usuario.cpf = cpf.value.replace('-', '');
-  let tel = document.getElementById('telefone').value;
-  tel = tel.value.replace('(', "");
-  tel = tel.value.replace(')', "");
-  usuario.telefone = tel.replace('-', '')
-  usuario.senha = document.getElementById('senha').value;
+  let cpf = document.getElementById( 'cpf' );
+  console.log( cpf )
+  cpf = cpf.value.replace( '.', '' );
+  usuario.cpf = cpf.value.replace( '-', '' );
+  let tel = document.getElementById( 'telefone' ).value;
+  tel = tel.value.replace( '(', "" );
+  tel = tel.value.replace( ')', "" );
+  usuario.telefone = tel.replace( '-', '' )
+  usuario.senha = document.getElementById( 'senha' ).value;
 
-  console.log(usuario);
+  console.log( usuario );
 
   const formData = new FormData();
-  formData.append('nome', usuario.nome)
-  formData.append('email', usuario.email)
-  formData.append('cpf', usuario.cpf)
-  formData.append('telefone', usuario.telefone)
-  formData.append('senha', usuario.senha)
+  formData.append( 'nome', usuario.nome )
+  formData.append( 'email', usuario.email )
+  formData.append( 'cpf', usuario.cpf )
+  formData.append( 'telefone', usuario.telefone )
+  formData.append( 'senha', usuario.senha )
 
-  await fetch('http://localhost:3000/cadastro/usuario',
+  await fetch( 'http://localhost:3000/cadastro/usuario',
     {
       method: 'POST',
-      body: JSON.parse(usuario.stringify()),
+      body: JSON.parse( usuario.stringify() ),
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       }
-    }).then(result => {
+    } ).then( result => {
       return result.json()
-    }).then(data => {
-      console.log(data)
+    } ).then( data => {
+      console.log( data )
 
-    })
+    } )
 
 
 
@@ -256,14 +256,14 @@ function criarDiv() {
   //Pego o ID
   let id = getNextId();
   //Crio a DIV
-  let divElement = document.createElement("div");
-  var conteudoNovo = document.createTextNode(id);
-  divElement.appendChild(conteudoNovo);
+  let divElement = document.createElement( "div" );
+  var conteudoNovo = document.createTextNode( id );
+  divElement.appendChild( conteudoNovo );
   //Pego a DIV onde a nova DIV será criada, sempre na DIV mãe
-  let divMae = document.getElementById("mesas");
+  let divMae = document.getElementById( "mesas" );
 
   //A ideia do ID é que ele seja um elemento único, ou seja, não se repita
-  divElement.setAttribute('id', 'box' + id.toString());
+  divElement.setAttribute( 'id', 'box' + id.toString() );
 
   //CSS
   divElement.style.width = "18%";
@@ -273,7 +273,7 @@ function criarDiv() {
   divElement.style.opacity = '0.1';
   divElement.style.marginLeft = '5%';
   divElement.style.margin = '10px'
-  divElement.classList.add("bounceIn")
+  divElement.classList.add( "bounceIn" )
 
   divElement.style.paddingTop = '23px'
   divElement.style.textAlign = 'center'
@@ -285,75 +285,75 @@ function criarDiv() {
 
   //Adiciono a nova DIV na DIV mãe
   //Aqui poderia ser por exemplo document.body.appendChild, adicionando assim o elemento criado diretamente no body
-  divMae.appendChild(divElement);
+  divMae.appendChild( divElement );
   // document.body.appendChild(divElement)
-  if (id >= 12) {
-    let footer = document.getElementById('footer');
+  if ( id >= 12 ) {
+    let footer = document.getElementById( 'footer' );
     footer.style.position = 'unset'
   }
-  console.log("rodou " + id)
+  console.log( "rodou " + id )
 }
 
 function criarDivCardapio() {
   //Pego o ID
   let id = getNextId();
   //Crio a DIV
-  let divElement = document.createElement("div");
+  let divElement = document.createElement( "div" );
 
-  var conteudoNovo = document.createElement("span");
-  var conteudoNovo2 = document.createElement("span");
-  var conteudoNovo3 = document.createElement("span");
+  var conteudoNovo = document.createElement( "span" );
+  var conteudoNovo2 = document.createElement( "span" );
+  var conteudoNovo3 = document.createElement( "span" );
 
-  var span1 = document.createTextNode("Itaipava ")
-  var span2 = document.createTextNode("600ml")
-  var span3 = document.createTextNode("R$:10,00")
+  var span1 = document.createTextNode( "Itaipava " )
+  var span2 = document.createTextNode( "600ml" )
+  var span3 = document.createTextNode( "R$:10,00" )
 
-  conteudoNovo.appendChild(span1);
-  conteudoNovo2.appendChild(span2);
-  conteudoNovo3.appendChild(span3);
+  conteudoNovo.appendChild( span1 );
+  conteudoNovo2.appendChild( span2 );
+  conteudoNovo3.appendChild( span3 );
 
 
-  divElement.appendChild(conteudoNovo);
-  divElement.appendChild(conteudoNovo2);
-  divElement.appendChild(conteudoNovo3);
+  divElement.appendChild( conteudoNovo );
+  divElement.appendChild( conteudoNovo2 );
+  divElement.appendChild( conteudoNovo3 );
   //Pego a DIV onde a nova DIV será criada, sempre na DIV mãe
-  let divMae = document.getElementById("mesas");
+  let divMae = document.getElementById( "mesas" );
 
   //A ideia do ID é que ele seja um elemento único, ou seja, não se repita
-  divElement.setAttribute('id', 'box' + id.toString());
+  divElement.setAttribute( 'id', 'box' + id.toString() );
 
   //CSS
 
-  divElement.classList.add("itens-cardapio")
-  divElement.classList.add("bounceIn")
-  conteudoNovo.classList.add("itens-cardapio-span")
+  divElement.classList.add( "itens-cardapio" )
+  divElement.classList.add( "bounceIn" )
+  conteudoNovo.classList.add( "itens-cardapio-span" )
 
   //Essa parte é mais para deixar claro que outras divs estão sendo criadas, criando um degrade
   //divElement.style.backgroundColor = "#f0" + id.toString();
 
   //Adiciono a nova DIV na DIV mãe
   //Aqui poderia ser por exemplo document.body.appendChild, adicionando assim o elemento criado diretamente no body
-  divMae.appendChild(divElement);
-  if (id >= 4) {
-    let footer = document.getElementById('footer');
+  divMae.appendChild( divElement );
+  if ( id >= 4 ) {
+    let footer = document.getElementById( 'footer' );
     footer.style.position = 'unset'
   }
   // document.body.appendChild(divElement)
-  console.log("rodou")
+  console.log( "rodou" )
 }
 
 
 // Home Cadastrado
 function estadoSpanHome() {
-  let span = document.getElementById('spanFunction');
-  let qnt1 = document.getElementById('quantidade1');
-  let qnt2 = document.getElementById('quantidade2');
+  let span = document.getElementById( 'spanFunction' );
+  let qnt1 = document.getElementById( 'quantidade1' );
+  let qnt2 = document.getElementById( 'quantidade2' );
 
-  if (qnt1.value, qnt2.value == "") {
-    console.log('rodou')
+  if ( qnt1.value, qnt2.value == "" ) {
+    console.log( 'rodou' )
     span.style.display = "block"
   } else {
-    console.log('passou')
+    console.log( 'passou' )
   }
 
   this.estadoQuantidade1();
@@ -362,9 +362,9 @@ function estadoSpanHome() {
 
 
 function estadoQuantidade1() {
-  let qnt1 = document.getElementById('quantidade1');
+  let qnt1 = document.getElementById( 'quantidade1' );
 
-  if (qnt1.value == "") {
+  if ( qnt1.value == "" ) {
     qnt1.style.visibility = "hidden"
   } else {
     qnt1.style.visibility = "visible"
@@ -372,8 +372,8 @@ function estadoQuantidade1() {
 }
 
 function estadoQuantidade2() {
-  let qnt2 = document.getElementById('quantidade2');
-  if (qnt2.value == "") {
+  let qnt2 = document.getElementById( 'quantidade2' );
+  if ( qnt2.value == "" ) {
     qnt2.style.visibility = "hidden"
 
   } else {
@@ -383,22 +383,22 @@ function estadoQuantidade2() {
 }
 // Splash Screen
 function timeout() {
-  myVar = setTimeout(function () { window.location.href = "./home-cadastrado.html"; }, 2500);
+  myVar = setTimeout( function () { window.location.href = "./home-cadastrado.html"; }, 2500 );
 }
 
 
 // Itens Cardapio
 function listaCardapio() {
-  let divComida = document.getElementById("divComida");
-  let divBebida = document.getElementById("divBebida");
-  let datalist = document.getElementById("popo")
+  let divComida = document.getElementById( "divComida" );
+  let divBebida = document.getElementById( "divBebida" );
+  let datalist = document.getElementById( "popo" )
 
 
-  if (datalist.value == "Comidas") {
+  if ( datalist.value == "Comidas" ) {
     divComida.style.display = "flex"
     divBebida.style.display = "none"
   }
-  if (datalist.value == "Bebidas") {
+  if ( datalist.value == "Bebidas" ) {
     divBebida.style.display = "flex"
     divComida.style.display = "none"
   }
@@ -408,131 +408,163 @@ function listaCardapio() {
 
 
 class Estabelecimento {
-  constructor() {
+  constructor () {
     this.arrayEstabelecimento = [];
     this.editId = null
-}
-cadastrar() {
+  }
+  cadastrar() {
     let estabelecimento = this.lerDados();
 
-    if (this.validaCampos(estabelecimento)) {
-        if (this.editId == null) {
-            this.adicionar(estabelecimento)
-        } else {
+    if ( this.validaCampos( estabelecimento ) ) {
+      if ( this.editId == null ) {
+        this.adicionar( estabelecimento )
+      } else {
 
-        }
-        
+      }
+
     }
 
-}
-async adicionar(estabelecimento) {
+  }
+  async adicionar( estabelecimento ) {
 
-  const formData = new FormData();
-  const fileField = document.querySelector('input[type="file"]');
+    const formData = new FormData();
+    const fileField = document.querySelector( 'input[type="file"]' );
 
-  formData.append('nome_estabelecimento', estabelecimento.nome_estabelecimento);
-  formData.append('cep', estabelecimento.cep);
-  formData.append('logo', fileField.files[0]);
-  formData.append('endereco', estabelecimento.endereco);
-  formData.append('mesa', estabelecimento.mesa)
-  formData.append('proprietario', estabelecimento.proprietario)
+    formData.append( 'nome_estabelecimento', estabelecimento.nome_estabelecimento );
+    formData.append( 'cep', estabelecimento.cep );
+    formData.append( 'logo', fileField.files[ 0 ] );
+    formData.append( 'endereco', estabelecimento.endereco );
+    formData.append( 'mesa', estabelecimento.mesa )
+    formData.append( 'proprietario', estabelecimento.proprietario )
 
-  
-  fetch('http://localhost:3000/estabelecimento/cadastro', {
+
+    fetch( 'http://localhost:3000/estabelecimento/cadastro', {
       method: 'POST',
       body: formData,
-      
-  }).then(result => {
+
+    } ).then( result => {
       return result.json();
-  }).then(data => {
-    console.log("data")
-    console.log(data)
-    estabelecimento.nome_estabelecimento = data.estabelecimentoCriado.nome_estabelecimento;
-    estabelecimento.logo = data.estabelecimentoCriado.logo
+    } ).then( data => {
+      console.log( "data" )
+      console.log( data )
+      estabelecimento.nome_estabelecimento = data.estabelecimentoCriado.nome_estabelecimento;
+      estabelecimento.logo = data.estabelecimentoCriado.logo
       estabelecimento.cep = data.estabelecimentoCriado.cep
       estabelecimento.endereco = data.estabelecimentoCriado.endereco
       estabelecimento.mesa = data.estabelecimentoCriado.mesa
       estabelecimento.proprietario = data.estabelecimentoCriado.id_proprietario
 
-      this.arrayEstabelecimento.push(estabelecimento);
+      this.arrayEstabelecimento.push( estabelecimento );
 
-  });
-}
+    } );
+  }
 
-lerDados() {
-  let estabelecimento = {}
+  lerDados() {
+    let estabelecimento = {}
 
-  estabelecimento.id = 0;
-  estabelecimento.nome_estabelecimento = document.getElementById('nome_estabelecimento').value;
-  estabelecimento.cep = document.getElementById('cep').value;
-  estabelecimento.logo = document.getElementById('logo').value;
-  estabelecimento.endereco = document.getElementById('endereco').value
-  estabelecimento.mesa = document.getElementById('quant').value
-  estabelecimento.proprietario = 1
+    estabelecimento.id = 0;
+    estabelecimento.nome_estabelecimento = document.getElementById( 'nome_estabelecimento' ).value;
+    estabelecimento.cep = document.getElementById( 'cep' ).value;
+    estabelecimento.logo = document.getElementById( 'logo' ).value;
+    estabelecimento.endereco = document.getElementById( 'endereco' ).value
+    estabelecimento.mesa = document.getElementById( 'quant' ).value
+    estabelecimento.proprietario = 1
 
-  console.log(estabelecimento)
+    console.log( estabelecimento )
 
-  return estabelecimento;
-}
+    return estabelecimento;
+  }
 
-validaCampos(estabelecimento) {
-  let msg = '';
+  validaCampos( estabelecimento ) {
+    let msg = '';
 
-  if (estabelecimento.nome_estabelecimento == "") {
+    if ( estabelecimento.nome_estabelecimento == "" ) {
       msg += '- Informe o nome do estabelecimento'
-  }
-  if (estabelecimento.logo == "") {
+    }
+    if ( estabelecimento.logo == "" ) {
       msg += '- Informe o logo do estabelecimento'
-  }
-  if (estabelecimento.cep == "") {
-    msg += '- Informe o cep do estabelecimento'
-}
-if (estabelecimento.endereco == "") {
-  msg += '- Informe o endereco do estabelecimento'
-}
-  if (msg != '') {
-      alert(msg);
+    }
+    if ( estabelecimento.cep == "" ) {
+      msg += '- Informe o cep do estabelecimento'
+    }
+    if ( estabelecimento.endereco == "" ) {
+      msg += '- Informe o endereco do estabelecimento'
+    }
+    if ( msg != '' ) {
+      alert( msg );
       return false
-  }
-  return true;
+    }
+    return true;
 
-}
+  }
 }
 var estabelecimento = new Estabelecimento
 
 
-function jwt_login(){
+function jwt_login() {
 
   let user = {
-      email: document.getElementById("email").value,
-      senha: document.getElementById("senha").value
+    email: document.getElementById( "email" ).value,
+    senha: document.getElementById( "senha" ).value
   };
 
-  alert(JSON.stringify(user));
+  alert( JSON.stringify( user ) );
 
-  let response = fetch('http://localhost:3000/usuarios/login', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          'Authorization': `${localStorage.getItem("ourToken")}`
+  let response = fetch( 'http://localhost:3000/usuarios/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'Authorization': `${localStorage.getItem( "ourToken" )}`
 
-      },
-      body: JSON.stringify(user)
-  }).then(result => {      
-      if (result.ok) {   
-          return result.json()
-      } else {
-          localStorage.setItem("ourToken", null)
-          alert("Senha Incorreta!")
-          document.getElementById('email').value = '';
-          document.getElementById('senha').value = '';
-      }
-  }).then(data => {
-    console.log(data)
-    
-      localStorage.setItem("ourToken", data.token)
-      location.assign('/home')
-  });
+    },
+    body: JSON.stringify( user )
+  } ).then( result => {
+    if ( result.ok ) {
+      return result.json()
+    } else {
+      localStorage.setItem( "ourToken", null )
+      alert( "Senha Incorreta!" )
+      document.getElementById( 'email' ).value = '';
+      document.getElementById( 'senha' ).value = '';
+    }
+  } ).then( data => {
+    console.log( data )
 
+    localStorage.setItem( "ourToken", data.token )
+    location.assign( '/home' )
+  } );
+
+
+}
+
+function jwt_auth_load() {
+
+  console.log( "authload" )
+  fetch( 'http://localhost:3030/home/entrar', {
+    headers: {
+      'Authorization': `${localStorage.getItem( "ourToken" )}`
+    }
+  } ).then( result => {
+    if ( result.ok ) {
+      return result.json()
+    } else {
+      localStorage.setItem( "ourToken", null )
+      console.log( "entrou else" )
+      location.assign( '/login' )
+    }
+  } );
+
+}
+
+function logout() {
+  fetch( 'http://localhost:3030/logout', {
+
+  } ).then( result => {
+
+    localStorage.setItem( "ourToken", null )
+    console.log( "entrou else" )
+    location.assign( '/login' )
+
+  } );
 
 }
