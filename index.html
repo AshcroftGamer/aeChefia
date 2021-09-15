@@ -18,7 +18,11 @@
     <title>Aeh Chefia</title>
 </head>
 
+<<<<<<< HEAD
 <body>
+=======
+<body onload="btngoogle()">
+>>>>>>> 3ac4de743348bf73005894eebe1bf03b0afb7b5e
     <div class="splash">
         <img class="bounceIn" src="/img/logo-splash.png" alt="">
     </div>
@@ -34,11 +38,11 @@
 
     </div>
 
-    <div class="g-signin2 " data-onsuccess="onSignIn">
+    <div class="g-signin2" data-onsuccess="onSignIn">
 
     </div>
     <div class="inputSpacing"></div>
-    <h1 class="divcenter">ou</h1>
+    <h1 style="font-weight: normal;" class="divcenter">ou</h1>
     <div class="inputSpacing"></div>
     <div class="inputs">
         <input class="inputLine" placeholder="Login" type="text" id="email"> <br>
@@ -50,13 +54,12 @@
                     alt=""></button>
         </div>
         <a href="./public/pages/cadastro.html" class="esqsenha">Esqueci minha senha</a>
-
         <!-- <input class="inputLine" placeholder="Senha" type="text"><a href="./public/pages/cadastro.html" class="esqsenha">Esqueci minha senha</a> <br> -->
     </div>
     <div class="divcenter">
         <button onclick="jwt_login()" class="btn redBtn redBtn-cad">Entrar </button><br>
         <div class="inputSpacing"></div>
-        <button class="btn borderBtn" onclick=""><a class="linkIndex" href="/pages/cadastro.html">Criar
+        <button style="background-color: white;" class="btn borderBtn" onclick=""><a class="linkIndex" href="/pages/cadastro.html">Criar
                 conta</a></button>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
         <span id="user-name"></span>

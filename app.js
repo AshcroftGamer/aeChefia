@@ -1,7 +1,7 @@
 const express = require( 'express' );
 const app = express();
 const morgan = require( 'morgan' );
-const cookieParser = require( 'cookie-parser' );
+const cookieParser = require('cookie-parser');
 const bodyparser = require( 'body-parser' );
 
 global.__basedir = __dirname;
