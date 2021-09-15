@@ -132,7 +132,7 @@ function onSignIn(googleUser) {
     if (xhr.responseText == 'success') {
        console.log(userName)
       signOut();
-      location.replace('/home')
+      location.assign('/home')
       
     }
   };
@@ -141,10 +141,26 @@ function onSignIn(googleUser) {
   return userName;
 }
 
+function btngoogle(){
+btn = document.querySelector('.abcRioButton');
+spanLogin = document.querySelector('span'); 
 
-// function aj( onSignIn(userName) ){
-//   console.log(userName)
-// }
+spanLogin.textContent="Entrar com Google"
+spanLogin.style.fontSize = '16px'
+spanLogin.style.fontWeight ='bold'
+
+btn.style.height = '48px';
+btn.style.width = '87%';
+btn.style.borderRadius = '100px';
+btn.style.textAlign = 'center';
+btn.style.left = '7%';
+btn.style.paddingLeft = '7px';
+btn.style.paddingTop = '9px';
+btn.style.color = '#323232';
+btn.style.outline = 'none'
+}
+
+
 
 // height: 48px;
 // width: 87%;
@@ -166,12 +182,13 @@ function Menu() {
 }
 
 function testeDiv() {
+  let id = getNextId();
   let div1 = document.getElementById('quantidade1')
   let div2 = document.getElementById('quantidade2')
   let num = 1
   console.log(div1.value)
-  div1.value = 1
-  div2.value = 1
+  div1.value = id
+  div2.value = id
   this.estadoQuantidade1()
   this.estadoQuantidade2()
 }
@@ -225,7 +242,26 @@ async function cadastro() {
 
 }
 
+function Modal() {
+   
 
+
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  modal.style.display = "block";
+  span.onclick = function () {
+      modal.style.display = "none";
+      modal.style.padding = '10%';
+      modal.style.paddingTop = '10%'
+
+
+  }
+  // window.onclick = function (event) {
+  //     if (event.target == modal) {
+  //         modal.style.display = "none";
+  //     }
+  // }
+}
 /** 
  * *  Cadastro de Estabelecimento
 */
@@ -405,7 +441,23 @@ function listaCardapio() {
 
 }
 
+function selecionar_estabelecimento(){
+  let a = document.getElementById('estab_input');
+  
+  let div1 = document.getElementById('quantidade1')
+  let div2 = document.getElementById('quantidade2')
+  console.log(a)
 
+  a.style.color= '#666666'
+
+
+  
+
+  
+
+  this.estadoQuantidade1();
+  this.estadoQuantidade2();
+}
 
 class Estabelecimento {
   constructor() {
@@ -471,7 +523,7 @@ lerDados() {
   estabelecimento.proprietario = 1
 
   console.log(estabelecimento)
-
+this
   return estabelecimento;
 }
 

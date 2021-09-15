@@ -34,6 +34,15 @@
         <a href="/"> <button type="submit" class="btn redBtn redBtn-cad">Redefinir</button><br> </a>
     </footer>
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
-</body>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+    <script>
+        new Cleave( '#cpf', {
+            blocks: [ 3, 3, 3, 2 ],
+            delimiters: [ '.', '.', '-' ],
+            numericOnly: true
+        } );
+    </script>
+</body>
 </html>
