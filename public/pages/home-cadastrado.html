@@ -38,11 +38,11 @@
   <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
   
   <div class="vermelhao vermelhaoCadastrado">
-    <button onclick="testeDiv()">teste</button>
-    <input type="text" placeholder="Selecione o estabelecimento" class="dropdown" name="city" list="cityname">
+    <!-- <button onclick="testeDiv()">teste</button> -->
+    <input onchange="selecionar_estabelecimento()" id="estab_input" type="text" placeholder="Selecione o estabelecimento" class="dropdown" name="city" list="cityname">
     <datalist id="cityname">
       <option value="Teste1">
-      <option value="ass">
+      <option value="Bar Do Birão">
       <option value="teste2">
     </datalist>
     <button class="btn borderBtn inverseBtn">Abrir caixa</button>         
