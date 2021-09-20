@@ -99,46 +99,103 @@ function signOut() {
 
 cliente = {};
 
-function onSignIn( googleUser ) {
-  profile = googleUser.getBasicProfile();
+// function onSignIn( googleUser ) {
+//   profile = googleUser.getBasicProfile();
 
-  // Conseguindo o Nome do Usuário
-  userName = profile.getName();
+//   // Conseguindo o Nome do Usuário
+//   userName = profile.getName();
 
-  // Conseguindo o E-mail do Usuário
-  userEmail = profile.getEmail();
+//   // Conseguindo o E-mail do Usuário
+//   userEmail = profile.getEmail();
 
-  // Conseguindo a URL da Foto do Perfil
-  userPicture = profile.getImageUrl();
+//   // Conseguindo a URL da Foto do Perfil
+//   userPicture = profile.getImageUrl();
 
-  document.getElementById( 'user-photo' ).src = userPicture;
-  document.getElementById( 'user-name' ).innerText = userName;
-  document.getElementById( 'user-email' ).innerText = userEmail;
+//   document.getElementById( 'user-photo' ).src = userPicture;
+//   document.getElementById( 'user-name' ).innerText = userName;
+//   document.getElementById( 'user-email' ).innerText = userEmail;
 
-  console.log( userName )
-  console.log( userEmail )
-  console.log( userPicture )
+//   console.log( userName )
+//   console.log( userEmail )
+//   console.log( userPicture )
+
+//   var id_token = googleUser.getAuthResponse().id_token;
+//   console.log( id_token );
+
+//   // var nomegoo = googleUser.Vs.Pe;
+//   var xhr = new XMLHttpRequest();
+//   xhr.open( 'POST', '/login' );
+
+//   xhr.setRequestHeader( 'Content-Type', 'application/json' );
+//   xhr.onload = function () {
+//     console.log( 'Signed in as: ' + xhr.responseText );
+//     if ( xhr.responseText == 'success' ) {
+//       console.log( userName )
+//       signOut();
+//       location.replace( '/home' )
+      
+//     }
+//   };
+//   xhr.send( JSON.stringify( { token: id_token } ) );
+
+//   return userName;
+// }
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+
+  var xhr = new XMLHttpRequest();
 
   var id_token = googleUser.getAuthResponse().id_token;
-  console.log( id_token );
 
-  // var nomegoo = googleUser.Vs.Pe;
-  var xhr = new XMLHttpRequest();
-  xhr.open( 'POST', '/login' );
-
-  xhr.setRequestHeader( 'Content-Type', 'application/json' );
+  var teste = profile.getEmail();
+  xhr.open('POST', '/login');
+  xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function () {
-    console.log( 'Signed in as: ' + xhr.responseText );
-    if ( xhr.responseText == 'success' ) {
-      console.log( userName )
-      signOut();
-      location.replace( '/home' )
-      
-    }
-  };
-  xhr.send( JSON.stringify( { token: id_token } ) );
 
-  return userName;
+      if (xhr.responseText == 'success') {
+
+          fetch('http://localhost:3000/usuarios/' + teste, {
+          })
+              .then(response => response.json())
+              .then(data => {
+
+                  if (data.tamanho > 0) {
+
+                      try {
+
+                          fetch('http://localhost:3000/usuarios/login', {
+                              method: 'POST',
+                              body: JSON.stringify({
+                                                  email: teste,
+                                                  google: true
+                                              }),
+                              headers: {
+                                  "Content-Type": "application/json; charset=utf-8"
+                              }
+
+                          }).then(result => {
+                              return result.json();
+                          }).then(data => {
+                              // console.log(data);
+                              localStorage.setItem("ourToken", data.token)
+                               location.assign('/home')
+                          });
+
+                      } catch (error) {
+                          console.log(error);
+                      }
+
+                  } else {
+
+                      location.assign('/cadastro')
+                  }
+              })
+
+          signOut();
+      }
+  };
+  xhr.send(JSON.stringify({ token: id_token }));
+  console.log()
 }
 
 function btngoogle(){
@@ -591,8 +648,8 @@ function jwt_login() {
 
 function jwt_auth_load() {
 
-  console.log( "authload" )
-  fetch( 'http://localhost:3030/home/entrar', {
+  // console.log( "authload" )
+  fetch( 'http://localhost:3000/home/entrar', {
     headers: {
       'Authorization': `${localStorage.getItem( "ourToken" )}`
     }
@@ -601,21 +658,21 @@ function jwt_auth_load() {
       return result.json()
     } else {
       localStorage.setItem( "ourToken", null )
-      console.log( "entrou else" )
-      location.assign( '/login' )
+      // console.log( "entrou else" )
+      location.assign( '/' )
     }
   } );
 
 }
 
 function logout() {
-  fetch( 'http://localhost:3030/logout', {
+  fetch( 'http://localhost:3000/logout', {
 
   } ).then( result => {
 
     localStorage.setItem( "ourToken", null )
-    console.log( "entrou else" )
-    location.assign( '/login' )
+    // console.log( "entrou else" )
+    location.assign( '/' )
 
   } );
 
