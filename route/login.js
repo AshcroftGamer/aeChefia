@@ -31,7 +31,7 @@ route
             })
 
             .catch(err => {
-                res.redirect('/login')
+                res.redirect('/')
             })
 
 

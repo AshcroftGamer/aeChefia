@@ -1,8 +1,8 @@
 
 const mysql = require( '../mysql' );
+// const path = require('path');
 
-
-exports.postEstabelecimento = async ( req, res ) => {
+exports.postEstab = async ( req, res ) => {
     try {
 
 
@@ -11,7 +11,8 @@ exports.postEstabelecimento = async ( req, res ) => {
         const result = await mysql.execute( query,
             [
                 req.body.nome_estabelecimento,
-                req.file.path.replace("public", " "),
+                // req.file.path.replace("public", " "),
+                req.body.logo,
                 req.body.cep,
                 req.body.endereco,
                 req.body.mesa,
@@ -23,19 +24,18 @@ exports.postEstabelecimento = async ( req, res ) => {
             estabelecimentoCriado: {
                 id_estabelecimento: result.insertId,
                 nome: req.body.nome,
-                logo: req.file.path,
+                // logo: req.file.path,
+                logo: req.body.logo,
                 cep: req.body.cep,
                 endereco: req.body.endereco,
                 mesa: req.body.mesa,
-                proprietario: req.body.id_proprietario,
-                request: {
-                    tipo: 'POST',
-                    descricao: 'Adiciona Um Estabelecimento',
-                }
+                proprietario: req.body.id_proprietario
+                
             }
         }
 
         return res.status( 201 ).send( response );
+        
     }
     catch ( error ) {
         console.log(error)

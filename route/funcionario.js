@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/', controller.postFuncionario);
+router.post('/cadastro', controller.postFuncionario);
+
 
 
 module.exports = router;

@@ -1,8 +1,14 @@
-const router = require('express').Router();
+const route = require('express').Router();
 
-const controle = require('../controllers/propcontrol');
+const controller = require('../controllers/itens_do_cardapio');
 
 
-router.post('/', controle.postItens);
+route.get('/todos', controller.getTodos);
 
-module.exports = router;
+route.post('/cadastro', controller.postItens);
+
+route.get('/verifica', controller.verifica);
+
+route.delete('/remover', controller.deleteItens);
+
+module.exports = route;

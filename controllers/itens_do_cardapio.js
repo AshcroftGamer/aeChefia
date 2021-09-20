@@ -1,34 +1,34 @@
 
 const mysql = require( '../mysql' );
-const bcrypt = require( 'bcrypt' );
 
 
-exports.postItens_cardapio = async ( req, res ) => {
+exports.postItens = async ( req, res ) => {
     try {
-        var query = 'INSERT INTO itens_do_cardapio';
-        var result = await mysql.execute( query, [ req.body.email ] );
-        if ( result.length > 0 ) {
-            return res.status( 409 ).send( { Mensagem: 'Usuario já cadastrado' } )
-        }
-        const hash = await bcrypt.hashSync( req.body.senha, 10 );
 
-        query = 'INSERT INTO itens_do_cardapio (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?)';
+        const query = `INSERT INTO itens_do_cardapio(id_cardapio, id_item_tipo, id_bebida_tipo, id_marcas, id_medidas, nome_comida, preco) VALUES (?, ?, ?, ?, ?, ?, ?);`;
         const results = await mysql.execute( query,
             [
-                req.body.nome,
-                req.body.email,
-                req.body.cpf,
-                req.body.telefone,
-                hash
+                req.body.id_cardapio,
+                req.body.id_item_tipo,
+                req.body.id_bebida_tipo,
+                req.body.id_marcas,
+                req.body.medidas,
+                req.body.nome_comida,
+                req.body.preco
+
             ] )
         const response = {
-            mensagem: 'itens_do_cardapio criado com sucesso',
-            usuarioCriado: {
-                id: results.insertId,
-                nome: req.body.nome,
-                email: req.body.email,
-                cpf: req.body.cpf,
-                telefone: req.body.telefone
+
+            Quantidade: results.length,
+            Mensagem: 'Item Adicionado com sucesso!',
+            itemCriado: {
+                cardapio: req.body.id_cardapio,
+                item_tipo: req.body.id_item_tipo,
+                bebida_tipo: req.body.id_bebida_tipo,
+                marcas: req.body.id_marcas,
+                medida: req.body.medidas,
+                comida: req.body.nome_comida,
+                preco: req.body.preco
             }
         }
 
@@ -40,71 +40,39 @@ exports.postItens_cardapio = async ( req, res ) => {
 
 }
 
-// exports.postitens_do_cardapio = async ( req, res ) => {
+// exports.patchItens = async ( req, res ) => {
 //     try {
-
-
-
-//         const query = 'INSERT INTO itens_do_cardapio (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?);'
-//         const result = await mysql.execute( query,
+//         const query = 'UPDATE itens_do_cardapio SET nome = ? WHERE email = ?;'
+//         await mysql.execute( query,
 //             [
 //                 req.body.nome,
-//                 req.body.email,
-//                 req.body.cpf,
-//                 req.body.telefone,
-//                 req.body.senha
+//                 req.body.email
 //             ] );
-
 //         const response = {
-//             mensagem: 'itens_do_cardapio criado com sucesso',
-//             usuarioCriado: {
-//                 id: result.insertId,
-//                 nome: req.body.nome,
-//                 email: req.body.email,
-//                 cpf: req.body.cpf,
-//                 telefone: req.body.telefone
+//             mensagem: 'itens_do_cardapio atualizado com sucesso',
+//             usuarioAtualizado: {
+//                 nome: req.body.nome
 //             }
 //         }
 
 //         return res.status( 201 ).send( response );
 //     }
 //     catch ( error ) {
-//         return res.status( 500 ).send( { err: error } )
+//         return res.status( 500 ).send( error )
 //     }
 
 // }
 
-exports.patchItens_cardapio = async ( req, res ) => {
-    try {
-        const query = 'UPDATE itens_do_cardapio SET nome = ? WHERE email = ?;'
-        await mysql.execute( query,
-            [
-                req.body.nome,
-                req.body.email
-            ] );
-        const response = {
-            mensagem: 'itens_do_cardapio atualizado com sucesso',
-            usuarioAtualizado: {
-                nome: req.body.nome
-            }
-        }
-
-        return res.status( 201 ).send( response );
-    }
-    catch ( error ) {
-        return res.status( 500 ).send( error )
-    }
-
-}
-
-exports.deleteItens_cardapio = async ( req, res ) => {
+exports.deleteItens = async ( req, res ) => {
     try {
 
 
         const query = 'DELETE from itens_do_cardapio WHERE id_itens_do_cardapio = ?'
+
         await mysql.execute( query, [ req.body.id_itens_do_cardapio ] );
+
         const response = {
-            mensagem: 'itens_do_cardapio removido com sucesso'
+            mensagem: 'Item removido com sucesso'
         }
 
         return res.status( 200 ).send( response );
@@ -123,15 +91,19 @@ exports.getTodos = async ( req, res ) => {
                 return res.status( 500 ).send( { Erro: error } )
             }
             const response = {
-                quantidade: results.length,
+                // quantidade: results.length,
                 itens_do_cardapios: results.map( prod => {
                     return {
                         id_itens_do_cardapio: prod.id_itens_do_cardapio,
-                        nome: prod.nome,
-                        email: prod.email,
-                        cpf: prod.cpf,
-                        telefone: prod.telefone,
-                        senha: prod.senha
+                        cardapio: prod.id_cardapio,
+                        item_tipo: prod.id_item_tipo,
+                        bebida_tipo: prod.id_bebida_tipo,
+                        marcas: prod.id_marcas,
+                        medida: prod.medidas,
+                        comida: prod.nome_comida,
+                        preco: prod.preco
+
+
                     }
 
                 } )
@@ -147,25 +119,16 @@ exports.getTodos = async ( req, res ) => {
 
 exports.verifica = async ( req, res ) => {
     try {
-        const query = 'SELECT * FROM itens_do_cardapio WHERE email = ?'
+        const query = 'SELECT * FROM itens_do_cardapio WHERE id_cardapio = ?'
 
-        const result = await mysql.execute( query, [ req.body.email ] );
-        if ( result.length == 1 ) {
-            const response = {
-                Mensagem: 'Usuario já cadastrado'
-            }
-
-            return res.status( 200 ).send( response );
-
+        const result = await mysql.execute( query, [ req.body.id_cardapio ] );
+        const response = {
+            
+            Cardapio: 'Itens cadastrado com este cardapio',
+            Quantidade: result.length
         }
-        else {
-            const response = {
-                Mensagem: 'Usuario não cadastrado'
-            }
 
-            return res.status( 404 ).send( response );
-
-        }
+        return res.status( 200 ).send( response );
 
     }
     catch ( error ) {

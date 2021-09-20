@@ -29,9 +29,19 @@ const rotaFuncionario = require( './route/funcionario' )
 const rotaLogout = require( './route/logout' )
 const rotaLogin = require( './route/login' )
 const rotaEstabelecimento = require( './route/estabelecimento' );
+const rotaUsuarios = require( './route/usuarios' )
+const rotaItens = require( './route/itens_cardapio' );
+const rotaBebidaTipo = require('./route/bebida_tipo');
+const rotaBebidaMarca = require('./route/bebida_marca');
+const rotaMedidas = require('./route/medida');
 
 
-app.use( '/estabelecimento', rotaEstabelecimento )
+app.use('/medida', rotaMedidas);
+app.use('/bebidamarca', rotaBebidaMarca);
+app.use('/bebidatipo', rotaBebidaTipo);
+app.use( '/item', rotaItens );
+app.use( '/usuarios', rotaUsuarios );
+app.use( '/estabelecimento', rotaEstabelecimento );
 app.use( '/login', rotaLogin );
 app.use( '/logout', rotaLogout );
 app.use( '/cadastro', rotaCadastro );
