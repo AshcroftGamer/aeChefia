@@ -256,11 +256,7 @@ function Modal() {
 
 
   }
-  // window.onclick = function (event) {
-  //     if (event.target == modal) {
-  //         modal.style.display = "none";
-  //     }
-  // }
+
 }
 /** 
  * *  Cadastro de Estabelecimento
@@ -549,6 +545,10 @@ class Estabelecimento {
     return true;
 
   }
+<<<<<<< HEAD
+  
+  return true;
+=======
 }
 var estabelecimento = new Estabelecimento
 
@@ -586,6 +586,7 @@ function jwt_login() {
     location.assign( '/home' )
   } );
 
+>>>>>>> 9b32b82a416035364e2f120f7237e0829a52276e
 
 }
 
