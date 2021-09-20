@@ -256,11 +256,7 @@ function Modal() {
 
 
   }
-  // window.onclick = function (event) {
-  //     if (event.target == modal) {
-  //         modal.style.display = "none";
-  //     }
-  // }
+
 }
 /** 
  * *  Cadastro de Estabelecimento
@@ -546,6 +542,7 @@ if (estabelecimento.endereco == "") {
       alert(msg);
       return false
   }
+  
   return true;
 
 }
