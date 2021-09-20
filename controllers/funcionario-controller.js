@@ -13,7 +13,7 @@ exports.postFuncionario = async ( req, res ) => {
                 req.body.login,
                 hash,
                 req.body.id_estabelecimento
-            ] )
+            ] );
 
         const response = {
             mensagem: 'Funcionario inserido com sucesso',
