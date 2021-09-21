@@ -1,7 +1,7 @@
 const express = require( 'express' );
 const app = express();
 const morgan = require( 'morgan' );
-const cookieParser = require( 'cookie-parser' );
+const cookieParser = require('cookie-parser');
 const bodyparser = require( 'body-parser' );
 
 global.__basedir = __dirname;
@@ -10,7 +10,7 @@ app.use( bodyparser.urlencoded( { extended: false } ) );
 app.use( bodyparser.json() );
 app.use( express.json() );
 app.use( cookieParser() );
-app.use( morgan( 'dev' ) );
+app.use(morgan('dev'))
 
 
 app.use( express.static( __dirname + '/public' ) );
@@ -62,6 +62,7 @@ app.get( '/', ( req, res ) => {
 app.get( '/teste', ( req, res ) => {
     res.sendFile( __dirname + '/public/pages/links.html' );
 } )
+
 
 /*
 //! TELA DE ERROR

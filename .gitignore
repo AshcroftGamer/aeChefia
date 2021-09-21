@@ -8,10 +8,12 @@ merda.sql
 
 rotaExemplo.js
 
+.env
+
 mysql.js
+
+ok
 
 nodemon.json
 
-.env
-
-localsession.sql
+app.js

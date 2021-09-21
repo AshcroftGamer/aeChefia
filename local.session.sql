@@ -1,1 +1,0 @@
-describe pedidos_comanda;

@@ -5,7 +5,7 @@ exports.postFuncionario = async ( req, res ) => {
     try {
         const hash = await bcrypt.hashSync( req.body.senha, 10 );
 
-        const query = 'INSERT INTO funcionario (nome, email, login, senha, id_estabelecimento ) VALUES (?, ?, ?, ?, ?)';
+        const query = 'INSERT INTO funcionario (nome, email, login, senha, id_estabelecimento ) VALUES (?, ?, ?, ?, ?);';
         await mysql.execute( query,
             [
                 req.body.nome,
@@ -25,11 +25,8 @@ exports.postFuncionario = async ( req, res ) => {
             }
         }
         return res.status( 201 ).send( response );
-
     } catch ( error ) {
-
         return res.status( 500 ).send( { error: error } );
-
     }
 
 };

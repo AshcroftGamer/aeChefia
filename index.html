@@ -18,7 +18,6 @@
     <title>Aeh Chefia</title>
 </head>
 
-<body>
 <body onload="btngoogle()">
     <div class="splash">
         <img class="bounceIn" src="/img/logo-splash.png" alt="">
@@ -42,13 +41,11 @@
     <h1 style="font-weight: normal;" class="divcenter">ou</h1>
     <div class="inputSpacing"></div>
     <div class="inputs">
-        <input class="inputLine" placeholder="Login" type="text" id="email"> <br> 
-        <!-- login -->
+        <input class="inputLine" placeholder="Login" type="text" id="email"> <br>
         <div class="inputSpacing"></div>
         <div style="width: 87%;" class="input-icon" style="text-align: center;">
 
             <input style="width: 100%;" class="Post" placeholder="Senha" id="senha" type="password">
-            <!-- senha -->
             <button onclick="ViewSenha()" class="SendIndex"><img id="olho" style="width: 50%;" src="/img/private.png"
                     alt=""></button>
         </div>
@@ -58,8 +55,8 @@
     <div class="divcenter">
         <button onclick="jwt_login()" class="btn redBtn redBtn-cad">Entrar </button><br>
         <div class="inputSpacing"></div>
-        <a class="linkIndex" href="/pages/cadastro.html"><button style="background-color: white;" class="btn borderBtn">Criar Conta</button></a>
-        
+        <button style="background-color: white;" class="btn borderBtn" onclick=""><a class="linkIndex" href="/pages/cadastro.html">Criar
+                conta</a></button>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
         <span id="user-name"></span>
         <span id="user-email"></span>
