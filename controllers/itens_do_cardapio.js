@@ -40,28 +40,28 @@ exports.postItens = async ( req, res ) => {
 
 }
 
-// exports.patchItens = async ( req, res ) => {
-//     try {
-//         const query = 'UPDATE itens_do_cardapio SET nome = ? WHERE email = ?;'
-//         await mysql.execute( query,
-//             [
-//                 req.body.nome,
-//                 req.body.email
-//             ] );
-//         const response = {
-//             mensagem: 'itens_do_cardapio atualizado com sucesso',
-//             usuarioAtualizado: {
-//                 nome: req.body.nome
-//             }
-//         }
+exports.patchItens = async ( req, res ) => {
+    try {
+        const query = 'UPDATE itens_do_cardapio SET preco = ? WHERE id_itens_do_cardapio = ?;'
+        await mysql.execute( query,
+            [
+                req.body.preco,
+                req.body.id_itens_do_cardapio
+            ] );
+        const response = {
+            mensagem: 'itens_do_cardapio atualizado com sucesso',
+            usuarioAtualizado: {
+                preco: req.body.preco
+            }
+        }
 
-//         return res.status( 201 ).send( response );
-//     }
-//     catch ( error ) {
-//         return res.status( 500 ).send( error )
-//     }
+        return res.status( 201 ).send( response );
+    }
+    catch ( error ) {
+        return res.status( 500 ).send( error )
+    }
 
-// }
+}
 
 exports.deleteItens = async ( req, res ) => {
     try {
@@ -119,13 +119,25 @@ exports.getTodos = async ( req, res ) => {
 
 exports.verifica = async ( req, res ) => {
     try {
-        const query = 'SELECT * FROM itens_do_cardapio WHERE id_cardapio = ?'
+        const query = 'SELECT * FROM itens_do_cardapio WHERE preco = ?'
 
-        const result = await mysql.execute( query, [ req.body.id_cardapio ] );
+        const result = await mysql.execute( query, [ req.body.preco ] );
         const response = {
-            
-            Cardapio: 'Itens cadastrado com este cardapio',
-            Quantidade: result.length
+
+            Cardapio: 'Itens cadastrado com esta faixa de preco',
+            Quantidade: result.length,
+            itemCardapio: result.map( prod => {
+                return {
+                    id_itens_do_cardapio: prod.id_itens_do_cardapio,
+                    cardapio: prod.id_cardapio,
+                    item_tipo: prod.id_item_tipo,
+                    bebida_tipo: prod.id_bebida_tipo,
+                    marcas: prod.id_marcas,
+                    medida: prod.medidas,
+                    comida: prod.nome_comida,
+                    preco: prod.preco
+                }
+            } )
         }
 
         return res.status( 200 ).send( response );

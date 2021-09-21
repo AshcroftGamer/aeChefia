@@ -1,1 +1,1 @@
-SELECT * FROM proprietario;
+describe pedidos_comanda;

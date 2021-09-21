@@ -1,7 +1,7 @@
 const express = require( 'express' );
 const app = express();
 const morgan = require( 'morgan' );
-const cookieParser = require('cookie-parser');
+const cookieParser = require( 'cookie-parser' );
 const bodyparser = require( 'body-parser' );
 
 global.__basedir = __dirname;
@@ -31,14 +31,18 @@ const rotaLogin = require( './route/login' )
 const rotaEstabelecimento = require( './route/estabelecimento' );
 const rotaUsuarios = require( './route/usuarios' )
 const rotaItens = require( './route/itens_cardapio' );
-const rotaBebidaTipo = require('./route/bebida_tipo');
-const rotaBebidaMarca = require('./route/bebida_marca');
-const rotaMedidas = require('./route/medida');
+const rotaBebidaTipo = require( './route/bebida_tipo' );
+const rotaBebidaMarca = require( './route/bebida_marca' );
+const rotaMedidas = require( './route/medida' );
+const rotaComanda = require( './route/comanda' );
+const rotaPedidoComanda = require( './route/pedido_comanda' );
 
 
-app.use('/medida', rotaMedidas);
-app.use('/bebidamarca', rotaBebidaMarca);
-app.use('/bebidatipo', rotaBebidaTipo);
+app.use( '/pedidocomanda', rotaPedidoComanda );
+app.use( '/comanda', rotaComanda );
+app.use( '/medida', rotaMedidas );
+app.use( '/bebidamarca', rotaBebidaMarca );
+app.use( '/bebidatipo', rotaBebidaTipo );
 app.use( '/item', rotaItens );
 app.use( '/usuarios', rotaUsuarios );
 app.use( '/estabelecimento', rotaEstabelecimento );

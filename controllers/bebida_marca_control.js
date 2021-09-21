@@ -3,13 +3,13 @@ const mysql = require( '../mysql' );
 
 exports.getAll = async ( req, res ) => {
     try {
-        await mysql.execute( 'SELECT * FROM marcas;', ( error, result ) => {
+        await mysql.execute( 'SELECT * FROM bebida_marcas;', ( error, result ) => {
             if ( error ) {
                 return res.status( 500 ).send( { Erro: error } )
             }
             const response = {
                 quantidade: result.length,
-                bebita_marca:  result.map( prod => {
+                bebida_marca:  result.map( prod => {
                     return{
                         nome: prod.nome_marca
                     }
