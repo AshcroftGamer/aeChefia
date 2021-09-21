@@ -11,9 +11,8 @@ exports.postFuncionario = async ( req, res ) => {
                 req.body.nome,
                 req.body.email,
                 req.body.login,
-                hash,
-                req.body.id_estabelecimento
-            ] )
+                hash
+            ] );
 
         const response = {
             mensagem: 'Funcionario inserido com sucesso',
@@ -25,11 +24,8 @@ exports.postFuncionario = async ( req, res ) => {
             }
         }
         return res.status( 201 ).send( response );
-
     } catch ( error ) {
-
         return res.status( 500 ).send( { error: error } );
-
     }
 
 };
