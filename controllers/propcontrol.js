@@ -37,7 +37,7 @@ exports.postProprietario = async ( req, res ) => {
     }
     catch ( error ) {
         console.log(error)
-        return res.status( 500 ).send( { err: error } )
+        return res.status( 500 ).send( { Erro: error } )
     }
 
 }

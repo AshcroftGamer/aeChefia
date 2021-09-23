@@ -1,4 +1,3 @@
-
 const route = require('express').Router();
 const mysql = require('../mysql').pool;
 const bcrypt = require('bcrypt');
@@ -78,6 +77,23 @@ route.post('/login', (req, res, next) => {
     });
 })
 
+route.get('/:email', (req, res, next) => {
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }) }
+        conn.query(
+            'SELECT * FROM proprietario where email = ?;', [req.params.email],
+            (error, result, field) => {
+                conn.release();
+                if (error) { return res.status(500).send({ error: error }) }
+                const response = {
+                    tamanho: result.length,
+                    email: result.email
+                }
+                return res.status(200).send(response)
+            }
+        )
+    });
+})
 //não utilizado essa rota ainda
 // 
 // route.post('/login_adm', (req, res, next) => {

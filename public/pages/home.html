@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
    <title>home</title>
 </head>
-<body>
+<body onload="jwt_auth_load()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -24,7 +24,9 @@
               <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
               <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
               <a href="#"><li><a href="/cardapio">Cardapio</a></li></a>
-              <a href="#"><li><a href="#">Sair</a></li></a>
+              <a href="#"><li><a onclick="logout()">Sair</a></li></a>
+              <a href="#"><li><a onclick="listarEstab()">lista</a></li></a>
+
               
             </ul>
           </div>

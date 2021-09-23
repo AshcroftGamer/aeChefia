@@ -30,15 +30,15 @@ exports.postEstab = async ( req, res ) => {
                 endereco: req.body.endereco,
                 mesa: req.body.mesa,
                 proprietario: req.body.id_proprietario
-                
+
             }
         }
 
         return res.status( 201 ).send( response );
-        
+
     }
     catch ( error ) {
-        console.log(error)
+        console.log( error )
         return res.status( 500 ).send( { err: error } )
     }
 
@@ -117,6 +117,41 @@ exports.getEstabelecimento = async ( req, res ) => {
 
 }
 
+exports.getEstabProp = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM estabelecimento
+        INNER JOIN proprietario
+        ON estabelecimento.id_proprietario = proprietario.id_proprietario
+        WHERE proprietario.email = ?;`
+        
+        const result = await mysql.execute( query,
+            [
+                req.params.email
+            ] );
+        console.log( result)
+
+        const response = {
+            quantidade: result.length,
+            Estabelecimento: result.map( prod => {
+                return {
+                    id_estalecimento: prod.id_estabelecimento,
+                    nome: prod.nome_estabelecimento,
+                    logo: prod.logo,
+                    cep: prod.cep,
+                    endereco: prod.endereco,
+                    mesa: prod.mesa,
+                    id_proprietario: prod.id_proprietario
+                }
+
+            } )
+        }
+
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+}
 exports.verifica = async ( req, res ) => {
     try {
         const query = 'SELECT * FROM estabelecimento WHERE id_proprietario = ?'

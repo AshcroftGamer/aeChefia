@@ -36,8 +36,10 @@ const rotaBebidaMarca = require( './route/bebida_marca' );
 const rotaMedidas = require( './route/medida' );
 const rotaComanda = require( './route/comanda' );
 const rotaPedidoComanda = require( './route/pedido_comanda' );
+const rotaDashboard = require('./route/dashboard');
 
 
+app.use('/dashboard', rotaDashboard);
 app.use( '/pedidocomanda', rotaPedidoComanda );
 app.use( '/comanda', rotaComanda );
 app.use( '/medida', rotaMedidas );
