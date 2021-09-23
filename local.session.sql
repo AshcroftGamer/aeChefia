@@ -1,1 +1,1 @@
-select * from  estabelecimento;
+select * from cardapio;
