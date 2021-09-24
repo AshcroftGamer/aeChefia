@@ -12,7 +12,7 @@
   <title>home</title>
 </head>
 
-<body onload="estadoSpanHome(); jwt_auth_load(); alertEstab();">
+<body onload="estadoSpanHome(); jwt_auth_load(); proprietario.buscarProprietario();">
 
 
   <header class="headerMenor" onload="jwt_auth_load()">
@@ -46,7 +46,7 @@
     </nav>
   </header>
   <div class="inputSpacing"></div>
-  <span class="spanHome">Olá Rai!</span>
+  <span class="spanHome" id="nomespan"></span>
   
   <div class=" divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 
@@ -54,10 +54,7 @@
       <!-- <button onclick="testeDiv()">teste</button> -->
       <input onchange="selecionar_estabelecimento()" id="estab_input" type="text"
         placeholder="Selecione o estabelecimento" class="dropdown" name="city" list="cityname">
-      <datalist id="cityname">
-        <option value="Teste1">
-        <option value="Bar Do Birão">
-        <option value="teste2">
+      <datalist class="testando" id="cityname">
       </datalist>
       <button class="btn borderBtn inverseBtn">Abrir caixa</button>
       <div class="footer footerAdd">
