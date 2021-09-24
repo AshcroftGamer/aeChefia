@@ -293,9 +293,7 @@ function Modal() {
 let id = 0;
 
 //Retorna o próximo ID válido para a DIV que será criada
-function getNextId() {
-  return ++id;
-}
+
 
 function criarDiv() {
   //Pego o ID
@@ -457,14 +455,9 @@ function selecionar_estabelecimento() {
   console.log(a)
 
   a.style.color = '#666666'
-
-
-
-
-
-
   this.estadoQuantidade1();
   this.estadoQuantidade2();
+  this.estabelecimento.escolherEstabelecimento()
 }
 
 class Estabelecimento {
@@ -488,33 +481,26 @@ class Estabelecimento {
   listaEstabelecimento() {
 
     fetch('http://localhost:3000/estabelecimento/listar/' + localStorage.getItem("id_proprietario"), {
-      
+
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       }
     }).then(result => {
       return result.json()
     }).then(data => {
-
-      console.log(data)
-      console.log("______")
-      console.log(data.estabelecimento)
-      console.log(this.arrayEstabelecimento)
       data.estabelecimento.forEach(estabe => {
         this.arrayEstabelecimento.push(estabe);
-      });
+      })
       for (let i = 0; i < this.arrayEstabelecimento.length; i++) {
 
         if (this.arrayEstabelecimento[i].id_proprietario == localStorage.getItem('id_proprietario')) {
           let estabelecimento = document.createElement('div')
-          estabelecimento.innerHTML = `<option value="${this.arrayEstabelecimento[i].nome_estabelecimento}" </option>`
+          estabelecimento.innerHTML = `<option value="${this.arrayEstabelecimento[i].nome_estabelecimento}" onselect="estabelecimento.escolherEstabelecimento()"</option>`
           document.getElementsByClassName("testando")[0].appendChild(estabelecimento)
         }
-
       }
     })
   }
-  //
   async adicionar(estabelecimento) {
 
     const formData = new FormData();
@@ -548,7 +534,6 @@ class Estabelecimento {
 
     });
   }
-
   lerDados() {
     let estabelecimento = {}
 
@@ -568,6 +553,68 @@ class Estabelecimento {
     return estabelecimento;
   }
 
+  verificar() {
+
+    fetch('http://localhost:3000/estabelecimento/listar/' + localStorage.getItem("id_proprietario"), {
+
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }).then(result => {
+      return result.json()
+    }).then(data => {
+      if (data.estabelecimento.length == 0) {
+      } else {
+        window.location.href = "/dashboard"
+      }
+    })
+  }
+  escolherEstabelecimento() {
+    alert("olaa")
+    console.log()
+  }
+  criarMesas() {
+    fetch('http://localhost:3000/estabelecimento/listar/' + localStorage.getItem("id_proprietario"), {
+
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }).then(result => {
+      return result.json()
+    }).then(data => {
+      for (let i = 0; i < data.estabelecimento[0].mesa; i++) {
+        let id = [i];
+
+        let divElement = document.createElement("div");
+        var conteudoNovo = document.createTextNode(id);
+        divElement.appendChild(conteudoNovo);
+
+        let divMae = document.getElementById("mesas");
+
+        divElement.setAttribute('id', 'box' + id.toString());
+
+        divElement.style.width = "18%";
+        divElement.style.height = "66px";
+        divElement.style.backgroundColor = '#666666';
+        divElement.style.display = '';
+        divElement.style.opacity = '0.1';
+        divElement.style.marginLeft = '5%';
+        divElement.style.margin = '10px'
+        divElement.classList.add("bounceIn")
+
+        divElement.style.paddingTop = '23px'
+        divElement.style.textAlign = 'center'
+
+        divMae.appendChild(divElement);
+
+        if (id >= 12) {
+          let footer = document.getElementById('footer');
+          footer.style.position = 'unset'
+        }
+
+      }
+    })
+  }
   validaCampos(estabelecimento) {
     let msg = '';
 
@@ -776,13 +823,13 @@ class Proprietario {
   }
   async buscarProprietario() {
 
-    fetch('http://localhost:3000/proprietario/'+ localStorage.getItem('id_proprietario'))
-    .then(result => {
-      return result.json()
-    }).then(data => {
-      document.getElementById('nomespan').innerHTML = `Olá ${data.proprietario.nome}!`
-      estabelecimento.listaEstabelecimento();
-    })
+    fetch('http://localhost:3000/proprietario/' + localStorage.getItem('id_proprietario'))
+      .then(result => {
+        return result.json()
+      }).then(data => {
+        document.getElementById('nomespan').innerHTML = `Olá ${data.proprietario.nome}!`
+        estabelecimento.listaEstabelecimento();
+      })
   }
 }
 
