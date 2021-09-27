@@ -1,14 +1,22 @@
-const router = require('express').Router();
+const route = require('express').Router();
 
 const controller = require('../controllers/funcionario-controller');
 
-router.get('/', (req, res) => {
+route.get('/', (req, res) => {
     res.sendFile(__basedir + '/public/pages/funcionario.html');
 })
 
 
-router.post('/cadastro', controller.postFuncionario);
+route.post('/cadastro', controller.postFuncionario);
 
+route.get('/todos', controller.getFunc);
 
+route.get('/verifica', controller.verifica);
 
-module.exports = router;
+route.get('/quant', controller.getCount);
+
+route.delete('/remover', controller.deleteFunc);
+
+route.patch('/atualizar', controller.patchFunc);
+
+module.exports = route;

@@ -8,6 +8,7 @@ merda.sql
 
 rotaExemplo.js
 
+<<<<<<< HEAD
 mysql.js
 
 nodemon.json
@@ -17,3 +18,14 @@ nodemon.json
 localsession.sql
 
 app.js
+=======
+.env
+
+mysql.js
+
+ok
+
+nodemon.json
+
+app.js
+>>>>>>> 71689140de18d7411ef766267f253c5bc93cfc87

@@ -16,7 +16,7 @@ exports.postCardapio = async ( req, res ) => {
 
         const response = {
             mensagem: 'Cardapio inserido com sucesso',
-           
+
         }
 
         return res.status( 201 ).send( response );
@@ -36,10 +36,10 @@ exports.patchCardapio = async ( req, res ) => {
                 req.body.id_cardapio,
                 req.body.id_estabelecimento
             ] );
-            
+
         const response = {
             mensagem: 'cardapio atualizado com sucesso',
-            
+
         }
 
         return res.status( 201 ).send( response );
@@ -58,7 +58,7 @@ exports.deleteCardapio = async ( req, res ) => {
 
         const response = {
             mensagem: 'cardapio removido com sucesso',
-            
+
         }
 
         return res.status( 201 ).send( response );
@@ -91,6 +91,38 @@ exports.getCardapio = async ( req, res ) => {
     }
     catch ( error ) {
 
+    }
+
+}
+
+exports.verifica = async ( req, res ) => {
+    try {
+        const query = 'SELECT * FROM cardapio WHERE id_estabelecimento = ?;';
+        let id = req.body.id;
+        const result = await mysql.execute( query, [ id ] );
+        if ( result.length > 0 ) {
+            
+            const response = {
+                id_cardapio: result[ 0 ].id_cardapio,
+                id_estabelecimento: result[ 0 ].id_estabelecimento
+            }
+    
+
+            return res.status( 200 ).send( response );
+
+        }
+        else {
+            const response = {
+                Mensagem: 'Cardapio não encontrado'
+            }
+
+            return res.status( 404 ).send( response );
+
+        }
+
+    }
+    catch ( error ) {
+        return res.status( 500 ).send( { erro: error } )
     }
 
 }

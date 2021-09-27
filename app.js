@@ -1,6 +1,6 @@
 const express = require( 'express' );
 const app = express();
-const morgan = require( 'morgan' );
+//const morgan = require( 'morgan' );
 const cookieParser = require('cookie-parser');
 const bodyparser = require( 'body-parser' );
 
@@ -10,7 +10,7 @@ app.use( bodyparser.urlencoded( { extended: false } ) );
 app.use( bodyparser.json() );
 app.use( express.json() );
 app.use( cookieParser() );
-app.use( morgan( 'dev' ) );
+//app.use(morgan('dev'))
 
 
 app.use( express.static( __dirname + '/public' ) );
@@ -31,14 +31,20 @@ const rotaLogin = require( './route/login' )
 const rotaEstabelecimento = require( './route/estabelecimento' );
 const rotaUsuarios = require( './route/usuarios' )
 const rotaItens = require( './route/itens_cardapio' );
-const rotaBebidaTipo = require('./route/bebida_tipo');
-const rotaBebidaMarca = require('./route/bebida_marca');
-const rotaMedidas = require('./route/medida');
+const rotaBebidaTipo = require( './route/bebida_tipo' );
+const rotaBebidaMarca = require( './route/bebida_marca' );
+const rotaMedidas = require( './route/medida' );
+const rotaComanda = require( './route/comanda' );
+const rotaPedidoComanda = require( './route/pedido_comanda' );
+const rotaDashboard = require('./route/dashboard');
 
 
-app.use('/medida', rotaMedidas);
-app.use('/bebidamarca', rotaBebidaMarca);
-app.use('/bebidatipo', rotaBebidaTipo);
+app.use('/dashboard', rotaDashboard);
+app.use( '/pedidocomanda', rotaPedidoComanda );
+app.use( '/comanda', rotaComanda );
+app.use( '/medida', rotaMedidas );
+app.use( '/bebidamarca', rotaBebidaMarca );
+app.use( '/bebidatipo', rotaBebidaTipo );
 app.use( '/item', rotaItens );
 app.use( '/usuarios', rotaUsuarios );
 app.use( '/estabelecimento', rotaEstabelecimento );
@@ -58,6 +64,7 @@ app.get( '/', ( req, res ) => {
 app.get( '/teste', ( req, res ) => {
     res.sendFile( __dirname + '/public/pages/links.html' );
 } )
+
 
 /*
 //! TELA DE ERROR

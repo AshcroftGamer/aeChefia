@@ -8,35 +8,47 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet">
+    rel="stylesheet">
   <title>home</title>
 </head>
 
-<body onload="estadoSpanHome()">
-  <header class="headerMenor">
+<body onload="estadoSpanHome(); jwt_auth_load(); proprietario.buscarProprietario();">
+
+
+  <header class="headerMenor" onload="jwt_auth_load()">
     <img src="../img/logo.png" alt="">
     <nav role="navigation">
       <div id="menuToggle">
 
-        <input onclick="Menu()" id="menu-js" type="checkbox" />            
+        <input onclick="Menu()" id="menu-js" type="checkbox" />
         <span></span>
         <span></span>
         <span></span>
         <ul id="menu">
-          <a href="#"><li><a href="funcionario.html">Funcionario</a></li></a>
-          <a href="#"><li><a href="/">Login</a></li></a>
-          <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
-          <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
-          <a href="#"><li><a href="/cardapio">Cardapio</a></li></a>
-          
+          <a href="#">
+            <li><a href="funcionario.html">Funcionario</a></li>
+          </a>
+          <a href="#">
+            <li><a href="/">Login</a></li>
+          </a>
+          <a href="#">
+            <li> <a href="/cadastro">Cadastro</a></li>
+          </a>
+          <a href="#">
+            <li> <a href="/mesa">Mesas</a> </li>
+          </a>
+          <a href="#">
+            <li><a href="/cardapio">Cardapio</a></li>
+          </a>
+
         </ul>
       </div>
     </nav>
-</header>
+  </header>
   <div class="inputSpacing"></div>
-  <span class="spanHome">Olá Rai!</span>
-  <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
+  <span class="spanHome" id="nomespan"></span>
   
+<<<<<<< HEAD
   <div class="vermelhao vermelhaoCadastrado">
     <!-- <button onclick="testeDiv()">teste</button> -->
     <!-- <input >
@@ -56,26 +68,40 @@
     <div class="footer footerAdd">
     <h2 id="spanFunction" style="display: none;"  class="h2-Add">Você ainda não possui cardápios <br> 
       e funcionários cadastrados:</h1>
+=======
+  <div class=" divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
+>>>>>>> 71689140de18d7411ef766267f253c5bc93cfc87
 
-    <div class="card">
-      <div class="card-div">
-        <span class="spanAdd">Funcionários</span>
-        <a href="../pages/funcionario.html"><button class="btnAdd">+</button></a>
-        <input id="quantidade1" class="quantidadeAdd" type="text" value="" disabled />
-        <!-- <div id="quantidade1" class="quantidadeAdd">2</div> -->
-        
+    <div class="vermelhao vermelhaoCadastrado">
+      <!-- <button onclick="testeDiv()">teste</button> -->
+      <input onchange="selecionar_estabelecimento()" id="estab_input" type="text"
+        placeholder="Selecione o estabelecimento" class="dropdown" name="city" list="cityname">
+      <datalist class="testando" id="cityname">
+      </datalist>
+      <button class="btn borderBtn inverseBtn">Abrir caixa</button>
+      <div class="footer footerAdd">
+        <h2 id="spanFunction" style="display: none;" class="h2-Add">Você ainda não possui cardápios <br>
+          e funcionários cadastrados:</h1>
+
+          <div class="card">
+            <div class="card-div">
+              <span class="spanAdd">Funcionários</span>
+              <a href="../pages/funcionario.html"><button class="btnAdd">+</button></a>
+              <input id="quantidade1" class="quantidadeAdd" type="text" value="" disabled />
+              <!-- <div id="quantidade1" class="quantidadeAdd">2</div> -->
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-div">
+              <span class="spanAdd">Cardápios</span>
+              <a href="../pages/cardapio-zerado.html"> <button class="btnAdd">+</button></a>
+              <input id="quantidade2" class="quantidadeAdd" type="text" value="" disabled />
+              <!-- <div id="quantidade2" class="quantidadeAdd">4</div> -->
+            </div>
+          </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-div">
-        <span class="spanAdd">Cardápios</span>
-       <a href="../pages/cardapio-zerado.html"> <button class="btnAdd">+</button></a>
-        <input id="quantidade2" class="quantidadeAdd" type="text" value="" disabled />
-        <!-- <div id="quantidade2" class="quantidadeAdd">4</div> -->
-      </div>
-    </div>
-  </div>
-  
+
 </body>
 
 </html>

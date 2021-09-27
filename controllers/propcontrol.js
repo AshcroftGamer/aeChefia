@@ -1,55 +1,56 @@
 
-const mysql = require( '../mysql' );
-const bcrypt = require( 'bcrypt' );
+const mysql = require('../mysql');
+const bcrypt = require('bcrypt');
 
 
-exports.postProprietario = async ( req, res ) => {
+exports.postProprietario = async (req, res) => {
     try {
         var query = 'SELECT * FROM proprietario WHERE email = ?';
-        var result = await mysql.execute( query, [ req.body.email ] );
-        if ( result.length > 0 ) {
-            return res.status( 409 ).send( { Mensagem: 'Usuario já cadastrado' } )
+        var results = await mysql.execute(query, [req.body.email]);
+        if (results.length > 0) {
+            return res.status(409).send({ Mensagem: 'Usuario já cadastrado' })
         }
-        const hash = await bcrypt.hashSync( req.body.senha, 10 );
+        const hash = await bcrypt.hash(req.body.senha, 10);
 
         query = 'INSERT INTO proprietario (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?)';
-        const results = await mysql.execute( query,
+        const result = await mysql.execute(query,
             [
                 req.body.nome,
                 req.body.email,
                 req.body.cpf,
                 req.body.telefone,
                 hash
-            ] )
+            ])
         const response = {
             mensagem: 'Proprietario criado com sucesso',
             usuarioCriado: {
-                id: results.insertId,
+                id: result.insertId,
                 nome: req.body.nome,
                 email: req.body.email,
                 cpf: req.body.cpf,
-                telefone: req.body.telefone
+                telefone: req.body.telefone,
+                hash: hash
             }
         }
 
-        return res.status( 201 ).send( response );
+        return res.status(201).send(response);
     }
-    catch ( error ) {
-        return res.status( 500 ).send( { err: error } )
+    catch (error) {
+        return res.status(500).send({ Erro: error })
     }
 
 }
 
 
 
-exports.patchProprietario = async ( req, res ) => {
+exports.patchProprietario = async (req, res) => {
     try {
         const query = 'UPDATE proprietario SET nome = ? WHERE email = ?;'
-        await mysql.execute( query,
+        await mysql.execute(query,
             [
                 req.body.nome,
                 req.body.email
-            ] );
+            ]);
         const response = {
             mensagem: 'Proprietario atualizado com sucesso',
             usuarioAtualizado: {
@@ -57,42 +58,42 @@ exports.patchProprietario = async ( req, res ) => {
             }
         }
 
-        return res.status( 201 ).send( response );
+        return res.status(201).send(response);
     }
-    catch ( error ) {
-        return res.status( 500 ).send( error )
+    catch (error) {
+        return res.status(500).send(error)
     }
 
 }
 
-exports.deleteProprietario = async ( req, res ) => {
+exports.deleteProprietario = async (req, res) => {
     try {
 
 
         const query = 'DELETE from proprietario WHERE id_proprietario = ?'
-        await mysql.execute( query, [ req.body.id_proprietario ] );
+        await mysql.execute(query, [req.body.id_proprietario]);
         const response = {
             mensagem: 'Proprietario removido com sucesso'
         }
 
-        return res.status( 200 ).send( response );
+        return res.status(200).send(response);
     }
-    catch ( error ) {
-        return res.status( 500 ).send( error )
+    catch (error) {
+        return res.status(500).send(error)
     }
 
 }
 
 
-exports.getProp = async ( req, res ) => {
+exports.getProp = async (req, res) => {
     try {
-        await mysql.execute( 'SELECT * FROM proprietario', ( error, results ) => {
-            if ( error ) {
-                return res.status( 500 ).send( { Erro: error } )
+        await mysql.execute('SELECT * FROM proprietario', (error, results) => {
+            if (error) {
+                return res.status(500).send({ Erro: error })
             }
             const response = {
                 quantidade: results.length,
-                proprietarios: results.map( prod => {
+                proprietarios: results.map(prod => {
                     return {
                         id_proprietario: prod.id_proprietario,
                         nome: prod.nome,
@@ -102,45 +103,51 @@ exports.getProp = async ( req, res ) => {
                         senha: prod.senha
                     }
 
-                } )
+                })
             }
-            return res.status( 200 ).send( response );
-        } )
+            return res.status(200).send(response);
+        })
     }
-    catch ( error ) {
-        return res.status( 500 ).send( error )
+    catch (error) {
+        return res.status(500).send(error)
     }
 
 }
 
-exports.getName = async ( req, res ) => {
+exports.getUmProprietario = async (req, res) => {
     try {
-        const query = 'SELECT * FROM proprietario WHERE name = ?';
+        const query = 'SELECT * FROM proprietario WHERE id_proprietario = ?';
 
-        await mysql.execute( query, [req.body.nome] );
-        const response = "ok"
-                      
-            
-        
-        return res.status( 200 ).send( response );
+        const result = await mysql.execute(query, [req.params.id_proprietario]);
+
+        const response = {
+            mensagem: "Proprietario selecionado com sucesso",
+            proprietario: {
+                id_proprietario: result[0].id_proprietario,
+                nome: result[0].nome,
+                email: result[0].email,
+            }
+        }
+        return res.status(200).send(response);
     }
-    catch ( error ) {
-
+    catch (error) {
+        console.log(error)
+        return res.status(500).send({ error: error })
     }
 
 }
 
-exports.verifica = async ( req, res ) => {
+exports.verifica = async (req, res) => {
     try {
         const query = 'SELECT * FROM proprietario WHERE email = ?'
 
-        const result = await mysql.execute( query, [ req.body.email ] );
-        if ( result.length == 1 ) {
+        const result = await mysql.execute(query, [req.body.email]);
+        if (result.length == 1) {
             const response = {
                 Mensagem: 'Usuario já cadastrado'
             }
 
-            return res.status( 200 ).send( response );
+            return res.status(200).send(response);
 
         }
         else {
@@ -148,14 +155,13 @@ exports.verifica = async ( req, res ) => {
                 Mensagem: 'Usuario não cadastrado'
             }
 
-            return res.status( 404 ).send( response );
+            return res.status(404).send(response);
 
         }
 
     }
-    catch ( error ) {
-        console.log( error )
-        return res.status( 500 ).send( { erro: error } )
+    catch (error) {
+        return res.status(500).send({ erro: error })
     }
 
 }
