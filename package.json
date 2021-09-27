@@ -4,7 +4,12 @@
   "description": "****",
   "main": "server.js",
   "scripts": {
+<<<<<<< HEAD
+    "test": "server.js",
+    "start": "nodemon server.jss"
+=======
     "start": "nodemon server.js"
+>>>>>>> 71689140de18d7411ef766267f253c5bc93cfc87
   },
   "author": "RAINS",
   "license": "ISC",

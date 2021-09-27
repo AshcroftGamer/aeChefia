@@ -9,7 +9,7 @@ route.get( '/', ( req, res ) => {
 
 route.get( '/todos', prop.getProp );
 
-route.get( '/nome', prop.getName );
+route.get( '/:id_proprietario', prop.getUmProprietario );
 
 
 route.get( '/verifica', prop.verifica );

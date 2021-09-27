@@ -33,6 +33,7 @@ route.get( '/', ( req, res ) => {
 
 route.get( '/todos', controller.getEstabelecimento );
 
+
 route.get( '/verifica', controller.verifica );
 
 route.delete( '/remover', controller.deleteEstabelecimento );
@@ -41,7 +42,7 @@ route.patch( '/atualizar', controller.patchEstabelecimento );
 
 route.post( '/cadastro', upload.single( 'logo' ), controller.postEstab );
 
-route.get( '/listar/:email', controller.getEstabProp );
+route.get( '/listar/:id_proprietario', controller.getEstabProp );
 
 
 
