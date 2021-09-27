@@ -442,14 +442,9 @@ function selecionar_estabelecimento(){
   
   let div1 = document.getElementById('quantidade1')
   let div2 = document.getElementById('quantidade2')
-  console.log(a)
+  console.log(a.value)
 
   a.style.color= '#666666'
-
-
-  
-
-  
 
   this.estadoQuantidade1();
   this.estadoQuantidade2();
@@ -545,10 +540,6 @@ class Estabelecimento {
     return true;
 
   }
-<<<<<<< HEAD
-  
-  return true;
-=======
 }
 var estabelecimento = new Estabelecimento
 
@@ -586,7 +577,6 @@ function jwt_login() {
     location.assign( '/home' )
   } );
 
->>>>>>> 9b32b82a416035364e2f120f7237e0829a52276e
 
 }
 

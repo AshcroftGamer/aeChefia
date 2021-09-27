@@ -39,12 +39,19 @@
   
   <div class="vermelhao vermelhaoCadastrado">
     <!-- <button onclick="testeDiv()">teste</button> -->
-    <input onchange="selecionar_estabelecimento()" id="estab_input" type="text" placeholder="Selecione o estabelecimento" class="dropdown" name="city" list="cityname">
+    <!-- <input >
     <datalist id="cityname">
       <option value="Teste1">
       <option value="Bar Do Birão">
       <option value="teste2">
-    </datalist>
+    </datalist> -->
+    <select name="Bares" onchange="selecionar_estabelecimento()" id="estab_input" type="text" class="dropdown">
+      <option value="Index">Selecionar Estabelecimento</option>
+      <option value="Bar1">Bar1</option>
+      <option value="Bar2">Bar2</option>
+      <option value="Bar3">Bar3</option>
+      <option value="Bar4">Bar4</option>
+    </select>
     <button class="btn borderBtn inverseBtn">Abrir caixa</button>         
     <div class="footer footerAdd">
     <h2 id="spanFunction" style="display: none;"  class="h2-Add">Você ainda não possui cardápios <br> 
