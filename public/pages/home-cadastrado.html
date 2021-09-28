@@ -48,60 +48,33 @@
   <div class="inputSpacing"></div>
   <span class="spanHome" id="nomespan"></span>
   
-<<<<<<< HEAD
   <div class="vermelhao vermelhaoCadastrado">
-    <!-- <button onclick="testeDiv()">teste</button> -->
-    <!-- <input >
-    <datalist id="cityname">
-      <option value="Teste1">
-      <option value="Bar Do Birão">
-      <option value="teste2">
-    </datalist> -->
-    <select name="Bares" onchange="selecionar_estabelecimento()" id="estab_input" type="text" class="dropdown">
-      <option value="Index">Selecionar Estabelecimento</option>
-      <option value="Bar1">Bar1</option>
-      <option value="Bar2">Bar2</option>
-      <option value="Bar3">Bar3</option>
-      <option value="Bar4">Bar4</option>
+    <select name="Bares" onchange="estabelecimento.selecionar_estabelecimento()" id="estab_input" type="text" class="dropdown_estabelecimento">
+      <option>Escolha o Estabelecimento</option>
     </select>
     <button class="btn borderBtn inverseBtn">Abrir caixa</button>         
     <div class="footer footerAdd">
     <h2 id="spanFunction" style="display: none;"  class="h2-Add">Você ainda não possui cardápios <br> 
       e funcionários cadastrados:</h1>
-=======
-  <div class=" divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
->>>>>>> 71689140de18d7411ef766267f253c5bc93cfc87
 
     <div class="vermelhao vermelhaoCadastrado">
-      <!-- <button onclick="testeDiv()">teste</button> -->
-      <input onchange="selecionar_estabelecimento()" id="estab_input" type="text"
-        placeholder="Selecione o estabelecimento" class="dropdown" name="city" list="cityname">
-      <datalist class="testando" id="cityname">
-      </datalist>
-      <button class="btn borderBtn inverseBtn">Abrir caixa</button>
-      <div class="footer footerAdd">
-        <h2 id="spanFunction" style="display: none;" class="h2-Add">Você ainda não possui cardápios <br>
-          e funcionários cadastrados:</h1>
 
           <div class="card">
             <div class="card-div">
               <span class="spanAdd">Funcionários</span>
-              <a href="../pages/funcionario.html"><button class="btnAdd">+</button></a>
+              <a href="/funcionario"><button class="btnAdd">+</button></a>
               <input id="quantidade1" class="quantidadeAdd" type="text" value="" disabled />
-              <!-- <div id="quantidade1" class="quantidadeAdd">2</div> -->
 
             </div>
           </div>
           <div class="card">
             <div class="card-div">
               <span class="spanAdd">Cardápios</span>
-              <a href="../pages/cardapio-zerado.html"> <button class="btnAdd">+</button></a>
+              <a href="/cardapio/zerado"> <button class="btnAdd">+</button></a>
               <input id="quantidade2" class="quantidadeAdd" type="text" value="" disabled />
-              <!-- <div id="quantidade2" class="quantidadeAdd">4</div> -->
             </div>
           </div>
       </div>
-
 </body>
 
 </html>

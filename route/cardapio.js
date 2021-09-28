@@ -5,6 +5,10 @@ route.get( '/', ( req, res ) => {
     res.sendFile( __basedir + '/public/pages/cardapio.html' );
 } )
 
+route.get( '/zerado', ( req, res ) => {
+    res.sendFile( __basedir + '/public/pages/cardapio-zerado.html' );
+} )
+
 route.get( '/todos', controller.getCardapio );
 
 route.get( '/verifica', controller.verifica );

@@ -447,24 +447,6 @@ function listaCardapio() {
 
 }
 
-function selecionar_estabelecimento() {
-  let a = document.getElementById('estab_input');
-
-  let div1 = document.getElementById('quantidade1')
-  let div2 = document.getElementById('quantidade2')
-  console.log(a.value)
-
-<<<<<<< HEAD
-  a.style.color= '#666666'
-
-=======
-  a.style.color = '#666666'
->>>>>>> 71689140de18d7411ef766267f253c5bc93cfc87
-  this.estadoQuantidade1();
-  this.estadoQuantidade2();
-  this.estabelecimento.escolherEstabelecimento()
-}
-
 class Estabelecimento {
   constructor() {
     this.arrayEstabelecimento = [];
@@ -484,7 +466,7 @@ class Estabelecimento {
 
   }
   listaEstabelecimento() {
-
+    console.log("entrei")
     fetch('http://localhost:3000/estabelecimento/listar/' + localStorage.getItem("id_proprietario"), {
 
       headers: {
@@ -493,15 +475,18 @@ class Estabelecimento {
     }).then(result => {
       return result.json()
     }).then(data => {
-      data.estabelecimento.forEach(estabe => {
-        this.arrayEstabelecimento.push(estabe);
+
+      data.estabelecimento.forEach(estabele => {
+        this.arrayEstabelecimento.push(estabele);
       })
+
       for (let i = 0; i < this.arrayEstabelecimento.length; i++) {
 
         if (this.arrayEstabelecimento[i].id_proprietario == localStorage.getItem('id_proprietario')) {
-          let estabelecimento = document.createElement('div')
-          estabelecimento.innerHTML = `<option value="${this.arrayEstabelecimento[i].nome_estabelecimento}" onselect="estabelecimento.escolherEstabelecimento()"</option>`
-          document.getElementsByClassName("testando")[0].appendChild(estabelecimento)
+          let estabelecimento = document.createElement('option')
+          estabelecimento.setAttribute("value", this.arrayEstabelecimento[i].nome_estabelecimento )  
+          estabelecimento.innerHTML = `${this.arrayEstabelecimento[i].nome_estabelecimento}`
+          document.getElementsByClassName("dropdown_estabelecimento")[0].appendChild(estabelecimento)
         }
       }
     })
@@ -568,16 +553,29 @@ class Estabelecimento {
     }).then(result => {
       return result.json()
     }).then(data => {
+      console.log(data)
       if (data.estabelecimento.length == 0) {
       } else {
         window.location.href = "/dashboard"
       }
     })
   }
-  escolherEstabelecimento() {
-    alert("olaa")
-    console.log()
+  selecionar_estabelecimento() {
+    let estabelecimento_input = document.getElementById('estab_input').value
+    console.table(estabelecimento_input)
+    fetch('http://localhost:3000/estabelecimento/' + estabelecimento_input, {
+
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }).then(result => {
+      return result.json()
+    }).then(data => {
+      localStorage.setItem("estabelecimento", data.estabelecimento[0].id_estabelecimento )
+    })
+
   }
+
   criarMesas() {
     fetch('http://localhost:3000/estabelecimento/listar/' + localStorage.getItem("id_proprietario"), {
 
@@ -644,6 +642,8 @@ class Estabelecimento {
   }
 }
 var estabelecimento = new Estabelecimento
+
+
 
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
@@ -822,10 +822,7 @@ function logout() {
 }
 
 class Proprietario {
-  constructor() {
-    this.arrayPokedex = [];
-    this.editId = null
-  }
+
   async buscarProprietario() {
 
     fetch('http://localhost:3000/proprietario/' + localStorage.getItem('id_proprietario'))
@@ -839,3 +836,102 @@ class Proprietario {
 }
 
 var proprietario = new Proprietario
+
+class Funcionario {
+  constructor() {
+    this.arrayFuncionario = [];
+    this.editId = null
+  }
+  cadastrado() {
+    let funcionario = this.dados_funcionario();
+
+    if (this.validafun(funcionario)) {
+      if (this.editId == null) {
+        this.adicionar(funcionario)
+      } else {
+        console.log("aff")
+      }
+
+    }
+
+  }
+
+  dados_funcionario(){
+  let funcionario = {}
+
+  /*var password = document.getElementById("senha")
+  , confirm_password = document.getElementById("confSenha");
+
+function validatePassword() {
+  if (password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Senhas diferentes!");
+    alert('passei')
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;*/
+
+  funcionario.id = 0;
+  funcionario.nome_funcionario = document.getElementById('nome_funcionario').value;
+  funcionario.email = document.getElementById('email').value;
+  funcionario.login = document.getElementById('login').value;
+  funcionario.id_estabelecimento = localStorage.getItem('estabelecimento')
+  funcionario.senha = document.getElementById('senha').value
+
+  console.log(funcionario)
+
+  return funcionario;
+  }
+  async adicionar(funcionario) {
+
+    fetch('http://localhost:3000/funcionario/cadastro/', {
+      method: 'POST',
+      headers:
+      { "content-type": "application/json" },
+      body: JSON.stringify(funcionario)
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      console.log("data")
+      console.log(data)
+      funcionario.nome_funcionario = data.funcionarioInserido.nome_funcionario;
+      funcionario.login = data.funcionarioInserido.login;
+      funcionario.email = data.funcionarioInserido.email;
+      funcionario.id_estabelecimento = data.funcionarioInserido.id_estabelecimento;
+      funcionario.senha = data.funcionarioInserido.hash
+
+      this.arrayFuncionario.push(funcionario);
+      location.assign('/funcionario/sucesso')
+    });
+  }
+  validafun(funcionario) {
+    let msg = '';
+
+    if (funcionario.nome_funcionario == "") {
+      msg += '- Informe o Nome'
+    }
+    if (funcionario.email == "") {
+      msg += '- Informe o E-mail'
+    }
+    if (funcionario.login == "") {
+      msg += '- Informe o login'
+    }
+    if (funcionario.senha == "") {
+      msg += '- Insira a Senha'
+    }
+    if (msg != '') {
+      alert(msg);
+      return false
+    }
+
+
+    return true;
+
+  }
+
+}
+
+var funcionario = new Funcionario

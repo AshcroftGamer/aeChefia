@@ -57,6 +57,7 @@ app.use( '/cardapio', rotaCardapio );
 app.use( '/funcionario', rotaFuncionario );
 app.use( '/proprietario', rotaProprietario );
 
+
 app.get( '/', ( req, res ) => {
     res.sendFile( __dirname + '/index.html' );
 } )

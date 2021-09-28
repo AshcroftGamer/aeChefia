@@ -6,6 +6,10 @@ route.get('/', (req, res) => {
     res.sendFile(__basedir + '/public/pages/funcionario.html');
 })
 
+route.get('/sucesso', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/funcionario-sucesso.html')
+})
+
 
 route.post('/cadastro', controller.postFuncionario);
 

@@ -3,12 +3,17 @@ const bcrypt = require( 'bcrypt' );
 
 exports.postFuncionario = async ( req, res ) => {
     try {
-        const hash = await bcrypt.hashSync( req.body.senha, 10 );
+        const queryEmail = 'SELECT * FROM funcionario WHERE email = ?';
+        const results = await mysql.execute(queryEmail, [req.body.email]);
+        if (results.length > 0) {
+            return res.status(409).send({ Mensagem: 'Usuario já cadastrado' })
+        }
+        const hash = await bcrypt.hash( req.body.senha, 10 );
 
-        const query = 'INSERT INTO funcionario (nome, email, login, senha, id_estabelecimento ) VALUES (?, ?, ?, ?, ?);';
-        await mysql.execute( query,
+        const query = 'INSERT INTO funcionario (nome_funcionario, email, login, senha, id_estabelecimento) VALUES (?, ?, ?, ?, ?)';
+        const result = await mysql.execute(query,
             [
-                req.body.nome,
+                req.body.nome_funcionario,
                 req.body.email,
                 req.body.login,
                 hash,
@@ -18,14 +23,18 @@ exports.postFuncionario = async ( req, res ) => {
         const response = {
             mensagem: 'Funcionario inserido com sucesso',
             funcionarioInserido: {
-                nome: req.body.nome,
+                id_funcionario: result.insertId,
+                nome_funcionario: req.body.nome_funcionario,
                 email: req.body.email,
-                login: req.body.login
+                login: req.body.login,
+                hash: hash,
+                id_estabelecimento: req.body.id_estabelecimento
 
             }
         }
         return res.status( 201 ).send( response );
     } catch ( error ) {
+        console.log(error)
         return res.status( 500 ).send( { error: error } );
     }
 
