@@ -5,14 +5,14 @@ const bcrypt = require('bcrypt');
 
 exports.postProprietario = async (req, res) => {
     try {
-        var query = 'SELECT * FROM proprietario WHERE email = ?';
-        var results = await mysql.execute(query, [req.body.email]);
+        const queryEmail = 'SELECT * FROM proprietario WHERE email = ?';
+        const results = await mysql.execute(queryEmail, [req.body.email]);
         if (results.length > 0) {
             return res.status(409).send({ Mensagem: 'Usuario já cadastrado' })
         }
         const hash = await bcrypt.hash(req.body.senha, 10);
 
-        query = 'INSERT INTO proprietario (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?)';
+        const query = 'INSERT INTO proprietario (nome, email, cpf, telefone, senha) VALUES (?, ?, ?, ?, ?)';
         const result = await mysql.execute(query,
             [
                 req.body.nome,
