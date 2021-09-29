@@ -3,12 +3,17 @@ const bcrypt = require( 'bcrypt' );
 
 exports.postFuncionario = async ( req, res ) => {
     try {
-        const hash = await bcrypt.hashSync( req.body.senha, 10 );
+        const queryEmail = 'SELECT * FROM funcionario WHERE email = ?';
+        const results = await mysql.execute(queryEmail, [req.body.email]);
+        if (results.length > 0) {
+            return res.status(409).send({ Mensagem: 'Usuario já cadastrado' })
+        }
+        const hash = await bcrypt.hash( req.body.senha, 10 );
 
-        const query = 'INSERT INTO funcionario (nome, email, login, senha, id_estabelecimento ) VALUES (?, ?, ?, ?, ?);';
-        await mysql.execute( query,
+        const query = 'INSERT INTO funcionario (nome_funcionario, email, login, senha, id_estabelecimento) VALUES (?, ?, ?, ?, ?)';
+        const result = await mysql.execute(query,
             [
-                req.body.nome,
+                req.body.nome_funcionario,
                 req.body.email,
                 req.body.login,
                 hash,
@@ -18,14 +23,18 @@ exports.postFuncionario = async ( req, res ) => {
         const response = {
             mensagem: 'Funcionario inserido com sucesso',
             funcionarioInserido: {
-                nome: req.body.nome,
+                id_funcionario: result.insertId,
+                nome_funcionario: req.body.nome_funcionario,
                 email: req.body.email,
-                login: req.body.login
+                login: req.body.login,
+                hash: hash,
+                id_estabelecimento: req.body.id_estabelecimento
 
             }
         }
         return res.status( 201 ).send( response );
     } catch ( error ) {
+        console.log(error)
         return res.status( 500 ).send( { error: error } );
     }
 
@@ -60,24 +69,35 @@ exports.getFunc = async ( req, res ) => {
     }
 }
 
-exports.getCount = async ( req, res ) => {
+exports.getQuantidade = async ( req, res ) => {
     try {
-        const query = 'SELECT COUNT(login) AS NumeroFuncionario FROM funcionario;'
+        const query = `SELECT * FROM funcionario
+        INNER JOIN estabelecimento
+        ON funcionario.id_estabelecimento = estabelecimento.id_estabelecimento
+        WHERE estabelecimento.id_estabelecimento = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_estabelecimento ] );
 
-        await mysql.execute( query, ( error, results ) => {
-            if ( error ) {
-                return res.status( 500 ).send( { Erro: error } )
+        const response = {
+            quantidade: result.length,
+            funcionario: result.map( funci => {
+                return{
+                    id_funcionario: funci.id_funcionario,
+                    id_estabelecimento: funci.id_estabelecimento,
+                    //nome_estabelecimento: funci.nome_estabelecimento,
+                    //logo: funci.logo,
+                    //cep: funci.cep,
+                    //endereco: funci.endereco,
+                    //mesa: funci.mesa,
+                    id_proprietario: funci.id_proprietario
+                }
+            })
+
             }
-            const response = {
-                quantidade: results
-            }
-            return res.status( 200 ).send( response )
-        } )
-
-
+        return res.status( 200 ).send( response )
 
     } catch ( error ) {
-        return res.status( 500 ).send( error )
+        return res.status( 500 ).send( { Erro: error } )
     }
 }
 
