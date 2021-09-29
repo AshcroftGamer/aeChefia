@@ -55,7 +55,7 @@
     <div style="text-align: inherit;" class="inputs">
 
         <label style="place-self: inherit;width: 84%;color: #666666;">Tipo de bebida</label>
-        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
+        <input id="tipo_bebida" style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
             name="Tipo" list="nome-tipo">
         <datalist id="nome-tipo">
             <option value="Cerveja">
@@ -67,19 +67,19 @@
         </datalist>
 
         <label style=" place-self: inherit;width: 84%;color: #666666;">Marca</label>
-        <input style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
+        <input id="marca" style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
             name="marca" list="nome-marca">
         <datalist id="nome-marca">
             <option value="marca1">
             <option value="marca2">
         </datalist>
         <label style=" place-self: inherit;width: 84%;color: #666666;">Medida/Unidade</label>
-        <input class="inputLine" placeholder="Ex: 600ml" type="text"> <br>
+        <input class="inputLine" placeholder="Ex: 600ml" type="text" id="medida"> <br>
         <label style=" place-self: inherit;width: 84%;color: #666666;">Valor da venda</label>
         <!-- <input class="inputLine" placeholder="" type="text"> <br> -->
         <div style="width: 87%;" class="input-icon" style="text-align: center;">
             <button class="Send">R$</button>
-            <input  onkeyup="k(this);" class="Post" placeholder="0,00" type="number">
+            <input  onkeyup="k(this);" class="Post" placeholder="0,00" type="number" id="preco">
         </div>
 
     </div>
@@ -92,9 +92,9 @@
         <option>Relish</option>
     </select> -->
     <footer class="divcenter footer footerAdd">
-      <a href="/pages/bebida-sucesso.html"> <button class="btn redBtn redBtn-cad" onclick="ok()">Inserir bebida</button><br></a> 
+      <button class="btn redBtn redBtn-cad" onclick="bebida.cadastrar_bebida()">Inserir bebida</button><br>
     </footer>
-    <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
+    <div class="divAnuncio" id="divAnuncio" >Acesse o site por um dispositivo mobile</div>
 
 </body>
 

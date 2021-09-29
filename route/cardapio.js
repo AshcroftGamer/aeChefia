@@ -9,11 +9,26 @@ route.get( '/zerado', ( req, res ) => {
     res.sendFile( __basedir + '/public/pages/cardapio-zerado.html' );
 } )
 
+route.get('/bebida', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/bebida.html');
+})
+
+route.get('/bebida/sucesso', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/bebida-sucesso.html');
+})
+
+route.get('/bebida/buscar', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/buscar-bebida.html');
+})
+
+
 route.get( '/todos', controller.getCardapio );
 
-route.get( '/verifica', controller.verifica );
+route.get( '/quantidade/:id_estabelecimento', controller.getQuantidade);
 
-route.post( '/cadastro', controller.postCardapio );
+route.get( '/verifica/:id_estabelecimento', controller.verifica );
+
+route.post( '/cadastro/:id_estabelecimento', controller.postCardapio );
 
 route.patch( '/atualizar', controller.patchCardapio );
 

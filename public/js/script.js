@@ -410,6 +410,8 @@ function estadoQuantidade1() {
     qnt1.style.visibility = "hidden"
   } else {
     qnt1.style.visibility = "visible"
+    var el = document.getElementById('spanFunction');
+    el.remove()
   }
 }
 
@@ -484,7 +486,7 @@ class Estabelecimento {
 
         if (this.arrayEstabelecimento[i].id_proprietario == localStorage.getItem('id_proprietario')) {
           let estabelecimento = document.createElement('option')
-          estabelecimento.setAttribute("value", this.arrayEstabelecimento[i].nome_estabelecimento )  
+          estabelecimento.setAttribute("value", this.arrayEstabelecimento[i].nome_estabelecimento)
           estabelecimento.innerHTML = `${this.arrayEstabelecimento[i].nome_estabelecimento}`
           document.getElementsByClassName("dropdown_estabelecimento")[0].appendChild(estabelecimento)
         }
@@ -571,7 +573,9 @@ class Estabelecimento {
     }).then(result => {
       return result.json()
     }).then(data => {
-      localStorage.setItem("estabelecimento", data.estabelecimento[0].id_estabelecimento )
+      localStorage.setItem("estabelecimento", data.estabelecimento[0].id_estabelecimento)
+      cardapio.quantidade_cardapio();
+      funcionario.funcionario_quantidade();
     })
 
   }
@@ -856,41 +860,56 @@ class Funcionario {
 
   }
 
-  dados_funcionario(){
-  let funcionario = {}
-
-  /*var password = document.getElementById("senha")
-  , confirm_password = document.getElementById("confSenha");
-
-function validatePassword() {
-  if (password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Senhas diferentes!");
-    alert('passei')
-  } else {
-    confirm_password.setCustomValidity('');
+  funcionario_quantidade(){
+    fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
+      method: 'GET',
+      headers:{ "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      console.log('euuu paipi')
+      console.log(data)
+      console.log(data.quantidade)
+      document.getElementById('quantidade1').value = data.quantidade
+      estadoSpanHome()
+    })
   }
-}
 
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;*/
+  dados_funcionario() {
+    let funcionario = {}
 
-  funcionario.id = 0;
-  funcionario.nome_funcionario = document.getElementById('nome_funcionario').value;
-  funcionario.email = document.getElementById('email').value;
-  funcionario.login = document.getElementById('login').value;
-  funcionario.id_estabelecimento = localStorage.getItem('estabelecimento')
-  funcionario.senha = document.getElementById('senha').value
+    /*var password = document.getElementById("senha")
+    , confirm_password = document.getElementById("confSenha");
+  
+  function validatePassword() {
+    if (password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Senhas diferentes!");
+      alert('passei')
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+  }
+  
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;*/
 
-  console.log(funcionario)
+    funcionario.id = 0;
+    funcionario.nome_funcionario = document.getElementById('nome_funcionario').value;
+    funcionario.email = document.getElementById('email').value;
+    funcionario.login = document.getElementById('login').value;
+    funcionario.id_estabelecimento = localStorage.getItem('estabelecimento')
+    funcionario.senha = document.getElementById('senha').value
 
-  return funcionario;
+    console.log(funcionario)
+
+    return funcionario;
   }
   async adicionar(funcionario) {
 
     fetch('http://localhost:3000/funcionario/cadastro/', {
       method: 'POST',
       headers:
-      { "content-type": "application/json" },
+        { "content-type": "application/json" },
       body: JSON.stringify(funcionario)
     }).then(result => {
       return result.json();
@@ -935,3 +954,168 @@ confirm_password.onkeyup = validatePassword;*/
 }
 
 var funcionario = new Funcionario
+
+
+class Cardapio {
+
+  quantidade_cardapio(){
+    fetch('http://localhost:3000/cardapio/quantidade/' + localStorage.getItem('estabelecimento'), {
+      method: 'GET',
+      headers:{ "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      console.log(data)
+      console.log(data.quantidade)
+      document.getElementById('quantidade2').value = data.quantidade
+      estadoSpanHome()
+    })
+  }
+
+  addCardapio() {
+    fetch('http://localhost:3000/cardapio/verifica/' + localStorage.getItem('estabelecimento'), {
+      method: 'GET',
+      headers:{ "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      if (data.quantidade == 0) {
+        fetch('http://localhost:3000/cardapio/cadastro/' + localStorage.getItem('estabelecimento'), {
+          method: 'POST',
+          headers:{ "content-type": "application/json" },
+        }).then(result => {
+          return result.json();
+        }).then(data => {
+          localStorage.setItem('id_cardapio', data.cardapioCriado.id_cardapio)
+          location.assign('/cardapio/zerado')
+        })
+      } else {
+        location.assign('/cardapio')
+      }
+    })
+  }
+
+  setarBebida() {
+
+    localStorage.setItem('id_item_tipo', 1)
+    location.assign('/cardapio/bebida')
+  }
+  setarComida() {
+    localStorage.setItem('id_item_tipo', 2)
+    location.assign('/cardapio/comida')
+  }
+}
+
+var cardapio = new Cardapio
+
+class Bebida {
+
+  constructor() {
+    this.arrayBebida = []
+    this.editId = null
+  }
+  cadastrar_bebida() {
+    let bebida = this.dadosBebida();
+
+    if (this.vericaBebida(bebida)) {
+      if (this.editId == null) {
+        this.addBebida(bebida)
+      } else {
+
+      }
+
+    }
+
+  }
+  addBebida(bebida) {
+    fetch('http://localhost:3000/bebidatipo/' + bebida.id_bebida_tipo, {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      bebida.id_bebida_tipo= data.bebida[0].id_bebida_tipo;
+
+
+      fetch('http://localhost:3000/medida/' + bebida.id_medidas, {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+
+        bebida.id_medidas = data.medidas[0].id_medidas
+
+        fetch('http://localhost:3000/marca/' + bebida.id_marcas, {
+          method: 'GET',
+          headers: { "content-type": "application/json" }
+        }).then(result => {
+          return result.json();
+        }).then(data => {
+
+          bebida.id_marcas = data.marcas[0].id_marcas
+          fetch('http://localhost:3000/item/cadastro/', {
+            method: 'POST',
+            headers:
+              { "content-type": "application/json" },
+            body: JSON.stringify(bebida)
+            
+          }).then(result => {
+            return result.json();
+          }).then(data => {
+      
+            bebida.id_cardapio = data.itemCriado.id_cardapio;
+            bebida.id_item_tipo = data.itemCriado.id_item_tipo;
+            bebida.id_bebida_tipo= data.itemCriado.id_bebida_tipo;
+            bebida.id_marcas = data.itemCriado.id_marcas;
+            bebida.id_medidas = data.itemCriado.id_medidas;
+            bebida.preco = data.itemCriado.preco;
+      
+            this.arrayBebida.push(bebida);
+            location.assign('/cardapio/bebida/sucesso')
+          });
+        });
+      });
+    });
+  }
+
+  dadosBebida() {
+    let bebida = {}
+    bebida.id = 0;
+    bebida.id_cardapio = localStorage.getItem('id_cardapio')
+    bebida.id_item_tipo = localStorage.getItem('id_item_tipo')
+    bebida.id_bebida_tipo= document.getElementById('tipo_bebida').value;
+    bebida.id_marcas = document.getElementById('marca').value;
+    bebida.id_medidas = document.getElementById('medida').value;
+    bebida.preco = document.getElementById('preco').value
+
+    return bebida;
+  }
+
+  vericaBebida(bebida) {
+    let msg = '';
+
+    if (funcionario.nome_funcionario == "") {
+      msg += '- Informe o Nome'
+    }
+    if (funcionario.email == "") {
+      msg += '- Informe o E-mail'
+    }
+    if (funcionario.login == "") {
+      msg += '- Informe o login'
+    }
+    if (funcionario.senha == "") {
+      msg += '- Insira a Senha'
+    }
+    if (msg != '') {
+      alert(msg);
+      return false
+    }
+
+
+    return true;
+
+  }
+}
+
+var bebida = new Bebida

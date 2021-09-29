@@ -5,23 +5,22 @@ const mysql = require( '../mysql' );
 exports.postCardapio = async ( req, res ) => {
     try {
 
-
-
-        const query = 'INSERT INTO cardapio (id_cardapio,id_estabelecimento) VALUES (?, ?);'
-        const result = await mysql.execute( query,
-            [
-                req.body.id_cardapio,
-                req.body.id_estabelecimento
-            ] );
+        const query = 'INSERT INTO cardapio (id_estabelecimento) VALUES (?);'
+        const result = await mysql.execute( query, [req.params.id_estabelecimento] );
 
         const response = {
             mensagem: 'Cardapio inserido com sucesso',
+            cardapioCriado: {
+                id_cardapio: result.insertId,
+                id_estabelecimento: req.params.id_estabelecimento
+            }
 
         }
 
         return res.status( 201 ).send( response );
     }
     catch ( error ) {
+        console.log(error)
         return res.status( 500 ).send( { err: error } )
     }
 
@@ -98,11 +97,11 @@ exports.getCardapio = async ( req, res ) => {
 exports.verifica = async ( req, res ) => {
     try {
         const query = 'SELECT * FROM cardapio WHERE id_estabelecimento = ?;';
-        let id = req.body.id;
-        const result = await mysql.execute( query, [ id ] );
+        const result = await mysql.execute( query, [ req.params.id_estabelecimento ] );
         if ( result.length > 0 ) {
             
             const response = {
+                
                 id_cardapio: result[ 0 ].id_cardapio,
                 id_estabelecimento: result[ 0 ].id_estabelecimento
             }
@@ -113,6 +112,7 @@ exports.verifica = async ( req, res ) => {
         }
         else {
             const response = {
+                quantidade: result.length,
                 Mensagem: 'Cardapio não encontrado'
             }
 
@@ -125,4 +125,36 @@ exports.verifica = async ( req, res ) => {
         return res.status( 500 ).send( { erro: error } )
     }
 
+}
+
+exports.getQuantidade = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM cardapio
+        INNER JOIN estabelecimento
+        ON cardapio.id_estabelecimento = estabelecimento.id_estabelecimento
+        WHERE estabelecimento.id_estabelecimento = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_estabelecimento ] );
+
+        const response = {
+            quantidade: result.length,
+            cardapio: result.map( card => {
+                return{
+                    id_cardapio: card.id_cardapio,
+                    id_estabelecimento: card.id_estabelecimento,
+                    //nome_estabelecimento: card.nome_estabelecimento,
+                    //logo: card.logo,
+                    //cep: card.cep,
+                    //endereco: card.endereco,
+                    //mesa: card.mesa,
+                    id_proprietario: card.id_proprietario
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
 }

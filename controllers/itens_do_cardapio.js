@@ -5,28 +5,28 @@ const mysql = require( '../mysql' );
 exports.postItens = async ( req, res ) => {
     try {
 
-        const query = `INSERT INTO itens_do_cardapio(id_cardapio, id_item_tipo, id_bebida_tipo, id_marcas, id_medidas, nome_comida, preco) VALUES (?, ?, ?, ?, ?, ?, ?);`;
+        const query = `INSERT INTO itens_do_cardapio(id_cardapio, id_item_tipo, id_bebida_tipo, id_marcas, id_medidas, nome_comida, preco) VALUES (?, ?, ?, ?, ?, ?, ?)`;
         const results = await mysql.execute( query,
             [
                 req.body.id_cardapio,
                 req.body.id_item_tipo,
                 req.body.id_bebida_tipo,
                 req.body.id_marcas,
-                req.body.medidas,
+                req.body.id_medidas,
                 req.body.nome_comida,
                 req.body.preco
-
             ] )
         const response = {
 
             Quantidade: results.length,
             Mensagem: 'Item Adicionado com sucesso!',
             itemCriado: {
-                cardapio: req.body.id_cardapio,
-                item_tipo: req.body.id_item_tipo,
-                bebida_tipo: req.body.id_bebida_tipo,
-                marcas: req.body.id_marcas,
-                medida: req.body.medidas,
+                id_itens_do_cardapio: results.insertId,
+                id_cardapio: req.body.id_cardapio,
+                id_item_tipo: req.body.id_item_tipo,
+                id_bebida_tipo: req.body.id_bebida_tipo,
+                id_marcas: req.body.id_marcas,
+                id_medidas: req.body.id_medidas,
                 comida: req.body.nome_comida,
                 preco: req.body.preco
             }
@@ -35,7 +35,8 @@ exports.postItens = async ( req, res ) => {
         return res.status( 201 ).send( response );
     }
     catch ( error ) {
-        return res.status( 500 ).send( { err: error } )
+        console.log(error)
+        return res.status( 500 ).send( { error: error } )
     }
 
 }

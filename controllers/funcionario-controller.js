@@ -69,24 +69,35 @@ exports.getFunc = async ( req, res ) => {
     }
 }
 
-exports.getCount = async ( req, res ) => {
+exports.getQuantidade = async ( req, res ) => {
     try {
-        const query = 'SELECT COUNT(login) AS NumeroFuncionario FROM funcionario;'
+        const query = `SELECT * FROM funcionario
+        INNER JOIN estabelecimento
+        ON funcionario.id_estabelecimento = estabelecimento.id_estabelecimento
+        WHERE estabelecimento.id_estabelecimento = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_estabelecimento ] );
 
-        await mysql.execute( query, ( error, results ) => {
-            if ( error ) {
-                return res.status( 500 ).send( { Erro: error } )
+        const response = {
+            quantidade: result.length,
+            funcionario: result.map( funci => {
+                return{
+                    id_funcionario: funci.id_funcionario,
+                    id_estabelecimento: funci.id_estabelecimento,
+                    //nome_estabelecimento: funci.nome_estabelecimento,
+                    //logo: funci.logo,
+                    //cep: funci.cep,
+                    //endereco: funci.endereco,
+                    //mesa: funci.mesa,
+                    id_proprietario: funci.id_proprietario
+                }
+            })
+
             }
-            const response = {
-                quantidade: results
-            }
-            return res.status( 200 ).send( response )
-        } )
-
-
+        return res.status( 200 ).send( response )
 
     } catch ( error ) {
-        return res.status( 500 ).send( error )
+        return res.status( 500 ).send( { Erro: error } )
     }
 }
 

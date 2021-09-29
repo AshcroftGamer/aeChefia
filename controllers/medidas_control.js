@@ -22,3 +22,27 @@ exports.getAll = async ( req, res ) => {
         return res.status( 500 ).send( error )
     }
 }
+
+exports.getUma = async(req, res) => {
+    try {
+        const query = `SELECT * FROM medidas WHERE medida = ?;`
+        
+        const result = await mysql.execute( query, [req.params.medida ] );
+
+        const response = {
+            quantidade: result.length,
+            medidas: result.map( mede => {
+                return{
+                    id_medidas: mede.id_medidas,
+                    medida: mede.nome_tipo
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+
+}

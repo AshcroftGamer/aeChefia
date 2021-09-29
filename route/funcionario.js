@@ -17,7 +17,7 @@ route.get('/todos', controller.getFunc);
 
 route.get('/verifica', controller.verifica);
 
-route.get('/quant', controller.getCount);
+route.get( '/quantidade/:id_estabelecimento', controller.getQuantidade);
 
 route.delete('/remover', controller.deleteFunc);
 
