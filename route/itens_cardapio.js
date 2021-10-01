@@ -9,6 +9,8 @@ route.post( '/cadastro', controller.postItens );
 
 route.get( '/verifica', controller.verifica );
 
+route.get('/', controller.getItens)
+
 route.delete( '/remover', controller.deleteItens );
 
 route.patch( '/atualizar', controller.patchItens );

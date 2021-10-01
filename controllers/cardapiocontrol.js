@@ -158,3 +158,35 @@ exports.getQuantidade = async ( req, res ) => {
         return res.status( 500 ).send( { Erro: error } )
     }
 }
+
+exports.getItem = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM itens_do_cardapio
+        INNER JOIN cardapio
+        ON itens_do_cardapio.id_cardapio = cardapio.id_cardapio
+        WHERE itens_do_cardapio.id_cardapio = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_cardapio ] );
+
+        const response = {
+            quantidade: result.length,
+            cardapio: result.map( card => {
+                return{
+                    id_cardapio: card.id_cardapio,
+                    id_estabelecimento: card.id_estabelecimento,
+                    //nome_estabelecimento: card.nome_estabelecimento,
+                    //logo: card.logo,
+                    //cep: card.cep,
+                    //endereco: card.endereco,
+                    //mesa: card.mesa,
+                    id_proprietario: card.id_proprietario
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+}
