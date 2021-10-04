@@ -11,6 +11,9 @@ route.get( '/verifica', controller.verifica );
 
 route.get('/', controller.getItens)
 
+route.get('/:id_item_tipo', controller.getItensTipo)
+
+
 route.delete( '/remover', controller.deleteItens );
 
 route.patch( '/atualizar', controller.patchItens );

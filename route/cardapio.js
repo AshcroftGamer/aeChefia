@@ -42,11 +42,13 @@ route.get( '/verifica/:id_estabelecimento', controller.verifica );
 
 route.get( '/item/:id_cardapio', controller.getItem);
 
+route.get( '/tipo/:tipo', controller.getTipo);
+
 route.post( '/cadastro/:id_estabelecimento', controller.postCardapio );
 
 route.patch( '/atualizar', controller.patchCardapio );
 
-route.delete( '/remover', controller.deleteCardapio );
+route.delete( '/remover/:id_cardapio', controller.deleteCardapio );
 
 
 module.exports = route;

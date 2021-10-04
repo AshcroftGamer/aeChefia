@@ -10,7 +10,7 @@
         rel="stylesheet">
     <title>lista de itens do cardápio</title>
 </head>
-<body>
+<body class="inicio">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -35,31 +35,33 @@
         <div class="inputSpacing"></div>
     <span class="spanHome">Cadastre um cardápio</span>
     <div class="inputSpacing"></div>
-    <div class="div-cardapio">
-        <a class="cardapio-item" href="bebida.html">
-               <button style="border: none; background-color: #e5e5e500;">
-   
-                   <img class="img-cardapio" src="../img/bebida.png" alt="">
-                   <h1 class="h1-bebida">Bebida</h1>
-               </button>
-           </a>
-           <a class="cardapio-item" href="comida.html">
-               <button style="border:none;background-color: #e5e5e500;">
-                   <img href="./comida.html" class="img-cardapio" src="../img/comida.png" alt="">
-                   <h1 class="h1-comida">Comida</h1>
-               </button></a>
-       </div>
-   
+    <div class="div-cardapio" >
+    
+      
+        <a class="cardapio-item"   >
+            
+            <button style="border: none; background-color: #e5e5e500;" input type="submit" onclick="cardapio.setarBebida()" id="esconder" value="bebida"> 
+                
+                <img class="img-cardapio" src="../img/bebida.png" alt="">
+                <h1 class="h1-bebida">Bebida</h1>
+            </button>
+        </a>
+        <a class="cardapio-item"  >
+            
+            <button style="border:none;background-color: #e5e5e500;" input type="submit" onclick="cardapio.setarComida()" id="esconder2" value="comida" >
+                
+                <img class="img-cardapio" src="../img/comida.png" alt="">
+                <h1 class="h1-comida">Comida</h1>
+            </button></a>
+    </div>
 
     <div class="inputs">
         <label style="width: auto;" class="label-listas">Cardápios cadastrados</label>
-        <input onchange="cardapio.listaCardapio()" id="popo" style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown"
-        name="city" list="cityname">
-    <datalist  id="cityname">
-        <option value="Comidas">
-        <option value="Bebidas">
-        <option value="">
-    </datalist>
+        <select name="Bares" onchange="cardapio.listaCardapio()" id="tipo" type="text" class="dropdown_estabelecimento">
+            <option>Selecionar</option>
+            <option value="Comida">Comida</option>
+            <option value="Bebida">Bebida</option>
+          </select>
     <div class="inputSpacing"></div>
 
     <input style="margin-left: 10px;" class="inputLine" placeholder="Buscar por..." type="text"> <br>
@@ -68,52 +70,8 @@
 
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 
-    <div id="divComida" style="display: none;" class="div-cadastrado">
-        <div  class="span-cadastrado">
-            <span class="nome-cadastrado">Porçao de fritas</span>
-            <span>M</span>
-            <span>R$:5,50</span>
-        </div>
-        <div class="btn-cadastrado">
-            <button class="editarGrey" onclick="ok()">Editar</button>
-            <button class="excluirRed" onclick="ok()">Excluir</button>
-        </div>
+    <div id="divBebida" style="display: none;" class="div-cadastrado">
     </div>
 
-    
-    <div id="divBebida" style="display: none;" class="div-cadastrado">
-        <div class="span-cadastrado">
-            <span class="nome-cadastrado">Itaipava</span>
-            <span>600 ml</span>
-            <span>R$:10,00</span>
-        </div>
-        <div class="btn-cadastrado">
-            <button class="editarGrey" onclick="ok()">Editar</button>
-            <button class="excluirRed" onclick="ok()">Excluir</button>
-        </div>
-    </div>
-
-    <!-- <div id="divBebida" style="display: none;" class="div-cadastrado">
-        <div class="span-cadastrado">
-            <span class="nome-cadastrado">Itaipava</span>
-            <span>1L </span>
-            <span>R$:15,00</span>
-        </div>
-        <div class="btn-cadastrado">
-            <button class="editarGrey" onclick="ok()">Editar</button>
-            <button class="excluirRed" onclick="ok()">Excluir</button>
-        </div>
-    </div>
-    <div id="divBebida" style="display: none;" class="div-cadastrado">
-        <div class="span-cadastrado">
-            <span class="nome-cadastrado">Suco</span>
-            <span>500 ml</span>
-            <span>R$:6,00</span>
-        </div>
-        <div class="btn-cadastrado">
-            <button class="editarGrey" onclick="ok()">Editar</button>
-            <button class="excluirRed" onclick="ok()">Excluir</button>
-        </div>
-    </div> -->
 </body>
 </html>

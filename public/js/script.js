@@ -443,11 +443,11 @@ function listaCardapio() {
   let datalist = document.getElementById("popo")
 
 
-  if (datalist.value == "Comidas") {
+  if (datalist.value == "Comida") {
     divComida.style.display = "flex"
     divBebida.style.display = "none"
   }
-  if (datalist.value == "Bebidas") {
+  if (datalist.value == "Bebida") {
     divBebida.style.display = "flex"
     divComida.style.display = "none"
   }
@@ -967,6 +967,17 @@ class Cardapio {
     this.arrayCardapio = []
   }
 
+
+  deletarCardapio(id_cardapio){
+    fetch('http://localhost:3000/cardapio/remover/' + id_cardapio, {
+      method: 'DELETE',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      //document.location.reload(true)
+    })
+  }
   quantidade_cardapio() {
     fetch('http://localhost:3000/cardapio/quantidade/' + localStorage.getItem('estabelecimento'), {
       method: 'GET',
@@ -1024,7 +1035,7 @@ class Cardapio {
   </div>
   <div class="btn-cadastrado">
      <a href="/cardapio/lista"> <button class="editarGrey" onclick="cardapio.setarCardapio(${this.arrayCardapio[i].id_cardapio})" >Editar</button></a>
-      <button class="excluirRed" onclick="ok()">Excluir</button>
+     <button class="excluirRed" onclick="cardapio.deletarCardapio(${this.arrayCardapio[i].id_cardapio})">Excluir</button>
   </div>`
 
           document.getElementsByClassName("selecionado")[0].appendChild(cardapio)
@@ -1033,18 +1044,89 @@ class Cardapio {
     });
   }
 
-  listaCardapio(){
+  listaCardapio() {
     fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
       method: 'GET',
       headers: { "content-type": "application/json" }
     }).then(result => {
       return result.json();
     }).then(data => {
-      console.log(data)
+      for(let i = 0; i < data.quantidade; i++){
+        console.log(data)
+        let medidas = data.cardapio[i].id_medidas
+        let marcas = data.cardapio[i].id_marcas
+        let nome_comida = data.cardapio[i].nome_comida
+        let preco = data.cardapio[i].preco
+        let tipo = document.getElementById('tipo').value
+        console.table(tipo)
+        fetch('http://localhost:3000/cardapio/tipo/' + tipo, {
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(result => {
+          return result.json()
+        }).then(data => {
+  
+          console.log(data)
+  
+          fetch('http://localhost:3000/marca/pegar/' + marcas, {
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(result => {
+            return result.json()
+          }).then(data => {
+            marcas = data.marcas[0].marca
+          })
+          localStorage.setItem("id_item_tipo", data.tipos[0].id_item_tipo)
+  
+          fetch('http://localhost:3000/medida/pegar/' + medidas, {
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(result => {
+            return result.json()
+          }).then(data => {
+            medidas = data.medidas[0].medida
+  
+            let item = document.createElement('div')
+              item.classList.add('div-cadastrado')
+              item.setAttribute("id", "divComida");
+
+              console.log()
+              if (localStorage.getItem("id_item_tipo") == 2) {
+                console.log("entrou")
+                item.innerHTML = `<div class="span-cadastrado">
+                  <span class="nome-cadastrado">${nome_comida}</span>
+                  <span>${medidas}</span>
+                  <span>R$:${preco}</span>
+              </div>
+              <div class="btn-cadastrado">
+                  <button class="editarGrey" onclick="ok()">Editar</button>
+                  <button class="excluirRed" onclick="ok()">Excluir</button>
+              </div>`
+  
+              } if(localStorage.getItem("id_item_tipo") == 1) {
+                item.innerHTML = `        <div class="span-cadastrado">
+                  <span class="nome-cadastrado">${marcas}</span>
+                  <span>${medidas}</span>
+                  <span>R$:${preco}</span>
+              </div>
+              <div class="btn-cadastrado">
+                  <button class="editarGrey" onclick="ok()">Editar</button>
+                  <button class="excluirRed" onclick="ok()">Excluir</button>
+              </div>`
+              }
+              document.getElementsByClassName("inicio")[0].appendChild(item)
+          })
+          
+        })
+      }
+
     })
   }
 
-  setarCardapio(id_cardapio){
+  setarCardapio(id_cardapio) {
     console.log(id_cardapio)
     localStorage.setItem('id_cardapio', id_cardapio)
   }
