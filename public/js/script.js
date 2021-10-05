@@ -411,7 +411,12 @@ function estadoQuantidade1() {
   } else {
     qnt1.style.visibility = "visible"
     var el = document.getElementById('spanFunction');
-    el.remove()
+    if (true == el.classList.contains("h2-Add")) {
+      el.remove()
+    } else {
+      next()
+    }
+
   }
 }
 
@@ -438,11 +443,11 @@ function listaCardapio() {
   let datalist = document.getElementById("popo")
 
 
-  if (datalist.value == "Comidas") {
+  if (datalist.value == "Comida") {
     divComida.style.display = "flex"
     divBebida.style.display = "none"
   }
-  if (datalist.value == "Bebidas") {
+  if (datalist.value == "Bebida") {
     divBebida.style.display = "flex"
     divComida.style.display = "none"
   }
@@ -581,7 +586,7 @@ class Estabelecimento {
   }
 
   criarMesas() {
-    fetch('http://localhost:3000/estabelecimento/listar/' + localStorage.getItem("id_proprietario"), {
+    fetch('http://localhost:3000/estabelecimento/mesa/' + localStorage.getItem("estabelecimento"), {
 
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -860,10 +865,10 @@ class Funcionario {
 
   }
 
-  funcionario_quantidade(){
+  funcionario_quantidade() {
     fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
       method: 'GET',
-      headers:{ "content-type": "application/json" }
+      headers: { "content-type": "application/json" }
     }).then(result => {
       return result.json();
     }).then(data => {
@@ -875,10 +880,39 @@ class Funcionario {
     })
   }
 
+  listaFuncionario(){
+    fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+
+      for(let i = 0; i < data.quantidade; i++){
+        let funcionario = document.createElement('div')
+        funcionario.classList.add('div-cadastrado')
+
+        funcionario.innerHTML = `<div class="span-cadastrado">
+        <span class="nome-cadastrado">${data.funcionario[i].nome_funcionario}</span>
+        <span>${data.funcionario[i].email}</span>
+    </div>
+    <div class="btn-cadastrado">
+        <button class="editarGrey" onclick="ok()">Editar</button>
+        <button class="excluirRed" onclick="ok()">Excluir</button>
+    </div>
+      `
+
+        document.getElementsByClassName("inicio")[0].appendChild(funcionario)
+      }
+
+
+    })
+  }
+
   dados_funcionario() {
     let funcionario = {}
 
-    /*var password = document.getElementById("senha")
+    var password = document.getElementById("senha")
     , confirm_password = document.getElementById("confSenha");
   
   function validatePassword() {
@@ -891,7 +925,7 @@ class Funcionario {
   }
   
   password.onchange = validatePassword;
-  confirm_password.onkeyup = validatePassword;*/
+  confirm_password.onkeyup = validatePassword;
 
     funcionario.id = 0;
     funcionario.nome_funcionario = document.getElementById('nome_funcionario').value;
@@ -958,10 +992,25 @@ var funcionario = new Funcionario
 
 class Cardapio {
 
-  quantidade_cardapio(){
+  constructor() {
+    this.arrayCardapio = []
+  }
+
+
+  deletarCardapio(id_cardapio){
+    fetch('http://localhost:3000/cardapio/remover/' + id_cardapio, {
+      method: 'DELETE',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      //document.location.reload(true)
+    })
+  }
+  quantidade_cardapio() {
     fetch('http://localhost:3000/cardapio/quantidade/' + localStorage.getItem('estabelecimento'), {
       method: 'GET',
-      headers:{ "content-type": "application/json" }
+      headers: { "content-type": "application/json" }
     }).then(result => {
       return result.json();
     }).then(data => {
@@ -973,26 +1022,142 @@ class Cardapio {
   }
 
   addCardapio() {
-    fetch('http://localhost:3000/cardapio/verifica/' + localStorage.getItem('estabelecimento'), {
-      method: 'GET',
-      headers:{ "content-type": "application/json" }
+    fetch('http://localhost:3000/cardapio/cadastro/' + localStorage.getItem('estabelecimento'), {
+      method: 'POST',
+      headers: { "content-type": "application/json" },
     }).then(result => {
       return result.json();
     }).then(data => {
-      if (data.quantidade == 0) {
-        fetch('http://localhost:3000/cardapio/cadastro/' + localStorage.getItem('estabelecimento'), {
-          method: 'POST',
-          headers:{ "content-type": "application/json" },
+      localStorage.setItem('id_cardapio', data.cardapioCriado.id_cardapio)
+      location.assign('/cardapio/zerado')
+    })
+  }
+
+
+  criarCardapio() {
+    fetch('http://localhost:3000/cardapio/quantidade/' + localStorage.getItem('estabelecimento'), {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+
+      data.cardapio.forEach(estabele => {
+        this.arrayCardapio.push(estabele);
+      })
+
+      for (let i = 0; i < this.arrayCardapio.length; i++) {
+        fetch('http://localhost:3000/cardapio/item/' + this.arrayCardapio[i].id_cardapio, {
+          method: 'GET',
+          headers: { "content-type": "application/json" }
         }).then(result => {
           return result.json();
         }).then(data => {
-          localStorage.setItem('id_cardapio', data.cardapioCriado.id_cardapio)
-          location.assign('/cardapio/zerado')
-        })
-      } else {
-        location.assign('/cardapio')
+
+          let cardapio = document.createElement('div')
+          cardapio.classList.add('div-cadastrado')
+
+          cardapio.innerHTML = `<div class="span-cadastrado">
+      <span class="nome-cadastrado">Cardápio ${[i]}</span>
+      <span>${data.quantidade} itens</span>
+      <span>28/07/2021</span>
+  </div>
+  <div class="btn-cadastrado">
+     <a href="/cardapio/lista"> <button class="editarGrey" onclick="cardapio.setarCardapio(${this.arrayCardapio[i].id_cardapio})" >Editar</button></a>
+     <button class="excluirRed" onclick="cardapio.deletarCardapio(${this.arrayCardapio[i].id_cardapio})">Excluir</button>
+  </div>`
+
+          document.getElementsByClassName("selecionado")[0].appendChild(cardapio)
+        });
       }
+    });
+  }
+
+  listaCardapio() {
+    fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      for(let i = 0; i < data.quantidade; i++){
+        console.log(data)
+        let medidas = data.cardapio[i].id_medidas
+        let marcas = data.cardapio[i].id_marcas
+        let nome_comida = data.cardapio[i].nome_comida
+        let preco = data.cardapio[i].preco
+        let tipo = document.getElementById('tipo').value
+        console.table(tipo)
+        fetch('http://localhost:3000/cardapio/tipo/' + tipo, {
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(result => {
+          return result.json()
+        }).then(data => {
+  
+          console.log(data)
+  
+          fetch('http://localhost:3000/marca/pegar/' + marcas, {
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(result => {
+            return result.json()
+          }).then(data => {
+            marcas = data.marcas[0].marca
+          })
+          localStorage.setItem("id_item_tipo", data.tipos[0].id_item_tipo)
+  
+          fetch('http://localhost:3000/medida/pegar/' + medidas, {
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(result => {
+            return result.json()
+          }).then(data => {
+            medidas = data.medidas[0].medida
+  
+            let item = document.createElement('div')
+              item.classList.add('div-cadastrado')
+              item.setAttribute("id", "divComida");
+
+              console.log()
+              if (localStorage.getItem("id_item_tipo") == 2) {
+                console.log("entrou")
+                item.innerHTML = `<div class="span-cadastrado">
+                  <span class="nome-cadastrado">${nome_comida}</span>
+                  <span>${medidas}</span>
+                  <span>R$:${preco}</span>
+              </div>
+              <div class="btn-cadastrado">
+                  <button class="editarGrey" onclick="ok()">Editar</button>
+                  <button class="excluirRed" onclick="ok()">Excluir</button>
+              </div>`
+  
+              } if(localStorage.getItem("id_item_tipo") == 1) {
+                item.innerHTML = `        <div class="span-cadastrado">
+                  <span class="nome-cadastrado" id="search_name">${marcas}</span>
+                  <span>${medidas}</span>
+                  <span>R$:${preco}</span>
+              </div>
+              <div class="btn-cadastrado">
+                  <button class="editarGrey" onclick="ok()">Editar</button>
+                  <button class="excluirRed" onclick="ok()">Excluir</button>
+              </div>`
+              }
+              document.getElementsByClassName("inicio")[0].appendChild(item)
+          })
+          
+        })
+      }
+
     })
+  }
+
+  setarCardapio(id_cardapio) {
+    console.log(id_cardapio)
+    localStorage.setItem('id_cardapio', id_cardapio)
   }
 
   setarBebida() {
@@ -1008,6 +1173,101 @@ class Cardapio {
 
 var cardapio = new Cardapio
 
+
+class Comida {
+  constructor() {
+    this.arrayComida = []
+    this.editId = null
+  }
+  cadastrar_comida() {
+    let comida = this.dadosComida();
+
+    if (this.verificaComida(comida)) {
+      if (this.editId == null) {
+        this.addComida(comida)
+      } else {
+
+      }
+
+    }
+
+  }
+  addComida(comida) {
+
+    fetch('http://localhost:3000/medida/' + comida.id_medidas, {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+
+      comida.id_medidas = data.medidas[0].id_medidas
+
+      fetch('http://localhost:3000/item/cadastro/', {
+        method: 'POST',
+        headers:
+          { "content-type": "application/json" },
+        body: JSON.stringify(comida)
+
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+
+        comida.id_cardapio = data.itemCriado.id_cardapio;
+        comida.id_medidas = data.itemCriado.id_medidas;
+        comida.nome_comida = data.itemCriado.nome_comida;
+        comida.id_item_tipo = data.itemCriado.id_item_tipo;
+        comida.preco = data.itemCriado.preco;
+
+        this.arrayComida.push(comida);
+        location.assign('/cardapio/comida/sucesso')
+      });
+    });
+  }
+
+  dadosComida() {
+    let comida = {}
+    comida.id = 0;
+    comida.id_cardapio = localStorage.getItem('id_cardapio')
+    comida.id_item_tipo = localStorage.getItem('id_item_tipo')
+    comida.nome_comida = document.getElementById('comida').value
+    comida.id_medidas = document.getElementById('medida').value;
+    comida.preco = document.getElementById('preco').value
+
+    console.log(comida)
+    return comida;
+  }
+
+  verificaComida(comida) {
+    let msg = '';
+
+    if (funcionario.nome_funcionario == "") {
+      msg += '- Informe o Nome'
+    }
+    if (funcionario.email == "") {
+      msg += '- Informe o E-mail'
+    }
+    if (funcionario.login == "") {
+      msg += '- Informe o login'
+    }
+    if (funcionario.senha == "") {
+      msg += '- Insira a Senha'
+    }
+    if (msg != '') {
+      alert(msg);
+      return false
+    }
+
+
+    return true;
+
+  }
+
+}
+
+var comida = new Comida
+
+
 class Bebida {
 
   constructor() {
@@ -1017,7 +1277,7 @@ class Bebida {
   cadastrar_bebida() {
     let bebida = this.dadosBebida();
 
-    if (this.vericaBebida(bebida)) {
+    if (this.verificaBebida(bebida)) {
       if (this.editId == null) {
         this.addBebida(bebida)
       } else {
@@ -1034,7 +1294,7 @@ class Bebida {
     }).then(result => {
       return result.json();
     }).then(data => {
-      bebida.id_bebida_tipo= data.bebida[0].id_bebida_tipo;
+      bebida.id_bebida_tipo = data.bebida[0].id_bebida_tipo;
 
 
       fetch('http://localhost:3000/medida/' + bebida.id_medidas, {
@@ -1059,18 +1319,18 @@ class Bebida {
             headers:
               { "content-type": "application/json" },
             body: JSON.stringify(bebida)
-            
+
           }).then(result => {
             return result.json();
           }).then(data => {
-      
+
             bebida.id_cardapio = data.itemCriado.id_cardapio;
             bebida.id_item_tipo = data.itemCriado.id_item_tipo;
-            bebida.id_bebida_tipo= data.itemCriado.id_bebida_tipo;
+            bebida.id_bebida_tipo = data.itemCriado.id_bebida_tipo;
             bebida.id_marcas = data.itemCriado.id_marcas;
             bebida.id_medidas = data.itemCriado.id_medidas;
             bebida.preco = data.itemCriado.preco;
-      
+
             this.arrayBebida.push(bebida);
             location.assign('/cardapio/bebida/sucesso')
           });
@@ -1084,7 +1344,7 @@ class Bebida {
     bebida.id = 0;
     bebida.id_cardapio = localStorage.getItem('id_cardapio')
     bebida.id_item_tipo = localStorage.getItem('id_item_tipo')
-    bebida.id_bebida_tipo= document.getElementById('tipo_bebida').value;
+    bebida.id_bebida_tipo = document.getElementById('tipo_bebida').value;
     bebida.id_marcas = document.getElementById('marca').value;
     bebida.id_medidas = document.getElementById('medida').value;
     bebida.preco = document.getElementById('preco').value
@@ -1092,7 +1352,7 @@ class Bebida {
     return bebida;
   }
 
-  vericaBebida(bebida) {
+  verificaBebida(bebida) {
     let msg = '';
 
     if (funcionario.nome_funcionario == "") {
@@ -1119,3 +1379,5 @@ class Bebida {
 }
 
 var bebida = new Bebida
+
+

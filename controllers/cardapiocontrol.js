@@ -52,8 +52,8 @@ exports.patchCardapio = async ( req, res ) => {
 exports.deleteCardapio = async ( req, res ) => {
 
     try {
-        const query = 'DELETE from cardapio WHERE id_estabelecimento = ?'
-        const result = await mysql.execute( query, [ req.body.id_estabelecimento ] );
+        const query = 'DELETE from cardapio WHERE id_cardapio = ?'
+        const result = await mysql.execute( query, [ req.params.id_cardapio ] );
 
         const response = {
             mensagem: 'cardapio removido com sucesso',
@@ -63,7 +63,8 @@ exports.deleteCardapio = async ( req, res ) => {
         return res.status( 201 ).send( response );
     }
     catch ( error ) {
-        return res.status( 500 ).send( error )
+        console.log(error)
+        return res.status( 500 ).send( { error: error } )
     }
 
 }
@@ -157,4 +158,61 @@ exports.getQuantidade = async ( req, res ) => {
     } catch ( error ) {
         return res.status( 500 ).send( { Erro: error } )
     }
+}
+
+exports.getItem = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM itens_do_cardapio
+        INNER JOIN cardapio
+        ON itens_do_cardapio.id_cardapio = cardapio.id_cardapio
+        WHERE itens_do_cardapio.id_cardapio = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_cardapio ] );
+
+        const response = {
+            quantidade: result.length,
+            cardapio: result.map( card => {
+                return{
+                    id_cardapio: card.id_cardapio,
+                    id_item_tipo: card.id_item_tipo,
+                    id_medidas: card.id_medidas,
+                    id_marcas: card.id_marcas,
+                    nome_comida: card.nome_comida,
+                    preco: card.preco
+                    //cep: card.cep,
+                    //endereco: card.endereco,
+                    //mesa: card.mesa,
+                    
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+}
+
+exports.getTipo = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM item_tipo WHERE tipo = ?;`
+        
+        const result = await mysql.execute( query, [req.params.tipo ] );
+
+        const response = {
+            tipos: result.map( tip => {
+                return{
+                    id_item_tipo: tip.id_item_tipo,
+                    tipo: tip.tipo
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+
 }
