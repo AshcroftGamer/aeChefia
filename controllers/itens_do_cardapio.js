@@ -27,7 +27,7 @@ exports.postItens = async ( req, res ) => {
                 id_bebida_tipo: req.body.id_bebida_tipo,
                 id_marcas: req.body.id_marcas,
                 id_medidas: req.body.id_medidas,
-                comida: req.body.nome_comida,
+                nome_comida: req.body.nome_comida,
                 preco: req.body.preco
             }
         }
@@ -151,5 +151,66 @@ exports.verifica = async ( req, res ) => {
 
 }
 
+exports.getItens = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM itens_do_cardapio
+        INNER JOIN cardapio
+        ON itens_do_cardapio.id_cardapio = cardapio.id_cardapio
+        WHERE itens_do_cardapio.id_cardapio = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_cardapio ] );
 
+        const response = {
+            quantidade: result.length,
+            cardapio: result.map( card => {
+                return{
+                    id_cardapio: card.id_cardapio,
+                    id_estabelecimento: card.id_estabelecimento,
+                    //nome_estabelecimento: card.nome_estabelecimento,
+                    //logo: card.logo,
+                    //cep: card.cep,
+                    //endereco: card.endereco,
+                    //mesa: card.mesa,
+                    id_proprietario: card.id_proprietario
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+}
+
+exports.getItensTipo = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM itens_do_cardapio
+        INNER JOIN item_tipo
+        ON itens_do_cardapio.id_item_tipo = item_tipo.id_item_tipo
+        WHERE itens_do_cardapio.id_item_tipo = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_item_tipo ] );
+
+        const response = {
+            quantidade: result.length,
+            produtos: result.map( tipo => {
+                return{
+                    id_itens_do_cardapio: tipo.id_itens_do_cardapio,
+                    id_item_tipo: tipo.id_item_tipo,
+                    id_bebida_tipo: tipo.id_bebida_tipo,
+                    id_marcas: tipo.id_marcas,
+                    id_medidas: tipo.id_medidas,
+                    nome_comida: tipo.nome_comida,
+                    preco: tipo.preco,
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+}
 

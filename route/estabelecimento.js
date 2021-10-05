@@ -44,6 +44,8 @@ route.post( '/cadastro', upload.single( 'logo' ), controller.postEstab );
 
 route.get( '/listar/:id_proprietario', controller.getEstabProp );
 
+route.get('/mesa/:id_estabelecimento', controller.getUmEstabelecimento);
+
 route.get( '/:nome_estabelecimento', controller.getNomeEstabelecimento);
 
 

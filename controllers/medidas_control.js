@@ -46,3 +46,26 @@ exports.getUma = async(req, res) => {
     }
 
 }
+
+exports.getMedidas = async(req, res) => {
+    try {
+        const query = `SELECT * FROM medidas WHERE id_medidas = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_medidas ] );
+
+        const response = { 
+            medidas: result.map( mede => {
+                return{
+                    id_medidas: mede.id_medidas,
+                    medida: mede.medida
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+
+}
