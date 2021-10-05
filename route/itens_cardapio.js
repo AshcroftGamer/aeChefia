@@ -4,6 +4,10 @@ const controller = require( '../controllers/itens_do_cardapio' );
 
 route.get('/bebida', (req, res) => {
     res.sendFile(__basedir + '/public/pages/buscar-bebida.html')
+});
+
+route.get('/comida', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/buscar-comida.html')
 })
 
 
