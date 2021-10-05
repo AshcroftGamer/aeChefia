@@ -21,11 +21,10 @@
             <span></span>
             <span></span>
             <ul id="menu">
-              <a href="#"><li><a href="funcionario.html">Funcionario</a></li></a>
-              <a href="#"><li><a href="/">Login</a></li></a>
-              <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
+              <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
+              <a href="#"><li><a href="/">Adm</a></li></a>
+              <a href="#" ><li> <a href="/cadastro">Login</a></li></a>
               <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
-              <a href="#"><li><a href="/cardapio">Cardapio</a></li></a>
               
             </ul>
           </div>
@@ -53,16 +52,28 @@
 
     <div class="inputs">
         <label style="width: auto;" class="label-listas">Cardápios cadastrados</label>
-        <input onchange="listaCardapio()" id="popo" style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown"
+        <!-- <input    type="text" placeholder="Selecione uma opção" class="dropdown"
         name="city" list="cityname">
     <datalist  id="cityname">
-        <option value="Comidas">
-        <option value="Bebidas">
+
         <option value="">
-    </datalist>
+    </datalist> -->
+
+    <select name="Item_cardapio" id="popo" style="color: black;" onchange="listaCardapio()" type="text" class="dropdown">
+        <option value="Bebidas">Bebidas</option>
+        <option value="Comidas">Comidas</option>
+      </select>
     <div class="inputSpacing"></div>
 
-    <input style="margin-left: 10px;" class="inputLine" placeholder="Buscar por..." type="text"> <br>
+    <div class="inputs">
+        <form>
+            <div style="width: 87%;">
+              <input style="width: 100%;"  class="inputLine" type="search" id="mySearch" name="q"
+              placeholder="Buscar bebidas" size="30">
+              <!-- <button>Search</button> -->
+            </div>
+          </form>
+    </div>
 
     </div>
 

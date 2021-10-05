@@ -454,12 +454,8 @@ function selecionar_estabelecimento() {
   let div2 = document.getElementById('quantidade2')
   console.log(a.value)
 
-<<<<<<< HEAD
   a.style.color= '#666666'
 
-=======
-  a.style.color = '#666666'
->>>>>>> 71689140de18d7411ef766267f253c5bc93cfc87
   this.estadoQuantidade1();
   this.estadoQuantidade2();
   this.estabelecimento.escolherEstabelecimento()
