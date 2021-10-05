@@ -880,10 +880,39 @@ class Funcionario {
     })
   }
 
+  listaFuncionario(){
+    fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+
+      for(let i = 0; i < data.quantidade; i++){
+        let funcionario = document.createElement('div')
+        funcionario.classList.add('div-cadastrado')
+
+        funcionario.innerHTML = `<div class="span-cadastrado">
+        <span class="nome-cadastrado">${data.funcionario[i].nome_funcionario}</span>
+        <span>${data.funcionario[i].email}</span>
+    </div>
+    <div class="btn-cadastrado">
+        <button class="editarGrey" onclick="ok()">Editar</button>
+        <button class="excluirRed" onclick="ok()">Excluir</button>
+    </div>
+      `
+
+        document.getElementsByClassName("inicio")[0].appendChild(funcionario)
+      }
+
+
+    })
+  }
+
   dados_funcionario() {
     let funcionario = {}
 
-    /*var password = document.getElementById("senha")
+    var password = document.getElementById("senha")
     , confirm_password = document.getElementById("confSenha");
   
   function validatePassword() {
@@ -896,7 +925,7 @@ class Funcionario {
   }
   
   password.onchange = validatePassword;
-  confirm_password.onkeyup = validatePassword;*/
+  confirm_password.onkeyup = validatePassword;
 
     funcionario.id = 0;
     funcionario.nome_funcionario = document.getElementById('nome_funcionario').value;
@@ -1108,7 +1137,7 @@ class Cardapio {
   
               } if(localStorage.getItem("id_item_tipo") == 1) {
                 item.innerHTML = `        <div class="span-cadastrado">
-                  <span class="nome-cadastrado">${marcas}</span>
+                  <span class="nome-cadastrado" id="search_name">${marcas}</span>
                   <span>${medidas}</span>
                   <span>R$:${preco}</span>
               </div>
@@ -1350,3 +1379,5 @@ class Bebida {
 }
 
 var bebida = new Bebida
+
+

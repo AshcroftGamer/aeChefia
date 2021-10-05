@@ -84,8 +84,8 @@ exports.getQuantidade = async ( req, res ) => {
                 return{
                     id_funcionario: funci.id_funcionario,
                     id_estabelecimento: funci.id_estabelecimento,
-                    //nome_estabelecimento: funci.nome_estabelecimento,
-                    //logo: funci.logo,
+                    nome_funcionario: funci.nome_funcionario,
+                    email: funci.email,
                     //cep: funci.cep,
                     //endereco: funci.endereco,
                     //mesa: funci.mesa,

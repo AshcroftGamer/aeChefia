@@ -69,6 +69,10 @@ app.get( '/teste', ( req, res ) => {
 } )
 
 
+app.get('/administrar', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/funcionario-zerado.html')
+})
+
 /*
 //! TELA DE ERROR
 app.use( '*', ( req, res ) => {

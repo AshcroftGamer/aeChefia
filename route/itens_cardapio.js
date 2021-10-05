@@ -2,6 +2,10 @@ const route = require( 'express' ).Router();
 
 const controller = require( '../controllers/itens_do_cardapio' );
 
+route.get('/bebida', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/buscar-bebida.html')
+})
+
 
 route.get( '/todos', controller.getTodos );
 
