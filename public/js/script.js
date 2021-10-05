@@ -341,45 +341,7 @@ function criarDivCardapio() {
   //Pego o ID
   let id = getNextId();
   //Crio a DIV
-  let divElement = document.createElement("div");
 
-  var conteudoNovo = document.createElement("span");
-  var conteudoNovo2 = document.createElement("span");
-  var conteudoNovo3 = document.createElement("span");
-
-  var span1 = document.createTextNode("Itaipava ")
-  var span2 = document.createTextNode("600ml")
-  var span3 = document.createTextNode("R$:10,00")
-
-  conteudoNovo.appendChild(span1);
-  conteudoNovo2.appendChild(span2);
-  conteudoNovo3.appendChild(span3);
-
-
-  divElement.appendChild(conteudoNovo);
-  divElement.appendChild(conteudoNovo2);
-  divElement.appendChild(conteudoNovo3);
-  //Pego a DIV onde a nova DIV será criada, sempre na DIV mãe
-  let divMae = document.getElementById("mesas");
-
-  //A ideia do ID é que ele seja um elemento único, ou seja, não se repita
-  divElement.setAttribute('id', 'box' + id.toString());
-
-  //CSS
-
-  divElement.classList.add("itens-cardapio")
-  divElement.classList.add("bounceIn")
-  conteudoNovo.classList.add("itens-cardapio-span")
-
-  //Essa parte é mais para deixar claro que oelement+ id.toString();
-
-  //Adiciono a nova DIV na DIV mãe
-  //Aqui poderia ser por exemplo document.body.appendChild, adicionando assim o elemento criado diretamente no body
-  divMae.appendChild(divElement);
-  if (id >= 4) {
-    let footer = document.getElementById('footer');
-    footer.style.position = 'unset'
-  }
   // document.body.appendChild(divElement)
   console.log("rodou")
 }
@@ -880,7 +842,7 @@ class Funcionario {
     })
   }
 
-  listaFuncionario(){
+  listaFuncionario() {
     fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
       method: 'GET',
       headers: { "content-type": "application/json" }
@@ -888,7 +850,7 @@ class Funcionario {
       return result.json();
     }).then(data => {
 
-      for(let i = 0; i < data.quantidade; i++){
+      for (let i = 0; i < data.quantidade; i++) {
         let funcionario = document.createElement('div')
         funcionario.classList.add('div-cadastrado')
 
@@ -913,19 +875,19 @@ class Funcionario {
     let funcionario = {}
 
     var password = document.getElementById("senha")
-    , confirm_password = document.getElementById("confSenha");
-  
-  function validatePassword() {
-    if (password.value != confirm_password.value) {
-      confirm_password.setCustomValidity("Senhas diferentes!");
-      alert('passei')
-    } else {
-      confirm_password.setCustomValidity('');
+      , confirm_password = document.getElementById("confSenha");
+
+    function validatePassword() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Senhas diferentes!");
+        alert('passei')
+      } else {
+        confirm_password.setCustomValidity('');
+      }
     }
-  }
-  
-  password.onchange = validatePassword;
-  confirm_password.onkeyup = validatePassword;
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
 
     funcionario.id = 0;
     funcionario.nome_funcionario = document.getElementById('nome_funcionario').value;
@@ -997,7 +959,7 @@ class Cardapio {
   }
 
 
-  deletarCardapio(id_cardapio){
+  deletarCardapio(id_cardapio) {
     fetch('http://localhost:3000/cardapio/remover/' + id_cardapio, {
       method: 'DELETE',
       headers: { "content-type": "application/json" }
@@ -1080,7 +1042,7 @@ class Cardapio {
     }).then(result => {
       return result.json();
     }).then(data => {
-      for(let i = 0; i < data.quantidade; i++){
+      for (let i = 0; i < data.quantidade; i++) {
         console.log(data)
         let medidas = data.cardapio[i].id_medidas
         let marcas = data.cardapio[i].id_marcas
@@ -1095,9 +1057,9 @@ class Cardapio {
         }).then(result => {
           return result.json()
         }).then(data => {
-  
+
           console.log(data)
-  
+
           fetch('http://localhost:3000/marca/pegar/' + marcas, {
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
@@ -1108,7 +1070,7 @@ class Cardapio {
             marcas = data.marcas[0].marca
           })
           localStorage.setItem("id_item_tipo", data.tipos[0].id_item_tipo)
-  
+
           fetch('http://localhost:3000/medida/pegar/' + medidas, {
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
@@ -1117,15 +1079,15 @@ class Cardapio {
             return result.json()
           }).then(data => {
             medidas = data.medidas[0].medida
-  
-            let item = document.createElement('div')
-              item.classList.add('div-cadastrado')
-              item.setAttribute("id", "divComida");
 
-              console.log()
-              if (localStorage.getItem("id_item_tipo") == 2) {
-                console.log("entrou")
-                item.innerHTML = `<div class="span-cadastrado">
+            let item = document.createElement('div')
+            item.classList.add('div-cadastrado')
+            item.setAttribute("id", "divComida");
+
+            console.log()
+            if (localStorage.getItem("id_item_tipo") == 2) {
+              console.log("entrou")
+              item.innerHTML = `<div class="span-cadastrado">
                   <span class="nome-cadastrado">${nome_comida}</span>
                   <span>${medidas}</span>
                   <span>R$:${preco}</span>
@@ -1134,9 +1096,9 @@ class Cardapio {
                   <button class="editarGrey" onclick="ok()">Editar</button>
                   <button class="excluirRed" onclick="ok()">Excluir</button>
               </div>`
-  
-              } if(localStorage.getItem("id_item_tipo") == 1) {
-                item.innerHTML = `        <div class="span-cadastrado">
+
+            } if (localStorage.getItem("id_item_tipo") == 1) {
+              item.innerHTML = `        <div class="span-cadastrado">
                   <span class="nome-cadastrado" id="search_name">${marcas}</span>
                   <span>${medidas}</span>
                   <span>R$:${preco}</span>
@@ -1145,10 +1107,10 @@ class Cardapio {
                   <button class="editarGrey" onclick="ok()">Editar</button>
                   <button class="excluirRed" onclick="ok()">Excluir</button>
               </div>`
-              }
-              document.getElementsByClassName("inicio")[0].appendChild(item)
+            }
+            document.getElementsByClassName("inicio")[0].appendChild(item)
           })
-          
+
         })
       }
 
@@ -1262,6 +1224,58 @@ class Comida {
     return true;
 
   }
+  criarComida() {
+
+    fetch('http://localhost:3000/item/' + localStorage.getItem("id_item_tipo"), {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      console.log(data)
+      fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        for (let i = 0; i < data.quantidade; i++) {
+          console.log(data)
+          let medidas = data.cardapio[i].id_medidas
+          let preco = data.cardapio[i].preco
+          let nome_comida = data.cardapio[i].nome_comida
+            console.log(data)
+            fetch('http://localhost:3000/medida/pegar/' + medidas, {
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              }
+            }).then(result => {
+              return result.json()
+            }).then(data => {
+              medidas = data.medidas[0].medida
+
+              let item = document.createElement('div')
+              item.classList.add("itens-cardapio")
+              item.classList.add("bounceIn")
+              item.setAttribute("id", "box0" + id.toString());
+              item.innerHTML = `
+                    <span class="nome-cadastrado">${nome_comida}</span>
+                    <span>${medidas}</span>
+                    <span>R$:${preco}</span>`
+
+              document.getElementsByClassName("mesas")[0].appendChild(item)
+
+              if (i >= 4) {
+                let footer = document.getElementById('footer');
+                footer.style.position = 'unset'
+              }
+            })         
+        }
+
+      })
+
+    })
+  }
 
 }
 
@@ -1285,6 +1299,73 @@ class Bebida {
       }
 
     }
+
+  }
+
+  criarBebida() {
+
+    fetch('http://localhost:3000/item/' + localStorage.getItem("id_item_tipo"), {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+
+      fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        for (let i = 0; i < data.quantidade; i++) {
+          console.log(data)
+          let medidas = data.cardapio[i].id_medidas
+          let marcas = data.cardapio[i].id_marcas
+          let preco = data.cardapio[i].preco
+            console.log(data)
+
+            fetch('http://localhost:3000/marca/pegar/' + marcas, {
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              }
+            }).then(result => {
+              return result.json()
+            }).then(data => {
+              console.log(data)
+              marcas = data.marcas[0].marca
+            })
+
+            fetch('http://localhost:3000/medida/pegar/' + medidas, {
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              }
+            }).then(result => {
+              return result.json()
+            }).then(data => {
+              medidas = data.medidas[0].medida
+
+              let item = document.createElement('div')
+              item.classList.add("itens-cardapio")
+              item.classList.add("bounceIn")
+              item.setAttribute("id", "box0" + id.toString());
+              item.innerHTML = `
+                    <span class="nome-cadastrado">${marcas}</span>
+                    <span>${medidas}</span>
+                    <span>R$:${preco}</span>`
+
+              document.getElementsByClassName("mesas")[0].appendChild(item)
+
+              if (i >= 4) {
+                let footer = document.getElementById('footer');
+                footer.style.position = 'unset'
+              }
+            })         
+        }
+
+      })
+    })
+
+
 
   }
   addBebida(bebida) {
