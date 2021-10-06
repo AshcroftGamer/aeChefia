@@ -556,8 +556,9 @@ class Estabelecimento {
     }).then(result => {
       return result.json()
     }).then(data => {
-      for (let i = 0; i < data.estabelecimento[0].mesa; i++) {
-        let id = [i];
+      console.log(data)
+      for (let mesa = 0; mesa < data.estabelecimento[0].mesa; mesa++) {
+        let id = [mesa];
 
         let divElement = document.createElement("div");
         var conteudoNovo = document.createTextNode(id);
@@ -566,6 +567,7 @@ class Estabelecimento {
         let divMae = document.getElementById("mesas");
 
         divElement.setAttribute('id', 'box' + id.toString());
+        divElement.setAttribute('onclick', 'comanda.mesa("' + [mesa] + '")')
 
         divElement.style.width = "18%";
         divElement.style.height = "66px";
@@ -578,6 +580,8 @@ class Estabelecimento {
 
         divElement.style.paddingTop = '23px'
         divElement.style.textAlign = 'center'
+
+
 
         divMae.appendChild(divElement);
 
@@ -1244,32 +1248,32 @@ class Comida {
           let medidas = data.cardapio[i].id_medidas
           let preco = data.cardapio[i].preco
           let nome_comida = data.cardapio[i].nome_comida
-            console.log(data)
-            fetch('http://localhost:3000/medida/pegar/' + medidas, {
-              headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-              }
-            }).then(result => {
-              return result.json()
-            }).then(data => {
-              medidas = data.medidas[0].medida
+          console.log(data)
+          fetch('http://localhost:3000/medida/pegar/' + medidas, {
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(result => {
+            return result.json()
+          }).then(data => {
+            medidas = data.medidas[0].medida
 
-              let item = document.createElement('div')
-              item.classList.add("itens-cardapio")
-              item.classList.add("bounceIn")
-              item.setAttribute("id", "box0" + id.toString());
-              item.innerHTML = `
+            let item = document.createElement('div')
+            item.classList.add("itens-cardapio")
+            item.classList.add("bounceIn")
+            item.setAttribute("id", "box0" + id.toString());
+            item.innerHTML = `
                     <span class="nome-cadastrado">${nome_comida}</span>
                     <span>${medidas}</span>
-                    <span>R$:${preco}</span>`
+                    <span value="${preco}">R$:${preco}</span>`
 
-              document.getElementsByClassName("mesas")[0].appendChild(item)
+            document.getElementsByClassName("mesas")[0].appendChild(item)
 
-              if (i >= 4) {
-                let footer = document.getElementById('footer');
-                footer.style.position = 'unset'
-              }
-            })         
+            if (i >= 4) {
+              let footer = document.getElementById('footer');
+              footer.style.position = 'unset'
+            }
+          })
         }
 
       })
@@ -1322,44 +1326,44 @@ class Bebida {
           let medidas = data.cardapio[i].id_medidas
           let marcas = data.cardapio[i].id_marcas
           let preco = data.cardapio[i].preco
+          console.log(data)
+
+          fetch('http://localhost:3000/marca/pegar/' + marcas, {
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(result => {
+            return result.json()
+          }).then(data => {
             console.log(data)
+            marcas = data.marcas[0].marca
+          })
 
-            fetch('http://localhost:3000/marca/pegar/' + marcas, {
-              headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-              }
-            }).then(result => {
-              return result.json()
-            }).then(data => {
-              console.log(data)
-              marcas = data.marcas[0].marca
-            })
+          fetch('http://localhost:3000/medida/pegar/' + medidas, {
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          }).then(result => {
+            return result.json()
+          }).then(data => {
+            medidas = data.medidas[0].medida
 
-            fetch('http://localhost:3000/medida/pegar/' + medidas, {
-              headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-              }
-            }).then(result => {
-              return result.json()
-            }).then(data => {
-              medidas = data.medidas[0].medida
-
-              let item = document.createElement('div')
-              item.classList.add("itens-cardapio")
-              item.classList.add("bounceIn")
-              item.setAttribute("id", "box0" + id.toString());
-              item.innerHTML = `
+            let item = document.createElement('div')
+            item.classList.add("itens-cardapio")
+            item.classList.add("bounceIn")
+            item.setAttribute("id", "box0" + id.toString());
+            item.innerHTML = `
                     <span class="nome-cadastrado">${marcas}</span>
                     <span>${medidas}</span>
-                    <span>R$:${preco}</span>`
+                    <span value="${preco}">R$:${preco}</span>`
 
-              document.getElementsByClassName("mesas")[0].appendChild(item)
+            document.getElementsByClassName("mesas")[0].appendChild(item)
 
-              if (i >= 4) {
-                let footer = document.getElementById('footer');
-                footer.style.position = 'unset'
-              }
-            })         
+            if (i >= 4) {
+              let footer = document.getElementById('footer');
+              footer.style.position = 'unset'
+            }
+          })
         }
 
       })
@@ -1482,3 +1486,79 @@ searchBar.addEventListener('keyup', (e) => {
     // displayCharacters(filtredCharacters)
 
 })
+class Comanda {
+
+  mesa(mesa) {
+    localStorage.setItem('mesa', mesa)
+    location.assign('/comanda/cliente')
+  }
+
+  carregarMesa() {
+    document.getElementById('mesa').value = `${localStorage.getItem('mesa')}`
+  }
+  listaCliente() {
+    fetch('http://localhost:3000/comanda/estabelecimento/' + localStorage.getItem("estabelecimento"), {
+      method: 'GET',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      
+      fetch('http://localhost:3000/comanda/cliente/' + localStorage.getItem("mesa"), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        for (let i = 0; i < data.quantidade; i++) {
+          console.log(data)
+          console.log(data.comanda[i].cliente)
+          let comandar = document.createElement('option')
+          comandar.setAttribute("value", data.comanda[i].id_comanda)
+          comandar.innerHTML = `${data.comanda[i].cliente}`
+          document.getElementsByClassName("dropdown_comanda")[0].appendChild(comandar)
+        }
+  
+      })
+    
+    })
+
+  }
+  selecionarCliente(){
+    localStorage.setItem("id_comanda", document.getElementById('id_comanda').value);
+  }
+
+  async adicionarCliente() {
+
+    let comanda = {}
+
+    comanda.mesa = document.getElementById('mesa').value;
+    comanda.cliente = document.getElementById('cliente').value;
+    comanda.telefone = document.getElementById('telefone').value;
+    comanda.status = true
+    comanda.id_estabelecimento = localStorage.getItem("estabelecimento")
+    console.log(comanda.id_estabelecimento)
+    fetch('http://localhost:3000/comanda/cadastro/', {
+      method: 'POST',
+      headers:
+        { "content-type": "application/json" },
+      body: JSON.stringify(comanda)
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      console.log("data")
+      console.log(data)
+      comanda.mesa = data.cliente.mesa;
+      comanda.cliente = data.cliente.cliente;
+      comanda.telefone = data.cliente.telefone;
+      comanda.status = data.cliente.status;
+      comanda.id_estabelecimento = data.cliente.id_estabelecimento;
+
+      location.assign('/comanda/sucesso')
+    });
+  }
+}
+
+
+
+var comanda = new Comanda
