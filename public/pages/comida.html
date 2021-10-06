@@ -43,14 +43,14 @@
     <div style="text-align: inherit;" class="inputs">
         
        <label style=" place-self: inherit;width: 83%;color: #666666;">Nome</label>
-        <input class="inputLine" placeholder="Ex: Ribs Fries" type="text"> <br>
+        <input class="inputLine" placeholder="Ex: Ribs Fries" type="text" id="comida" > <br>
         <label style=" place-self: inherit;width: 83%;color: #666666;">Tipo de porção</label>
-        <input class="inputLine" placeholder="Ex: M" type="text"> <br>
+        <input class="inputLine" placeholder="Ex: M" type="text" id="medida"> <br>
         <label style=" place-self: inherit;width: 83%;color: #666666;">Valor da venda</label>
         <!-- <input class="inputLine" placeholder="" type="text"> <br> -->
         <div style="width: 87%;" class="input-icon" style="text-align: center;">
             <button class="Send">R$</button>
-            <input onkeyup="k(this);" class="Post" placeholder="0,00" type="number">
+            <input onkeyup="k(this);" class="Post" placeholder="0,00" type="number" id="preco">
         </div>
 
     </div>
@@ -63,7 +63,7 @@
         <option>Relish</option>
     </select> -->
     <footer class="divcenter footer footerAdd">   
-        <button class="btn redBtn redBtn-cad" onclick="ok()">Inserir comida</button><br>
+        <button class="btn redBtn redBtn-cad" onclick="comida.cadastrar_comida()">Inserir comida</button><br>
     </footer>
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 </body>

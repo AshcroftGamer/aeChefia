@@ -12,7 +12,7 @@
     <title>Criar cardápio</title>
 </head>
 
-<body onload="jwt_auth_load()">
+<body onload="jwt_auth_load(); cardapio.criarCardapio()"  class="selecionado">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -75,31 +75,6 @@
         <label style="width: auto;" class="label-listas">Cardápios cadastrados</label>
     </div>
 
-
-    <div class="div-cadastrado">
-        <div class="span-cadastrado">
-            <span class="nome-cadastrado">Cardápio 1</span>
-            <span>35 itens</span>
-            <span>28/07/2021</span>
-        </div>
-        <div class="btn-cadastrado">
-            <button class="editarGrey" onclick="ok()">Editar</button>
-            <button class="excluirRed" onclick="ok()">Excluir</button>
-        </div>
-    </div>
-
-
-    <div  class="div-cadastrado">
-        <div class="span-cadastrado">
-            <span class="nome-cadastrado">Cardápio 2</span>
-            <span>35 itens</span>
-            <span>28/07/2021</span>
-        </div>
-        <div class="btn-cadastrado">
-            <button class="editarGrey" onclick="ok()">Editar</button>
-            <button class="excluirRed" onclick="ok()">Excluir</button>
-        </div>
-    </div>
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 </body>
 

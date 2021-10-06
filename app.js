@@ -1,6 +1,6 @@
 const express = require( 'express' );
 const app = express();
-const morgan = require( 'morgan' );
+//const morgan = require( 'morgan' );
 const cookieParser = require('cookie-parser');
 const bodyparser = require( 'body-parser' );
 
@@ -10,7 +10,7 @@ app.use( bodyparser.urlencoded( { extended: false } ) );
 app.use( bodyparser.json() );
 app.use( express.json() );
 app.use( cookieParser() );
-app.use(morgan('dev'))
+//app.use(morgan('dev'))
 
 
 app.use( express.static( __dirname + '/public' ) );
@@ -37,6 +37,7 @@ const rotaMedidas = require( './route/medida' );
 const rotaComanda = require( './route/comanda' );
 const rotaPedidoComanda = require( './route/pedido_comanda' );
 const rotaDashboard = require('./route/dashboard');
+const rotaMarca = require('./route/marca');
 
 
 app.use('/dashboard', rotaDashboard);
@@ -56,6 +57,8 @@ app.use( '/mesa', rotaMesa );
 app.use( '/cardapio', rotaCardapio );
 app.use( '/funcionario', rotaFuncionario );
 app.use( '/proprietario', rotaProprietario );
+app.use( '/marca', rotaMarca ) ;
+
 
 app.get( '/', ( req, res ) => {
     res.sendFile( __dirname + '/index.html' );
@@ -65,6 +68,10 @@ app.get( '/teste', ( req, res ) => {
     res.sendFile( __dirname + '/public/pages/links.html' );
 } )
 
+
+app.get('/administrar', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/funcionario-zerado.html')
+})
 
 /*
 //! TELA DE ERROR

@@ -11,8 +11,7 @@ exports.postEstab = async ( req, res ) => {
         const result = await mysql.execute( query,
             [
                 req.body.nome_estabelecimento,
-                // req.file.path.replace("public", " "),
-                req.body.logo,
+                req.file.path.replace("public", " "),
                 req.body.cep,
                 req.body.endereco,
                 req.body.mesa,
@@ -23,13 +22,12 @@ exports.postEstab = async ( req, res ) => {
             mensagem: 'Estabelecimento inserido com sucesso!',
             estabelecimentoCriado: {
                 id_estabelecimento: result.insertId,
-                nome: req.body.nome,
-                // logo: req.file.path,
-                logo: req.body.logo,
+                nome_estabelecimento: req.body.nome_estabelecimento,
+                logo: req.file.path,
                 cep: req.body.cep,
                 endereco: req.body.endereco,
                 mesa: req.body.mesa,
-                proprietario: req.body.id_proprietario
+                id_proprietario: req.body.id_proprietario
 
             }
         }
@@ -38,7 +36,6 @@ exports.postEstab = async ( req, res ) => {
 
     }
     catch ( error ) {
-        console.log( error )
         return res.status( 500 ).send( { err: error } )
     }
 
@@ -89,30 +86,32 @@ exports.deleteEstabelecimento = async ( req, res ) => {
 
 exports.getEstabelecimento = async ( req, res ) => {
     try {
-        await mysql.execute( 'SELECT * FROM estabelecimento', ( error, results ) => {
-            if ( error ) {
-                return res.status( 500 ).send( { Erro: error } )
-            }
+        /*const queryProprietario = 'SELECT * FROM proprietario WHERE id_proprietario = ?';
+        const resultProprietario = await mysql.execute(queryProprietario, [req.params.id_proprietario]);
+        if(resultProprietario.length == 0){
+            return res.status(404).send({ message: 'Proprietario não encontrado'})
+        }*/
+            const results = await mysql.execute( 'SELECT * FROM estabelecimento')
             const response = {
                 quantidade: results.length,
-                Estabelecimento: results.map( prod => {
+                estabelecimento: results.map( estab => {
                     return {
-                        id_estabelecimento: prod.id_estabelecimento,
-                        nome: prod.nome_estabelecimento,
-                        logo: prod.logo,
-                        cep: prod.cep,
-                        endereco: prod.endereco,
-                        mesa: prod.mesa,
-                        id_proprietario: prod.id_proprietario
+                        id_estabelecimento: estab.id_estabelecimento,
+                        nome_estabelecimento: estab.nome_estabelecimento,
+                        logo: estab.logo,
+                        cep: estab.cep,
+                        endereco: estab.endereco,
+                        mesa: estab.mesa,
+                        id_proprietario: estab.id_proprietario
                     }
 
                 } )
             }
             return res.status( 200 ).send( response );
-        } )
+        
     }
     catch ( error ) {
-
+        return res.status( 500 ).send( { error: error } )
     }
 
 }
@@ -122,30 +121,25 @@ exports.getEstabProp = async ( req, res ) => {
         const query = `SELECT * FROM estabelecimento
         INNER JOIN proprietario
         ON estabelecimento.id_proprietario = proprietario.id_proprietario
-        WHERE proprietario.email = ?;`
+        WHERE proprietario.id_proprietario = ?;`
         
-        const result = await mysql.execute( query,
-            [
-                req.params.email
-            ] );
-        console.log( result)
+        const result = await mysql.execute( query, [req.params.id_proprietario ] );
 
         const response = {
             quantidade: result.length,
-            Estabelecimento: result.map( prod => {
-                return {
-                    id_estalecimento: prod.id_estabelecimento,
-                    nome: prod.nome_estabelecimento,
-                    logo: prod.logo,
-                    cep: prod.cep,
-                    endereco: prod.endereco,
-                    mesa: prod.mesa,
-                    id_proprietario: prod.id_proprietario
+            estabelecimento: result.map( estab => {
+                return{
+                    id_estabelecimento: estab.id_estabelecimento,
+                    nome_estabelecimento: estab.nome_estabelecimento,
+                    logo: estab.logo,
+                    cep: estab.cep,
+                    endereco: estab.endereco,
+                    mesa: estab.mesa,
+                    id_proprietario: estab.id_proprietario
                 }
+            })
 
-            } )
-        }
-
+            }
         return res.status( 200 ).send( response )
 
     } catch ( error ) {
@@ -157,7 +151,6 @@ exports.verifica = async ( req, res ) => {
         const query = 'SELECT * FROM estabelecimento WHERE id_proprietario = ?'
 
         const result = await mysql.execute( query, [ req.body.id_proprietario ] );
-        console.log( result )
         const response = {
             quantidade: result.length,
             Estabelecimento: result.map( prod => {
@@ -178,8 +171,54 @@ exports.verifica = async ( req, res ) => {
 
     }
     catch ( error ) {
-        // console.log( error )
         return res.status( 500 ).send( { erro: "Nenhum estabelecimento encontrado!" } )
+    }
+
+}
+
+exports.getNomeEstabelecimento = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM estabelecimento WHERE nome_estabelecimento = ?;`
+        
+        const result = await mysql.execute( query, [req.params.nome_estabelecimento ] );
+
+        const response = {
+            quantidade: result.length,
+            estabelecimento: result.map( estab => {
+                return{
+                    id_estabelecimento: estab.id_estabelecimento,
+                    nome_estabelecimento: estab.nome_estabelecimento,
+                    mesa: estab.mesa
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+}
+
+exports.getUmEstabelecimento = async(req, res) => {
+    try {
+        const query = `SELECT * FROM estabelecimento WHERE id_estabelecimento = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_estabelecimento ] );
+
+        const response = {
+            estabelecimento: result.map( estab => {
+                return{
+                    id_estabelecimento: estab.id_estabelecimento,
+                    mesa: estab.mesa
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
     }
 
 }

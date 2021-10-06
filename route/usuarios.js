@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 
 route.post('/login', (req, res, next) => {
 
-    // console.log('entriu')
-    console.log(req.body.email);
 
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }) }
@@ -16,15 +14,13 @@ route.post('/login', (req, res, next) => {
             if (error) { return res.status(500).send({ error: error }) }
             if (results.length < 1) {
 
-                console.log('entriu 2')
-
                 return res.status(401).send({ mensagem: 'Falha na autenticação 1' })
             }
 
             if (req.body.google) {
 
                 let token = jwt.sign({
-                    id_usuario: results[0].id,
+                    id_proprietario: results[0].id_proprietario,
                     Nome: results[0].nome,
                     email: results[0].email,
                     Cpf: results[0].cpf,
@@ -45,21 +41,20 @@ route.post('/login', (req, res, next) => {
             } else {
                 bcrypt.compare(req.body.senha, results[0].senha, (err, result) => {
                     if (err) {
-                        console.log('entriu 3')
+                        
                         return res.status(401).send({ mensagem: 'Falha na autenticação 2' })
                     }
                     if (result) {
                         let token = jwt.sign({
-                            id_usuario: results[0].id,
+                            id_proprietario: results[0].id_proprietario,
                             Nome: results[0].nome,
                             email: results[0].email,
                             Cpf: results[0].cpf,
-                            telefone: results[0].telefone,
-                            id_tipo_cargo: results[0].id_tipo_cargo
+                            telefone: results[0].telefone
 
                         }, process.env.JWT_KEY,
                             {
-                                expiresIn: "1h"
+                                expiresIn: "8h"
                             });
                         return res.status(200).send({
                             mensagem: 'Autenticado com sucesso',

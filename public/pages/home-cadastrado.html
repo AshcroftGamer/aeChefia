@@ -12,7 +12,7 @@
   <title>home</title>
 </head>
 
-<body onload="estadoSpanHome(); jwt_auth_load(); alertEstab();">
+<body onload="estadoSpanHome(); jwt_auth_load(); proprietario.buscarProprietario();">
 
 
   <header class="headerMenor" onload="jwt_auth_load()">
@@ -32,7 +32,7 @@
             <li><a href="/">Login</a></li>
           </a>
           <a href="#">
-            <li> <a href="/cadastro">Cadastro</a></li>
+            <li> <a href="/administrar">adm</a></li>
           </a>
           <a href="#">
             <li> <a href="/mesa">Mesas</a> </li>
@@ -50,43 +50,35 @@
     </nav>
   </header>
   <div class="inputSpacing"></div>
-  <span class="spanHome">Olá Rai!</span>
+  <span class="spanHome" id="nomespan"></span>
   
-  <div class=" divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
+  <div class="vermelhao vermelhaoCadastrado">
+    <select name="Bares" onchange="estabelecimento.selecionar_estabelecimento()" id="estab_input" type="text" class="dropdown_estabelecimento">
+      <option>Escolha o Estabelecimento</option>
+    </select>
+   <a href="/mesa"><button class="btn borderBtn inverseBtn">Abrir caixa</button>      </a>   
+    <div class="footer footerAdd">
+    <h2 id="spanFunction" style="display: none;"  class="h2-Add">Você ainda não possui cardápios <br> 
+      e funcionários cadastrados:</h1>
 
     <div class="vermelhao vermelhaoCadastrado">
-      <!-- <button onclick="testeDiv()">teste</button> -->
-      <input onchange="selecionar_estabelecimento()" id="estab_input" type="text"
-        placeholder="Selecione o estabelecimento" class="dropdown" name="city" list="cityname">
-      <datalist id="cityname">
-        <option value="Teste1">
-        <option value="Bar Do Birão">
-        <option value="teste2">
-      </datalist>
-      <button class="btn borderBtn inverseBtn">Abrir caixa</button>
-      <div class="footer footerAdd">
-        <h2 id="spanFunction" style="display: none;" class="h2-Add">Você ainda não possui cardápios <br>
-          e funcionários cadastrados:</h1>
 
           <div class="card">
             <div class="card-div">
               <span class="spanAdd">Funcionários</span>
-              <a href="../pages/funcionario.html"><button class="btnAdd">+</button></a>
+              <a href="/funcionario"><button class="btnAdd">+</button></a>
               <input id="quantidade1" class="quantidadeAdd" type="text" value="" disabled />
-              <!-- <div id="quantidade1" class="quantidadeAdd">2</div> -->
 
             </div>
           </div>
           <div class="card">
             <div class="card-div">
               <span class="spanAdd">Cardápios</span>
-              <a href="../pages/cardapio-zerado.html"> <button class="btnAdd">+</button></a>
+              <a> <button class="btnAdd" onclick="cardapio.addCardapio()">+</button></a>
               <input id="quantidade2" class="quantidadeAdd" type="text" value="" disabled />
-              <!-- <div id="quantidade2" class="quantidadeAdd">4</div> -->
             </div>
           </div>
       </div>
-
 </body>
 
 </html>
