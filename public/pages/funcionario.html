@@ -23,22 +23,11 @@
         <span></span>
         <span></span>
         <ul id="menu">
-          <a href="#">
-            <li><a href="funcionario.html">Funcionario</a></li>
-          </a>
-          <a href="#">
-            <li><a href="/">Login</a></li>
-          </a>
-          <a href="#">
-            <li> <a href="/cadastro">Cadastro</a></li>
-          </a>
-          <a href="#">
-            <li> <a href="/mesa">Mesas</a> </li>
-          </a>
-          <a href="#">
-            <li><a href="/cardapio">Cardapio</a></li>
-          </a>
-
+          <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
+          <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+          <a href="#" ><li> <a href="/">Login</a></li></a>
+          <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
+          
         </ul>
       </div>
     </nav>
@@ -51,7 +40,7 @@
       <div class="inputSpacing"></div>
 
       <label for="nome">
-        <input class="inputLine" id="nome" name="nome" placeholder="Nome" type="text" required>
+        <input class="inputLine" id="nome_funcionario" name="nome" placeholder="Nome" type="text" required>
         <br>
       </label>
 
@@ -67,7 +56,7 @@
       <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
       <label for="senha">
         <div style="width: 87%;" class="input-icon" style="text-align: center;">
-          <input style="width: 100%;" class="Post" placeholder="Senha" id="senha" type="password">
+          <input style="width: 100%;" class="Post" placeholder="Senha" id="senha" type="password" required>
           <button onclick="ViewSenha()" type="button" class="SendIndex"><img id="olho" style="width: 50%;" src="/img/private.png"
               alt=""></button>
         </div>
@@ -76,14 +65,14 @@
       <label for="confSenha">
         <div style="width: 87%;" class="input-icon" style="text-align: center;">
 
-          <input style="width: 100%;" class="Post" placeholder="Confirmar senha" id="confSenha" type="password">
+          <input style="width: 100%;" class="Post" placeholder="Confirmar senha" id="confSenha" type="password" required>
           <button onclick="confirmarSenha()" type="button" class="SendIndex"><img id="olho1" style="width: 50%;"
               src="/img/private.png" alt=""></button>
         </div>
       </label>
       
       <footer class="divcenter footer footerAdd">
-        <button class="btn redBtn redBtn-cad" >Cadastrar funcionário</button><br>
+        <button onclick="funcionario.cadastrado()" class="btn redBtn redBtn-cad" >Cadastrar funcionário</button><br>
       </footer>
 
     </form>

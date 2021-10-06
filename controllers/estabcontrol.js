@@ -175,3 +175,50 @@ exports.verifica = async ( req, res ) => {
     }
 
 }
+
+exports.getNomeEstabelecimento = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM estabelecimento WHERE nome_estabelecimento = ?;`
+        
+        const result = await mysql.execute( query, [req.params.nome_estabelecimento ] );
+
+        const response = {
+            quantidade: result.length,
+            estabelecimento: result.map( estab => {
+                return{
+                    id_estabelecimento: estab.id_estabelecimento,
+                    nome_estabelecimento: estab.nome_estabelecimento,
+                    mesa: estab.mesa
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+}
+
+exports.getUmEstabelecimento = async(req, res) => {
+    try {
+        const query = `SELECT * FROM estabelecimento WHERE id_estabelecimento = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_estabelecimento ] );
+
+        const response = {
+            estabelecimento: result.map( estab => {
+                return{
+                    id_estabelecimento: estab.id_estabelecimento,
+                    mesa: estab.mesa
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+
+}

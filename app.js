@@ -37,6 +37,7 @@ const rotaMedidas = require( './route/medida' );
 const rotaComanda = require( './route/comanda' );
 const rotaPedidoComanda = require( './route/pedido_comanda' );
 const rotaDashboard = require('./route/dashboard');
+const rotaMarca = require('./route/marca');
 
 
 app.use('/dashboard', rotaDashboard);
@@ -56,6 +57,8 @@ app.use( '/mesa', rotaMesa );
 app.use( '/cardapio', rotaCardapio );
 app.use( '/funcionario', rotaFuncionario );
 app.use( '/proprietario', rotaProprietario );
+app.use( '/marca', rotaMarca ) ;
+
 
 app.get( '/', ( req, res ) => {
     res.sendFile( __dirname + '/index.html' );
@@ -65,6 +68,10 @@ app.get( '/teste', ( req, res ) => {
     res.sendFile( __dirname + '/public/pages/links.html' );
 } )
 
+
+app.get('/administrar', (req, res) => {
+    res.sendFile(__basedir + '/public/pages/funcionario-zerado.html')
+})
 
 /*
 //! TELA DE ERROR

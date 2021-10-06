@@ -12,7 +12,7 @@
     <title>Lista de Funcionários</title>
 </head>
 
-<body>
+<body class="inicio" onload="funcionario.listaFuncionario()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -23,13 +23,12 @@
             <span></span>
             <span></span>
             <ul id="menu">
-              <a href="#"><li><a href="funcionario.html">Funcionario</a></li></a>
-              <a href="#"><li><a href="/">Login</a></li></a>
-              <a href="#" ><li> <a href="/cadastro">Cadastro</a></li></a>
-              <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
-              <a href="#"><li><a href="/cardapio">Cardapio</a></li></a>
-              
-            </ul>
+                <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
+                <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                <a href="#" ><li> <a href="/">Login</a></li></a>
+                <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
+                
+              </ul>
           </div>
         </nav>
     </header>
@@ -40,13 +39,13 @@
     <div style="padding-bottom: 0px;" class="div-cardapio">
         <a class="cardapio-item" href="lista-funcionarios.html">
         <div >
-            <img class="img-cardapio" src="" alt="">
+            <img class="img-cardapio" src="../img/funcionarios.png" alt="">
             <h1 class="h1-bebida">Funcionários</h1>
         </div>
     </a>
         <a class="cardapio-item" href="cardapio.html">
         <div >
-            <img class="img-cardapio" src="" alt="">
+            <img class="img-cardapio" src="../img/cardapio_aechefia.jpg" alt="">
             <h1 class="h1-comida">Cardápio</h1>
         </div>
     </a>
@@ -58,29 +57,6 @@
     </div>
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 
-    <div class="div-cadastrado">
-        <div class="span-cadastrado">
-            <span class="nome-cadastrado">Rai Nascimento</span>
-            <span>rainascimento@gmail.com</span>
-            <span>+55 11 90000-0000</span>
-        </div>
-        <div class="btn-cadastrado">
-            <button class="editarGrey" onclick="ok()">Editar</button>
-            <button class="excluirRed" onclick="ok()">Excluir</button>
-        </div>
-    </div>
-
-
-    <div class="div-cadastrado">
-        <div class="span-cadastrado">
-            <span class="nome-cadastrado">Caetano Nascimento</span>
-            <span>rainascimento@gmail.com</span>
-            <span>+55 11 90000-0000</span>
-        </div>
-        <div class="btn-cadastrado">
-            <button class="editarGrey" onclick="ok()">Editar</button>
-            <button class="excluirRed" onclick="ok()">Excluir</button>
-        </div>
     </div>
 </body>
 

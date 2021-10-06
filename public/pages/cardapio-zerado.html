@@ -23,23 +23,12 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#">
-                        <li><a href="funcionario.html">Funcionario</a></li>
-                    </a>
-                    <a href="#">
-                        <li><a href="/">Login</a></li>
-                    </a>
-                    <a href="#">
-                        <li> <a href="/cadastro">Cadastro</a></li>
-                    </a>
-                    <a href="#">
-                        <li> <a href="/mesa">Mesas</a> </li>
-                    </a>
-                    <a href="#">
-                        <li><a href="/cardapio">Cardapio</a></li>
-                    </a>
-
-                </ul>
+                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
+                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                    <a href="#" ><li> <a href="/">Login</a></li></a>
+                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
+                    
+                  </ul>
             </div>
         </nav>
     </header>
@@ -47,28 +36,24 @@
     <div class="inputSpacing"></div>
     <span class="spanHome">Cadastre um cardápio</span>
     <div class="inputSpacing"></div>
-    <div class="div-cardapio">
+    <div class="div-cardapio" >
     
       
-        <a class="cardapio-item" href="bebida.html">
-            <button style="border: none; background-color: #e5e5e500;"  > 
-           
+        <a class="cardapio-item"   >
+            
+            <button style="border: none; background-color: #e5e5e500;" input type="submit" onclick="cardapio.setarBebida()" id="esconder" value="bebida"> 
+                
                 <img class="img-cardapio" src="../img/bebida.png" alt="">
                 <h1 class="h1-bebida">Bebida</h1>
             </button>
-
-           
-
         </a>
-    
-        <a class="cardapio-item" href="comida.html">
-            <button style="border:none;background-color: #e5e5e500;">
-                <img href="./comida.html" class="img-cardapio" src="../img/comida.png" alt="">
+        <a class="cardapio-item"  >
+            
+            <button style="border:none;background-color: #e5e5e500;" input type="submit" onclick="cardapio.setarComida()" id="esconder2" value="comida" >
+                
+                <img class="img-cardapio" src="../img/comida.png" alt="">
                 <h1 class="h1-comida">Comida</h1>
             </button></a>
-
-
-
     </div>
 
 
