@@ -1,1 +1,2 @@
-select * from cardapio;
+show tables;
+

@@ -17,3 +17,5 @@ ok
 nodemon.json
 
 app.js
+
+local.session.sql/

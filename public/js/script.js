@@ -2,6 +2,7 @@ function ok() {
   alert( "clickou" )
 };
 
+
 function process( mesa ) {
   var value = parseInt( document.getElementById( "quant" ).value );
   value += mesa;
@@ -694,6 +695,16 @@ function listarEstab() {
 
 }
 
+// FUNÇÃO PARA DAR REDIRECT EM CONTAS COM BASE NO LISTARESTAB ABAIXO
+function auto (){
+  let email = localStorage.getItem('email');
+
+  if(email != null){
+    listarEstab();
+  }
+  
+}
+
 function alertEstab (){
   let email = localStorage.getItem( "email" );
   fetch('http://localhost:3000/estabelecimento/listar/' + email, {
@@ -730,7 +741,8 @@ function logout() {
 
   } ).then( result => {
 
-    localStorage.setItem( "ourToken", null )
+    localStorage.removeItem('ourToken');
+    localStorage.removeItem('email');
     location.assign( '/' )
 
   } );
