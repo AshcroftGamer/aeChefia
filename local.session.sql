@@ -1,7 +1,3 @@
-select * from cardapio;
-
-ALTER TABLE funcionario change nome nome_funcionario varchar(50);
-
 CREATE SCHEMA IF NOT EXISTS `ae_chefia` DEFAULT CHARACTER SET latin1 ;
 USE `ae_chefia` ;
 
@@ -20,13 +16,15 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ae_chefia`.`mesas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ae_chefia`.`mesas` (
-  `id_mesas` INT(11) NOT NULL AUTO_INCREMENT,
-  `nome_cliente` VARCHAR(45) NULL DEFAULT NULL,
-  `telefone` SMALLINT(15) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_mesas`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+
+--CREATE TABLE IF NOT EXISTS `ae_chefia`.`mesas` (
+ -- `id_mesas` INT(11) NOT NULL AUTO_INCREMENT,
+  --`numero_mesa` INT(11) NULL DEFAULT NULL
+  --`nome_cliente` VARCHAR(45) NULL DEFAULT NULL,
+  --`telefone` SMALLINT(15) NULL DEFAULT NULL,
+  --PRIMARY KEY (`id_mesas`))
+--ENGINE = InnoDB
+--DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -40,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `ae_chefia`.`caixa` (
   CONSTRAINT `fk_caixa_mesas1`
     FOREIGN KEY (`id_mesas`)
     REFERENCES `ae_chefia`.`mesas` (`id_mesas`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+        ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
@@ -79,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `ae_chefia`.`estabelecimento` (
   CONSTRAINT `fk_estabelecimento_proprietario`
     FOREIGN KEY (`id_proprietario`)
     REFERENCES `ae_chefia`.`proprietario` (`id_proprietario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+        ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = latin1;
@@ -97,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `ae_chefia`.`cardapio` (
   CONSTRAINT `fk_cardapio_estabelecimento1`
     FOREIGN KEY (`id_estabelecimento`)
     REFERENCES `ae_chefia`.`estabelecimento` (`id_estabelecimento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+        ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = latin1;
@@ -121,8 +119,8 @@ CREATE TABLE IF NOT EXISTS `ae_chefia`.`funcionario` (
   CONSTRAINT `fk_funcionario_estabelecimento1`
     FOREIGN KEY (`id_estabelecimento`)
     REFERENCES `ae_chefia`.`estabelecimento` (`id_estabelecimento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+        ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = latin1;
@@ -173,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `ae_chefia`.`itens_do_cardapio` (
   `id_item_tipo` INT(11) NOT NULL,
   `id_bebida_tipo` INT(11) NULL DEFAULT NULL,
   `id_marcas` INT(11) NULL DEFAULT NULL,
-  `id_medidas` INT(11) NULL DEFAULT NULL,
+  `id_medidas` INT(11)NOT NULL ,
   `nome_comida` VARCHAR(20) NULL DEFAULT NULL,
   `preco` FLOAT NOT NULL,
   PRIMARY KEY (`id_itens_do_cardapio`),
@@ -185,28 +183,28 @@ CREATE TABLE IF NOT EXISTS `ae_chefia`.`itens_do_cardapio` (
   CONSTRAINT `fk_itens_do_cardapio_bebida_tipo1`
     FOREIGN KEY (`id_bebida_tipo`)
     REFERENCES `ae_chefia`.`bebida_tipo` (`id_bebida_tipo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+        ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_itens_do_cardapio_cardapio1`
     FOREIGN KEY (`id_cardapio`)
     REFERENCES `ae_chefia`.`cardapio` (`id_cardapio`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+        ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_itens_do_cardapio_item_tipo1`
     FOREIGN KEY (`id_item_tipo`)
     REFERENCES `ae_chefia`.`item_tipo` (`id_item_tipo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+        ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_itens_do_cardapio_marcas1`
     FOREIGN KEY (`id_marcas`)
     REFERENCES `ae_chefia`.`marcas` (`id_marcas`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+        ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_itens_do_cardapio_medidas1`
     FOREIGN KEY (`id_medidas`)
     REFERENCES `ae_chefia`.`medidas` (`id_medidas`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+        ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = latin1;
@@ -222,6 +220,52 @@ CREATE TABLE IF NOT EXISTS `ae_chefia`.`user_1` (
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
+
+CREATE TABLE IF NOT EXISTS `ae_chefia`.`comanda` (
+  `id_comanda` INT(11) NOT NULL AUTO_INCREMENT,
+  `mesa` INT(11) NOT NULL,
+  `cliente` VARCHAR(45) NOT NULL,
+  `telefone` VARCHAR(25) NOT NULL,
+  `status` TINYINT(4) NOT NULL,
+  `id_estabelecimento` int(11)NOT NULL
+  PRIMARY KEY (`id_comanda`),
+    INDEX `fk_comanda_estabelecimento_idx` (`id_estabelecimento` ASC) ,
+  CONSTRAINT `fk__comanda_estabelecimento`
+    FOREIGN KEY (`id_estabelecimento`)
+    REFERENCES `ae_chefia`.`id_estabelecimento` (`id_estabelecimento`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `ae_chefia`.`pedidos_comanda` (
+  `id_pedido` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_comanda` INT(11) NOT NULL,
+  `quant` VARCHAR(45) NULL DEFAULT NULL,
+  `id_itens_do_cardapio` INT(11) NOT NULL,
+  `id_funcionario` INT(11) NOT NULL,
+  PRIMARY KEY (`id_pedido`),
+  INDEX `fk_pedidos_comanda_itens_do_cardapio1_idx` (`id_itens_do_cardapio` ASC) ,
+  INDEX `fk_pedidos_comanda_comanda1_idx` (`id_comanda` ASC) ,
+  INDEX `fk_pedidos_comanda_funcionario1_idx` (`id_funcionario` ASC) ,
+  CONSTRAINT `fk_pedidos_comanda_itens_do_cardapio1`
+    FOREIGN KEY (`id_itens_do_cardapio`)
+    REFERENCES `ae_chefia`.`itens_do_cardapio` (`id_itens_do_cardapio`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_pedidos_comanda_comanda1`
+    FOREIGN KEY (`id_comanda`)
+    REFERENCES `ae_chefia`.`comanda` (`id_comanda`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_pedidos_comanda_funcionario1`
+    FOREIGN KEY (`id_funcionario`)
+    REFERENCES `ae_chefia`.`funcionario` (`id_funcionario`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
