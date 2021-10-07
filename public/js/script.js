@@ -1307,6 +1307,37 @@ class Bebida {
   }
 
   criarBebida() {
+    
+    var searchBar = document.getElementById('campo_busca');
+    console.log(searchBar)
+    var bebida_marca = [{ "name": "Skol" }, { "name": "Itaipava"}, { "name": "Original"},{ "name": "Tua mae"},{ "name": "kilo12"}];
+
+    searchBar.addEventListener('keyup', (e) => {
+      const searchString = e.target.value.toLowerCase();
+      console.log(searchString)
+      const FiltroBebidas = bebida_marca.filter(bebida_marca => {
+
+        return (
+          bebida_marca.name.toLowerCase().includes(searchString)
+        )
+      });
+      displayCharacters(FiltroBebidas)
+
+    })
+
+    const displayCharacters = (bebida_marca) => {
+      const htmlString = bebida_marca
+          .map((bebida_marca) => {
+              return `
+              <li class="character">
+                  <span>${bebida_marca.name}</span>
+              </li>
+          `;
+          })
+          .join('');
+      mesas.innerHTML = htmlString;
+  };
+  displayCharacters(bebida_marca)
 
     fetch('http://localhost:3000/item/' + localStorage.getItem("id_item_tipo"), {
       method: 'GET',
@@ -1468,24 +1499,9 @@ var bebida = new Bebida
 // ----------------------------------------------------------- Busca Bebida-Comida
 
 // const charactersList = document.getElementById('charactersList');
-const searchBar = document.getElementById("mySearch");
 
 
 
-searchBar.addEventListener('keyup', (e) => {
-    const searchString = e.target.value.toLowerCase();
-    console.log(searchString)
-    const filtredCharacters = hpCharacters.filter(character => {
-
-        return (
-          bebida.id_marcas.toLowerCase().includes(searchString)
-            
-
-        )
-    });
-    // displayCharacters(filtredCharacters)
-
-})
 class Comanda {
 
   mesa(mesa) {
@@ -1503,7 +1519,7 @@ class Comanda {
     }).then(result => {
       return result.json();
     }).then(data => {
-      
+
       fetch('http://localhost:3000/comanda/cliente/' + localStorage.getItem("mesa"), {
         method: 'GET',
         headers: { "content-type": "application/json" }
@@ -1518,13 +1534,13 @@ class Comanda {
           comandar.innerHTML = `${data.comanda[i].cliente}`
           document.getElementsByClassName("dropdown_comanda")[0].appendChild(comandar)
         }
-  
+
       })
-    
+
     })
 
   }
-  selecionarCliente(){
+  selecionarCliente() {
     localStorage.setItem("id_comanda", document.getElementById('id_comanda').value);
   }
 
