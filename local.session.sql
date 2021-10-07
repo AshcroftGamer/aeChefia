@@ -12,36 +12,35 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = latin1;
 
-
 -- -----------------------------------------------------
--- Table `ae_chefia`.`mesas`
+-- Table `ae_chefia`.`mesas_fechadas`
 -- -----------------------------------------------------
-
---CREATE TABLE IF NOT EXISTS `ae_chefia`.`mesas` (
- -- `id_mesas` INT(11) NOT NULL AUTO_INCREMENT,
-  --`numero_mesa` INT(11) NULL DEFAULT NULL
-  --`nome_cliente` VARCHAR(45) NULL DEFAULT NULL,
-  --`telefone` SMALLINT(15) NULL DEFAULT NULL,
-  --PRIMARY KEY (`id_mesas`))
---ENGINE = InnoDB
---DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `ae_chefia`.`caixa`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ae_chefia`.`caixa` (
-  `id_caixa` INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `ae_chefia`.`mesas_fechadas` (
+  `id_mesas_fechadas` INT(11) NOT NULL AUTO_INCREMENT,
   `id_mesas` INT(11) NOT NULL,
-  PRIMARY KEY (`id_caixa`),
-  INDEX `fk_caixa_mesas1_idx` (`id_mesas` ASC) ,
-  CONSTRAINT `fk_caixa_mesas1`
+  PRIMARY KEY (`id_mesas_fechadas`),
+  INDEX `fk_mesas_fechadas_mesas1_idx` (`id_mesas` ASC) ,
+  CONSTRAINT `fk_mesas_fechadas_mesas1`
     FOREIGN KEY (`id_mesas`)
     REFERENCES `ae_chefia`.`mesas` (`id_mesas`)
         ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `ae_chefia`.`mesas_fechadas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ae_chefia`.`mesas_fechadas` (
+  `id_mesas_fechadas` INT(11) NOT NULL AUTO_INCREMENT,
+  `data_mesa` VARCHAR(30) NULL DEFAULT NULL,
+  `valor` INT(11) NOT NULL,
+  PRIMARY KEY (`id_mesas_fechadas`),
+        ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
 
 
 -- -----------------------------------------------------
@@ -242,13 +241,13 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `ae_chefia`.`pedidos_comanda` (
   `id_pedido` INT(11) NOT NULL AUTO_INCREMENT,
   `id_comanda` INT(11) NOT NULL,
-  `quant` VARCHAR(45) NULL DEFAULT NULL,
+  `quant` int(11) NOT NULL ,
   `id_itens_do_cardapio` INT(11) NOT NULL,
-  `id_funcionario` INT(11) NOT NULL,
+  `id_estabelecimento` INT(11) NOT NULL,
   PRIMARY KEY (`id_pedido`),
   INDEX `fk_pedidos_comanda_itens_do_cardapio1_idx` (`id_itens_do_cardapio` ASC) ,
   INDEX `fk_pedidos_comanda_comanda1_idx` (`id_comanda` ASC) ,
-  INDEX `fk_pedidos_comanda_funcionario1_idx` (`id_funcionario` ASC) ,
+  INDEX `fk_pedidos_comanda_estabelecimento1_idx` (`id_estabelecimento` ASC) ,
   CONSTRAINT `fk_pedidos_comanda_itens_do_cardapio1`
     FOREIGN KEY (`id_itens_do_cardapio`)
     REFERENCES `ae_chefia`.`itens_do_cardapio` (`id_itens_do_cardapio`)
@@ -259,9 +258,9 @@ CREATE TABLE IF NOT EXISTS `ae_chefia`.`pedidos_comanda` (
     REFERENCES `ae_chefia`.`comanda` (`id_comanda`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_pedidos_comanda_funcionario1`
-    FOREIGN KEY (`id_funcionario`)
-    REFERENCES `ae_chefia`.`funcionario` (`id_funcionario`)
+  CONSTRAINT `fk_pedidos_comanda_estabelecimento1`
+    FOREIGN KEY (`id_estabelecimento`)
+    REFERENCES `ae_chefia`.`estabelecimento` (`id_estabelecimento`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
