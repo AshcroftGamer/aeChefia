@@ -8,5 +8,6 @@ route.get( '/todos', controller.getPedido );
 
 route.get('/sum', controller.getSum);
 
+route.get('/valor/:id_comanda', controller.getUmPedido);
 
 module.exports = route;

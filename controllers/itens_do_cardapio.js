@@ -214,3 +214,30 @@ exports.getItensTipo = async ( req, res ) => {
     }
 }
 
+exports.getUmItem = async (req, res) => {
+    try {
+        const query = `SELECT * FROM itens_do_cardapio WHERE id_itens_do_cardapio = ?;`
+
+        const result = await mysql.execute(query, [req.params.id_itens_do_cardapio]);
+
+        const response = {
+            itens: result.map(item => {
+                return {
+                    id_itens_do_cardapio: item.id_itens_do_cardapio,
+                    id_item_tipo: item.id_item_tipo,
+                    id_bebida_tipo: item.id_bebida_tipo,
+                    id_marcas: item.id_marcas,
+                    id_medidas: item.id_medidas,
+                    nome_comida: item.nome_comida,
+                    preco: item.preco,
+                }
+            })
+
+        }
+        return res.status(200).send(response)
+
+    } catch (error) {
+        return res.status(500).send({ Erro: error })
+    }
+
+}

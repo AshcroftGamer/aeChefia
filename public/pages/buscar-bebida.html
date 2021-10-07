@@ -34,13 +34,12 @@
     <div class="inputs">
         <form>
             <div style="width: 87%;">
-              <input onkeyup="bebida.pesquisarBebida(e)" style="width: 100%;"  class="inputLine" type="search" id="mySearch" name="q"
+              <input  style="width: 100%;"  class="inputLine" type="search" id="campo_busca" name="campo_busca"
               placeholder="Buscar bebidas" size="30">
               <!-- <button>Search</button> -->
             </div>
           </form>
     </div>
-
 <div id="mesas" class="mesas">
 <!-- Div onde é armazenada as bebidas do banco de dados -->
 </div>
@@ -56,7 +55,7 @@
       </div> 
       
     <button style="margin-top: 0px;margin-top: 0px;width: 48%;
-    margin-left: 4%;" class="btn redBtn redBtn-cad" onclick="ok()">Adicionar</button><br>
+    margin-left: 4%;" class="btn redBtn redBtn-cad" onclick="comanda.addPedido()">Adicionar</button><br>
 </footer>
 <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 </body>
