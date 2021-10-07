@@ -17,9 +17,11 @@ route.post( '/cadastro', controller.postItens );
 
 route.get( '/verifica', controller.verifica );
 
-route.get('/', controller.getItens)
+route.get('/', controller.getItens);
 
-route.get('/:id_item_tipo', controller.getItensTipo)
+route.get('/:id_item_tipo', controller.getItensTipo);
+
+route.get('/unico/:id_itens_do_cardapio', controller.getUmItem);
 
 
 route.delete( '/remover', controller.deleteItens );

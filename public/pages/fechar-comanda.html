@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="comanda.fecharComanda()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -48,7 +48,7 @@
     <div class="divRetirada fadeIn">
         <h1 style="font-size: 18px;padding: 15px;">Fechar comanda</h1>
         <div class="input-icon" style="display: block; text-align: center;">
-            <h1 style="text-align: left;" >R$ 450,43</h1>
+            <h1 id="valor-comanda" style="text-align: left;" ></h1>
             <div class="btnRetirada">
                 
                 <a href="../pages/abrir-caixa-cliente.html"><button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" >Cancelar</button></a>
