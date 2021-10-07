@@ -2,6 +2,7 @@ function ok() {
   alert("clickou")
 };
 
+
 function process(mesa) {
   var value = parseInt(document.getElementById("quant").value);
   value += mesa;
@@ -754,111 +755,126 @@ function listarEstab() {
 
 }
 
+// FUNÇÃO PARA DAR REDIRECT EM CONTAS COM BASE NO LISTARESTAB ABAIXO
+function auto() {
+  let email = localStorage.getItem('email');
+
+  if (email != null) {
+    listarEstab();
+  }
+
+}
+
 function alertEstab() {
   let email = localStorage.getItem("email");
-  fetch('http://localhost:3000/estabelecimento/listar/' + email, {
-    method: 'GET'
-  }).then(result => {
-    return result.json();
-  }).then(data => {
-    console.table(data.Estabelecimento[0])
-  })
-}
+  function alertEstab() {
+    let email = localStorage.getItem("email");
+    fetch('http://localhost:3000/estabelecimento/listar/' + email, {
+      method: 'GET'
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      console.table(data.Estabelecimento[0])
+    })
+  }
 
 
-function jwt_auth_load() {
+  function jwt_auth_load() {
 
-  fetch('http://localhost:3000/home/entrar', {
-    headers: {
-      'Authorization': `${localStorage.getItem("ourToken")}`
-    }
-  }).then(result => {
-    if (result.ok) {
-      return result.json()
-    } else {
-      localStorage.setItem("ourToken", null)
-      console.log("entrou else")
-      location.assign('/')
-    }
-  });
-
-}
-
-function logout() {
-  fetch('http://localhost:3000/logout', {
-
-  }).then(result => {
-
-    localStorage.setItem("ourToken", null)
-    location.assign('/')
-
-  });
-
-}
-
-class Proprietario {
-
-  async buscarProprietario() {
-
-    fetch('http://localhost:3000/proprietario/' + localStorage.getItem('id_proprietario'))
-      .then(result => {
+    fetch('http://localhost:3000/home/entrar', {
+      headers: {
+        'Authorization': `${localStorage.getItem("ourToken")}`
+      }
+    }).then(result => {
+      if (result.ok) {
         return result.json()
-      }).then(data => {
-        document.getElementById('nomespan').innerHTML = `Olá ${data.proprietario.nome}!`
-        estabelecimento.listaEstabelecimento();
-      })
-  }
-}
-
-var proprietario = new Proprietario
-
-class Funcionario {
-  constructor() {
-    this.arrayFuncionario = [];
-    this.editId = null
-  }
-  cadastrado() {
-    let funcionario = this.dados_funcionario();
-
-    if (this.validafun(funcionario)) {
-      if (this.editId == null) {
-        this.adicionar(funcionario)
       } else {
-        console.log("aff")
+        localStorage.setItem("ourToken", null)
+        console.log("entrou else")
+        location.assign('/')
+      }
+    });
+
+  }
+
+  function logout() {
+    fetch('http://localhost:3000/logout', {
+
+    }).then(result => {
+
+      localStorage.setItem("ourToken", null)
+      location.assign('/')
+
+    });
+
+  }
+
+  localStorage.removeItem('ourToken');
+  localStorage.removeItem('email');
+  location.assign('/')
+  class Proprietario {
+
+    async buscarProprietario() {
+
+      fetch('http://localhost:3000/proprietario/' + localStorage.getItem('id_proprietario'))
+        .then(result => {
+          return result.json()
+        }).then(data => {
+          document.getElementById('nomespan').innerHTML = `Olá ${data.proprietario.nome}!`
+          estabelecimento.listaEstabelecimento();
+        })
+    }
+  }
+
+  var proprietario = new Proprietario
+
+  class Funcionario {
+    constructor() {
+      this.arrayFuncionario = [];
+      this.editId = null
+    }
+    cadastrado() {
+      let funcionario = this.dados_funcionario();
+
+      if (this.validafun(funcionario)) {
+        if (this.editId == null) {
+          this.adicionar(funcionario)
+        } else {
+          console.log("aff")
+        }
+
       }
 
     }
 
-  }
+    funcionario_quantidade() {
+      fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        console.log('euuu paipi')
+        console.log(data)
+        console.log(data.quantidade)
+        document.getElementById('quantidade1').value = data.quantidade
+        estadoSpanHome()
+      })
+    }
 
-  funcionario_quantidade() {
-    fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
-      method: 'GET',
-      headers: { "content-type": "application/json" }
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-      console.log('euuu paipi')
-      console.log(data)
-      console.log(data.quantidade)
-      document.getElementById('quantidade1').value = data.quantidade
-      estadoSpanHome()
-    })
-  }
+    listaFuncionario() {
+      fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
 
-  listaFuncionario() {
-    fetch('http://localhost:3000/funcionario/quantidade/' + localStorage.getItem('estabelecimento'), {
-      method: 'GET',
-      headers: { "content-type": "application/json" }
-    }).then(result => {
-      return result.json();
-    }).then(data => {
+        for (let i = 0; i < data.quantidade; i++) {
+          let funcionario = document.createElement('div')
+          funcionario.classList.add('div-cadastrado')
 
-      for (let i = 0; i < data.quantidade; i++) {
-        let funcionario = document.createElement('div')
-        funcionario.classList.add('div-cadastrado')
-
-        funcionario.innerHTML = `<div class="span-cadastrado">
+          funcionario.innerHTML = `<div class="span-cadastrado">
         <span class="nome-cadastrado">${data.funcionario[i].nome_funcionario}</span>
         <span>${data.funcionario[i].email}</span>
     </div>
@@ -868,162 +884,162 @@ class Funcionario {
     </div>
       `
 
-        document.getElementsByClassName("inicio")[0].appendChild(funcionario)
-      }
+          document.getElementsByClassName("inicio")[0].appendChild(funcionario)
+        }
 
 
-    })
-  }
-
-  dados_funcionario() {
-    let funcionario = {}
-
-    var password = document.getElementById("senha")
-      , confirm_password = document.getElementById("confSenha");
-
-    function validatePassword() {
-      if (password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Senhas diferentes!");
-        alert('passei')
-      } else {
-        confirm_password.setCustomValidity('');
-      }
-    }
-
-    password.onchange = validatePassword;
-    confirm_password.onkeyup = validatePassword;
-
-    funcionario.id = 0;
-    funcionario.nome_funcionario = document.getElementById('nome_funcionario').value;
-    funcionario.email = document.getElementById('email').value;
-    funcionario.login = document.getElementById('login').value;
-    funcionario.id_estabelecimento = localStorage.getItem('estabelecimento')
-    funcionario.senha = document.getElementById('senha').value
-
-    console.log(funcionario)
-
-    return funcionario;
-  }
-  async adicionar(funcionario) {
-
-    fetch('http://localhost:3000/funcionario/cadastro/', {
-      method: 'POST',
-      headers:
-        { "content-type": "application/json" },
-      body: JSON.stringify(funcionario)
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-      console.log("data")
-      console.log(data)
-      funcionario.nome_funcionario = data.funcionarioInserido.nome_funcionario;
-      funcionario.login = data.funcionarioInserido.login;
-      funcionario.email = data.funcionarioInserido.email;
-      funcionario.id_estabelecimento = data.funcionarioInserido.id_estabelecimento;
-      funcionario.senha = data.funcionarioInserido.hash
-
-      this.arrayFuncionario.push(funcionario);
-      location.assign('/funcionario/sucesso')
-    });
-  }
-  validafun(funcionario) {
-    let msg = '';
-
-    if (funcionario.nome_funcionario == "") {
-      msg += '- Informe o Nome'
-    }
-    if (funcionario.email == "") {
-      msg += '- Informe o E-mail'
-    }
-    if (funcionario.login == "") {
-      msg += '- Informe o login'
-    }
-    if (funcionario.senha == "") {
-      msg += '- Insira a Senha'
-    }
-    if (msg != '') {
-      alert(msg);
-      return false
-    }
-
-
-    return true;
-
-  }
-
-}
-
-var funcionario = new Funcionario
-
-
-class Cardapio {
-
-  constructor() {
-    this.arrayCardapio = []
-  }
-
-
-  deletarCardapio(id_cardapio) {
-    fetch('http://localhost:3000/cardapio/remover/' + id_cardapio, {
-      method: 'DELETE',
-      headers: { "content-type": "application/json" }
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-      //document.location.reload(true)
-    })
-  }
-  quantidade_cardapio() {
-    fetch('http://localhost:3000/cardapio/quantidade/' + localStorage.getItem('estabelecimento'), {
-      method: 'GET',
-      headers: { "content-type": "application/json" }
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-      console.log(data)
-      console.log(data.quantidade)
-      document.getElementById('quantidade2').value = data.quantidade
-      estadoSpanHome()
-    })
-  }
-
-  addCardapio() {
-    fetch('http://localhost:3000/cardapio/cadastro/' + localStorage.getItem('estabelecimento'), {
-      method: 'POST',
-      headers: { "content-type": "application/json" },
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-      localStorage.setItem('id_cardapio', data.cardapioCriado.id_cardapio)
-      location.assign('/cardapio/zerado')
-    })
-  }
-
-
-  criarCardapio() {
-    fetch('http://localhost:3000/cardapio/quantidade/' + localStorage.getItem('estabelecimento'), {
-      method: 'GET',
-      headers: { "content-type": "application/json" }
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-
-      data.cardapio.forEach(estabele => {
-        this.arrayCardapio.push(estabele);
       })
+    }
 
-      for (let i = 0; i < this.arrayCardapio.length; i++) {
-        fetch('http://localhost:3000/cardapio/item/' + this.arrayCardapio[i].id_cardapio, {
-          method: 'GET',
-          headers: { "content-type": "application/json" }
-        }).then(result => {
-          return result.json();
-        }).then(data => {
+    dados_funcionario() {
+      let funcionario = {}
 
-          let cardapio = document.createElement('div')
-          cardapio.classList.add('div-cadastrado')
+      var password = document.getElementById("senha")
+        , confirm_password = document.getElementById("confSenha");
 
-          cardapio.innerHTML = `<div class="span-cadastrado">
+      function validatePassword() {
+        if (password.value != confirm_password.value) {
+          confirm_password.setCustomValidity("Senhas diferentes!");
+          alert('passei')
+        } else {
+          confirm_password.setCustomValidity('');
+        }
+      }
+
+      password.onchange = validatePassword;
+      confirm_password.onkeyup = validatePassword;
+
+      funcionario.id = 0;
+      funcionario.nome_funcionario = document.getElementById('nome_funcionario').value;
+      funcionario.email = document.getElementById('email').value;
+      funcionario.login = document.getElementById('login').value;
+      funcionario.id_estabelecimento = localStorage.getItem('estabelecimento')
+      funcionario.senha = document.getElementById('senha').value
+
+      console.log(funcionario)
+
+      return funcionario;
+    }
+    async adicionar(funcionario) {
+
+      fetch('http://localhost:3000/funcionario/cadastro/', {
+        method: 'POST',
+        headers:
+          { "content-type": "application/json" },
+        body: JSON.stringify(funcionario)
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        console.log("data")
+        console.log(data)
+        funcionario.nome_funcionario = data.funcionarioInserido.nome_funcionario;
+        funcionario.login = data.funcionarioInserido.login;
+        funcionario.email = data.funcionarioInserido.email;
+        funcionario.id_estabelecimento = data.funcionarioInserido.id_estabelecimento;
+        funcionario.senha = data.funcionarioInserido.hash
+
+        this.arrayFuncionario.push(funcionario);
+        location.assign('/funcionario/sucesso')
+      });
+    }
+    validafun(funcionario) {
+      let msg = '';
+
+      if (funcionario.nome_funcionario == "") {
+        msg += '- Informe o Nome'
+      }
+      if (funcionario.email == "") {
+        msg += '- Informe o E-mail'
+      }
+      if (funcionario.login == "") {
+        msg += '- Informe o login'
+      }
+      if (funcionario.senha == "") {
+        msg += '- Insira a Senha'
+      }
+      if (msg != '') {
+        alert(msg);
+        return false
+      }
+
+
+      return true;
+
+    }
+
+  }
+
+  var funcionario = new Funcionario
+
+
+  class Cardapio {
+
+    constructor() {
+      this.arrayCardapio = []
+    }
+
+
+    deletarCardapio(id_cardapio) {
+      fetch('http://localhost:3000/cardapio/remover/' + id_cardapio, {
+        method: 'DELETE',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        //document.location.reload(true)
+      })
+    }
+    quantidade_cardapio() {
+      fetch('http://localhost:3000/cardapio/quantidade/' + localStorage.getItem('estabelecimento'), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        console.log(data)
+        console.log(data.quantidade)
+        document.getElementById('quantidade2').value = data.quantidade
+        estadoSpanHome()
+      })
+    }
+
+    addCardapio() {
+      fetch('http://localhost:3000/cardapio/cadastro/' + localStorage.getItem('estabelecimento'), {
+        method: 'POST',
+        headers: { "content-type": "application/json" },
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        localStorage.setItem('id_cardapio', data.cardapioCriado.id_cardapio)
+        location.assign('/cardapio/zerado')
+      })
+    }
+
+
+    criarCardapio() {
+      fetch('http://localhost:3000/cardapio/quantidade/' + localStorage.getItem('estabelecimento'), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+
+        data.cardapio.forEach(estabele => {
+          this.arrayCardapio.push(estabele);
+        })
+
+        for (let i = 0; i < this.arrayCardapio.length; i++) {
+          fetch('http://localhost:3000/cardapio/item/' + this.arrayCardapio[i].id_cardapio, {
+            method: 'GET',
+            headers: { "content-type": "application/json" }
+          }).then(result => {
+            return result.json();
+          }).then(data => {
+
+            let cardapio = document.createElement('div')
+            cardapio.classList.add('div-cadastrado')
+
+            cardapio.innerHTML = `<div class="span-cadastrado">
       <span class="nome-cadastrado">Cardápio ${[i]}</span>
       <span>${data.quantidade} itens</span>
       <span>28/07/2021</span>
@@ -1033,65 +1049,65 @@ class Cardapio {
      <button class="excluirRed" onclick="cardapio.deletarCardapio(${this.arrayCardapio[i].id_cardapio})">Excluir</button>
   </div>`
 
-          document.getElementsByClassName("selecionado")[0].appendChild(cardapio)
-        });
-      }
-    });
-  }
+            document.getElementsByClassName("selecionado")[0].appendChild(cardapio)
+          });
+        }
+      });
+    }
 
-  listaCardapio() {
-    fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
-      method: 'GET',
-      headers: { "content-type": "application/json" }
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-      for (let i = 0; i < data.quantidade; i++) {
-        console.log(data)
-        let medidas = data.cardapio[i].id_medidas
-        let marcas = data.cardapio[i].id_marcas
-        let nome_comida = data.cardapio[i].nome_comida
-        let preco = data.cardapio[i].preco
-        let tipo = document.getElementById('tipo').value
-        console.table(tipo)
-        fetch('http://localhost:3000/cardapio/tipo/' + tipo, {
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          }
-        }).then(result => {
-          return result.json()
-        }).then(data => {
-
+    listaCardapio() {
+      fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        for (let i = 0; i < data.quantidade; i++) {
           console.log(data)
-
-          fetch('http://localhost:3000/marca/pegar/' + marcas, {
+          let medidas = data.cardapio[i].id_medidas
+          let marcas = data.cardapio[i].id_marcas
+          let nome_comida = data.cardapio[i].nome_comida
+          let preco = data.cardapio[i].preco
+          let tipo = document.getElementById('tipo').value
+          console.table(tipo)
+          fetch('http://localhost:3000/cardapio/tipo/' + tipo, {
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
             }
           }).then(result => {
             return result.json()
           }).then(data => {
-            marcas = data.marcas[0].marca
-          })
-          localStorage.setItem("id_item_tipo", data.tipos[0].id_item_tipo)
 
-          fetch('http://localhost:3000/medida/pegar/' + medidas, {
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            }
-          }).then(result => {
-            return result.json()
-          }).then(data => {
-            medidas = data.medidas[0].medida
+            console.log(data)
 
-            let item = document.createElement('div')
-            item.classList.add('div-cadastrado')
-            item.setAttribute("id", "divComida");
+            fetch('http://localhost:3000/marca/pegar/' + marcas, {
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              }
+            }).then(result => {
+              return result.json()
+            }).then(data => {
+              marcas = data.marcas[0].marca
+            })
+            localStorage.setItem("id_item_tipo", data.tipos[0].id_item_tipo)
 
-            console.log()
-            if (localStorage.getItem("id_item_tipo") == 2) {
-              console.log("entrou")
-              item.innerHTML = `<div class="span-cadastrado">
+            fetch('http://localhost:3000/medida/pegar/' + medidas, {
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              }
+            }).then(result => {
+              return result.json()
+            }).then(data => {
+              medidas = data.medidas[0].medida
+
+              let item = document.createElement('div')
+              item.classList.add('div-cadastrado')
+              item.setAttribute("id", "divComida");
+
+              console.log()
+              if (localStorage.getItem("id_item_tipo") == 2) {
+                console.log("entrou")
+                item.innerHTML = `<div class="span-cadastrado">
                   <span class="nome-cadastrado">${nome_comida}</span>
                   <span>${medidas}</span>
                   <span>R$:${preco}</span>
@@ -1101,8 +1117,8 @@ class Cardapio {
                   <button class="excluirRed" onclick="ok()">Excluir</button>
               </div>`
 
-            } if (localStorage.getItem("id_item_tipo") == 1) {
-              item.innerHTML = `        <div class="span-cadastrado">
+              } if (localStorage.getItem("id_item_tipo") == 1) {
+                item.innerHTML = `        <div class="span-cadastrado">
                   <span class="nome-cadastrado" id="search_name">${marcas}</span>
                   <span>${medidas}</span>
                   <span>R$:${preco}</span>
@@ -1111,133 +1127,126 @@ class Cardapio {
                   <button class="editarGrey" onclick="ok()">Editar</button>
                   <button class="excluirRed" onclick="ok()">Excluir</button>
               </div>`
-            }
-            document.getElementsByClassName("inicio")[0].appendChild(item)
+              }
+              document.getElementsByClassName("inicio")[0].appendChild(item)
+            })
+
           })
+        }
 
-        })
-      }
+      })
+    }
 
-    })
+    setarCardapio(id_cardapio) {
+      console.log(id_cardapio)
+      localStorage.setItem('id_cardapio', id_cardapio)
+    }
+
+    setarBebida() {
+
+      localStorage.setItem('id_item_tipo', 1)
+      location.assign('/cardapio/bebida')
+    }
+    setarComida() {
+      localStorage.setItem('id_item_tipo', 2)
+      location.assign('/cardapio/comida')
+    }
   }
 
-  setarCardapio(id_cardapio) {
-    console.log(id_cardapio)
-    localStorage.setItem('id_cardapio', id_cardapio)
-  }
-
-  setarBebida() {
-
-    localStorage.setItem('id_item_tipo', 1)
-    location.assign('/cardapio/bebida')
-  }
-  setarComida() {
-    localStorage.setItem('id_item_tipo', 2)
-    location.assign('/cardapio/comida')
-  }
-}
-
-var cardapio = new Cardapio
+  var cardapio = new Cardapio
 
 
-class Comida {
-  constructor() {
-    this.arrayComida = []
-    this.editId = null
-  }
-  cadastrar_comida() {
-    let comida = this.dadosComida();
+  class Comida {
+    constructor() {
+      this.arrayComida = []
+      this.editId = null
+    }
+    cadastrar_comida() {
+      let comida = this.dadosComida();
 
-    if (this.verificaComida(comida)) {
-      if (this.editId == null) {
-        this.addComida(comida)
-      } else {
+      if (this.verificaComida(comida)) {
+        if (this.editId == null) {
+          this.addComida(comida)
+        } else {
+
+        }
 
       }
 
     }
+    addComida(comida) {
 
-  }
-  addComida(comida) {
-
-    fetch('http://localhost:3000/medida/' + comida.id_medidas, {
-      method: 'GET',
-      headers: { "content-type": "application/json" }
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-
-      comida.id_medidas = data.medidas[0].id_medidas
-
-      fetch('http://localhost:3000/item/cadastro/', {
-        method: 'POST',
-        headers:
-          { "content-type": "application/json" },
-        body: JSON.stringify(comida)
-
+      fetch('http://localhost:3000/medida/' + comida.id_medidas, {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
       }).then(result => {
         return result.json();
       }).then(data => {
 
-        comida.id_cardapio = data.itemCriado.id_cardapio;
-        comida.id_medidas = data.itemCriado.id_medidas;
-        comida.nome_comida = data.itemCriado.nome_comida;
-        comida.id_item_tipo = data.itemCriado.id_item_tipo;
-        comida.preco = data.itemCriado.preco;
+        comida.id_medidas = data.medidas[0].id_medidas
 
-        this.arrayComida.push(comida);
-        location.assign('/cardapio/comida/sucesso')
+        fetch('http://localhost:3000/item/cadastro/', {
+          method: 'POST',
+          headers:
+            { "content-type": "application/json" },
+          body: JSON.stringify(comida)
+
+        }).then(result => {
+          return result.json();
+        }).then(data => {
+
+          comida.id_cardapio = data.itemCriado.id_cardapio;
+          comida.id_medidas = data.itemCriado.id_medidas;
+          comida.nome_comida = data.itemCriado.nome_comida;
+          comida.id_item_tipo = data.itemCriado.id_item_tipo;
+          comida.preco = data.itemCriado.preco;
+
+          this.arrayComida.push(comida);
+          location.assign('/cardapio/comida/sucesso')
+        });
       });
-    });
-  }
-
-  dadosComida() {
-    let comida = {}
-    comida.id = 0;
-    comida.id_cardapio = localStorage.getItem('id_cardapio')
-    comida.id_item_tipo = localStorage.getItem('id_item_tipo')
-    comida.nome_comida = document.getElementById('comida').value
-    comida.id_medidas = document.getElementById('medida').value;
-    comida.preco = document.getElementById('preco').value
-
-    console.log(comida)
-    return comida;
-  }
-
-  verificaComida(comida) {
-    let msg = '';
-
-    if (funcionario.nome_funcionario == "") {
-      msg += '- Informe o Nome'
-    }
-    if (funcionario.email == "") {
-      msg += '- Informe o E-mail'
-    }
-    if (funcionario.login == "") {
-      msg += '- Informe o login'
-    }
-    if (funcionario.senha == "") {
-      msg += '- Insira a Senha'
-    }
-    if (msg != '') {
-      alert(msg);
-      return false
     }
 
+    dadosComida() {
+      let comida = {}
+      comida.id = 0;
+      comida.id_cardapio = localStorage.getItem('id_cardapio')
+      comida.id_item_tipo = localStorage.getItem('id_item_tipo')
+      comida.nome_comida = document.getElementById('comida').value
+      comida.id_medidas = document.getElementById('medida').value;
+      comida.preco = document.getElementById('preco').value
 
-    return true;
+      console.log(comida)
+      return comida;
+    }
 
-  }
-  criarComida() {
+    verificaComida(comida) {
+      let msg = '';
 
-    fetch('http://localhost:3000/item/' + localStorage.getItem("id_item_tipo"), {
-      method: 'GET',
-      headers: { "content-type": "application/json" }
-    }).then(result => {
-      return result.json();
-    }).then(data => {
-      console.log(data)
-      fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
+      if (funcionario.nome_funcionario == "") {
+        msg += '- Informe o Nome'
+      }
+      if (funcionario.email == "") {
+        msg += '- Informe o E-mail'
+      }
+      if (funcionario.login == "") {
+        msg += '- Informe o login'
+      }
+      if (funcionario.senha == "") {
+        msg += '- Insira a Senha'
+      }
+      if (msg != '') {
+        alert(msg);
+        return false
+      }
+
+
+      return true;
+
+    }
+    criarComida() {
+
+      fetch('http://localhost:3000/item/' + localStorage.getItem("id_item_tipo"), {
         method: 'GET',
         headers: { "content-type": "application/json" }
       }).then(result => {
@@ -1280,12 +1289,11 @@ class Comida {
 
       })
 
-    })
+    }
   }
-  setarValor(id_itens_do_cardapio) {
-    localStorage.setItem("id_itens_do_cardapio", id_itens_do_cardapio)
-  }
-
+};
+setarValor(id_itens_do_cardapio); {
+  localStorage.setItem("id_itens_do_cardapio", id_itens_do_cardapio)
 }
 
 var comida = new Comida
@@ -1311,111 +1319,122 @@ class Bebida {
 
   }
 
-  criarBebida() {
-    
-    var searchBar = document.getElementById('campo_busca');
-    console.log(searchBar)
-    var bebida_marca = [{ "name": "Skol" }, { "name": "Itaipava"}, { "name": "Original"},{ "name": "Tua mae"},{ "name": "kilo12"}];
+}
 
-    searchBar.addEventListener('keyup', (e) => {
-      const searchString = e.target.value.toLowerCase();
-      console.log(searchString)
-      const FiltroBebidas = bebida_marca.filter(bebida_marca => {
+criarBebida(); {
 
-        return (
-          bebida_marca.name.toLowerCase().includes(searchString)
-        )
-      });
-      displayCharacters(FiltroBebidas)
+  var searchBar = document.getElementById('campo_busca');
+  console.log(searchBar)
+  var bebida_marca = [{ "name": "Skol" }, { "name": "Itaipava" }, { "name": "Original" }, { "name": "Tua mae" }, { "name": "kilo12" }];
 
-    })
+  searchBar.addEventListener('keyup', (e) => {
+    const searchString = e.target.value.toLowerCase();
+    console.log(searchString)
+    const FiltroBebidas = bebida_marca.filter(bebida_marca => {
 
-    const displayCharacters = (bebida_marca) => {
-      const htmlString = bebida_marca
-          .map((bebida_marca) => {
-              return `
+      return (
+        bebida_marca.name.toLowerCase().includes(searchString)
+      )
+    });
+    displayCharacters(FiltroBebidas)
+
+  })
+
+  const displayCharacters = (bebida_marca) => {
+    const htmlString = bebida_marca
+      .map((bebida_marca) => {
+        return `
               <li class="character">
                   <span>${bebida_marca.name}</span>
               </li>
           `;
-          })
-          .join('');
-      mesas.innerHTML = htmlString;
+      })
+      .join('');
+    mesas.innerHTML = htmlString;
   };
   displayCharacters(bebida_marca)
 
-    fetch('http://localhost:3000/item/' + localStorage.getItem("id_item_tipo"), {
+  fetch('http://localhost:3000/item/' + localStorage.getItem("id_item_tipo"), {
+    method: 'GET',
+    headers: { "content-type": "application/json" }
+  }).then(result => {
+    return result.json();
+  }).then(data => {
+    console.log('nos')
+    console.log(data)
+    fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
       method: 'GET',
       headers: { "content-type": "application/json" }
     }).then(result => {
       return result.json();
     }).then(data => {
-      console.log('nos')
-      console.log(data)
-      fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio'), {
-        method: 'GET',
-        headers: { "content-type": "application/json" }
-      }).then(result => {
-        return result.json();
-      }).then(data => {
-        for (let i = 0; i < data.quantidade; i++) {
+      for (let i = 0; i < data.quantidade; i++) {
+        console.log(data)
+        let medidas = data.cardapio[i].id_medidas
+        let marcas = data.cardapio[i].id_marcas
+        let preco = data.cardapio[i].preco
+        let id_itens_do_cardapio = data.cardapio[i].id_itens_do_cardapio
+        console.log(data)
+
+        fetch('http://localhost:3000/marca/pegar/' + marcas, {
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(result => {
+          return result.json()
+        }).then(data => {
           console.log(data)
-          let medidas = data.cardapio[i].id_medidas
-          let marcas = data.cardapio[i].id_marcas
-          let preco = data.cardapio[i].preco
-          let id_itens_do_cardapio = data.cardapio[i].id_itens_do_cardapio
-          console.log(data)
+          marcas = data.marcas[0].marca
+        })
 
-          fetch('http://localhost:3000/marca/pegar/' + marcas, {
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            }
-          }).then(result => {
-            return result.json()
-          }).then(data => {
-            console.log(data)
-            marcas = data.marcas[0].marca
-          })
+        fetch('http://localhost:3000/medida/pegar/' + medidas, {
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(result => {
+          return result.json()
+        }).then(data => {
+          medidas = data.medidas[0].medida
 
-          fetch('http://localhost:3000/medida/pegar/' + medidas, {
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            }
-          }).then(result => {
-            return result.json()
-          }).then(data => {
-            medidas = data.medidas[0].medida
-
-            let item = document.createElement('option')
-            item.classList.add("itens-cardapio")
-            item.classList.add("bounceIn")
-            item.setAttribute("id", "box0" + id.toString());
-            item.setAttribute("onclick", "bebida.setarValor(" + id_itens_do_cardapio + ")");
-            item.innerHTML = `
+          let item = document.createElement('option')
+          item.classList.add("itens-cardapio")
+          item.classList.add("bounceIn")
+          item.setAttribute("id", "box0" + id.toString());
+          item.setAttribute("onclick", "bebida.setarValor(" + id_itens_do_cardapio + ")");
+          item.innerHTML = `
                     <span class="nome-cadastrado">${marcas}</span>
                     <span>${medidas}</span>
                     <span>R$:${preco}</span>`
 
-            document.getElementsByClassName("mesas")[0].appendChild(item)
+          document.getElementsByClassName("mesas")[0].appendChild(item)
 
-            if (i >= 4) {
-              let footer = document.getElementById('footer');
-              footer.style.position = 'unset'
-            }
-          })
-        }
+          if (i >= 4) {
+            let footer = document.getElementById('footer');
+            footer.style.position = 'unset'
+          }
+        })
+      }
 
-      })
     })
-  }
+  })
+}
 
-  setarValor(id_itens_do_cardapio) {
+setarValor(id_itens_do_cardapio); {
 
-    localStorage.setItem("id_itens_do_cardapio", id_itens_do_cardapio)
-  }
+  localStorage.setItem("id_itens_do_cardapio", id_itens_do_cardapio);
+}
 
-  addBebida(bebida) {
-    fetch('http://localhost:3000/bebidatipo/' + bebida.id_bebida_tipo, {
+addBebida(bebida); {
+  fetch('http://localhost:3000/bebidatipo/' + bebida.id_bebida_tipo, {
+    method: 'GET',
+    headers: { "content-type": "application/json" }
+  }).then(result => {
+    return result.json();
+  }).then(data => {
+    bebida.id_bebida_tipo = data.bebida[0].id_bebida_tipo;
+
+
+    fetch('http://localhost:3000/medida/' + bebida.id_medidas, {
       method: 'GET',
       headers: { "content-type": "application/json" }
     }).then(result => {
@@ -1465,51 +1484,52 @@ class Bebida {
       });
     });
   }
+  
 
-  dadosBebida() {
-    let bebida = {}
+    dadosBebida() {
+    let bebida = {};
     bebida.id = 0;
-    bebida.id_cardapio = localStorage.getItem('id_cardapio')
-    bebida.id_item_tipo = localStorage.getItem('id_item_tipo')
+    bebida.id_cardapio = localStorage.getItem('id_cardapio');
+    bebida.id_item_tipo = localStorage.getItem('id_item_tipo');
     bebida.id_bebida_tipo = document.getElementById('tipo_bebida').value;
     bebida.id_marcas = document.getElementById('marca').value;
     bebida.id_medidas = document.getElementById('medida').value;
     bebida.preco = document.getElementById('preco').value
 
-    return bebida;
+      return bebida;
   }
 
-  verificaBebida(bebida) {
+    verificaBebida(bebida) {
     let msg = '';
 
-    if (funcionario.nome_funcionario == "") {
-      msg += '- Informe o Nome'
-    }
-    if (funcionario.email == "") {
-      msg += '- Informe o E-mail'
-    }
-    if (funcionario.login == "") {
-      msg += '- Informe o login'
-    }
-    if (funcionario.senha == "") {
-      msg += '- Insira a Senha'
-    }
-    if (msg != '') {
-      alert(msg);
-      return false
-    }
-
-
-    return true;
-
+    if(funcionario.nome_funcionario == "" ) {
+    msg += '- Informe o Nome'
   }
+  if (funcionario.email == "") {
+    msg += '- Informe o E-mail'
+  }
+  if (funcionario.login == "") {
+    msg += '- Informe o login'
+  }
+  if (funcionario.senha == "") {
+    msg += '- Insira a Senha'
+  }
+  if (msg != '') {
+    alert(msg);
+    return false
+  }
+
+
+  return true;
+
 }
+
 
 var bebida = new Bebida
 
 // ----------------------------------------------------------- Busca Bebida-Comida
 
-// const charactersList = document.getElementById('charactersList');
+
 
 
 
@@ -1582,7 +1602,7 @@ class Comanda {
 
   async adicionarCliente() {
 
-    let comanda = {}
+
 
     comanda.mesa = document.getElementById('mesa').value;
     comanda.cliente = document.getElementById('cliente').value;
@@ -1630,11 +1650,11 @@ class Comanda {
         }).then(data => {
 
 
-          if(valor != undefined){
+          if (valor != undefined) {
             console.log('passei no if')
             valor += quant * data.itens[0].preco
             console.log(valor)
-          }else{
+          } else {
             valor = quant * data.itens[0].preco
           }
           document.getElementById('valor-comanda').innerHTML = `R$ ${valor}`
@@ -1644,6 +1664,34 @@ class Comanda {
   }
 }
 
+let comanda = {}
+
+comanda.mesa = document.getElementById('mesa').value;
+comanda.cliente = document.getElementById('cliente').value;
+comanda.telefone = document.getElementById('telefone').value;
+comanda.status = true
+comanda.id_estabelecimento = localStorage.getItem("estabelecimento")
+console.log(comanda.id_estabelecimento)
+fetch('http://localhost:3000/comanda/cadastro/', {
+  method: 'POST',
+  headers:
+    { "content-type": "application/json" },
+  body: JSON.stringify(comanda)
+}).then(result => {
+  return result.json();
+}).then(data => {
+  console.log("data")
+  console.log(data)
+  comanda.mesa = data.cliente.mesa;
+  comanda.cliente = data.cliente.cliente;
+  comanda.telefone = data.cliente.telefone;
+  comanda.status = data.cliente.status;
+  comanda.id_estabelecimento = data.cliente.id_estabelecimento;
+
+  location.assign('/comanda/sucesso')
+});
 
 
-var comanda = new Comanda
+
+
+var comanda = new Comanda;

@@ -12,6 +12,97 @@
             "database": "ae_chefia",
             "username": "root",
             "password": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "local",
+            "database": "ae_chefia",
+            "username": "felipe",
+            "password": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3006,
+            "driver": "MySQL",
+            "name": "local",
+            "database": "ae_chefia",
+            "username": "root",
+            "password": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3006,
+            "driver": "MySQL",
+            "name": "local",
+            "database": "ae_chefia",
+            "username": "felipe",
+            "password": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3006,
+            "driver": "MySQL",
+            "name": "local",
+            "database": "ae_chefia",
+            "username": "goes",
+            "password": "root0214"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "127.0.0.1",
+            "port": 3006,
+            "driver": "MySQL",
+            "name": "Local",
+            "database": "ae_chefia",
+            "username": "root",
+            "password": "Dbpass20!"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "127.0.0.1",
+            "port": 3006,
+            "driver": "MySQL",
+            "name": "local",
+            "database": "ae_chefia",
+            "username": "goes",
+            "password": "Root2021!"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "127.0.0.1",
+            "port": 3006,
+            "driver": "MySQL",
+            "name": "local",
+            "database": "ae_chefia",
+            "username": "goes",
+            "password": "Dbpass20!"
         }
     ]
 }
