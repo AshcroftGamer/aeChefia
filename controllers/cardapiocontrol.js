@@ -178,8 +178,8 @@ exports.getItem = async ( req, res ) => {
                     id_medidas: card.id_medidas,
                     id_marcas: card.id_marcas,
                     nome_comida: card.nome_comida,
-                    preco: card.preco
-                    //cep: card.cep,
+                    preco: card.preco,
+                    id_itens_do_cardapio: card.id_itens_do_cardapio
                     //endereco: card.endereco,
                     //mesa: card.mesa,
                     
