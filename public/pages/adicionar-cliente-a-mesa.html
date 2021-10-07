@@ -12,7 +12,7 @@
     <title>Abrir Caixa</title>
 </head>
 
-<body>
+<body onload="comanda.carregarMesa()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -23,37 +23,26 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#">
-                        <li><a href="funcionario.html">Funcionario</a></li>
-                    </a>
-                    <a href="#">
-                        <li><a href="/">Login</a></li>
-                    </a>
-                    <a href="#">
-                        <li> <a href="/cadastro">Cadastro</a></li>
-                    </a>
-                    <a href="#">
-                        <li> <a href="/mesa">Mesas</a> </li>
-                    </a>
-                    <a href="#">
-                        <li><a href="/cardapio">Cardapio</a></li>
-                    </a>
-
-                </ul>
+                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
+                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                    <a href="#" ><li> <a href="/">Login</a></li></a>
+                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
+                    
+                  </ul>
             </div>
         </nav>
     </header>
     <h1>Adicionar cliente a mesa</h1>
 
 <div class="inputs">
-    <span class="spanInputs">Tipo de bebida</span>
+    <span class="spanInputs">Numero da mesa</span>
     <label for="tipo-bebida">
-        <input class="inputLine" style="background: rgba(196, 196, 196, 0.4);" type="text" value="Mesa 8" disabled />
+        <input id="mesa" class="inputLine" style="background: rgba(196, 196, 196, 0.4);" type="text" value=""  />
         <br>
     </label>
     <span class="spanInputs">Nome do cliente</span>
     <label for="nome">
-        <input class="inputLine" id="nome" name="nome" placeholder="Ex.Jorge Silva" type="text" required autocomplete="off">
+        <input class="inputLine" id="cliente" name="nome" placeholder="Ex.Jorge Silva" type="text" required autocomplete="off">
         <br>
     </label>
     <span class="spanInputs">Telefone</span>
@@ -68,7 +57,7 @@
 <footer class="divcenter footer footerAdd">
  
 
-    <button class="btn redBtn redBtn-cad" onclick="ok()">Adicionar</button><br>
+    <button class="btn redBtn redBtn-cad" onclick="comanda.adicionarCliente()">Adicionar</button><br>
 </footer>
 </body>
 <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>

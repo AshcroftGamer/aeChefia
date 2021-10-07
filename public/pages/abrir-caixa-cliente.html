@@ -12,7 +12,7 @@
     <title>Abrir Caixa</title>
 </head>
 
-<body >
+<body onload="comanda.listaCliente()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -23,35 +23,21 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#">
-                        <li><a href="funcionario.html">Funcionario</a></li>
-                    </a>
-                    <a href="#">
-                        <li><a href="/">Login</a></li>
-                    </a>
-                    <a href="#">
-                        <li> <a href="/cadastro">Cadastro</a></li>
-                    </a>
-                    <a href="#">
-                        <li> <a href="/mesa">Mesas</a> </li>
-                    </a>
-                    <a href="#">
-                        <li><a href="/cardapio">Cardapio</a></li>
-                    </a>
-
-                </ul>
+                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
+                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                    <a href="#" ><li> <a href="/">Login</a></li></a>
+                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
+                    
+                  </ul>
             </div>
         </nav>
     </header>
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
     <div class="seleCliente">
-        <input style="color: black;" type="text" placeholder="Selecione um cliente" class="dropdown inputLine"
-            name="city" list="cityname">
-        <datalist id="cityname">
-            <option value="bebida1">sds
-            <option value="bebida2">sdsd
-        </datalist>
-     <a href="/pages/adicionar-cliente-a-mesa.html">   <button style="background-color: var(--vermelho);color: var(--branco);margin-left: 15px;
+            <select name="Bares" onchange="comanda.selecionarCliente()" id="id_comanda" type="text" class="dropdown_comanda">
+                <option>Selecionar um cliente</option>
+              </select>
+     <a href="/comanda/mesa">   <button style="background-color: var(--vermelho);color: var(--branco);margin-left: 15px;
 margin-top: -2px;width: 50px;height: 48px;display:grid;align-content:space-around;
     padding-bottom: 4px;" class="btnAdd">+</button></a>
     </div>
@@ -74,7 +60,7 @@ margin-top: -2px;width: 50px;height: 48px;display:grid;align-content:space-aroun
     <footer class="divcenter footer footerAdd">
 
 
-        <button class="btn redBtn redBtn-cad" onclick="ok()">Fechar comanda</button><br>
+      <a href="/comanda/fechar"> <button class="btn redBtn redBtn-cad" >Fechar comanda</button><br></a> 
     </footer>
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 
