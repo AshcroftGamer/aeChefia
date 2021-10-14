@@ -22,8 +22,7 @@ route.post('/cadastro', controller.postComanda);
 
 route.get('/todos', controller.getComanda);
 
-route.get('/cliente/:mesa', controller.getCliente);
+route.get('/cliente/:mesa/:id_estabelecimento', controller.getCliente);
 
-route.get('/estabelecimento/:id_estabelecimento', controller.getEstabelecimento)
 
 module.exports = route;

@@ -194,6 +194,41 @@ exports.getItem = async ( req, res ) => {
     }
 }
 
+exports.getItemTipo = async ( req, res ) => {
+    try {
+        const query = `SELECT * FROM itens_do_cardapio
+        INNER JOIN cardapio
+        ON itens_do_cardapio.id_cardapio = cardapio.id_cardapio
+        WHERE itens_do_cardapio.id_cardapio = ? and id_item_tipo = ?;`
+        
+        const result = await mysql.execute( query, [req.params.id_cardapio, req.params.id_item_tipo ] );
+
+        const response = {
+            quantidade: result.length,
+            cardapio: result.map( card => {
+                return{
+                    id_cardapio: card.id_cardapio,
+                    id_item_tipo: card.id_item_tipo,
+                    id_medidas: card.id_medidas,
+                    id_marcas: card.id_marcas,
+                    nome_comida: card.nome_comida,
+                    preco: card.preco,
+                    id_itens_do_cardapio: card.id_itens_do_cardapio
+                    //endereco: card.endereco,
+                    //mesa: card.mesa,
+                    
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
+    }
+}
+
+
 exports.getTipo = async ( req, res ) => {
     try {
         const query = `SELECT * FROM item_tipo WHERE tipo = ?;`
