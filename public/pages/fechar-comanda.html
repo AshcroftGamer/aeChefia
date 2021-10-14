@@ -13,7 +13,7 @@
 
 </head>
 
-<body onload="comanda.fecharComanda()">
+<body onload="comanda.abrirComanda()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -40,8 +40,8 @@
             <h1 id="valor-comanda" style="text-align: left;" ></h1>
             <div class="btnRetirada">
                 
-                <a href="../pages/abrir-caixa-cliente.html"><button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" >Cancelar</button></a>
-                <button class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="ok()">Fechar comanda</button><br>
+                <a href="/comanda/cliente"><button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" >Cancelar</button></a>
+                <a ><button id="data_mesa" class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="comanda.fecharComanda()">Fechar comanda</button><br></a>
             </div>
         </div>
 
