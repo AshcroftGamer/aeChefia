@@ -43,7 +43,7 @@
             <h1 class="h1-bebida">Funcionários</h1>
         </div>
     </a>
-        <a class="cardapio-item" href="cardapio.html">
+        <a class="cardapio-item" href="/cardapio">
         <div >
             <img class="img-cardapio" src="../img/cardapio_aechefia.jpg" alt="">
             <h1 class="h1-comida">Cardápio</h1>
@@ -53,8 +53,15 @@
 
     <div class="inputs">
         <label class="label-listas" style="width: auto;">Funcionários cadastrados</label>
-        <input class="inputLine" placeholder="Buscar por..." type="text"> <br>
+         <form>
+            <div style="width: 87%;">
+              <input  style="width: 100%;"  class="inputLine" type="search" id="campo_busca" name="campo_busca"
+              placeholder="Buscar bebidas" size="30">
+            </div>
+          </form>
     </div>
+
+    <div  id="bora"></div>
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 
     </div>

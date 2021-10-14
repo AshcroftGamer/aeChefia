@@ -39,12 +39,12 @@
         <div class="input-icon" style="display: inline-table; text-align: center;">
             <div style="width: 87%;" class="input-icon" style="text-align: center;">
             <button class="Send">R$</button>
-            <input onkeyup="k(this);" class="Post"  placeholder="0,00" type="number">
+            <input onkeyup="k(this);" class="Post" id="retirada" placeholder="-0,00" type="number">
         </div>
             <div class="btnRetirada">
                 
                 <button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" onclick="ok()">Cancelar</button>
-                <button class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="ok()">Confirmar retirada</button><br>
+                <button class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="comanda.fazerRetirada()">Confirmar retirada</button><br>
             </div>
         </div>
 

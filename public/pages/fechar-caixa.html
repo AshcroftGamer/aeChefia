@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="comanda.abrirCaixa()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -37,10 +37,10 @@
     <div class="divRetirada fadeIn">
         <h1 style="font-size: 18px;padding: 15px;">Fechar caixa</h1>
         <div class="input-icon" style="display: block; text-align: center;">
-            <h1 style="text-align: left;" >R$ 10.543,78</h1>
+            <h1 id="valor-caixa" style="text-align: left;" >R$ 10.543,78</h1>
             <div class="btnRetirada">
                 
-               <a href="../pages/mesas-disponiveis.html"><button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" >Cancelar</button></a> 
+               <a href="/mesa"><button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" >Cancelar</button></a> 
                 <button class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="ok()">Fechar caixa</button><br>
             </div>
         </div>

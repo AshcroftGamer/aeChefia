@@ -66,40 +66,12 @@ exports.getComanda = async ( req, res ) => {
 
 }
 
-exports.getEstabelecimento = async ( req, res ) => {
-    try {
-        const query = `SELECT * FROM comanda
-        INNER JOIN estabelecimento
-        ON comanda.id_estabelecimento = estabelecimento.id_estabelecimento
-        WHERE comanda.id_estabelecimento = ?`
-        
-        const result = await mysql.execute( query, [req.params.id_estabelecimento] );
-
-        const response = {
-            quantidade: result.length,
-            comanda: result.map( comand => {
-                return{
-                    id_comanda: comand.id_comanda,
-                    cliente: comand.cliente,
-                    mesa: comand.mesa,
-                    id_estabelecimento: comand.id_estabelecimento
-                }
-            })
-
-            }
-        return res.status( 200 ).send( response )
-
-    } catch ( error ) {
-        return res.status( 500 ).send( { Erro: error } )
-    }
-
-}
 
 exports.getCliente = async ( req, res ) => {
     try {
-        const query = `SELECT * FROM comanda WHERE mesa = ?`
+        const query = `SELECT * FROM comanda WHERE mesa = ? and id_estabelecimento = ?`
         
-        const result = await mysql.execute( query, [req.params.mesa] );
+        const result = await mysql.execute( query, [req.params.mesa, req.params.id_estabelecimento] );
 
         const response = {
             quantidade: result.length,
