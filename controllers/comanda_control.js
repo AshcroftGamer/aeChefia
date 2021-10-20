@@ -79,6 +79,7 @@ exports.getCliente = async ( req, res ) => {
                 return{
                     id_comanda: comand.id_comanda,
                     cliente: comand.cliente,
+                    disponibilidade: comand.status,
                     mesa: comand.mesa,
                     id_estabelecimento: comand.id_estabelecimento
                 }
@@ -92,4 +93,28 @@ exports.getCliente = async ( req, res ) => {
     }
 
 }
+
+exports.patchMesa = async ( req, res ) => {
+    try {
+        const query = `UPDATE comanda
+        SET status = false
+        WHERE id_comanda = ? and id_estabelecimento = ?;`
+        
+   await mysql.execute( query, [req.params.id_comanda, req.params.id_estabelecimento] );
+
+        const response = {
+            mensagem: 'Mesa Atualizada'
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        console.log('entrei error')
+        console.log(error)
+        console.log(error)
+        return res.status( 500 ).send( { error: error } )
+    }
+
+}
+
+
 
