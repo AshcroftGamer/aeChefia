@@ -25,6 +25,7 @@ exports.postValor = async ( req, res ) => {
         return res.status( 201 ).send( response );
     }
     catch ( error ) {
+        
         return res.status( 500 ).send( { error: error } )
     }
 
@@ -50,6 +51,31 @@ exports.getUmCaixa = async (req, res) => {
 
     } catch (error) {
         return res.status(500).send({ Erro: error })
+    }
+
+}
+
+exports.getDisponibilidade = async ( req, res ) => {
+    try {
+        const query = `SELECT status, mesa FROM comanda WHERE mesa = ? and id_estabelecimento = ?`
+        
+        const result = await mysql.execute( query, [req.params.mesa, req.params.id_estabelecimento] );
+
+        const response = {
+            quantidade: result.length,
+            comanda: result.map( comand => {
+                return{
+                    id_comanda: comand.id_comanda,
+                    disponibilidade: comand.status,
+                    mesa: comand.mesa,
+                }
+            })
+
+            }
+        return res.status( 200 ).send( response )
+
+    } catch ( error ) {
+        return res.status( 500 ).send( { Erro: error } )
     }
 
 }
