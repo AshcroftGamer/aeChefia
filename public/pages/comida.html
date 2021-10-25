@@ -16,7 +16,7 @@
     <title>Inserir comida</title>
 </head>
 
-<body onload="jwt_auth_load(); comida.editarComida()">
+<body onload="jwt_auth_load(); comida.mostrarComida()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -51,7 +51,7 @@
         <!-- <input class="inputLine" placeholder="" type="text"> <br> -->
         <div style="width: 87%;" class="input-icon" style="text-align: center;">
             <button class="Send">R$</button>
-            <input onkeyup="k(this);" class="Post" placeholder="0,00" type="number" id="preco">
+            <input onkeyup="valor(this);" class="Post" placeholder="0,00" type="number" id="preco">
         </div>
 
     </div>

@@ -42,6 +42,8 @@ route.get( '/verifica/:id_estabelecimento', controller.verifica );
 
 route.get( '/item/:id_cardapio/:id_item_tipo', controller.getItemTipo);
 
+route.get('/listar/:id_estabelecimento', controller.getCardapioEstabelecimento)
+
 route.get( '/item/:id_cardapio', controller.getItem);
 
 route.get( '/tipo/:tipo', controller.getTipo);
