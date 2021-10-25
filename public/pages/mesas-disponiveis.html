@@ -23,11 +23,13 @@
         <span></span>
         <span></span>
         <ul id="menu">
-          <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-          <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+          <a href="#"><li><a href="/dashboard">Home</a></li></a>
+          <a href="#"><li><a href="/administrar">Adm</a></li></a>
           <a href="#" ><li> <a href="/">Login</a></li></a>
-          <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-          
+          <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
+          <a href="">
+            <li><a onclick="logout()">Logout</a></li>
+          </a>
         </ul>
       </div>
     </nav>
@@ -38,6 +40,11 @@
     <span class="ponto3">Indisponíveis</span>
   </div>
   <h1 class="margin-top20">Mesas Disponíveis</h1>
+
+  <div class="aviso_mesas">
+  <h2 style="color: red; text-align: center; padding-top: 2%;letter-spacing: 1px;" class="h2-Add">Selecione um estabelecimento para ver as mesas<br> 
+</div>
+
   <div id="mesas" class="mesas">
 
   </div>

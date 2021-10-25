@@ -1,62 +1,88 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/script.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
-    <title>Busacar bebidas</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/script.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Buscar bebidas</title>
 
 </head>
 
 <body onload="bebida.criarBebida()">
-    <header class="headerMenor">
-        <img src="../img/logo.png" alt="">
-        <nav role="navigation">
-            <div id="menuToggle">
+  <header class="headerMenor">
+    <img src="../img/logo.png" alt="">
+    <nav role="navigation">
+      <div id="menuToggle">
 
-                <input onclick="Menu()" id="menu-js" type="checkbox" />
-                <span></span>
-                <span></span>
-                <span></span>
-                <ul id="menu">
-                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
-                    <a href="#" ><li> <a href="/">Login</a></li></a>
-                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-                    
-                  </ul>
-            </div>
-        </nav>
-    </header>
+        <input onclick="Menu()" id="menu-js" type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <a href="#">
+            <li><a href="/dashboard">Home</a></li>
+          </a>
+          <a href="#">
+            <li><a href="/administrar">Adm</a></li>
+          </a>
+          <a href="#">
+            <li> <a href="/">Login</a></li>
+          </a>
+          <a href="#">
+            <li> <a href="/mesa">Mesas</a> </li>
+          </a>
+          <a href="#">
+            <li><a onclick="logout()">Logout</a></li>
+          </a>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-    <div class="inputs">
-        <form>
-            <div style="width: 87%;">
-              <input  style="width: 100%;"  class="inputLine" type="search" id="campo_busca" name="campo_busca"
-              placeholder="Buscar bebidas" size="30">
-              <!-- <button>Search</button> -->
-            </div>
-          </form>
-    </div>
-<div id="mesas" class="mesas">
-<!-- Div onde é armazenada as bebidas do banco de dados -->
+  <div class="inputs">
+    <form>
+      <div style="width: 87%;">
+        <input style="width: 100%;" class="inputLine" type="search" id="campo_busca" name="campo_busca"
+          placeholder="Buscar bebidas" size="30">
+        <!-- <button>Search</button> -->
+      </div>
+    </form>
+  </div>
+
+  <div class="aviso_bebidas">
+    <h2 style="color: #666666; text-align: center; padding-top: 2%;letter-spacing: 1px;" class="h2-Add">Selecione um
+      cardapio para ver as bebidas<br>
+  </div>
+   <button onclick="criarDivCardapio()">criar</button>
+    <button onclick="chekado()">ver selecionados</button>
+  <div id="mesas" class="mesas">
+    <!-- Div onde é armazenada as bebidas do banco de dados -->
+    <!-- <div style="border: solid 1px;" id="box0" class="cardapio bounceIn">
+<span class="nome-cadastrado">dfd</span>
+                    <span>dsdf</span>
+                    <span>yh</span>
+</div> -->
+ 
+
 </div>
 
 
-<footer id="footer" style="display: flex;margin-top: 10px;border-top: 1px solid rgba(102, 102, 102, 0.2);width: 100%;padding: 30px;
+  <footer id="footer" style="display: flex;margin-top: 10px;border-top: 1px solid rgba(102, 102, 102, 0.2);width: 100%;padding: 30px;
 " class="divcenter btnRetirada footer footerAdd">
 
-      <div style="width: 48%;" data-app="product.quantity" class="btnQnt" id="quantidade">    
-        <input style="width: 20%;" type="button" id="plus" class="input-mais" value='-' onclick="process(-1)" />
-        <input id="quant" class="input-quantidade" name="quant" class="text" size="1" type="number" value="1" maxlength="5" />
-        <input style="width: 20%;" type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
-      </div> 
-      
+    <div style="width: 48%;" data-app="product.quantity" class="btnQnt" id="quantidade">
+      <input style="width: 20%;" type="button" id="plus" class="input-mais" value='-' onclick="process(-1)" />
+      <input id="quant" class="input-quantidade" name="quant" class="text" size="1" type="number" value="1"
+        maxlength="5" />
+      <input style="width: 20%;" type="button" class="input-menos" id="minus" value='+' onclick="process(1)">
+    </div>
+
     <button style="margin-top: 0px;margin-top: 0px;width: 48%;
     margin-left: 4%;" class="btn redBtn redBtn-cad" onclick="comanda.addPedido()">Adicionar</button><br>
-</footer>
-<div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
+  </footer>
+  <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 </body>
+
 </html>

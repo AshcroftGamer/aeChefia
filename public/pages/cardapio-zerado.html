@@ -23,11 +23,13 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                    <a href="#"><li><a href="/dashboard">Home</a></li></a>
+                    <a href="#"><li><a href="/administrar">Adm</a></li></a>
                     <a href="#" ><li> <a href="/">Login</a></li></a>
-                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-                    
+                    <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
+                    <a href="#">
+            <li><a onclick="logout()">Logout</a></li>
+          </a>
                   </ul>
             </div>
         </nav>
@@ -55,8 +57,16 @@
                 <h1 class="h1-comida">Comida</h1>
             </button></a>
     </div>
+<div class="inputs">
+    <label style="width: auto;" class="label-listas">Cardápios cadastrados</label>
+    <select style="color: #666666;" name="Bares" onchange="cardapio.listaCardapio()" id="tipo" type="text" class="dropdown_estabelecimento">
+        <option>Selecione uma opção</option>
+        <option  >Comida</option>
+        <option >Bebida</option>
+      </select>
+<div class="inputSpacing"></div>
 
-
+</div>
 
 
 <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>

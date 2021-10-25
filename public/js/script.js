@@ -88,6 +88,14 @@ function k(i) {
   v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
   v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
   i.value = v;
+  v = -v
+  console.log(v)
+
+  // function k(){
+  //   retirada = document.getElementById('retirada').value
+  //   retirada = -retirada
+  //   console.log(retirada)
+  // }
 }
 
 function signOut() {
@@ -141,6 +149,8 @@ function Menu() {
 
 }
 
+
+
 function testeDiv() {
   lippeativista
   let id = getNextId();
@@ -170,6 +180,8 @@ class Usuario {
     }
 
   }
+
+
 
 
   async adicionar(usuario) {
@@ -293,43 +305,61 @@ function Modal() {
 let id = 0;
 
 //Retorna o próximo ID válido para a DIV que será criada
+function getNextId() {
+  return ++id;
+}
+
+function chekado() {
+  var checkbox = document.querySelectorAll('.itens-cardapio');
+console.log(checkbox)
+var selecionados = 0
+checkbox.forEach(function(el){
+  if(el.checked){
+    selecionados++;
+    console.log(el)
+  }
+});
+console.log("quantidade de divs selecionadas " + selecionados)
+}
+
+
+  
 
 
 function criarDiv() {
   //Pego o ID
   let id = getNextId();
   //Crio a DIV
-  let divElement = document.createElement("div");
+  let divElement = document.createElement("input");
   var conteudoNovo = document.createTextNode(id);
-  divElement.appendChild(conteudoNovo);
+  divElement.type = "checkbox"
+  let labelFor = document.createElement("label")
+  // divElement.setAttribute('checked', 'checked')
+  labelFor.appendChild(conteudoNovo);  
+
+
   //Pego a DIV onde a nova DIV será criada, sempre na DIV mãe
   let divMae = document.getElementById("mesas");
+  divMae.classList.add("checkboxes")
 
   //A ideia do ID é que ele seja um elemento único, ou seja, não se repita
   divElement.setAttribute('id', 'box' + id.toString());
-
+  /////novo
+  labelFor.setAttribute('for' , 'box' + id.toString()) 
   //CSS
-  divElement.style.width = "18%";
-  divElement.style.height = "66px";
-  divElement.style.backgroundColor = '#666666';
-  divElement.style.display = '';
-  divElement.style.opacity = '0.1';
-  divElement.style.marginLeft = '5%';
-  divElement.style.margin = '10px'
+
   divElement.classList.add("bounceIn")
+  // divElement.style.paddingTop = '23px'
+  // divElement.style.textAlign = 'center'
 
-  divElement.style.paddingTop = '23px'
-  divElement.style.textAlign = 'center'
-
-
-
+labelFor.classList.add("whatever")
   //Essa parte é mais para deixar claro que outras divs estão sendo criadas, criando um degrade
   //divElement.style.backgroundColor = "#f0" + id.toString();
 
   //Adiciono a nova DIV na DIV mãe
-  //Aqui poderia ser por exemplo document.body.appendChild, adicionando assim o elemento criado diretamente no body
   divMae.appendChild(divElement);
-  // document.body.appendChild(divElement)
+  divMae.appendChild(labelFor)
+  
   if (id >= 12) {
     let footer = document.getElementById('footer');
     footer.style.position = 'unset'
@@ -337,11 +367,63 @@ function criarDiv() {
   console.log("rodou " + id)
 }
 
+
+
+
+
 function criarDivCardapio() {
   //Pego o ID
   let id = getNextId();
   //Crio a DIV
+  let divElement = document.createElement("input");
+  divElement.type = "checkbox"
+  
+  let labelFor = document.createElement("label")
 
+  var conteudoNovo = document.createElement("span");
+  var conteudoNovo2 = document.createElement("span");
+  var conteudoNovo3 = document.createElement("span");
+
+  var span1 = document.createTextNode("Itaipava ")
+  var span2 = document.createTextNode("600ml")
+  var span3 = document.createTextNode("R$:10,00")
+
+  conteudoNovo.appendChild(span1);
+  conteudoNovo2.appendChild(span2);
+  conteudoNovo3.appendChild(span3);
+  
+
+  labelFor.appendChild(conteudoNovo);
+  labelFor.appendChild(conteudoNovo2);
+  labelFor.appendChild(conteudoNovo3);
+  //Pego a DIV onde a nova DIV será criada, sempre na DIV mãe
+  let divMae = document.getElementById("mesas");
+  divMae.classList.add("checkboxes")
+  //A ideia do ID é que ele seja um elemento único, ou seja, não se repita
+  divElement.setAttribute('id', 'box' + id.toString());
+  labelFor.setAttribute('for' , 'box' + id.toString()) 
+  //CSS
+  labelFor.classList.add("whatever")
+  divElement.classList.add("itens-cardapio")
+  divElement.classList.add("bounceIn")
+  conteudoNovo.style.fontSize = "18px"
+  conteudoNovo.style.lineHeight = "22px"
+  conteudoNovo.style.letterSpacing = "-0.02em"
+  conteudoNovo.style.fontWeight = "bold"
+ 
+
+  
+  //Essa parte é mais para deixar claro que outras divs estão sendo criadas, criando um degrade
+  //divElement.style.backgroundColor = "#f0" + id.toString();
+
+  //Adiciono a nova DIV na DIV mãe
+  //Aqui poderia ser por exemplo document.body.appendChild, adicionando assim o elemento criado diretamente no body
+  divMae.appendChild(divElement);
+  divMae.appendChild(labelFor)
+  if (id >= 4) {
+    let footer = document.getElementById('footer');
+    footer.style.position = 'unset'
+  }
   // document.body.appendChild(divElement)
   console.log("rodou")
 }
@@ -544,7 +626,7 @@ class Estabelecimento {
   }
 
   criarMesas() {
-    if(localStorage.getItem('estabelecimento') == undefined){
+    if (localStorage.getItem('estabelecimento') == undefined) {
       alert('selecione um estabelecimento')
     }
     fetch('http://localhost:3000/estabelecimento/mesa/' + localStorage.getItem("estabelecimento"), {
@@ -556,54 +638,54 @@ class Estabelecimento {
       return result.json()
     }).then(data => {
       console.log(data)
-      if(data.estabelecimento.length >= 1){
-      for (let mesa = 0; mesa < data.estabelecimento[0].mesa; mesa++) {
-        let id = '0' + [mesa];
-        if (id.length > 2) {
-          console.log(typeof id)
-          id = id.replace('0', ' ')
+      if (data.estabelecimento.length >= 1) {
+        for (let mesa = 0; mesa < data.estabelecimento[0].mesa; mesa++) {
+          let id = '0' + [mesa];
+          if (id.length > 2) {
+            console.log(typeof id)
+            id = id.replace('0', ' ')
+          }
+          let divElement = document.createElement("div");
+          var conteudoNovo = document.createTextNode(id);
+          divElement.appendChild(conteudoNovo);
+
+          let divMae = document.getElementById("mesas");
+
+          divElement.setAttribute('id', 'box' + id.toString());
+          divElement.setAttribute('onclick', 'comanda.mesa("' + [mesa] + '")')
+
+          divElement.style.width = "18%";
+          divElement.style.height = "66px";
+          divElement.style.backgroundColor = '#F4F4F4';
+          divElement.style.display = '';
+          divElement.style.opacity = '0.1';
+          divElement.style.marginLeft = '5%';
+          divElement.style.margin = '10px'
+          divElement.style.color = '#5A5A5A'
+          divElement.style.fontSize = '24px'
+          divElement.style.fontFamily = 'Inter'
+          divElement.style.fontStyle = 'normal'
+          divElement.style.lineHeight = '27px'
+          divElement.style.letterSpacing = '-0.02em'
+          divElement.classList.add("bounceIn")
+
+
+          divElement.style.paddingTop = '23px'
+          divElement.style.textAlign = 'center'
+
+
+
+          divMae.appendChild(divElement);
+
+          if (id >= 12) {
+            let footer = document.getElementById('footer');
+            footer.style.position = 'unset'
+          }
+
         }
-        let divElement = document.createElement("div");
-        var conteudoNovo = document.createTextNode(id);
-        divElement.appendChild(conteudoNovo);
-
-        let divMae = document.getElementById("mesas");
-
-        divElement.setAttribute('id', 'box' + id.toString());
-        divElement.setAttribute('onclick', 'comanda.mesa("' + [mesa] + '")')
-
-        divElement.style.width = "18%";
-        divElement.style.height = "66px";
-        divElement.style.backgroundColor = '#F4F4F4';
-        divElement.style.display = '';
-        divElement.style.opacity = '0.1';
-        divElement.style.marginLeft = '5%';
-        divElement.style.margin = '10px'
-        divElement.style.color = '#5A5A5A'
-        divElement.style.fontSize = '24px'
-        divElement.style.fontFamily = 'Inter'
-        divElement.style.fontStyle = 'normal'
-        divElement.style.lineHeight = '27px'
-        divElement.style.letterSpacing = '-0.02em'
-        divElement.classList.add("bounceIn")
-
-
-        divElement.style.paddingTop = '23px'
-        divElement.style.textAlign = 'center'
-
-
-
-        divMae.appendChild(divElement);
-
-        if (id >= 12) {
-          let footer = document.getElementById('footer');
-          footer.style.position = 'unset'
-        }
-
       }
-    }
     })
-  
+
   }
   validaCampos(estabelecimento) {
     let msg = '';
@@ -1260,7 +1342,7 @@ class Comida {
 
   }
   criarComida() {
-    if(localStorage.getItem('id_cardapio') == undefined){
+    if (localStorage.getItem('id_cardapio') == undefined) {
       alert('nenhum cardapio selecionado')
     }
     fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio') + '/' + localStorage.getItem('id_item_tipo'), {
@@ -1336,7 +1418,7 @@ class Bebida {
   }
 
   criarBebida() {
-    if(localStorage.getItem('id_cardapio') == undefined){
+    if (localStorage.getItem('id_cardapio') == undefined) {
       alert('nenhum cardapio selecionado')
     }
     fetch('http://localhost:3000/cardapio/item/' + localStorage.getItem('id_cardapio') + '/' + localStorage.getItem('id_item_tipo'), {
@@ -1639,8 +1721,8 @@ class Comanda {
       close.id_estabelecimento = data.valorCriado.id_estabelecimento
     })
   }
-  atualizar_mesa(){
-    fetch('http://localhost:3000/comanda/atualizar/'+ localStorage.getItem('id_comanda') + '/' + localStorage.getItem('estabelecimento'),{
+  atualizar_mesa() {
+    fetch('http://localhost:3000/comanda/atualizar/' + localStorage.getItem('id_comanda') + '/' + localStorage.getItem('estabelecimento'), {
       method: 'PATCH'
     }).then(result => {
       return result.json();
@@ -1696,35 +1778,35 @@ class Comanda {
     })
   }
   disponibilidade_mesa() {
-    if(localStorage.getItem("estabelecimento") != undefined){
-    fetch('http://localhost:3000/estabelecimento/mesa/' + localStorage.getItem("estabelecimento"), {
+    if (localStorage.getItem("estabelecimento") != undefined) {
+      fetch('http://localhost:3000/estabelecimento/mesa/' + localStorage.getItem("estabelecimento"), {
 
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    }).then(result => {
-      return result.json()
-    }).then(data => {
-      console.log(data)
-      for (let mesa = 0; mesa < data.estabelecimento[0].mesa; mesa++) {
-        fetch('http://localhost:3000/mesa/disponibilidade/' + mesa + '/' + localStorage.getItem('estabelecimento'), {
-          method: 'GET',
-          headers: { "content-type": "application/json" }
-        }).then(result => {
-          return result.json();
-        }).then(data => {
-          console.log(data)
-          for (let i = 0; i < data.quantidade; i++) {
-            if (data.comanda[i].disponibilidade == 1) {
-              let situacao = document.getElementById('box' + '0' + mesa)
-              situacao.style.backgroundColor = 'var(--vermelho)'
-              situacao.style.color = 'var(--branco)'
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        }
+      }).then(result => {
+        return result.json()
+      }).then(data => {
+        console.log(data)
+        for (let mesa = 0; mesa < data.estabelecimento[0].mesa; mesa++) {
+          fetch('http://localhost:3000/mesa/disponibilidade/' + mesa + '/' + localStorage.getItem('estabelecimento'), {
+            method: 'GET',
+            headers: { "content-type": "application/json" }
+          }).then(result => {
+            return result.json();
+          }).then(data => {
+            console.log(data)
+            for (let i = 0; i < data.quantidade; i++) {
+              if (data.comanda[i].disponibilidade == 1) {
+                let situacao = document.getElementById('box' + '0' + mesa)
+                situacao.style.backgroundColor = 'var(--vermelho)'
+                situacao.style.color = 'var(--branco)'
+              }
             }
-          }
-        })
-      }
-    })
-  }
+          })
+        }
+      })
+    }
   }
 
 }

@@ -672,7 +672,7 @@
         padding-left: 10px;
         padding-right: 10px;
         letter-spacing: -0.02em;
-    } 
+    }
     .modal {
         display: none;
         position: fixed;
@@ -1009,6 +1009,7 @@
         background: #ED1B2E;
         color: #F4F4F4;
     }
+
     /* Comdanda */
     table {
         width: 100%;
@@ -1054,4 +1055,27 @@
 
     transform: translateY(-2px);
 } */
+}
+
+.whatever {
+    width: 40%;
+    height: 165px;
+    background: #F4F4F4;
+    display: grid;
+    margin: 5px;
+    border-radius: 6px;
+    text-align: center;
+    padding: 26px;
+    padding-top: 40px;
+    justify-items: start;
+    color: #666666;
+}
+
+.checkboxes input[type=checkbox] {
+    display: none;
+}
+
+.checkboxes input[type=checkbox]:checked+.whatever {
+    background-color: red;
+    color: #D5D7DC;
 }
