@@ -5,11 +5,6 @@ route.get('/', (req, res) => {
 })
 
 route.get('/entrar', login,(req, res) => {
-    console.log(req.usuario)
-
-    console.log("entrou na rota")
-    console.log(req.body)
-
     return res.status(200).send({Ebaa:"ebba"})
 })
 
