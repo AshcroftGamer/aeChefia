@@ -1,19 +1,22 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">  
+    <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <title>lista de itens do cardápio</title>
 </head>
+
 <body class="inicio">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
+<<<<<<< HEAD
           <div id="menuToggle">
 
             <input onclick="Menu()" id="menu-js" type="checkbox" />            
@@ -30,27 +33,53 @@
           </a>
             </ul>
           </div>
+=======
+            <div id="menuToggle">
+
+                <input onclick="Menu()" id="menu-js" type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="#">
+                        <li><a href="/home">Home</a></li>
+                    </a>
+                    <a href="#">
+                        <li><a href="funcionario-zerado.html">Adm</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/">Login</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="mesas-disponiveis.html">Mesas</a> </li>
+                    </a>
+
+                </ul>
+            </div>
+>>>>>>> 37a4f63d5c34d625ed02fdf36cfc706aafa85612
         </nav>
     </header>
 
-        <div class="inputSpacing"></div>
+    <div class="inputSpacing"></div>
     <span class="spanHome">Cadastre um cardápio</span>
     <div class="inputSpacing"></div>
-    <div class="div-cardapio" >
-    
-      
-        <a class="cardapio-item"   >
-            
-            <button style="border: none; background-color: #e5e5e500;" input type="submit" onclick="cardapio.setarBebida()" id="esconder" value="bebida"> 
-                
+    <div class="div-cardapio">
+
+
+        <a class="cardapio-item">
+
+            <button style="border: none; background-color: #e5e5e500;" input type="submit"
+                onclick="cardapio.setarBebida()" id="esconder" value="bebida">
+
                 <img class="img-cardapio" src="../img/bebida.png" alt="">
                 <h1 class="h1-bebida">Bebida</h1>
             </button>
         </a>
-        <a class="cardapio-item"  >
-            
-            <button style="border:none;background-color: #e5e5e500;" input type="submit" onclick="cardapio.setarComida()" id="esconder2" value="comida" >
-                
+        <a class="cardapio-item">
+
+            <button style="border:none;background-color: #e5e5e500;" input type="submit"
+                onclick="cardapio.setarComida()" id="esconder2" value="comida">
+
                 <img class="img-cardapio" src="../img/comida.png" alt="">
                 <h1 class="h1-comida">Comida</h1>
             </button></a>
@@ -60,23 +89,24 @@
         <label style="width: auto;" class="label-listas">Cardápios cadastrados</label>
         <select name="Bares" onchange="cardapio.listaCardapio()" id="tipo" type="text" class="dropdown_estabelecimento">
             <option>Selecionar</option>
-            <option  >Comida</option>
-            <option >Bebida</option>
-          </select>
-    <div class="inputSpacing"></div>
+            <option>Comida</option>
+            <option>Bebida</option>
+        </select>
+        <div class="inputSpacing"></div>
 
-        <form>
-            <div style="width: 87%;">
-              <input style="width: 100%;" class="inputLine" type="search" id="mySearch" name="q"
-              placeholder="Buscar por..." size="30">
-              <!-- <button>Search</button> -->
-            </div>
-          </form>
+        <div class="inputs">
+            <form>
+                <div style="width: 87%;">
+                    <input style="width: 100%;" class="inputLine" type="search" id="campo_busca" name="campo_busca"
+                        placeholder="Buscar Por..." size="30">
+                </div>
+            </form>
+        </div>
     </div>
 
     <div id="item"></div>
 
-  
+
 
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 
@@ -84,4 +114,5 @@
     </div>
 
 </body>
+
 </html>

@@ -70,7 +70,7 @@ exports.deleteItens = async ( req, res ) => {
 
         const query = 'DELETE from itens_do_cardapio WHERE id_itens_do_cardapio = ?'
 
-        await mysql.execute( query, [ req.body.id_itens_do_cardapio ] );
+        await mysql.execute( query, [ req.params.id_itens_do_cardapio ] );
 
         const response = {
             mensagem: 'Item removido com sucesso'

@@ -898,8 +898,6 @@ class Funcionario {
     if (this.validafun(funcionario)) {
       if (this.editId == null) {
         this.adicionar(funcionario)
-      } else {
-        console.log("aff")
       }
 
     }
@@ -913,9 +911,6 @@ class Funcionario {
     }).then(result => {
       return result.json();
     }).then(data => {
-      console.log('euuu paipi')
-      console.log(data)
-      console.log(data.quantidade)
       document.getElementById('quantidade1').value = data.quantidade
       estadoSpanHome()
     })
@@ -1153,11 +1148,14 @@ class Cardapio {
       }).then(result => {
         return result.json();
       }).then(data => {
+        console.log(data)
         for (let i = 0; i < data.quantidade; i++) {
+
           let medidas = data.cardapio[i].id_medidas
           let marcas = data.cardapio[i].id_marcas
           let nome_comida = data.cardapio[i].nome_comida
           let preco = data.cardapio[i].preco
+          let itens = data.cardapio[i].id_itens_do_cardapio
 
           if (localStorage.getItem("id_item_tipo") == 1) {
             fetch('http://localhost:3000/marca/pegar/' + marcas, {
@@ -1167,65 +1165,80 @@ class Cardapio {
             }).then(result => {
               return result.json()
             }).then(data => {
+              console.log(data)
               marcas = data.marcas[0].marca
+
+              fetch('http://localhost:3000/medida/pegar/' + medidas, {
+                headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+                }
+              }).then(result => {
+                return result.json()
+              }).then(data => {
+                medidas = data.medidas[0].medida
+
+                let item = document.createElement('div')
+                item.classList.add('foi-bebida')
+                item.setAttribute('value', itens)
+                if (item.classList.contains('foi-comida') == false) {
+                  let comida = document.getElementsByClassName('foi-comida')
+                  for (let comer = 0; comer < comida.length; comer++) {
+                    comida[comer].style.display = 'none'
+                  }
+
+                }
+                item.innerHTML = ` <div class="div-cadastrado" id="bebida${itens}">
+                         <div class="span-cadastrado">
+                      <span class="nome-cadastrado" id="search_name">${marcas}</span>
+                      <span>${medidas}</span>
+                      <span>R$:${preco}</span>
+                  </div>
+                  <div class="btn-cadastrado">
+                      <button class="editarGrey" onclick="bebida.salvarBebida(${itens})">Editar</button>
+                      <button class="excluirRed" onclick="cardapio.excluirProduto(${itens})">Excluir</button>
+                  </div>
+                  </div>`
+                item
+
+                document.getElementsByClassName("inicio")[0].appendChild(item)
+              })
             })
-          }
-          fetch('http://localhost:3000/medida/pegar/' + medidas, {
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            }
-          }).then(result => {
-            return result.json()
-          }).then(data => {
-            medidas = data.medidas[0].medida
+          } else {
+            fetch('http://localhost:3000/medida/pegar/' + medidas, {
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              }
+            }).then(result => {
+              return result.json()
+            }).then(data => {
+              medidas = data.medidas[0].medida
 
-
-            let item = document.createElement('div')
-            let carregar = []
-            carregar = item
-            console.log(item)
-
-            if (localStorage.getItem("id_item_tipo") == 2) {
+              let item = document.createElement('div')
 
               item.classList.add('foi-comida')
-              item.innerHTML = `<div class="div-cadastrado divComida">
-              <div class="span-cadastrado">
-                  <span class="nome-cadastrado">${nome_comida}</span>
-                  <span>${medidas}</span>
-                  <span>R$:${preco}</span>
-              </div>
-              <div class="btn-cadastrado">
-                  <button class="editarGrey" onclick="ok()">Editar</button>
-                  <button class="excluirRed" onclick="ok()">Excluir</button>
-              </div>
-              </div>`
+              if (item.classList.contains('foi-bebida') == false) {
+                let bebida = document.getElementsByClassName('foi-bebida')
+                for (let beber = 0; beber < bebida.length; beber++) {
+                  bebida[beber].style.display = 'none'
+                }
 
-            } else {
-              console.log(carregar)
-              item.classList.add('foi-bebida')
-              console.log(item.classList.contains('foi-comida'))
-              if (item.classList.contains('foi-comida') == false) {
-                item.style.display = 'none'
               }
+              item.innerHTML = `<div class="div-cadastrado" id="comida${itens}">
+                  <div class="span-cadastrado">
+                      <span class="nome-cadastrado">${nome_comida}</span>
+                      <span>${medidas}</span>
+                      <span>R$:${preco}</span>
+                  </div>
+                  <div class="btn-cadastrado">
+                      <button class="editarGrey" onclick="comida.salvarComida(${itens})">Editar</button>
+                      <button class="excluirRed" onclick="cardapio.excluirProduto(${itens})">Excluir</button>
+                  </div>
+                  </div>`
 
 
-              item.innerHTML = ` <div class="div-cadastrado" id="divBebida">
-                     <div class="span-cadastrado">
-                  <span class="nome-cadastrado" id="search_name">${marcas}</span>
-                  <span>${medidas}</span>
-                  <span>R$:${preco}</span>
-              </div>
-              <div class="btn-cadastrado">
-                  <button class="editarGrey" onclick="ok()">Editar</button>
-                  <button class="excluirRed" onclick="ok()">Excluir</button>
-              </div>
-              </div>`
-              item
-            }
-            document.getElementsByClassName("inicio")[0].appendChild(item)
-          })
-
-
+              document.getElementsByClassName("inicio")[0].appendChild(item)
+            })
+          }
         }
       })
     })
@@ -1244,6 +1257,23 @@ class Cardapio {
   setarComida() {
     localStorage.setItem('id_item_tipo', 2)
     location.assign('/cardapio/comida')
+  }
+
+  excluirProduto(item) {
+    fetch('http://localhost:3000/item/remover/' + item, {
+      method: 'DELETE',
+      headers: { "content-type": "application/json" }
+    }).then(result => {
+      return result.json();
+    }).then(data => {
+      if (localStorage.getItem('id_item_tipo') == 1) {
+        let selecionadobebida = document.getElementById('bebida' + item)
+
+        selecionadobebida.style.display = 'none'
+      }
+      let selecionadocomida = document.getElementById('comida' + item)
+      selecionadocomida.style.display = 'none'
+    })
   }
   sumiu() {
 
@@ -1390,6 +1420,27 @@ class Comida {
   }
   setarValor(id_itens_do_cardapio) {
     localStorage.setItem("id_itens_do_cardapio", id_itens_do_cardapio)
+  }
+  salvarComida(item) {
+    localStorage.setItem('item', item)
+    location.assign('/cardapio/comida')
+
+    comida.editarComida()
+  }
+  editarComida() {
+    if(localStorage.getItem('item') != 'null'){
+      fetch('http://localhost:3000/item/unico/' + localStorage.getItem('item'), {
+        method: 'GET',
+        headers: { "content-type": "application/json" }
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        console.log(data)
+        document.getElementById('medida').value = data.itens[0].id_medidas
+        document.getElementById('botao_comida').innerHTML = `Atualizar Comida `
+      })
+    }
+
   }
 
 }

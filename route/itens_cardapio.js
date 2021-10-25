@@ -24,7 +24,7 @@ route.get('/:id_item_tipo', controller.getItensTipo);
 route.get('/unico/:id_itens_do_cardapio', controller.getUmItem);
 
 
-route.delete( '/remover', controller.deleteItens );
+route.delete( '/remover/:id_itens_do_cardapio', controller.deleteItens );
 
 route.patch( '/atualizar', controller.patchItens );
 
