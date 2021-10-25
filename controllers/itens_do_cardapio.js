@@ -46,19 +46,20 @@ exports.patchItens = async ( req, res ) => {
         const query = 'UPDATE itens_do_cardapio SET preco = ? WHERE id_itens_do_cardapio = ?;'
         await mysql.execute( query,
             [
-                req.body.preco,
-                req.body.id_itens_do_cardapio
+                req.params.preco,
+                req.params.id_itens_do_cardapio
             ] );
         const response = {
             mensagem: 'itens_do_cardapio atualizado com sucesso',
             usuarioAtualizado: {
-                preco: req.body.preco
+                preco: req.params.preco
             }
         }
 
         return res.status( 201 ).send( response );
     }
     catch ( error ) {
+        console.log(error)
         return res.status( 500 ).send( error )
     }
 

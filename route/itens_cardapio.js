@@ -26,6 +26,6 @@ route.get('/unico/:id_itens_do_cardapio', controller.getUmItem);
 
 route.delete( '/remover/:id_itens_do_cardapio', controller.deleteItens );
 
-route.patch( '/atualizar', controller.patchItens );
+route.patch( '/atualizar/:id_itens_do_cardapio/:preco', controller.patchItens );
 
 module.exports = route;
