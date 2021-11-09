@@ -251,3 +251,24 @@ exports.getTipo = async ( req, res ) => {
     }
 
 }
+exports.getCardapioEstabelecimento = async (req, res) => {
+    try {
+        const query = `SELECT * FROM cardapio WHERE id_estabelecimento = ?;`
+
+        const result = await mysql.execute(query, [req.params.id_estabelecimento]);
+
+        const response = {
+            cardapio: result.map(cardapio => {
+                return {
+                    cardapio: cardapio.id_cardapio,
+                }
+            })
+
+        }
+        return res.status(200).send(response)
+
+    } catch (error) {
+        return res.status(500).send({ Erro: error })
+    }
+
+}

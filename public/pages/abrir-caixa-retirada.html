@@ -24,12 +24,22 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
-                    <a href="#" ><li> <a href="/">Login</a></li></a>
-                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-                    
-                  </ul>
+                    <a href="#">
+                        <li><a href="/dashboard">Home</a></li>
+                    </a>
+                    <a href="#">
+                        <li><a href="/administrar">Adm</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/">Login</a></li>
+                    </a>
+                    <a href="#">
+                        <li> <a href="/mesa">Mesas</a> </li>
+                    </a>
+                    <a href="#">
+                        <li><a onclick="logout()">Logout</a></li>
+                    </a>
+                </ul>
             </div>
         </nav>
     </header>
@@ -38,13 +48,15 @@
         <h1 style="font-size: 18px;padding: 15px;">Retirada de caixa</h1>
         <div class="input-icon" style="display: inline-table; text-align: center;">
             <div style="width: 87%;" class="input-icon" style="text-align: center;">
-            <button class="Send">R$</button>
-            <input onkeyup="k(this);" class="Post" id="retirada" placeholder="-0,00" type="number">
-        </div>
+                <button class="Send">R$</button>
+                <input onkeyup="k(this);" class="Post" id="retirada" placeholder="-0,00" type="number">
+            </div>
             <div class="btnRetirada">
-                
-                <button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" onclick="ok()">Cancelar</button>
-                <button class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="comanda.fazerRetirada()">Confirmar retirada</button><br>
+
+                <button class="btn borderBtn inverseBtn" style="width: 35%;background: white;"
+                    onclick="ok()">Cancelar</button>
+                <button class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;"
+                    onclick="comanda.fazerRetirada()">Confirmar retirada</button><br>
             </div>
         </div>
 

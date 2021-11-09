@@ -10,7 +10,7 @@
 
 </head>
 
-<body onload="comida.criarComida()">
+<body onload="comida.criarComida(); jwt_auth_load();">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -21,12 +21,12 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
-                    <a href="#" ><li> <a href="/">Login</a></li></a>
-                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-                    
-                  </ul>
+                  <a href="#"><li><a href="/dashboard">Home</a></li></a>
+                  <a href="#"><li><a href="/administrar">Adm</a></li></a>
+                  <a href="#" ><li> <a href="/cardapio/zerado">Cardápio</a></li></a>
+                  <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
+              <li><a onclick="logout()">Logout</a></li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -39,6 +39,10 @@
               <!-- <button>Search</button> -->
             </div>
           </form>
+    </div>
+
+    <div class="aviso_comidas" id="aviso">
+
     </div>
 
 <div id="mesas" class="mesas">

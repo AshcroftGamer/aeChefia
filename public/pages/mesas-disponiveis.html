@@ -12,7 +12,7 @@
   <title>Mesas Disponíveis</title>
 </head>
 
-<body onload="estabelecimento.criarMesas()">
+<body onload="estabelecimento.criarMesas();jwt_auth_load(); comanda.disponibilidade_mesa()">
   <header class="headerMenor">
     <img src="../img/logo.png" alt="">
     <nav role="navigation">
@@ -23,11 +23,12 @@
         <span></span>
         <span></span>
         <ul id="menu">
-          <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-          <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
-          <a href="#" ><li> <a href="/">Login</a></li></a>
-          <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-          
+          <a href="#"><li><a href="/dashboard">Home</a></li></a>
+          <a href="#"><li><a href="/administrar">Adm</a></li></a>
+          <a href="#" ><li> <a href="/cardapio/zerado">Cardápio</a></li></a>
+          <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
+      <li><a onclick="logout()">Logout</a></li>
+
         </ul>
       </div>
     </nav>
@@ -38,6 +39,11 @@
     <span class="ponto3">Indisponíveis</span>
   </div>
   <h1 class="margin-top20">Mesas Disponíveis</h1>
+
+  <div class="aviso_mesas" id="aviso">
+  
+</div>
+
   <div id="mesas" class="mesas">
 
   </div>

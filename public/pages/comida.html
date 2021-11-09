@@ -16,7 +16,7 @@
     <title>Inserir comida</title>
 </head>
 
-<body>
+<body onload="jwt_auth_load(); comida.mostrarComida()">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -27,11 +27,13 @@
             <span></span>
             <span></span>
             <ul id="menu">
-                <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-                <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                <a href="#"><li><a href="/dashboard">Home</a></li></a>
+                <a href="#"><li><a href="/administrar">Adm</a></li></a>
                 <a href="#" ><li> <a href="/">Login</a></li></a>
-                <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-                
+                <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
+                <a href="#">
+            <li><a onclick="logout()">Logout</a></li>
+          </a>
               </ul>
           </div>
         </nav>
@@ -49,7 +51,7 @@
         <!-- <input class="inputLine" placeholder="" type="text"> <br> -->
         <div style="width: 87%;" class="input-icon" style="text-align: center;">
             <button class="Send">R$</button>
-            <input onkeyup="k(this);" class="Post" placeholder="0,00" type="number" id="preco">
+            <input onkeyup="valor(this);" class="Post" placeholder="0,00" type="number" id="preco">
         </div>
 
     </div>
@@ -62,7 +64,7 @@
         <option>Relish</option>
     </select> -->
     <footer class="divcenter footer footerAdd">   
-        <button class="btn redBtn redBtn-cad" onclick="comida.cadastrar_comida()">Inserir comida</button><br>
+        <button class="btn redBtn redBtn-cad" onclick="comida.cadastrar_comida()" id="botao_comida">Inserir comida</button><br>
     </footer>
     <div class="divAnuncio" id="divAnuncio">Acesse o site por um dispositivo mobile</div>
 </body>

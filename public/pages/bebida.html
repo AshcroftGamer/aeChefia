@@ -16,7 +16,7 @@
     <title>Inserir bebida</title>
 </head>
 
-<body>
+<body onload="bebida.mostrarBebida();jwt_auth_load();">
     <header class="headerMenor">
         <img src="../img/logo.png" alt="">
         <nav role="navigation">
@@ -27,11 +27,13 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                    <a href="#"><li><a href="/dashboard">Home</a></li></a>
+                    <a href="#"><li><a href="/administrar">Adm</a></li></a>
                     <a href="#" ><li> <a href="/">Login</a></li></a>
-                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-                    
+                    <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
+                    <a href="#">
+            <li><a onclick="logout()">Logout</a></li>
+          </a>
                   </ul>
             </div>
         </nav>
@@ -47,7 +49,7 @@
         <input id="tipo_bebida" style="color: black;" type="text" placeholder="Selecione uma opção" class="dropdown inputLine"
             name="Tipo" list="nome-tipo">
         <datalist id="nome-tipo">
-            <option value="Cerveja">
+            <option id="nome-tipo" value="Cerveja">
             <option value="whisky">
             <option value="vodka">
             <option value="cachaça">
@@ -68,7 +70,7 @@
         <!-- <input class="inputLine" placeholder="" type="text"> <br> -->
         <div style="width: 87%;" class="input-icon" style="text-align: center;">
             <button class="Send">R$</button>
-            <input  onkeyup="k(this);" class="Post" placeholder="0,00" type="number" id="preco">
+            <input  onkeyup="valor(this);" class="Post" placeholder="0,00" type="number" id="preco">
         </div>
 
     </div>
@@ -81,7 +83,7 @@
         <option>Relish</option>
     </select> -->
     <footer class="divcenter footer footerAdd">
-      <button class="btn redBtn redBtn-cad" onclick="bebida.cadastrar_bebida()">Inserir bebida</button><br>
+      <button id="botao_bebida" class="btn redBtn redBtn-cad" onclick="bebida.cadastrar_bebida()">Inserir bebida</button><br>
     </footer>
     <div class="divAnuncio" id="divAnuncio" >Acesse o site por um dispositivo mobile</div>
 

@@ -24,5 +24,8 @@ route.get('/todos', controller.getComanda);
 
 route.get('/cliente/:mesa/:id_estabelecimento', controller.getCliente);
 
+route.patch('/atualizar/:id_comanda/:id_estabelecimento', controller.patchMesa)
+
+
 
 module.exports = route;

@@ -24,11 +24,13 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                    <a href="#"><li><a href="/dashboard">Home</a></li></a>
+                    <a href="#"><li><a href="/administrar">Adm</a></li></a>
                     <a href="#" ><li> <a href="/">Login</a></li></a>
-                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-                    
+                    <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
+                    <a href="#">
+            <li><a onclick="logout()">Logout</a></li>
+          </a>
                   </ul>
             </div>
         </nav>
@@ -41,7 +43,7 @@
             <div class="btnRetirada">
                 
                 <a href="/comanda/cliente"><button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" >Cancelar</button></a>
-                <a ><button id="data_mesa" class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="comanda.fecharComanda()">Fechar comanda</button><br></a>
+                <a ><button id="data_mesa" class="btn redBtn redBtn-cad" style="width: 60%;margin-left: 3%;" onclick="comanda.fecharComanda(); comanda.atualizar_mesa()">Fechar comanda</button><br></a>
             </div>
         </div>
 

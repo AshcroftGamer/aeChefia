@@ -24,11 +24,13 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href="#"><li><a href="home-cadastrado.html">Home</a></li></a>
-                    <a href="#"><li><a href="funcionario-zerado.html">Adm</a></li></a>
+                    <a href="#"><li><a href="/dashboard">Home</a></li></a>
+                    <a href="#"><li><a href="/administrar">Adm</a></li></a>
                     <a href="#" ><li> <a href="/">Login</a></li></a>
-                    <a href="#"><li> <a href="mesas-disponiveis.html">Mesas</a> </li></a>
-                    
+                    <a href="#"><li> <a href="/mesa">Mesas</a> </li></a>
+                    <a href="#">
+            <li><a onclick="logout()">Logout</a></li>
+          </a>
                   </ul>
             </div>
         </nav>
@@ -37,7 +39,7 @@
     <div class="divRetirada fadeIn">
         <h1 style="font-size: 18px;padding: 15px;">Fechar caixa</h1>
         <div class="input-icon" style="display: block; text-align: center;">
-            <h1 id="valor-caixa" style="text-align: left;" >R$ 10.543,78</h1>
+            <h1 id="valor-caixa" style="text-align: left;" ></h1>
             <div class="btnRetirada">
                 
                <a href="/mesa"><button class="btn borderBtn inverseBtn" style="width: 35%;background: white;" >Cancelar</button></a> 
